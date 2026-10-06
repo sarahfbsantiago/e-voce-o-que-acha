@@ -10,7 +10,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
   const configured = adminToken() !== null;
   return (
     <div className="container-page py-12 max-w-md">
-      <PageTitle lead="Área privada do administrador do projeto. Mostra apenas dados agregados.">Acesso administrativo</PageTitle>
+      <PageTitle lead="Área privada do administrador do projeto. A sessão dura 10 minutos sem atividade e termina ao fechar o navegador; o token nunca fica salvo no navegador.">Acesso administrativo</PageTitle>
       {!configured ? (
         <p className="card p-4 text-sm">O painel está desativado: defina <code>ADMIN_TOKEN</code> (mínimo 16 caracteres) nas variáveis de ambiente.</p>
       ) : (
