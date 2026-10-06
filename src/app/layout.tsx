@@ -16,13 +16,25 @@ const robotoMono = Roboto_Mono({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Você decide",
     template: "%s · Você decide",
   },
   description:
     "Compare suas prioridades com propostas e registros públicos dos candidatos. Este site não diz em quem você deve votar.",
+  applicationName: "Você decide",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Você decide",
+    title: "Você decide",
+    description: "Nós organizamos as evidências. Vote com consciência. 52 perguntas, sem nome de candidato, com as fontes no final.",
+  },
+  twitter: { card: "summary_large_image", title: "Você decide", description: "Nós organizamos as evidências. Vote com consciência." },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
