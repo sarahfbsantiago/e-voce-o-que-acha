@@ -1,0 +1,536 @@
+// Schema Prisma — "Você decide"
+//
+// Princípios refletidos no schema:
+// - Nenhum campo de pontuação eleitoral, ranking ou "melhor candidato".
+// - Evidence aponta obrigatoriamente para Source.
+// - CandidatePosition aponta para uma ou várias Evidence (tabela de junção).
+// - Indicadores estatísticos NÃO são CandidatePosition.
+// - Estatísticas anônimas em estrutura separada (SurveySubmission), sem PII.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum QuestionKind {
+  AGREEMENT
+  SINGLE_CHOICE
+  MULTI_CHOICE
+}
+
+enum SourceType {
+  government_plan
+  legislation
+  bill
+  roll_call_vote
+  official_statistics
+  official_speech
+  official_interview
+  government_database
+  academic_research
+  international_organization
+  professional_press
+  other
+}
+
+enum SourceLegend {
+  PRIMARIA
+  ESTATISTICA
+  INSTITUCIONAL
+  ACADEMICA
+  JORNALISTICA
+}
+
+enum VerificationStatus {
+  VERIFIED
+  PENDING_MANUAL
+  UNVERIFIED
+}
+
+enum EvidenceClassification {
+  PROPOSTA
+  POSICAO
+  ATUACAO
+  RESULTADO_OBSERVADO
+}
+
+enum EvidenceStrength {
+  A
+  B
+  C
+  D
+}
+
+enum ReviewStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  PUBLISHED
+  REJECTED
+}
+
+enum PositionDirection {
+  SUPPORTS
+  PARTIALLY_SUPPORTS
+  NEUTRAL
+  PARTIALLY_OPPOSES
+  OPPOSES
+  UNCLEAR
+}
+
+/// Etiqueta do resumo de programa em relação às regras atuais.
+enum ProgramActionLabel {
+  MANTER
+  AMPLIAR
+  CRIAR
+  MUDAR
+  REDUZIR
+  SEM_PROPOSTA_CLARA
+}
+
+enum ContextNoteKind {
+  LEGAL
+  CONCEPTUAL
+  HISTORICAL
+}
+
+enum AgeRange {
+  R16_24
+  R25_34
+  R35_44
+  R45_59
+  R60_PLUS
+  PREFER_NOT
+}
+
+enum Region {
+  NORTE
+  NORDESTE
+  CENTRO_OESTE
+  SUDESTE
+  SUL
+  EXTERIOR
+  PREFER_NOT
+}
+
+// ---------------------------------------------------------------------------
+// Conteúdo do questionário
+// ---------------------------------------------------------------------------
+
+model Candidate {
+  id               String   @id
+  slug             String   @unique
+  name             String
+  roleContext      String
+  historySourceIds String[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  evidences          Evidence[]
+  positions          CandidatePosition[]
+  legislativeActions LegislativeAction[]
+  publicPolicies     PublicPolicy[]
+  programSummaries   ProgramSummary[]
+  candidateProfiles  CandidateProfile[]
+}
+
+model Topic {
+  id               String   @id
+  slug             String   @unique
+  order            Int
+  name             String
+  description      String
+  subtopics        String[]
+  priorityQuestion String?
+
+  questions Question[]
+  evidences Evidence[]
+}
+
+model Question {
+  id                   String       @id
+  topicId              String
+  subtopic             String?
+  order                Int
+  text                 String
+  kind                 QuestionKind
+  contextNoteIds       String[]
+  argumentsId          String?
+  evidenceDistinctions String[]
+
+  topic     Topic               @relation(fields: [topicId], references: [id])
+  options   QuestionOption[]
+  evidences Evidence[]
+  positions CandidatePosition[]
+  protocol  ResearchProtocol?
+
+  @@index([topicId])
+}
+
+model QuestionOption {
+  id              String  @id
+  questionId      String
+  label           String
+  order           Int
+  normalizedValue Int?
+  isNoOpinion     Boolean @default(false)
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId])
+}
+
+model ContextNote {
+  id         String          @id
+  kind       ContextNoteKind
+  title      String
+  paragraphs String[]
+  sourceIds  String[]
+  asOf       DateTime
+  timeline   Json?
+}
+
+model ArgumentSet {
+  id      String   @id
+  policy  String
+  inFavor String[]
+  against String[]
+}
+
+// ---------------------------------------------------------------------------
+// Fontes e evidências
+// ---------------------------------------------------------------------------
+
+model Source {
+  id                    String             @id
+  name                  String
+  institution           String
+  url                   String
+  documentUrl           String?
+  type                  SourceType
+  legend                SourceLegend
+  purpose               String
+  usageRestrictions     String?
+  publishedAt           DateTime?
+  retrievedAt           DateTime?
+  archivedUrl           String?
+  hash                  String?
+  notes                 String?
+  verificationStatus    VerificationStatus @default(UNVERIFIED)
+  verificationCheckedAt DateTime?
+  verificationNote      String?
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+
+  evidences        Evidence[]
+  indicators       Indicator[]
+  programSummaries ProgramSummary[]
+  rawDocuments     RawDocument[]
+}
+
+model Evidence {
+  id                      String                 @id @default(cuid())
+  candidateId             String
+  questionId              String?
+  topicId                 String
+  title                   String
+  summary                 String
+  originalExcerpt         String
+  sourceId                String
+  sourceType              SourceType
+  eventDate               DateTime?
+  publicationDate         DateTime?
+  retrievedAt             DateTime
+  classification          EvidenceClassification
+  evidenceStrength        EvidenceStrength
+  reviewStatus            ReviewStatus           @default(DRAFT)
+  classificationCriterion String?
+  inForce                 Boolean?
+  createdAt               DateTime               @default(now())
+  updatedAt               DateTime               @updatedAt
+
+  candidate Candidate @relation(fields: [candidateId], references: [id])
+  question  Question? @relation(fields: [questionId], references: [id])
+  topic     Topic     @relation(fields: [topicId], references: [id])
+  source    Source    @relation(fields: [sourceId], references: [id])
+
+  positions          CandidatePositionEvidence[]
+  reviews            EvidenceReview[]
+  llmClassifications LlmClassification[]
+
+  @@index([candidateId, questionId])
+  @@index([reviewStatus])
+}
+
+model CandidatePosition {
+  id              String            @id @default(cuid())
+  candidateId     String
+  questionId      String
+  direction       PositionDirection
+  closestOptionId String?
+  summary         String
+  dimension       String?
+  reviewStatus    ReviewStatus      @default(DRAFT)
+  timeline        Json?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  candidate Candidate                   @relation(fields: [candidateId], references: [id])
+  question  Question                    @relation(fields: [questionId], references: [id])
+  evidences CandidatePositionEvidence[]
+
+  @@index([candidateId, questionId])
+}
+
+/// Uma posição aponta para uma ou várias evidências.
+model CandidatePositionEvidence {
+  positionId String
+  evidenceId String
+
+  position CandidatePosition @relation(fields: [positionId], references: [id], onDelete: Cascade)
+  evidence Evidence          @relation(fields: [evidenceId], references: [id], onDelete: Cascade)
+
+  @@id([positionId, evidenceId])
+}
+
+/// Atuação parlamentar (projetos, votos, relatorias, emendas…).
+model LegislativeAction {
+  id           String       @id @default(cuid())
+  candidateId  String
+  kind         String // projeto, coautoria, relatoria, voto, emenda, comissão, pronunciamento
+  externalId   String? // id na Câmara/Senado
+  title        String
+  summary      String
+  date         DateTime?
+  sourceId     String
+  reviewStatus ReviewStatus @default(DRAFT)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  candidate Candidate @relation(fields: [candidateId], references: [id])
+
+  @@index([candidateId])
+}
+
+/// Política efetivamente executada por chefe do Executivo (lei sancionada, decreto, programa…).
+model PublicPolicy {
+  id           String       @id @default(cuid())
+  candidateId  String
+  kind         String // sanção, veto, decreto, programa, execução orçamentária
+  title        String
+  summary      String
+  startDate    DateTime?
+  endDate      DateTime?
+  sourceId     String
+  reviewStatus ReviewStatus @default(DRAFT)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  candidate Candidate @relation(fields: [candidateId], references: [id])
+
+  @@index([candidateId])
+}
+
+/// Indicador estatístico. NÃO é posição de candidato e não implica causalidade.
+model Indicator {
+  id                      String       @id @default(cuid())
+  name                    String
+  surveyName              String
+  institution             String
+  sourceId                String
+  value                   Float
+  unit                    String
+  referencePeriod         String
+  releasedAt              DateTime
+  methodologyNote         String?
+  contemporaneousPolicies String[]
+  reviewStatus            ReviewStatus @default(DRAFT)
+  createdAt               DateTime     @default(now())
+  updatedAt               DateTime     @updatedAt
+
+  source Source @relation(fields: [sourceId], references: [id])
+}
+
+/// Resumo factual de programa para "Entenda melhor as propostas".
+model ProgramSummary {
+  id               String              @id @default(cuid())
+  candidateId      String
+  themeKey         String
+  title            String
+  summary          String
+  documentalStatus String
+  actionLabel      ProgramActionLabel?
+  sourceId         String
+  documentDate     DateTime?
+  proposalDetails  Json?
+  reviewStatus     ReviewStatus        @default(DRAFT)
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  candidate Candidate @relation(fields: [candidateId], references: [id])
+  source    Source    @relation(fields: [sourceId], references: [id])
+
+  @@index([candidateId, themeKey])
+}
+
+// ---------------------------------------------------------------------------
+// Revisão cega, metodologia, protocolo, auditoria
+// ---------------------------------------------------------------------------
+
+/// Revisão cega: o revisor recebe evidenceId, texto, fonte e tema SEM candidateId.
+model EvidenceReview {
+  id                     String   @id @default(cuid())
+  evidenceId             String
+  reviewerId             String
+  reviewedAt             DateTime @default(now())
+  classificationVersion  String
+  previousClassification Json?
+  newClassification      Json
+  reason                 String
+  blind                  Boolean  @default(true)
+
+  evidence Evidence @relation(fields: [evidenceId], references: [id], onDelete: Cascade)
+
+  @@index([evidenceId])
+}
+
+model MethodologyVersion {
+  id             String    @id
+  version        String    @unique
+  title          String
+  description    String
+  effectiveFrom  DateTime
+  effectiveUntil DateTime?
+  createdAt      DateTime  @default(now())
+  changeLog      String[]
+}
+
+model ResearchProtocol {
+  id                String   @id
+  questionId        String   @unique
+  topic             String
+  subtopic          String
+  searchTerms       String[]
+  sourceIds         String[]
+  period            String
+  inclusionCriteria String[]
+  exclusionCriteria String[]
+  definedAt         DateTime
+
+  question Question @relation(fields: [questionId], references: [id])
+}
+
+model ChangeLog {
+  id          String   @id @default(cuid())
+  version     String
+  description String
+  createdAt   DateTime @default(now())
+}
+
+/// Auditoria de alterações relevantes.
+model AuditLog {
+  id        String   @id @default(cuid())
+  actor     String
+  timestamp DateTime @default(now())
+  operation String
+  entity    String
+  entityId  String
+  before    Json?
+  after     Json?
+  reason    String
+
+  @@index([entity, entityId])
+}
+
+// ---------------------------------------------------------------------------
+// Ingestão (documento bruto -> evidência candidata -> revisão humana)
+// ---------------------------------------------------------------------------
+
+model RawDocument {
+  id          String   @id @default(cuid())
+  sourceId    String
+  adapter     String
+  externalId  String?
+  url         String
+  fetchedAt   DateTime @default(now())
+  contentType String?
+  content     String?
+  hash        String?
+  metadata    Json?
+
+  source Source @relation(fields: [sourceId], references: [id])
+
+  @@index([sourceId, externalId])
+}
+
+/// Registro de classificação por LLM. Nunca publica automaticamente.
+model LlmClassification {
+  id           String   @id @default(cuid())
+  evidenceId   String
+  prompt       String
+  model        String
+  modelVersion String
+  rawResponse  String
+  confidence   Float?
+  createdAt    DateTime @default(now())
+  reviewed     Boolean  @default(false)
+
+  evidence Evidence @relation(fields: [evidenceId], references: [id], onDelete: Cascade)
+}
+
+// ---------------------------------------------------------------------------
+// Estatísticas anônimas (estrutura separada, sem PII)
+// ---------------------------------------------------------------------------
+
+/// Envio anônimo. Sem nome, email, IP, user agent, fingerprint ou identificadores externos.
+model SurveySubmission {
+  id                 String    @id @default(uuid())
+  methodologyVersion String
+  submittedAt        DateTime  @default(now())
+  answers            Json // [{ questionId, optionIds[] }]
+  topicPriorities    Json // [{ topicId, level }]
+  optionalAgeRange   AgeRange?
+  optionalRegion     Region?
+
+  @@index([submittedAt])
+  @@index([methodologyVersion])
+}
+
+model QuestionAggregate {
+  id                 String   @id @default(cuid())
+  questionId         String
+  optionId           String
+  responseCount      Int
+  methodologyVersion String
+  calculatedAt       DateTime @default(now())
+
+  @@unique([questionId, optionId, methodologyVersion])
+}
+
+/// Avaliação anônima da pesquisa (nota e se ajudou na decisão). Sem PII.
+model SurveyFeedback {
+  id                 String   @id @default(uuid())
+  methodologyVersion String
+  submittedAt        DateTime @default(now())
+  rating             Int // 1..5
+  helpedDecision     Boolean? // true = sim, false = não, null = prefiro não dizer
+
+  @@index([submittedAt])
+}
+
+/// Perfil público do candidato (trajetória, cargos, experiência), com fontes por item.
+model CandidateProfile {
+  candidateId String   @id
+  data        Json
+  updatedAt   DateTime @updatedAt
+
+  candidate Candidate @relation(fields: [candidateId], references: [id])
+}

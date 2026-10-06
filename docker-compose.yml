@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: voce_decide
+    ports:
+      - "5432:5432"
+    volumes:
+      - voce_decide_pg:/var/lib/postgresql/data
+
+volumes:
+  voce_decide_pg:

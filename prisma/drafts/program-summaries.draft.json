@@ -1,0 +1,905 @@
+{
+ "_meta": {
+  "generatedAt": "2026-10-06",
+  "methodologyVersion": "1.1.0",
+  "reviewStatus": "DRAFT",
+  "rule": "Resumos gerados exclusivamente a partir dos PDFs registrados no TSE (proposta_governo_2026_BR.zip). Páginas referem-se ao PDF. Nenhum item é publicado sem revisão humana. Afirmações das candidaturas sobre resultados passados não foram tratadas como fatos.",
+  "labels": [
+   "MANTER",
+   "AMPLIAR",
+   "CRIAR",
+   "MUDAR",
+   "REDUZIR",
+   "SEM_PROPOSTA_CLARA"
+  ],
+  "sources": {
+   "lula": "tse-proposta-governo-2026-lula",
+   "flavio-bolsonaro": "tse-proposta-governo-2026-flavio-bolsonaro"
+  },
+  "documentDate": "2026-07-22"
+ },
+ "summaries": [
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:economia",
+   "actionLabel": "MANTER",
+   "title": "Manter o arcabouço fiscal e buscar queda sustentada dos juros",
+   "summary": "O programa propõe manter o novo arcabouço fiscal, com controle do crescimento das despesas e redução do déficit primário, e criar condições para redução sustentada da taxa de juros com inflação controlada. Prevê elevar a taxa de investimento, com foco em infraestrutura logística e social, e aprofundar o mercado de capitais doméstico. Meta de crescimento sustentado com inclusão.",
+   "pages": [
+    48,
+    49
+   ],
+   "excerpt": "manteremos o novo arcabouço fiscal, que controlou o crescimento das despesas sem prejudicar as políticas sociais e permitiu uma redução significativa do déficit primário.",
+   "proposalDetails": {
+    "whatIsProposed": "Manter o arcabouço fiscal; reduzir juros com responsabilidade fiscal; elevar investimento.",
+    "dependsOnCongress": "Mudanças nas regras fiscais exigem lei complementar.",
+    "executiveCanDo": "Gestão orçamentária e política de investimentos públicos."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:economia",
+   "actionLabel": "MUDAR",
+   "title": "Reformular as regras fiscais, entregar superávits e cortar despesas",
+   "summary": "Propõe uma 'reformulação nas atuais regras fiscais' com foco em estabilizar e reduzir a dívida pública, entregar superávits primários, limitar crédito subsidiado do Tesouro e criar regra de controle de gastos discricionários dos três Poderes. Associa a queda da dívida à redução de juros e à inflação no centro da meta. Meta de crescimento de 4% ao ano na próxima década, apoiado em investimento privado.",
+   "pages": [
+    49,
+    70,
+    71
+   ],
+   "excerpt": "Apresentaremos uma reformulação nas atuais regras fiscais, com regras claras focadas na estabilização e na redução da dívida pública",
+   "proposalDetails": {
+    "whatIsProposed": "Novas regras fiscais; superávits primários; corte de despesas (Tesouraço).",
+    "dependsOnCongress": "Alteração das regras fiscais exige lei complementar ou emenda constitucional.",
+    "executiveCanDo": "Contingenciamento e gestão de despesas discricionárias do Executivo."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:impostos",
+   "actionLabel": "MANTER",
+   "title": "Implementar a reforma do consumo, usar o Imposto Seletivo e manter a tributação dos mais ricos",
+   "summary": "O programa apresenta como já realizadas a isenção do IR para quem ganha até R$ 5.000 e a tributação de rendas muito altas, e propõe seguir reduzindo a regressividade do sistema. Prevê a implementação da reforma tributária do consumo (CBS e IBS, cesta básica isenta, cashback) e o uso do Imposto Seletivo para desestimular produtos nocivos à saúde. Garante tratamento tributário justo às pequenas empresas na transição.",
+   "pages": [
+    11,
+    19,
+    57,
+    59
+   ],
+   "excerpt": "isentamos de imposto de renda todos os que ganham até R$ 5.000, compromisso assumido na campanha de 2022, marcos do início do processo de redução da regressividade do sistema tributário brasileiro.",
+   "proposalDetails": {
+    "whatIsProposed": "Continuidade da agenda de progressividade e implementação da reforma do consumo.",
+    "dependsOnCongress": "Regulamentação do Imposto Seletivo e demais leis complementares da reforma."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:impostos",
+   "actionLabel": "REDUZIR",
+   "title": "Revisar a reforma tributária, reduzir o IVA e os impostos sobre consumo, energia e combustíveis",
+   "summary": "Propõe revisar e redimensionar a reforma tributária em curso e as majorações recentes, com o objetivo de reduzir a carga sobre produção e consumo, reduzir a alíquota do IVA, assegurar não cumulatividade e reduzir exceções. Prevê redução de impostos sobre energia elétrica e combustíveis e desoneração de exportações e investimentos. Inclui fim gradual do IOF sobre câmbio como etapa da adesão à OCDE.",
+   "pages": [
+    30,
+    31,
+    63,
+    71,
+    72
+   ],
+   "excerpt": "Vamos promover a revisão e o redimensionamento da reforma tributária em curso e da majoração de impostos efetuada pelo atual governo, com o objetivo de reduzir efetivamente a carga sobre a produção e o consumo.",
+   "proposalDetails": {
+    "whatIsProposed": "Revisão da reforma tributária e redução de alíquotas.",
+    "dependsOnCongress": "Alterações de alíquotas e da reforma exigem lei (em parte, emenda constitucional).",
+    "executiveCanDo": "IOF pode ser alterado por decreto dentro dos limites legais."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:trabalho-e-jornada",
+   "actionLabel": "MUDAR",
+   "title": "Fim da escala 6x1 e jornada de 40 horas sem redução salarial; regular o trabalho por plataformas",
+   "summary": "Compromete-se a atuar junto ao Senado pela aprovação do fim da escala 6x1 e da redução da jornada para 40 horas semanais sem redução salarial, nos termos aprovados na Câmara. Propõe manter a política de valorização do salário mínimo com aumento real, consolidar um sistema de proteção para trabalhadores de plataformas (relação de trabalho, remuneração, direitos previdenciários, transparência algorítmica) e combater a pejotização fraudulenta. Prevê fortalecer a negociação coletiva.",
+   "pages": [
+    73,
+    74,
+    75,
+    76,
+    77
+   ],
+   "excerpt": "Manteremos nossa ação junto ao Senado Federal para assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial, nos termos aprovados na Câmara dos Deputados.",
+   "proposalDetails": {
+    "whatIsProposed": "Redução da jornada constitucional e proteção a trabalhadores de aplicativos.",
+    "dependsOnCongress": "A jornada máxima é constitucional (art. 7º, XIII): exige PEC. A regulação de plataformas exige lei.",
+    "executiveCanDo": "Política de valorização do salário mínimo e fiscalização do trabalho."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:trabalho-e-jornada",
+   "actionLabel": "MUDAR",
+   "title": "Reduzir o custo do trabalho, 'negociado sobre o legislado' e novos contratos para jovens e maiores de 50",
+   "summary": "Propõe reduzir gradualmente o custo do trabalho formal 'sem retirar direitos', criar um contrato para o primeiro emprego (18 a 24 anos) com menor custo na folha e outro para pessoas com 50 anos ou mais desempregadas há 12 meses. Defende o 'negociado sobre o legislado' e jornadas flexíveis, e se posiciona contra o que chama de 'República Sindical'. Para trabalhadores de aplicativos, afirma manter as oportunidades do modelo atual com proteção social e previdenciária 'sem os interesses de dirigentes sindicais à frente'. Não há proposta explícita sobre o fim da escala 6x1; o texto critica a discussão de jornada que 'ignora a prevalência do negociado sobre o legislado'.",
+   "pages": [
+    43,
+    44,
+    45
+   ],
+   "excerpt": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos, para que mais brasileiros tenham carteira assinada e a proteção que vem com ela.",
+   "proposalDetails": {
+    "whatIsProposed": "Redução de encargos e novos tipos de contrato.",
+    "dependsOnCongress": "Alterações na CLT e em encargos exigem lei."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:saude",
+   "actionLabel": "AMPLIAR",
+   "title": "Expandir o SUS: especialistas, Farmácia Popular com exames, prontuário único e produção nacional de insumos",
+   "summary": "Propõe ampliar o programa Agora tem Especialistas (terceiro turno, carretas, mutirões, parceria com hospitais privados em troca de créditos), manter a Farmácia Popular 100% gratuita e incluir exames laboratoriais, consolidar o prontuário único do cidadão com marcação de consultas pelo celular e fila única por risco clínico com inteligência artificial. Prevê fortalecer o Complexo Econômico-Industrial da Saúde para produção nacional de vacinas, medicamentos e hemoderivados.",
+   "pages": [
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+   ],
+   "excerpt": "O programa será mantido, 100% gratuito, assegurando contínua revisão dos medicamentos ofertados [...] Uma inovação do programa será incluir exames laboratoriais, de diagnóstico e de monitoramento de condições crônicas de saúde",
+   "proposalDetails": {
+    "whatIsProposed": "Expansão da atenção especializada e da Farmácia Popular; prontuário único.",
+    "executiveCanDo": "Programas e portarias do Ministério da Saúde, dentro do orçamento."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:saude",
+   "actionLabel": "MUDAR",
+   "title": "Prontuário eletrônico único, correção da tabela SUS, contratação da rede privada em horários ociosos e telessaúde",
+   "summary": "Propõe implantar prontuário eletrônico único vinculado ao CPF e interoperável entre redes pública e privada, usar inteligência artificial para agendamento, corrigir efetivamente a tabela SUS, ampliar a Estratégia Saúde da Família e criar um Programa de Atendimento aos Idosos. Prevê contratar serviços e exames da rede privada nos horários ociosos, telessaúde, entrega de remédios em domicílio e manutenção da imunização com incentivo à produção nacional de vacinas.",
+   "pages": [
+    25,
+    26,
+    37,
+    38
+   ],
+   "excerpt": "Vamos garantir as condições para que seja possível a correção efetiva da tabela SUS. [...] Para usar bem o que já existe, vamos contratar serviços e exames na rede privada nos horários ociosos",
+   "proposalDetails": {
+    "whatIsProposed": "Digitalização do SUS, correção da tabela e maior uso da rede privada.",
+    "dependsOnCongress": "Correção da tabela depende de recursos orçamentários aprovados.",
+    "executiveCanDo": "Contratualização com a rede privada e sistemas de informação."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:educacao",
+   "actionLabel": "AMPLIAR",
+   "title": "Alfabetização, tempo integral, Pé-de-Meia e expansão de institutos e universidades federais",
+   "summary": "Propõe cumprir as metas do PNE 2026-2036, chegar a 80% das crianças alfabetizadas na idade certa, dar 'absoluta prioridade' à educação em tempo integral, universalizar a internet nas escolas e manter e fortalecer o Pé-de-Meia. Prevê concluir mais 111 institutos federais em 106 municípios, novo ciclo de expansão e interiorização do ensino superior público e manutenção do ProUni e do FIES.",
+   "pages": [
+    30,
+    31,
+    32,
+    33,
+    34
+   ],
+   "excerpt": "Serão mais 111 IFs, com novos campus em 106 municípios de todos os estados. [...] Haverá também novo ciclo expansão e interiorização da educação superior pública",
+   "proposalDetails": {
+    "whatIsProposed": "Expansão da rede federal e das políticas de permanência."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:educacao",
+   "actionLabel": "MUDAR",
+   "title": "Método fônico, gestão por resultados, voucher educacional, escolas cívico-militares e ensino superior sob o MCTI",
+   "summary": "Propõe priorizar o método fônico na alfabetização, criar o Programa Acolher (alunos remunerados para dar reforço), financiamento vinculado a metas de aprendizagem, ampliação das Escolas Cívico-Militares e voucher educacional onde faltar vaga pública, com educação 'livre de doutrinação político-partidária'. Prevê ampliar o ensino técnico em parceria com o setor produtivo, transferir a governança do ensino superior para o Ministério da Ciência, Tecnologia e Inovações e substituir o modelo de financiamento estudantil por Empréstimo Contingente à Renda.",
+   "pages": [
+    34,
+    35,
+    36,
+    37
+   ],
+   "excerpt": "No ensino superior, vamos transferir a governança para o Ministério da Ciência, Tecnologia e Inovações, unificando ciência e ensino superior sob o mesmo teto.",
+   "proposalDetails": {
+    "whatIsProposed": "Mudanças de método, gestão e financiamento; realocação institucional do ensino superior.",
+    "dependsOnCongress": "Voucher e novo financiamento estudantil exigem lei; a reorganização de ministérios exige lei ou medida provisória."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:programas-sociais",
+   "actionLabel": "MANTER",
+   "title": "Manter, aperfeiçoar e ampliar o Bolsa Família e a proteção social; fortalecer SUAS e Política de Cuidados",
+   "summary": "O programa afirma que se deve 'manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita', citando o Bolsa Família recriado com benefícios para crianças e a valorização do salário mínimo. Propõe fortalecer o SUAS, expandir a Política Nacional de Cuidados (Cuidotecas, lavanderias públicas, cozinhas solidárias, capacitação de cuidadores) e ampliar o combate à pobreza infantil.",
+   "pages": [
+    18,
+    19,
+    24,
+    25,
+    26
+   ],
+   "excerpt": "Por isso, devemos manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita.",
+   "proposalDetails": {
+    "whatIsProposed": "Continuidade e ampliação da transferência de renda e dos cuidados."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:programas-sociais",
+   "actionLabel": "MANTER",
+   "title": "Manter os programas sociais com mais controle e prioridade ao trabalho; proibir uso dos recursos em apostas",
+   "summary": "Compromete-se a manter os programas sociais existentes 'com aperfeiçoamento da gestão, correção de distorções e combate às fraudes'. Propõe que o beneficiário tenha prioridade em primeiro emprego, qualificação e intermediação de mão de obra, com retorno imediato ao benefício após o seguro-desemprego. Prevê proibir o uso de recursos de programas sociais em apostas e orientação financeira pela rede da CAIXA.",
+   "pages": [
+    33,
+    42,
+    43
+   ],
+   "excerpt": "vamos manter os programas sociais existentes, com aperfeiçoamento da gestão, correção de distorções e combate às fraudes. Quem depende hoje da ajuda do Estado para pôr comida na mesa não vai ter essa ajuda tirada.",
+   "proposalDetails": {
+    "whatIsProposed": "Manutenção com condicionalidades de trabalho e controle de fraudes.",
+    "dependsOnCongress": "Vedação do uso em apostas pode exigir lei."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:seguranca-publica",
+   "actionLabel": "CRIAR",
+   "title": "PEC da Segurança, Ministério da Segurança Pública, SUSP, asfixia financeira do crime e controle de armas",
+   "summary": "Propõe aprovar a PEC da Segurança Pública enviada pelo Executivo para revisar atribuições federativas e ampliar o papel federal, e criar o Ministério da Segurança Pública para coordenar o SUSP. Prevê manter a estratégia de asfixia financeira do crime organizado (Lei Antifacção), R$ 10 bilhões para estados e municípios, ampliar FICCOs, fortalecer o sistema penitenciário federal com isolamento de lideranças, câmeras corporais e policiamento de proximidade. Reafirma a política de controle de armas e munições.",
+   "pages": [
+    26,
+    27,
+    28,
+    29,
+    30
+   ],
+   "excerpt": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública",
+   "proposalDetails": {
+    "whatIsProposed": "Coordenação federal via PEC e novo ministério.",
+    "dependsOnCongress": "PEC exige 3/5 em dois turnos nas duas Casas.",
+    "executiveCanDo": "Programas de cooperação, FICCOs e financiamento a estados."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:seguranca-publica",
+   "actionLabel": "MUDAR",
+   "title": "Facções como organizações 'narcoterroristas', presídios de segurança máxima, maioridade penal aos 16 e fim da progressão para hediondos",
+   "summary": "Propõe declarar PCC, CV e milícias como organizações narcoterroristas, criar o Sistema Nacional de Fronteira com tropa de elite das Forças Armadas, construir 5 presídios de segurança máxima (complexo 'TREVA') e meio milhão de vagas prisionais em 4 anos, e dobrar o investimento federal em segurança. Defende reduzir a maioridade penal para 16 anos, castração química para estupradores condenados, fim da progressão de regime para crimes hediondos, cumprimento integral da pena por agressores de mulheres, reconhecimento facial nacional ('Muralha Brasileira') e penas quadruplicadas para roubo e revenda de celulares.",
+   "pages": [
+    13,
+    14,
+    15,
+    16
+   ],
+   "excerpt": "O novo governo do Brasil vai apoiar e sancionar a redução da maioridade penal de 18 para 16 anos. [...] O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador.",
+   "proposalDetails": {
+    "whatIsProposed": "Endurecimento penal e expansão prisional.",
+    "dependsOnCongress": "Maioridade penal é constitucional (art. 228): exige PEC. Progressão de regime, castração química e tipificação exigem lei.",
+    "executiveCanDo": "Investimento em presídios federais e emprego das Forças Armadas em GLO nos limites legais."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:apostas",
+   "actionLabel": "MANTER",
+   "title": "Manter controles de gastos em apostas on-line e ampliar atendimento a pessoas com problemas com jogos",
+   "summary": "O programa menciona manter os mecanismos de controle de gastos excessivos em apostas on-line e aprimorar regras de crédito ao consumidor, além de ampliar profissionais e estratégias de saúde mental voltadas a pessoas com problemas relacionados a jogos de apostas. Não detalha posição sobre a proibição estabelecida pela MP 1.394/2026.",
+   "pages": [
+    39,
+    49
+   ],
+   "excerpt": "mantendo os mecanismos de controle de gastos excessivos em apostas on-line e aprimorando as regras de oferta e responsabilidade na concessão de crédito",
+   "proposalDetails": {
+    "whatIsProposed": "Controle de gastos e atenção à saúde."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:apostas",
+   "actionLabel": "MUDAR",
+   "title": "Proibir uso de recursos de programas sociais em apostas e promover campanhas de conscientização",
+   "summary": "Propõe proibir o uso de recursos de programas sociais em apostas e promover campanhas educativas sobre os riscos do endividamento com jogos, além de orientação financeira às famílias para se proteger do impacto das apostas online. Não há proposta explícita sobre o regime geral de exploração das apostas nem menção à MP 1.394/2026.",
+   "pages": [
+    19,
+    33
+   ],
+   "excerpt": "Vamos proibir o uso dos recursos dos programas sociais para apostas, porque dinheiro destinado a pôr comida na mesa não pode escoar para a casa de apostas",
+   "proposalDetails": {
+    "whatIsProposed": "Vedação específica e campanhas."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:meio-ambiente",
+   "actionLabel": "MANTER",
+   "title": "Desmatamento líquido zero até 2030, cumprir a NDC (59% a 67% até 2035) e ampliar o financiamento climático",
+   "summary": "Reafirma a meta de desmatamento líquido zero até 2030, a NDC de redução de 59% a 67% das emissões líquidas até 2035 e o Plano Clima. Propõe implementar o Sistema Brasileiro de Comércio de Emissões, manter Fundo Clima, Eco Invest, Fundo Amazônia e o TFFF, expandir monitoramento por satélite e inteligência artificial contra crimes ambientais e destinar terras públicas a unidades de conservação, territórios indígenas e quilombolas.",
+   "pages": [
+    69,
+    70,
+    71,
+    72
+   ],
+   "excerpt": "No próximo mandato, continuaremos trabalhando para alcançar o desmatamento líquido zero até 2030, meta que reafirmamos.",
+   "proposalDetails": {
+    "whatIsProposed": "Continuidade das metas e instrumentos climáticos."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:meio-ambiente",
+   "actionLabel": "MUDAR",
+   "title": "Desmatamento ilegal zero até 2029, licenciamento com prazo e licença tácita, PSA e fusão de funções de Ibama, Funai e ICMBio",
+   "summary": "Estabelece meta de zerar o desmatamento ilegal até 2029 e combater queimadas ilegais com satélite e inteligência artificial, com foco em grilagem e crime organizado e 'sem criminalizar o morador da floresta'. Propõe licenciamento ambiental com prazos definidos e concessão da licença se o órgão não decidir no prazo, estabilidade de regras por até 20 anos, ampliação do pagamento por serviços ambientais, mercado regulado de carbono, eliminação de superposições entre Ibama, Funai e ICMBio e exigência de transparência de ONGs com recursos internacionais.",
+   "pages": [
+    49,
+    50,
+    57,
+    58,
+    59
+   ],
+   "excerpt": "Teremos a meta de zerar o desmatamento ilegal até 2029 [...] Se não decidir nem se manifestar dentro desse prazo, a licença deve ser concedida",
+   "proposalDetails": {
+    "whatIsProposed": "Nova lógica de licenciamento e reorganização de órgãos.",
+    "dependsOnCongress": "Licença tácita e reorganização de autarquias exigem lei."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:infraestrutura",
+   "actionLabel": "AMPLIAR",
+   "title": "Nova edição do Novo PAC, concessões, Minha Casa Minha Vida ampliado, saneamento e mobilidade",
+   "summary": "Propõe uma nova edição do Novo PAC combinando obras públicas e concessões (rodovias, ferrovias, portos, aeroportos regionais), com meta de R$ 300 bilhões em investimento em infraestrutura em 2026. Prevê manter e ampliar o Minha Casa Minha Vida para todas as faixas, Compra Assistida, Reforma Casa Brasil, Periferia Viva, universalização de água e esgoto e apoio a transporte coletivo de alta capacidade e eletrificação de frotas.",
+   "pages": [
+    44,
+    45,
+    46,
+    47,
+    53,
+    54
+   ],
+   "excerpt": "O MCMV será mantido e ampliado no próximo mandato, para todas as faixas de renda e preservando seu foco nas famílias de mais baixa renda.",
+   "proposalDetails": {
+    "whatIsProposed": "Continuidade e ampliação do programa de investimentos."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:infraestrutura",
+   "actionLabel": "MUDAR",
+   "title": "R$ 900 bilhões em 4 anos via setor privado, Casa Verde e Amarela (2,5 milhões), ferrovias e saneamento por concessões",
+   "summary": "Propõe investir R$ 900 bilhões em quatro anos em rodovias, hidrovias, portos, aeroportos e ferrovias, com estratégia apoiada na iniciativa privada, novo modelo de financiamento (securitização de ativos da União, PPPs, BNDES só para obras no Brasil), Corredores Logísticos Inteligentes, Ferrogrão, Trem do Nordeste e Transnordestina. Prevê retomar o Casa Verde e Amarela com meta de 2,5 milhões de residências, acelerar concessões de saneamento sob o Marco Legal de 2020, 'nenhuma escola sem água até 2030' e Lixão Zero.",
+   "pages": [
+    47,
+    48,
+    50,
+    51,
+    52
+   ],
+   "excerpt": "Vamos retomar o Casa Verde e Amarela, com meta de 2,5 milhões de residências e a menor taxa de juros possível no financiamento.",
+   "proposalDetails": {
+    "whatIsProposed": "Modelo centrado em concessões e PPPs; retomada de programa habitacional anterior."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:industria",
+   "actionLabel": "AMPLIAR",
+   "title": "Aprofundar a Nova Indústria Brasil, política de minerais críticos e conteúdo local",
+   "summary": "Propõe aprimorar a 'neoindustrialização' com foco em inovação, inteligência artificial e minerais críticos, integrando políticas industrial, científica e de comércio exterior. Prevê financiamento direcionado, compras públicas, margens de preferência e benefícios condicionados a conteúdo local, uso estratégico do FNDCT, política específica para minerais críticos e terras raras evitando exportação de matéria-prima bruta, e regulamentação do mercado de carbono articulada à NIB.",
+   "pages": [
+    50,
+    51,
+    52
+   ],
+   "excerpt": "Utilizaremos financiamento direcionado [...], compras públicas, concessões, regulações e benefícios condicionados a conteúdo local, valor agregado nacional, margens de preferência com estímulos para empresas brasileiras.",
+   "proposalDetails": {
+    "whatIsProposed": "Instrumentos: crédito direcionado, compras públicas, conteúdo local, fundo de pesquisa."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:industria",
+   "actionLabel": "MUDAR",
+   "title": "Estado regulador, não empresário: minerais críticos com capital estrangeiro, abertura comercial e integração a cadeias globais",
+   "summary": "Propõe que o Estado atue 'como regulador e coordenador, não como empresário', com marco regulatório estável, licenciamento ágil, atração de capital e tecnologia estrangeiros e verticalização de minerais críticos 'com incentivos de mercado'. Prevê abertura comercial com acesso a bens de capital importados, plano de integração às cadeias globais de valor (agroindústria, minerais críticos, saúde, economia digital), internacionalização de pequenas e médias empresas via BNDES e Apex e segurança jurídica com estabilidade de regras por até 20 anos.",
+   "pages": [
+    49,
+    50,
+    55,
+    56,
+    62,
+    63,
+    64
+   ],
+   "excerpt": "O Estado atuará como regulador e coordenador, não como empresário, apoiado em seis pilares: marco regulatório claro e estável, licenciamento ágil e técnico, atração de capital e tecnologia, verticalização com incentivos de mercado, governança e transparência.",
+   "proposalDetails": {
+    "whatIsProposed": "Instrumentos: regulação, licenciamento, atração de capital privado; redução de proteção comercial."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:tecnologia-e-ia",
+   "actionLabel": "CRIAR",
+   "title": "Supercomputadores nacionais, modelos de linguagem em português, data centers com contrapartidas e transparência algorítmica",
+   "summary": "Propõe infraestrutura computacional soberana com supercomputadores desenvolvidos e operados por instituições nacionais, desenvolver e sustentar modelos de linguagem em português apoiados em plataforma nacional de dados, e exigir que a expansão de data centers tenha salvaguardas socioambientais, energia 100% renovável e contrapartidas de conteúdo local. Prevê Centro Nacional de Transparência Algorítmica, Conselho Nacional pela Soberania Digital, Política Nacional de Letramento Digital, regulação democrática de plataformas e expansão de fibra e 5G.",
+   "pages": [
+    16,
+    17,
+    54,
+    55
+   ],
+   "excerpt": "Vamos avançar numa infraestrutura computacional soberana, com supercomputadores desenvolvidos e operados por instituições nacionais. [...] Vamos desenvolver e sustentar modelos de linguagem em português",
+   "proposalDetails": {
+    "whatIsProposed": "Desenvolvimento de modelos e infraestrutura própria; regulação de plataformas e IA.",
+    "dependsOnCongress": "Regulação de plataformas e de IA exige lei."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:tecnologia-e-ia",
+   "actionLabel": "AMPLIAR",
+   "title": "Estado 100% digital, Estratégia Nacional de IA para empresas, polo de data centers e legislação de 'liberdade de criar e inovar'",
+   "summary": "Propõe digitalizar 100% dos serviços federais, identidade digital única, assistentes de IA que indicam benefícios ao cidadão (ClarIA), prontuário eletrônico único e pacotes de internet com prioridade a mulheres. Na economia, prevê Estratégia Nacional de IA para difundir IA em micro, pequenas e médias empresas, tornar o Brasil polo global de data centers sustentáveis com energia barata, elevar patentes em IA e propor legislação 'voltada à liberdade de criar e inovar' em vez de regras 'que afugentam o investimento'. Afirma fortalecer a defesa cibernética e a proteção de dados.",
+   "pages": [
+    24,
+    25,
+    26,
+    53,
+    56,
+    57
+   ],
+   "excerpt": "Proporemos uma legislação voltada à liberdade de criar e inovar, inspirada nas melhores práticas internacionais, para que a tecnologia seja desenvolvida aqui sem entraves",
+   "proposalDetails": {
+    "whatIsProposed": "Governo digital e difusão de IA no setor produtivo; regulação leve."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:autonomia-tecnologica",
+   "actionLabel": "AMPLIAR",
+   "title": "Soberania digital, Base Industrial de Defesa, defesa cibernética e produção nacional de fertilizantes e insumos de saúde",
+   "summary": "Define 'soberania digital' como capacidade de desenvolver, operar, regular e governar tecnologias estratégicas e infraestruturas críticas. Propõe fortalecer a Base Industrial e Tecnológica de Defesa, reforçar a defesa cibernética 'desenvolvendo tecnologias próprias e reduzindo a dependência externa', preservar a competência nuclear com autonomia do ciclo do combustível, acelerar a produção nacional de fertilizantes pela Petrobras e ampliar a produção nacional de insulina, hemoderivados e insumos farmacêuticos.",
+   "pages": [
+    39,
+    54,
+    63,
+    68,
+    78,
+    79
+   ],
+   "excerpt": "Reforçaremos a defesa cibernética, protegendo infraestruturas críticas e bases de dados governamentais, desenvolvendo tecnologias próprias e reduzindo a dependência externa em áreas estratégicas.",
+   "proposalDetails": {
+    "whatIsProposed": "Capacidade própria em defesa, cibernética, nuclear, fertilizantes e saúde."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:autonomia-tecnologica",
+   "actionLabel": "MUDAR",
+   "title": "Soberania 'com profissionalismo': evitar dependência em cadeias críticas, fertilizantes nacionais e capital estrangeiro em minerais",
+   "summary": "Define soberania como governar-se e cuidar do território 'na prática', começando pela segurança interna. Propõe equilibrar abertura comercial com o papel do Estado de 'evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia', apoiar produção nacional de fertilizantes (potássio e fosfato) e produzir IA e tecnologia no país a partir de energia barata e minerais críticos. Ao mesmo tempo, prevê atrair capital e tecnologia estrangeiros para a mineração e tratar a defesa com foco em drones e IA.",
+   "pages": [
+    32,
+    53,
+    54,
+    55,
+    56,
+    61,
+    62,
+    63
+   ],
+   "excerpt": "Nosso projeto equilibra a abertura comercial com o papel do Estado de evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia.",
+   "proposalDetails": {
+    "whatIsProposed": "Autonomia seletiva em cadeias críticas com protagonismo do investimento privado."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:relacoes-internacionais",
+   "actionLabel": "MANTER",
+   "title": "Política externa universalista, Mercosul como plataforma, BRICS e Sul Global, reforma da ONU e OMC",
+   "summary": "Propõe política externa 'universalista' e 'independente', com a integração sul-americana como primeiro círculo estratégico: aprofundar o Mercosul (infraestrutura, energia, defesa, saúde), mercado comum sul-americano de energia e OTCA. Prevê aprofundar a aproximação com BRICS, Sul Global e G20, relações com África, CPLP, ASEAN, Ásia, Oriente Médio e Europa, reforma do Conselho de Segurança da ONU, da OMC e da arquitetura financeira (FMI, Banco Mundial, NDB), novos acordos comerciais e Aliança Global contra a Fome.",
+   "pages": [
+    79,
+    80,
+    81,
+    82
+   ],
+   "excerpt": "Manteremos uma política externa universalista e ampliaremos os esforços de cooperação e negociação com todas as regiões do mundo, diversificando nossas parcerias estratégicas.",
+   "proposalDetails": {
+    "whatIsProposed": "Continuidade; Mercosul e BRICS como prioridades."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:relacoes-internacionais",
+   "actionLabel": "MUDAR",
+   "title": "Diplomacia 'pragmática', reaproximação com EUA, Argentina e Israel, adesão à OCDE e negociação com todos",
+   "summary": "Propõe diplomacia 'guiada pelo profissionalismo e pelo pragmatismo, não pela ideologia', revertendo o que descreve como desgaste nas relações com Argentina, Estados Unidos e Israel, e negociando 'com todos os que interessam ao Brasil, da China à União Europeia'. Prioriza retomar a adesão à OCDE (com fim gradual do IOF sobre câmbio), acordos comerciais de ganho mútuo e posicionar o Brasil como destino de investimento em transição energética. Não menciona Mercosul nem BRICS no capítulo de política externa.",
+   "pages": [
+    61,
+    62,
+    63
+   ],
+   "excerpt": "Negociaremos com todos os que interessam ao Brasil, da China à União Europeia, dos Estados Unidos aos mercados asiáticos, porque o que orienta a nossa diplomacia é o interesse do produtor e do trabalhador brasileiro",
+   "proposalDetails": {
+    "whatIsProposed": "Reorientação de prioridades diplomáticas; OCDE.",
+    "dependsOnCongress": "Acordos internacionais exigem aprovação do Congresso."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "programa-2026:direitos-e-instituicoes",
+   "actionLabel": "MANTER",
+   "title": "Reforma política, debate sobre emendas parlamentares, regulação de plataformas, diálogo com o Judiciário e direitos de grupos",
+   "summary": "Defende reforma política e eleitoral, debate público sobre o sistema de emendas parlamentares e o 'orçamento secreto', regulação democrática das redes sociais contra desinformação e ódio, e diálogo com o Judiciário 'respeitada a autonomia dos Poderes'. Reafirma políticas para mulheres (Pacto contra o Feminicídio, Lei da Igualdade Salarial), igualdade racial e cotas, povos indígenas e quilombolas (demarcação e titulação), pessoas LGBTQIAP+, pessoas com deficiência, combate à corrupção com independência das instituições e Inteligência de Estado civil sob controle democrático.",
+   "pages": [
+    15,
+    16,
+    18,
+    19,
+    20,
+    21,
+    26,
+    79
+   ],
+   "excerpt": "É parte da reafirmação da democracia avançar ainda mais na regulação democrática das redes sociais e das plataformas digitais",
+   "proposalDetails": {
+    "whatIsProposed": "Continuidade da agenda de direitos; regulação de plataformas; reforma política.",
+    "dependsOnCongress": "Regulação de plataformas, reforma política e emendas exigem lei ou PEC."
+   }
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "programa-2026:direitos-e-instituicoes",
+   "actionLabel": "MUDAR",
+   "title": "STF como corte constitucional, fim da reeleição, 'Tesouraço na Censura', valores declarados e categoria feminina no esporte",
+   "summary": "Propõe fim das competências criminais originárias do STF, limitação de decisões monocráticas, revisão do escopo das ADPFs, quarentena de um ano para ministros de Estado indicados ao STF, ampliação da participação no CNJ e CNMP, reforma política e fim da reeleição presidencial (PEC já protocolada). Prevê extinguir estruturas estatais de combate à desinformação ('Ministério da Verdade') e revogar atos relacionados. Declara valores de 'respeito à liberdade, à família, à vida desde a concepção, à propriedade privada, à democracia, à liberdade de expressão e à liberdade religiosa' e propõe que a categoria feminina no esporte seja disputada 'por atletas do sexo feminino'. Prevê autonomia de indígenas e quilombolas para decidir atividades produtivas em suas terras.",
+   "pages": [
+    9,
+    40,
+    41,
+    50,
+    65,
+    66,
+    67
+   ],
+   "excerpt": "Fim das competências criminais originárias do STF [...] Limitação das decisões monocráticas do STF [...] E propomos o fim da reeleição para o cargo de Presidente da República.",
+   "proposalDetails": {
+    "whatIsProposed": "Reforma do Judiciário e política; extinção de estruturas de combate à desinformação.",
+    "dependsOnCongress": "Competências do STF e reeleição são constitucionais: exigem PEC.",
+    "executiveCanDo": "Revogar atos infralegais do próprio Executivo."
+   }
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MANTER",
+   "title": "Manter o arcabouço fiscal e reduzir juros",
+   "summary": "Manter a regra fiscal atual e criar condições para queda sustentada dos juros com inflação controlada.",
+   "pages": [
+    49
+   ],
+   "excerpt": "manteremos o novo arcabouço fiscal",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MUDAR",
+   "title": "Fim da escala 6x1 e jornada de 40 horas sem redução de salário",
+   "summary": "Atuar junto ao Senado pela aprovação nos termos votados na Câmara (exige PEC).",
+   "pages": [
+    75
+   ],
+   "excerpt": "assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "CRIAR",
+   "title": "PEC da Segurança e Ministério da Segurança Pública",
+   "summary": "Ampliar o papel federal na segurança e coordenar o SUSP por um novo ministério, após aprovação da PEC.",
+   "pages": [
+    27,
+    30
+   ],
+   "excerpt": "criaremos o Ministério da Segurança Pública",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MANTER",
+   "title": "Controle de armas e munições",
+   "summary": "Manter a política de controle, rastreabilidade e fiscalização de CACs e segurança privada.",
+   "pages": [
+    28
+   ],
+   "excerpt": "manteremos uma política de controle de armas e munições",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MANTER",
+   "title": "Desmatamento líquido zero até 2030 e NDC de 59% a 67% até 2035",
+   "summary": "Reafirmar metas climáticas e implementar o mercado regulado de carbono.",
+   "pages": [
+    69,
+    70
+   ],
+   "excerpt": "alcançar o desmatamento líquido zero até 2030, meta que reafirmamos",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "AMPLIAR",
+   "title": "Minha Casa Minha Vida mantido e ampliado para todas as faixas",
+   "summary": "Continuidade com Compra Assistida, Reforma Casa Brasil e uso de imóveis da União.",
+   "pages": [
+    45
+   ],
+   "excerpt": "O MCMV será mantido e ampliado no próximo mandato",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "AMPLIAR",
+   "title": "Nova edição do Novo PAC com concessões e obras",
+   "summary": "Investimento em logística, energia e infraestrutura social; meta de R$ 300 bilhões em 2026.",
+   "pages": [
+    53
+   ],
+   "excerpt": "A nova edição do Novo PAC manterá a articulação dos investimentos públicos e privados",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "CRIAR",
+   "title": "Regulação do trabalho por plataformas com previdência",
+   "summary": "Sistema de proteção para trabalhadores de aplicativos, incluindo financiamento previdenciário e transparência algorítmica.",
+   "pages": [
+    75,
+    77
+   ],
+   "excerpt": "consolidar um sistema de proteção aos trabalhadores na economia digital e de plataformas",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "CRIAR",
+   "title": "Soberania digital: supercomputadores e modelos de IA em português",
+   "summary": "Infraestrutura computacional nacional, modelos de linguagem próprios e contrapartidas para data centers.",
+   "pages": [
+    54,
+    55
+   ],
+   "excerpt": "supercomputadores desenvolvidos e operados por instituições nacionais",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "AMPLIAR",
+   "title": "Educação: 80% alfabetizados na idade certa, tempo integral e mais 111 institutos federais",
+   "summary": "Prioridade à educação básica em tempo integral com expansão da rede técnica e superior.",
+   "pages": [
+    31,
+    33
+   ],
+   "excerpt": "Serão mais 111 IFs, com novos campus em 106 municípios",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "AMPLIAR",
+   "title": "Saúde: Agora tem Especialistas, Farmácia Popular com exames e prontuário único",
+   "summary": "Reduzir filas da atenção especializada e ampliar a Farmácia Popular.",
+   "pages": [
+    35,
+    36,
+    37
+   ],
+   "excerpt": "Uma inovação do programa será incluir exames laboratoriais",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "lula",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MANTER",
+   "title": "Implementação da reforma tributária do consumo e progressividade",
+   "summary": "CBS/IBS, cesta básica isenta, cashback e Imposto Seletivo; manutenção da tributação de rendas muito altas.",
+   "pages": [
+    11,
+    59
+   ],
+   "excerpt": "vamos, por meio do Imposto Seletivo, desestimular produtos nocivos à saúde",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "REDUZIR",
+   "title": "'Tesouraço': cortar no mínimo 10 ministérios e reformular as regras fiscais",
+   "summary": "Reforma administrativa, corte de cargos e despesas, superávits primários e nova regra fiscal.",
+   "pages": [
+    69,
+    70,
+    71
+   ],
+   "excerpt": "o corte de no mínimo 10 ministérios",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "REDUZIR",
+   "title": "Revisar a reforma tributária e reduzir o IVA e impostos sobre consumo, energia e combustíveis",
+   "summary": "Redimensionar a reforma em curso para reduzir a carga sobre produção e consumo.",
+   "pages": [
+    30,
+    71
+   ],
+   "excerpt": "reduzir o IVA, hoje projetado num dos patamares mais altos do mundo",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MUDAR",
+   "title": "Facções como organizações narcoterroristas e Sistema Nacional de Fronteira",
+   "summary": "Combate ao crime organizado com Forças Armadas nas fronteiras, portos e aeroportos.",
+   "pages": [
+    13,
+    14,
+    15
+   ],
+   "excerpt": "PCC, CV, milícias e todas as outras facções serão declaradas como organizações narcoterroristas",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "CRIAR",
+   "title": "Cinco presídios de segurança máxima e meio milhão de vagas prisionais",
+   "summary": "Complexo Federal de Segurança Máxima e eliminação do déficit carcerário em 4 anos.",
+   "pages": [
+    14
+   ],
+   "excerpt": "O Brasil terá 5 novos presídios de segurança máxima",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MUDAR",
+   "title": "Maioridade penal aos 16 anos e fim da progressão de regime para crimes hediondos",
+   "summary": "Mudanças constitucionais e legais no sistema penal, incluindo castração química para estupradores condenados.",
+   "pages": [
+    13,
+    14,
+    15,
+    16
+   ],
+   "excerpt": "redução da maioridade penal de 18 para 16 anos",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "CRIAR",
+   "title": "Brasil por Elas: Central da Mulher, voucher-creche e Rede Nacional de Cuidado",
+   "summary": "Doze compromissos voltados às mulheres, com creches em tempo integral e voucher onde faltar vaga.",
+   "pages": [
+    17,
+    18,
+    19,
+    20,
+    21
+   ],
+   "excerpt": "a família receberá um voucher-creche para acesso à rede privada credenciada até a vaga pública surgir",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "AMPLIAR",
+   "title": "Estado 100% digital, prontuário eletrônico único e IA a serviço do cidadão",
+   "summary": "Digitalizar todos os serviços federais e integrar saúde pública e privada no prontuário único.",
+   "pages": [
+    24,
+    25,
+    26
+   ],
+   "excerpt": "Vamos digitalizar 100% dos serviços públicos do Governo Federal passíveis de digitalização",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MUDAR",
+   "title": "Reduzir o custo do trabalho, contrato de primeiro emprego e 'negociado sobre o legislado'",
+   "summary": "Novos contratos para jovens e maiores de 50 anos; manutenção do trabalho por aplicativos.",
+   "pages": [
+    43,
+    44,
+    45
+   ],
+   "excerpt": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MUDAR",
+   "title": "Adesão à OCDE, fim gradual do IOF sobre câmbio e abertura comercial",
+   "summary": "Retomar o cronograma de adesão e integrar o país a cadeias globais de valor.",
+   "pages": [
+    62,
+    63
+   ],
+   "excerpt": "O passo mais urgente é retomar o cronograma interrompido de adesão à OCDE",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MUDAR",
+   "title": "STF como corte constitucional e fim da reeleição presidencial",
+   "summary": "Fim das competências criminais originárias, limite a decisões monocráticas e PEC do fim da reeleição.",
+   "pages": [
+    65,
+    66
+   ],
+   "excerpt": "propomos o fim da reeleição para o cargo de Presidente da República",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MUDAR",
+   "title": "Energia: fracking permitido, redução gradual da CDE e polo de data centers",
+   "summary": "Programa Nacional de Segurança Energética com gás não convencional, conta de luz simplificada e atração de data centers.",
+   "pages": [
+    31,
+    52,
+    53
+   ],
+   "excerpt": "permitir a exploração do gás não convencional (fracking) com responsabilidade ambiental",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MANTER",
+   "title": "Manter programas sociais com prioridade ao trabalho e proibir apostas com recursos sociais",
+   "summary": "Manutenção com combate a fraudes, trilha de qualificação e retorno sem fila ao benefício.",
+   "pages": [
+    33,
+    42,
+    43
+   ],
+   "excerpt": "vamos manter os programas sociais existentes",
+   "proposalDetails": {}
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "themeKey": "pontos-centrais",
+   "actionLabel": "MUDAR",
+   "title": "Retomar o Programa Nacional de Desestatização e avaliar a venda de estatais",
+   "summary": "Privatizações: retomar o Programa Nacional de Desestatização \"com critério, avaliando caso a caso\", além de blindar fundos de pensão das estatais de indicação política e profissionalizar o recrutamento nas estatais.",
+   "pages": [
+    70
+   ],
+   "excerpt": "E vamos retomar o Programa Nacional de Desestatização com critério, avaliando caso a caso onde a presença do Estado deixou de fazer sentido."
+  }
+ ]
+}

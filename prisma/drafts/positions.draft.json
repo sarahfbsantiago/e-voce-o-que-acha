@@ -1,0 +1,3474 @@
+{
+ "_meta": {
+  "generatedAt": "2026-10-06",
+  "methodologyVersion": "1.2.0",
+  "reviewStatus": "DRAFT",
+  "rule": "Posições por pergunta classificadas a partir dos programas de 2026 registrados no TSE (proposta) e de leis, decretos e projetos de autoria em fontes oficiais (atuação). Nenhum item é publicado sem revisão humana. UNCLEAR = sem posição suficientemente documentada.",
+  "criterion": "Direção atribuída pela leitura do trecho citado; \"em parte\" quando a proposta cobre só parte da pergunta ou é condicionada; UNCLEAR quando o documento não trata do assunto."
+ },
+ "positions": [
+  {
+   "candidateId": "lula",
+   "questionId": "q01",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "O programa propõe manter a tributação de rendas muito altas e seguir reduzindo a regressividade do sistema.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Implementar a reforma do consumo, usar o Imposto Seletivo e manter a tributação dos mais ricos",
+     "summary": "O programa apresenta como já realizadas a isenção do IR para quem ganha até R$ 5.000 e a tributação de rendas muito altas, e propõe seguir reduzindo a regressividade do sistema. Prevê a implementação da reforma tributária do consumo (CBS e IBS, cesta básica isenta, cashback) e o uso do Imposto Seletivo para desestimular produtos nocivos à saúde. Garante tratamento tributário justo às pequenas empresas na transição.",
+     "excerpt": "isentamos de imposto de renda todos os que ganham até R$ 5.000, compromisso assumido na campanha de 2022, marcos do início do processo de redução da regressividade do sistema tributário brasileiro.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      11,
+      19,
+      57,
+      59
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 15.270/2025 — fim do Imposto de Renda para quem ganha até R$ 5 mil",
+     "summary": "Lei sancionada em 26/11/2025 (terceiro mandato) que zera o Imposto de Renda para quem ganha até R$ 5.000 por mês a partir de janeiro de 2026, com redução progressiva até R$ 7.350, e cria tributação mínima para altas rendas.",
+     "excerpt": "Lei nº 15.270, de 26 de novembro de 2025 — Altera a Lei nº 9.250, de 26 de dezembro de 1995, e a Lei nº 9.249, de 26 de dezembro de 1995, para instituir a redução do imposto sobre a renda devido nas bases de cálculo mensal e anual e a tributação mínima para as pessoas físicas que auferem altas rendas; e dá outras providências.",
+     "sourceId": "lei-15270-2025",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm",
+     "date": "2025-11-26",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q01",
+   "direction": "PARTIALLY_OPPOSES",
+   "closestOption": 3,
+   "summary": "Tende a discordar: as propostas priorizam redução da carga tributária e corte de gastos, e não há proposta de aumentar a tributação de quem ganha muito. Classificação cautelosa: \"não apresentou proposta\", não \"é contra\".",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Revisar a reforma tributária, reduzir o IVA e os impostos sobre consumo, energia e combustíveis",
+     "summary": "Propõe revisar e redimensionar a reforma tributária em curso e as majorações recentes, com o objetivo de reduzir a carga sobre produção e consumo, reduzir a alíquota do IVA, assegurar não cumulatividade e reduzir exceções. Prevê redução de impostos sobre energia elétrica e combustíveis e desoneração de exportações e investimentos. Inclui fim gradual do IOF sobre câmbio como etapa da adesão à OCDE.",
+     "excerpt": "Vamos promover a revisão e o redimensionamento da reforma tributária em curso e da majoração de impostos efetuada pelo atual governo, com o objetivo de reduzir efetivamente a carga sobre a produção e o consumo.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      30,
+      31,
+      63,
+      71,
+      72
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reduzir a carga tributária e revisar as majorações de impostos do governo atual; sem proposta de tributar altas rendas",
+     "summary": "O programa propõe reduzir impostos sobre produção e consumo e rever a \"majoração de impostos efetuada pelo atual governo\". Em 76 páginas não há proposta de aumentar a tributação de rendas altas; as palavras \"Imposto de Renda\", \"altas rendas\" e \"progressividade\" não aparecem.",
+     "excerpt": "Vamos promover a revisão e o redimensionamento da reforma tributária em curso e da majoração de impostos efetuada pelo atual governo, com o objetivo de reduzir efetivamente a carga sobre a produção e o consumo.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      30,
+      71
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q02",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Apresenta a isenção do IR até R$ 5.000 como compromisso cumprido e propõe continuar reduzindo a regressividade.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Implementar a reforma do consumo, usar o Imposto Seletivo e manter a tributação dos mais ricos",
+     "summary": "O programa apresenta como já realizadas a isenção do IR para quem ganha até R$ 5.000 e a tributação de rendas muito altas, e propõe seguir reduzindo a regressividade do sistema. Prevê a implementação da reforma tributária do consumo (CBS e IBS, cesta básica isenta, cashback) e o uso do Imposto Seletivo para desestimular produtos nocivos à saúde. Garante tratamento tributário justo às pequenas empresas na transição.",
+     "excerpt": "isentamos de imposto de renda todos os que ganham até R$ 5.000, compromisso assumido na campanha de 2022, marcos do início do processo de redução da regressividade do sistema tributário brasileiro.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      11,
+      19,
+      57,
+      59
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 15.270/2025 — fim do Imposto de Renda para quem ganha até R$ 5 mil",
+     "summary": "Lei sancionada em 26/11/2025 (terceiro mandato) que zera o Imposto de Renda para quem ganha até R$ 5.000 por mês a partir de janeiro de 2026, com redução progressiva até R$ 7.350, e cria tributação mínima para altas rendas.",
+     "excerpt": "Lei nº 15.270, de 26 de novembro de 2025 — Altera a Lei nº 9.250, de 26 de dezembro de 1995, e a Lei nº 9.249, de 26 de dezembro de 1995, para instituir a redução do imposto sobre a renda devido nas bases de cálculo mensal e anual e a tributação mínima para as pessoas físicas que auferem altas rendas; e dá outras providências.",
+     "sourceId": "lei-15270-2025",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm",
+     "date": "2025-11-26",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q02",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "Propõe reduzir impostos sobre consumo, energia e combustíveis; não trata do Imposto de Renda de quem ganha menos.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Revisar a reforma tributária, reduzir o IVA e os impostos sobre consumo, energia e combustíveis",
+     "summary": "Propõe revisar e redimensionar a reforma tributária em curso e as majorações recentes, com o objetivo de reduzir a carga sobre produção e consumo, reduzir a alíquota do IVA, assegurar não cumulatividade e reduzir exceções. Prevê redução de impostos sobre energia elétrica e combustíveis e desoneração de exportações e investimentos. Inclui fim gradual do IOF sobre câmbio como etapa da adesão à OCDE.",
+     "excerpt": "Vamos promover a revisão e o redimensionamento da reforma tributária em curso e da majoração de impostos efetuada pelo atual governo, com o objetivo de reduzir efetivamente a carga sobre a produção e o consumo.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      30,
+      31,
+      63,
+      71,
+      72
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q03",
+   "direction": "SUPPORTS",
+   "closestOption": 3,
+   "summary": "Propõe manter o arcabouço fiscal \"sem prejudicar as políticas sociais\": equilíbrio entre contas públicas e áreas sociais.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Manter o arcabouço fiscal e buscar queda sustentada dos juros",
+     "summary": "O programa propõe manter o novo arcabouço fiscal, com controle do crescimento das despesas e redução do déficit primário, e criar condições para redução sustentada da taxa de juros com inflação controlada. Prevê elevar a taxa de investimento, com foco em infraestrutura logística e social, e aprofundar o mercado de capitais doméstico. Meta de crescimento sustentado com inclusão.",
+     "excerpt": "manteremos o novo arcabouço fiscal, que controlou o crescimento das despesas sem prejudicar as políticas sociais e permitiu uma redução significativa do déficit primário.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      48,
+      49
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q03",
+   "direction": "SUPPORTS",
+   "closestOption": 2,
+   "summary": "Prioriza estabilizar e reduzir a dívida, entregar superávits e cortar despesas, mantendo os programas sociais existentes.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reformular as regras fiscais, entregar superávits e cortar despesas",
+     "summary": "Propõe uma 'reformulação nas atuais regras fiscais' com foco em estabilizar e reduzir a dívida pública, entregar superávits primários, limitar crédito subsidiado do Tesouro e criar regra de controle de gastos discricionários dos três Poderes. Associa a queda da dívida à redução de juros e à inflação no centro da meta. Meta de crescimento de 4% ao ano na próxima década, apoiado em investimento privado.",
+     "excerpt": "Apresentaremos uma reformulação nas atuais regras fiscais, com regras claras focadas na estabilização e na redução da dívida pública",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      49,
+      70,
+      71
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q04",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe financiamento direcionado, compras públicas e benefícios condicionados a conteúdo local para a indústria.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Aprofundar a Nova Indústria Brasil, política de minerais críticos e conteúdo local",
+     "summary": "Propõe aprimorar a 'neoindustrialização' com foco em inovação, inteligência artificial e minerais críticos, integrando políticas industrial, científica e de comércio exterior. Prevê financiamento direcionado, compras públicas, margens de preferência e benefícios condicionados a conteúdo local, uso estratégico do FNDCT, política específica para minerais críticos e terras raras evitando exportação de matéria-prima bruta, e regulamentação do mercado de carbono articulada à NIB.",
+     "excerpt": "Utilizaremos financiamento direcionado [...], compras públicas, concessões, regulações e benefícios condicionados a conteúdo local, valor agregado nacional, margens de preferência com estímulos para empresas brasileiras.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      50,
+      51,
+      52
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q04",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Defende Estado \"regulador, não empresário\", mas prevê incentivos em setores específicos (minerais críticos, pequenas e médias empresas via BNDES e Apex).",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Estado regulador, não empresário: minerais críticos com capital estrangeiro, abertura comercial e integração a cadeias globais",
+     "summary": "Propõe que o Estado atue 'como regulador e coordenador, não como empresário', com marco regulatório estável, licenciamento ágil, atração de capital e tecnologia estrangeiros e verticalização de minerais críticos 'com incentivos de mercado'. Prevê abertura comercial com acesso a bens de capital importados, plano de integração às cadeias globais de valor (agroindústria, minerais críticos, saúde, economia digital), internacionalização de pequenas e médias empresas via BNDES e Apex e segurança jurídica com estabilidade de regras por até 20 anos.",
+     "excerpt": "O Estado atuará como regulador e coordenador, não como empresário, apoiado em seis pilares: marco regulatório claro e estável, licenciamento ágil e técnico, atração de capital e tecnologia, verticalização com incentivos de mercado, governança e transparência.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      49,
+      50,
+      55,
+      56,
+      62,
+      63,
+      64
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q05",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Compromete-se com o fim da escala 6x1 e a jornada de 40 horas sem redução salarial.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Fim da escala 6x1 e jornada de 40 horas sem redução salarial; regular o trabalho por plataformas",
+     "summary": "Compromete-se a atuar junto ao Senado pela aprovação do fim da escala 6x1 e da redução da jornada para 40 horas semanais sem redução salarial, nos termos aprovados na Câmara. Propõe manter a política de valorização do salário mínimo com aumento real, consolidar um sistema de proteção para trabalhadores de plataformas (relação de trabalho, remuneração, direitos previdenciários, transparência algorítmica) e combater a pejotização fraudulenta. Prevê fortalecer a negociação coletiva.",
+     "excerpt": "Manteremos nossa ação junto ao Senado Federal para assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial, nos termos aprovados na Câmara dos Deputados.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      73,
+      74,
+      75,
+      76,
+      77
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q05",
+   "direction": "PARTIALLY_OPPOSES",
+   "closestOption": 2,
+   "summary": "Não propõe a jornada de 5 dias com 2 de folga. Defende jornadas flexíveis negociadas caso a caso (\"negociado sobre o legislado\"), em vez de uma regra única para todos: contra em parte.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reduzir o custo do trabalho, 'negociado sobre o legislado' e novos contratos para jovens e maiores de 50",
+     "summary": "Propõe reduzir gradualmente o custo do trabalho formal 'sem retirar direitos', criar um contrato para o primeiro emprego (18 a 24 anos) com menor custo na folha e outro para pessoas com 50 anos ou mais desempregadas há 12 meses. Defende o 'negociado sobre o legislado' e jornadas flexíveis, e se posiciona contra o que chama de 'República Sindical'. Para trabalhadores de aplicativos, afirma manter as oportunidades do modelo atual com proteção social e previdenciária 'sem os interesses de dirigentes sindicais à frente'. Não há proposta explícita sobre o fim da escala 6x1; o texto critica a discussão de jornada que 'ignora a prevalência do negociado sobre o legislado'.",
+     "excerpt": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos, para que mais brasileiros tenham carteira assinada e a proteção que vem com ela.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      43,
+      44,
+      45
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "POSICAO",
+     "strength": "A",
+     "title": "Jornada flexível e \"negociado sobre o legislado\" em vez de regra única",
+     "summary": "O programa defende jornadas flexíveis negociadas entre trabalhador e empresa, \"em vez de seguir uma regra única imposta a todos\", o que vai na direção contrária a uma regra geral de 5 dias de trabalho e 2 de folga.",
+     "excerpt": "Vamos também dar mais liberdade a quem trabalha, com jornada flexível que caiba na vida de mães, jovens e de quem tem mais dificuldade de entrar no mercado. Por isso defendemos o negociado sobre o legislado, ou seja, permitir que trabalhador e empresa combinem diretamente as condições de trabalho que funcionam para os dois, dentro da lei, em vez de seguir uma regra única imposta a todos.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      44
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q06",
+   "direction": "OPPOSES",
+   "closestOption": 1,
+   "summary": "Propõe o fim da escala 6x1.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Fim da escala 6x1 e jornada de 40 horas sem redução salarial; regular o trabalho por plataformas",
+     "summary": "Compromete-se a atuar junto ao Senado pela aprovação do fim da escala 6x1 e da redução da jornada para 40 horas semanais sem redução salarial, nos termos aprovados na Câmara. Propõe manter a política de valorização do salário mínimo com aumento real, consolidar um sistema de proteção para trabalhadores de plataformas (relação de trabalho, remuneração, direitos previdenciários, transparência algorítmica) e combater a pejotização fraudulenta. Prevê fortalecer a negociação coletiva.",
+     "excerpt": "Manteremos nossa ação junto ao Senado Federal para assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial, nos termos aprovados na Câmara dos Deputados.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      73,
+      74,
+      75,
+      76,
+      77
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q06",
+   "direction": "NEUTRAL",
+   "closestOption": 2,
+   "summary": "Não trata da escala 6x1 diretamente; defende que a jornada seja negociada entre trabalhador e empresa, o que equivale a admiti-la onde for acordada: \"apenas em alguns trabalhos\".",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reduzir o custo do trabalho, 'negociado sobre o legislado' e novos contratos para jovens e maiores de 50",
+     "summary": "Propõe reduzir gradualmente o custo do trabalho formal 'sem retirar direitos', criar um contrato para o primeiro emprego (18 a 24 anos) com menor custo na folha e outro para pessoas com 50 anos ou mais desempregadas há 12 meses. Defende o 'negociado sobre o legislado' e jornadas flexíveis, e se posiciona contra o que chama de 'República Sindical'. Para trabalhadores de aplicativos, afirma manter as oportunidades do modelo atual com proteção social e previdenciária 'sem os interesses de dirigentes sindicais à frente'. Não há proposta explícita sobre o fim da escala 6x1; o texto critica a discussão de jornada que 'ignora a prevalência do negociado sobre o legislado'.",
+     "excerpt": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos, para que mais brasileiros tenham carteira assinada e a proteção que vem com ela.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      43,
+      44,
+      45
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "POSICAO",
+     "strength": "A",
+     "title": "Jornada flexível e \"negociado sobre o legislado\" em vez de regra única",
+     "summary": "O programa defende jornadas flexíveis negociadas entre trabalhador e empresa, \"em vez de seguir uma regra única imposta a todos\", o que vai na direção contrária a uma regra geral de 5 dias de trabalho e 2 de folga.",
+     "excerpt": "Vamos também dar mais liberdade a quem trabalha, com jornada flexível que caiba na vida de mães, jovens e de quem tem mais dificuldade de entrar no mercado. Por isso defendemos o negociado sobre o legislado, ou seja, permitir que trabalhador e empresa combinem diretamente as condições de trabalho que funcionam para os dois, dentro da lei, em vez de seguir uma regra única imposta a todos.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      44
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q07",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe sistema de proteção aos trabalhadores de plataformas, com direitos previdenciários.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Fim da escala 6x1 e jornada de 40 horas sem redução salarial; regular o trabalho por plataformas",
+     "summary": "Compromete-se a atuar junto ao Senado pela aprovação do fim da escala 6x1 e da redução da jornada para 40 horas semanais sem redução salarial, nos termos aprovados na Câmara. Propõe manter a política de valorização do salário mínimo com aumento real, consolidar um sistema de proteção para trabalhadores de plataformas (relação de trabalho, remuneração, direitos previdenciários, transparência algorítmica) e combater a pejotização fraudulenta. Prevê fortalecer a negociação coletiva.",
+     "excerpt": "Manteremos nossa ação junto ao Senado Federal para assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial, nos termos aprovados na Câmara dos Deputados.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      73,
+      74,
+      75,
+      76,
+      77
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q07",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "Removido da comparação a pedido da revisão: o programa fala em \"manter as oportunidades do modelo atual com proteção social e previdenciária\" para aplicativos, mas não diz quais direitos (aposentadoria, férias, acidente). Sem posição suficientemente documentada.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reduzir o custo do trabalho, 'negociado sobre o legislado' e novos contratos para jovens e maiores de 50",
+     "summary": "Propõe reduzir gradualmente o custo do trabalho formal 'sem retirar direitos', criar um contrato para o primeiro emprego (18 a 24 anos) com menor custo na folha e outro para pessoas com 50 anos ou mais desempregadas há 12 meses. Defende o 'negociado sobre o legislado' e jornadas flexíveis, e se posiciona contra o que chama de 'República Sindical'. Para trabalhadores de aplicativos, afirma manter as oportunidades do modelo atual com proteção social e previdenciária 'sem os interesses de dirigentes sindicais à frente'. Não há proposta explícita sobre o fim da escala 6x1; o texto critica a discussão de jornada que 'ignora a prevalência do negociado sobre o legislado'.",
+     "excerpt": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos, para que mais brasileiros tenham carteira assinada e a proteção que vem com ela.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      43,
+      44,
+      45
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q08",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe manter a política de valorização do salário mínimo com aumento real.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Fim da escala 6x1 e jornada de 40 horas sem redução salarial; regular o trabalho por plataformas",
+     "summary": "Compromete-se a atuar junto ao Senado pela aprovação do fim da escala 6x1 e da redução da jornada para 40 horas semanais sem redução salarial, nos termos aprovados na Câmara. Propõe manter a política de valorização do salário mínimo com aumento real, consolidar um sistema de proteção para trabalhadores de plataformas (relação de trabalho, remuneração, direitos previdenciários, transparência algorítmica) e combater a pejotização fraudulenta. Prevê fortalecer a negociação coletiva.",
+     "excerpt": "Manteremos nossa ação junto ao Senado Federal para assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial, nos termos aprovados na Câmara dos Deputados.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      73,
+      74,
+      75,
+      76,
+      77
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 14.663/2023 — política de valorização do salário mínimo",
+     "summary": "Lei sancionada que fixa a política de valorização permanente do salário mínimo (reposição da inflação mais crescimento do PIB).",
+     "excerpt": "Lei nº 14.663, de 28 de agosto de 2023 — Conversão da Medida Provisória nº 1.172/2023; dispõe sobre o valor do salário mínimo e a política de valorização.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14663.htm",
+     "date": "2023-08-28",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q08",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa não trata do reajuste do salário mínimo.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reduzir o custo do trabalho, 'negociado sobre o legislado' e novos contratos para jovens e maiores de 50",
+     "summary": "Propõe reduzir gradualmente o custo do trabalho formal 'sem retirar direitos', criar um contrato para o primeiro emprego (18 a 24 anos) com menor custo na folha e outro para pessoas com 50 anos ou mais desempregadas há 12 meses. Defende o 'negociado sobre o legislado' e jornadas flexíveis, e se posiciona contra o que chama de 'República Sindical'. Para trabalhadores de aplicativos, afirma manter as oportunidades do modelo atual com proteção social e previdenciária 'sem os interesses de dirigentes sindicais à frente'. Não há proposta explícita sobre o fim da escala 6x1; o texto critica a discussão de jornada que 'ignora a prevalência do negociado sobre o legislado'.",
+     "excerpt": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos, para que mais brasileiros tenham carteira assinada e a proteção que vem com ela.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      43,
+      44,
+      45
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q09",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe expandir o SUS e manter a Farmácia Popular 100% gratuita.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Expandir o SUS: especialistas, Farmácia Popular com exames, prontuário único e produção nacional de insumos",
+     "summary": "Propõe ampliar o programa Agora tem Especialistas (terceiro turno, carretas, mutirões, parceria com hospitais privados em troca de créditos), manter a Farmácia Popular 100% gratuita e incluir exames laboratoriais, consolidar o prontuário único do cidadão com marcação de consultas pelo celular e fila única por risco clínico com inteligência artificial. Prevê fortalecer o Complexo Econômico-Industrial da Saúde para produção nacional de vacinas, medicamentos e hemoderivados.",
+     "excerpt": "O programa será mantido, 100% gratuito, assegurando contínua revisão dos medicamentos ofertados [...] Uma inovação do programa será incluir exames laboratoriais, de diagnóstico e de monitoramento de condições crônicas de saúde",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 14.621/2023 — Mais Médicos (formação de especialistas)",
+     "summary": "Lei sancionada no terceiro mandato ampliando o Mais Médicos no SUS.",
+     "excerpt": "Institui a Estratégia Nacional de Formação de Especialistas para a Saúde no âmbito do Programa Mais Médicos.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14621.htm",
+     "date": "2023-07-14",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 10.858/2004 — Farmácia Popular",
+     "summary": "Lei sancionada no primeiro mandato que deu base ao Farmácia Popular.",
+     "excerpt": "Lei nº 10.858, de 13 de abril de 2004 — Autoriza a Fundação Oswaldo Cruz a disponibilizar medicamentos, mediante ressarcimento (Programa Farmácia Popular do Brasil).",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l10.858.htm",
+     "date": "2004-04-13",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Brasil Sorridente — saúde bucal no SUS",
+     "summary": "Política nacional de saúde bucal no SUS, iniciada em 2004 e mantida pelo Ministério da Saúde.",
+     "excerpt": "Página oficial \"Brasil Sorridente — Ministério da Saúde\" (gov.br).",
+     "sourceId": "govbr-programas",
+     "url": "https://www.gov.br/saude/pt-br/composicao/saps/brasil-sorridente",
+     "date": "2004-03-17",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q09",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "Removido da comparação a pedido da revisão: o programa propõe corrigir a tabela SUS e contratar a rede privada em horários ociosos, mas não se manifesta sobre manter o atendimento gratuito e universal. Sem posição suficientemente documentada.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Prontuário eletrônico único, correção da tabela SUS, contratação da rede privada em horários ociosos e telessaúde",
+     "summary": "Propõe implantar prontuário eletrônico único vinculado ao CPF e interoperável entre redes pública e privada, usar inteligência artificial para agendamento, corrigir efetivamente a tabela SUS, ampliar a Estratégia Saúde da Família e criar um Programa de Atendimento aos Idosos. Prevê contratar serviços e exames da rede privada nos horários ociosos, telessaúde, entrega de remédios em domicílio e manutenção da imunização com incentivo à produção nacional de vacinas.",
+     "excerpt": "Vamos garantir as condições para que seja possível a correção efetiva da tabela SUS. [...] Para usar bem o que já existe, vamos contratar serviços e exames na rede privada nos horários ociosos",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      25,
+      26,
+      37,
+      38
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q10",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe ampliar programas do SUS (especialistas, Farmácia Popular com exames).",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Expandir o SUS: especialistas, Farmácia Popular com exames, prontuário único e produção nacional de insumos",
+     "summary": "Propõe ampliar o programa Agora tem Especialistas (terceiro turno, carretas, mutirões, parceria com hospitais privados em troca de créditos), manter a Farmácia Popular 100% gratuita e incluir exames laboratoriais, consolidar o prontuário único do cidadão com marcação de consultas pelo celular e fila única por risco clínico com inteligência artificial. Prevê fortalecer o Complexo Econômico-Industrial da Saúde para produção nacional de vacinas, medicamentos e hemoderivados.",
+     "excerpt": "O programa será mantido, 100% gratuito, assegurando contínua revisão dos medicamentos ofertados [...] Uma inovação do programa será incluir exames laboratoriais, de diagnóstico e de monitoramento de condições crônicas de saúde",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q10",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "Removido da comparação a pedido da revisão: corrigir a tabela SUS não equivale a compromisso de gastar mais com saúde pública, e o programa prevê corte de despesas. Sem posição suficientemente documentada.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Prontuário eletrônico único, correção da tabela SUS, contratação da rede privada em horários ociosos e telessaúde",
+     "summary": "Propõe implantar prontuário eletrônico único vinculado ao CPF e interoperável entre redes pública e privada, usar inteligência artificial para agendamento, corrigir efetivamente a tabela SUS, ampliar a Estratégia Saúde da Família e criar um Programa de Atendimento aos Idosos. Prevê contratar serviços e exames da rede privada nos horários ociosos, telessaúde, entrega de remédios em domicílio e manutenção da imunização com incentivo à produção nacional de vacinas.",
+     "excerpt": "Vamos garantir as condições para que seja possível a correção efetiva da tabela SUS. [...] Para usar bem o que já existe, vamos contratar serviços e exames na rede privada nos horários ociosos",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      25,
+      26,
+      37,
+      38
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q11",
+   "direction": "SUPPORTS",
+   "closestOption": 2,
+   "summary": "Fortalece o SUS e prevê parceria com hospitais privados em troca de créditos para reduzir filas.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Expandir o SUS: especialistas, Farmácia Popular com exames, prontuário único e produção nacional de insumos",
+     "summary": "Propõe ampliar o programa Agora tem Especialistas (terceiro turno, carretas, mutirões, parceria com hospitais privados em troca de créditos), manter a Farmácia Popular 100% gratuita e incluir exames laboratoriais, consolidar o prontuário único do cidadão com marcação de consultas pelo celular e fila única por risco clínico com inteligência artificial. Prevê fortalecer o Complexo Econômico-Industrial da Saúde para produção nacional de vacinas, medicamentos e hemoderivados.",
+     "excerpt": "O programa será mantido, 100% gratuito, assegurando contínua revisão dos medicamentos ofertados [...] Uma inovação do programa será incluir exames laboratoriais, de diagnóstico e de monitoramento de condições crônicas de saúde",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q11",
+   "direction": "SUPPORTS",
+   "closestOption": 2,
+   "summary": "Fortalece o SUS com prontuário integrado e contratação da rede privada em horários ociosos.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Prontuário eletrônico único, correção da tabela SUS, contratação da rede privada em horários ociosos e telessaúde",
+     "summary": "Propõe implantar prontuário eletrônico único vinculado ao CPF e interoperável entre redes pública e privada, usar inteligência artificial para agendamento, corrigir efetivamente a tabela SUS, ampliar a Estratégia Saúde da Família e criar um Programa de Atendimento aos Idosos. Prevê contratar serviços e exames da rede privada nos horários ociosos, telessaúde, entrega de remédios em domicílio e manutenção da imunização com incentivo à produção nacional de vacinas.",
+     "excerpt": "Vamos garantir as condições para que seja possível a correção efetiva da tabela SUS. [...] Para usar bem o que já existe, vamos contratar serviços e exames na rede privada nos horários ociosos",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      25,
+      26,
+      37,
+      38
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q12",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe fortalecer o Complexo Econômico-Industrial da Saúde para produção nacional de vacinas, medicamentos e hemoderivados.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Expandir o SUS: especialistas, Farmácia Popular com exames, prontuário único e produção nacional de insumos",
+     "summary": "Propõe ampliar o programa Agora tem Especialistas (terceiro turno, carretas, mutirões, parceria com hospitais privados em troca de créditos), manter a Farmácia Popular 100% gratuita e incluir exames laboratoriais, consolidar o prontuário único do cidadão com marcação de consultas pelo celular e fila única por risco clínico com inteligência artificial. Prevê fortalecer o Complexo Econômico-Industrial da Saúde para produção nacional de vacinas, medicamentos e hemoderivados.",
+     "excerpt": "O programa será mantido, 100% gratuito, assegurando contínua revisão dos medicamentos ofertados [...] Uma inovação do programa será incluir exames laboratoriais, de diagnóstico e de monitoramento de condições crônicas de saúde",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q12",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Prevê incentivo à produção nacional de vacinas; não trata de medicamentos e equipamentos em geral.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Prontuário eletrônico único, correção da tabela SUS, contratação da rede privada em horários ociosos e telessaúde",
+     "summary": "Propõe implantar prontuário eletrônico único vinculado ao CPF e interoperável entre redes pública e privada, usar inteligência artificial para agendamento, corrigir efetivamente a tabela SUS, ampliar a Estratégia Saúde da Família e criar um Programa de Atendimento aos Idosos. Prevê contratar serviços e exames da rede privada nos horários ociosos, telessaúde, entrega de remédios em domicílio e manutenção da imunização com incentivo à produção nacional de vacinas.",
+     "excerpt": "Vamos garantir as condições para que seja possível a correção efetiva da tabela SUS. [...] Para usar bem o que já existe, vamos contratar serviços e exames na rede privada nos horários ociosos",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      25,
+      26,
+      37,
+      38
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q13",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe mais 111 institutos federais e novo ciclo de expansão do ensino superior público.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Alfabetização, tempo integral, Pé-de-Meia e expansão de institutos e universidades federais",
+     "summary": "Propõe cumprir as metas do PNE 2026-2036, chegar a 80% das crianças alfabetizadas na idade certa, dar 'absoluta prioridade' à educação em tempo integral, universalizar a internet nas escolas e manter e fortalecer o Pé-de-Meia. Prevê concluir mais 111 institutos federais em 106 municípios, novo ciclo de expansão e interiorização do ensino superior público e manutenção do ProUni e do FIES.",
+     "excerpt": "Serão mais 111 IFs, com novos campus em 106 municípios de todos os estados. [...] Haverá também novo ciclo expansão e interiorização da educação superior pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      30,
+      31,
+      32,
+      33,
+      34
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Decreto nº 6.096/2007 — Reuni",
+     "summary": "Decreto do segundo mandato para expandir as universidades federais.",
+     "excerpt": "Institui o Programa de Apoio a Planos de Reestruturação e Expansão das Universidades Federais - REUNI.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6096.htm",
+     "date": "2007-04-24",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 11.892/2008 — cria os Institutos Federais",
+     "summary": "Lei sancionada no segundo mandato criando os Institutos Federais.",
+     "excerpt": "Institui a Rede Federal de Educação Profissional, Científica e Tecnológica, cria os Institutos Federais de Educação, Ciência e Tecnologia.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11892.htm",
+     "date": "2008-12-29",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q13",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa reorganiza o ensino superior sob o MCTI e amplia o técnico com o setor produtivo; não fala em criar universidades ou institutos federais.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Método fônico, gestão por resultados, voucher educacional, escolas cívico-militares e ensino superior sob o MCTI",
+     "summary": "Propõe priorizar o método fônico na alfabetização, criar o Programa Acolher (alunos remunerados para dar reforço), financiamento vinculado a metas de aprendizagem, ampliação das Escolas Cívico-Militares e voucher educacional onde faltar vaga pública, com educação 'livre de doutrinação político-partidária'. Prevê ampliar o ensino técnico em parceria com o setor produtivo, transferir a governança do ensino superior para o Ministério da Ciência, Tecnologia e Inovações e substituir o modelo de financiamento estudantil por Empréstimo Contingente à Renda.",
+     "excerpt": "No ensino superior, vamos transferir a governança para o Ministério da Ciência, Tecnologia e Inovações, unificando ciência e ensino superior sob o mesmo teto.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      34,
+      35,
+      36,
+      37
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q14",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe manter o ProUni e o FIES.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Alfabetização, tempo integral, Pé-de-Meia e expansão de institutos e universidades federais",
+     "summary": "Propõe cumprir as metas do PNE 2026-2036, chegar a 80% das crianças alfabetizadas na idade certa, dar 'absoluta prioridade' à educação em tempo integral, universalizar a internet nas escolas e manter e fortalecer o Pé-de-Meia. Prevê concluir mais 111 institutos federais em 106 municípios, novo ciclo de expansão e interiorização do ensino superior público e manutenção do ProUni e do FIES.",
+     "excerpt": "Serão mais 111 IFs, com novos campus em 106 municípios de todos os estados. [...] Haverá também novo ciclo expansão e interiorização da educação superior pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      30,
+      31,
+      32,
+      33,
+      34
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 11.096/2005 — institui o ProUni",
+     "summary": "Lei sancionada no primeiro mandato, criando bolsas em faculdades particulares para estudantes de baixa renda.",
+     "excerpt": "Institui o Programa Universidade para Todos - PROUNI, regula a atuação de entidades beneficentes de assistência social no ensino superior.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11096.htm",
+     "date": "2005-01-13",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q14",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Propõe substituir o financiamento estudantil por Empréstimo Contingente à Renda: apoio mantido, com outro desenho.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Método fônico, gestão por resultados, voucher educacional, escolas cívico-militares e ensino superior sob o MCTI",
+     "summary": "Propõe priorizar o método fônico na alfabetização, criar o Programa Acolher (alunos remunerados para dar reforço), financiamento vinculado a metas de aprendizagem, ampliação das Escolas Cívico-Militares e voucher educacional onde faltar vaga pública, com educação 'livre de doutrinação político-partidária'. Prevê ampliar o ensino técnico em parceria com o setor produtivo, transferir a governança do ensino superior para o Ministério da Ciência, Tecnologia e Inovações e substituir o modelo de financiamento estudantil por Empréstimo Contingente à Renda.",
+     "excerpt": "No ensino superior, vamos transferir a governança para o Ministério da Ciência, Tecnologia e Inovações, unificando ciência e ensino superior sob o mesmo teto.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      34,
+      35,
+      36,
+      37
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q15",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe supercomputadores nacionais, modelos de IA em português e uso estratégico do FNDCT.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Supercomputadores nacionais, modelos de linguagem em português, data centers com contrapartidas e transparência algorítmica",
+     "summary": "Propõe infraestrutura computacional soberana com supercomputadores desenvolvidos e operados por instituições nacionais, desenvolver e sustentar modelos de linguagem em português apoiados em plataforma nacional de dados, e exigir que a expansão de data centers tenha salvaguardas socioambientais, energia 100% renovável e contrapartidas de conteúdo local. Prevê Centro Nacional de Transparência Algorítmica, Conselho Nacional pela Soberania Digital, Política Nacional de Letramento Digital, regulação democrática de plataformas e expansão de fibra e 5G.",
+     "excerpt": "Vamos avançar numa infraestrutura computacional soberana, com supercomputadores desenvolvidos e operados por instituições nacionais. [...] Vamos desenvolver e sustentar modelos de linguagem em português",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      16,
+      17,
+      54,
+      55
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q15",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "Propõe Estratégia Nacional de IA e elevar patentes, mas não se compromete com mais recursos públicos para pesquisa.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Estado 100% digital, Estratégia Nacional de IA para empresas, polo de data centers e legislação de 'liberdade de criar e inovar'",
+     "summary": "Propõe digitalizar 100% dos serviços federais, identidade digital única, assistentes de IA que indicam benefícios ao cidadão (ClarIA), prontuário eletrônico único e pacotes de internet com prioridade a mulheres. Na economia, prevê Estratégia Nacional de IA para difundir IA em micro, pequenas e médias empresas, tornar o Brasil polo global de data centers sustentáveis com energia barata, elevar patentes em IA e propor legislação 'voltada à liberdade de criar e inovar' em vez de regras 'que afugentam o investimento'. Afirma fortalecer a defesa cibernética e a proteção de dados.",
+     "excerpt": "Proporemos uma legislação voltada à liberdade de criar e inovar, inspirada nas melhores práticas internacionais, para que a tecnologia seja desenvolvida aqui sem entraves",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      24,
+      25,
+      26,
+      53,
+      56,
+      57
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q16",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Dá \"absoluta prioridade\" à educação básica em tempo integral e à alfabetização na idade certa.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Alfabetização, tempo integral, Pé-de-Meia e expansão de institutos e universidades federais",
+     "summary": "Propõe cumprir as metas do PNE 2026-2036, chegar a 80% das crianças alfabetizadas na idade certa, dar 'absoluta prioridade' à educação em tempo integral, universalizar a internet nas escolas e manter e fortalecer o Pé-de-Meia. Prevê concluir mais 111 institutos federais em 106 municípios, novo ciclo de expansão e interiorização do ensino superior público e manutenção do ProUni e do FIES.",
+     "excerpt": "Serão mais 111 IFs, com novos campus em 106 municípios de todos os estados. [...] Haverá também novo ciclo expansão e interiorização da educação superior pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      30,
+      31,
+      32,
+      33,
+      34
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 14.640/2023 — Escola em Tempo Integral",
+     "summary": "Lei sancionada no terceiro mandato para ampliar matrículas em tempo integral na educação básica.",
+     "excerpt": "Institui o Programa Escola em Tempo Integral.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14640.htm",
+     "date": "2023-07-31",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q16",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Prioriza a alfabetização pelo método fônico e o reforço escolar na educação básica.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Método fônico, gestão por resultados, voucher educacional, escolas cívico-militares e ensino superior sob o MCTI",
+     "summary": "Propõe priorizar o método fônico na alfabetização, criar o Programa Acolher (alunos remunerados para dar reforço), financiamento vinculado a metas de aprendizagem, ampliação das Escolas Cívico-Militares e voucher educacional onde faltar vaga pública, com educação 'livre de doutrinação político-partidária'. Prevê ampliar o ensino técnico em parceria com o setor produtivo, transferir a governança do ensino superior para o Ministério da Ciência, Tecnologia e Inovações e substituir o modelo de financiamento estudantil por Empréstimo Contingente à Renda.",
+     "excerpt": "No ensino superior, vamos transferir a governança para o Ministério da Ciência, Tecnologia e Inovações, unificando ciência e ensino superior sob o mesmo teto.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      34,
+      35,
+      36,
+      37
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q17",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe manter, aperfeiçoar e ampliar o Bolsa Família e a proteção social.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Manter, aperfeiçoar e ampliar o Bolsa Família e a proteção social; fortalecer SUAS e Política de Cuidados",
+     "summary": "O programa afirma que se deve 'manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita', citando o Bolsa Família recriado com benefícios para crianças e a valorização do salário mínimo. Propõe fortalecer o SUAS, expandir a Política Nacional de Cuidados (Cuidotecas, lavanderias públicas, cozinhas solidárias, capacitação de cuidadores) e ampliar o combate à pobreza infantil.",
+     "excerpt": "Por isso, devemos manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      18,
+      19,
+      24,
+      25,
+      26
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 10.836/2004 — cria o Programa Bolsa Família",
+     "summary": "Lei sancionada no primeiro mandato, criando o Bolsa Família. O art. 3º condiciona os benefícios a acompanhamento de saúde e frequência escolar.",
+     "excerpt": "Cria o Programa Bolsa Família e dá outras providências.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l10.836.htm",
+     "date": "2004-01-09",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "MPV 132/2003 — Bolsa Família, de autoria do Poder Executivo, aprovada na Câmara",
+     "summary": "Registro da Câmara: medida provisória apresentada pelo Poder Executivo em 21/10/2003, com 9 votações; projeto de lei de conversão aprovado em 17/12/2003 e transformado na Lei 10.836/2004.",
+     "excerpt": "Autor: Poder Executivo (Órgão do Poder Executivo). Situação: Transformado em Norma Jurídica — Transformado na Lei 10836/04. Votação de 17/12/2003: Aprovado o Projeto de Lei de Conversão nº 28, de 2003.",
+     "sourceId": "camara-dados-abertos",
+     "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=138604",
+     "date": "2003-12-17",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 14.601/2023 — institui o Programa Bolsa Família (novo)",
+     "summary": "Lei sancionada no terceiro mandato, recriando o Bolsa Família com benefícios por criança e mantendo condicionalidades de saúde e educação.",
+     "excerpt": "Institui o Programa Bolsa Família; altera a Lei nº 8.742, de 7 de dezembro de 1993 (Lei Orgânica da Assistência Social).",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14601.htm",
+     "date": "2023-06-19",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 10.689/2003 — Fome Zero (Programa Nacional de Acesso à Alimentação)",
+     "summary": "Lei sancionada no primeiro mandato, base legal do Fome Zero.",
+     "excerpt": "Cria o Programa Nacional de Acesso à Alimentação – PNAA.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.689.htm",
+     "date": "2003-06-13",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Brasil Sem Fome",
+     "summary": "Estratégia nacional de combate à fome do terceiro mandato, articulando renda, alimentação, assistência social, agricultura familiar, saúde e educação.",
+     "excerpt": "Página oficial do programa Brasil Sem Fome (gov.br).",
+     "sourceId": "govbr-programas",
+     "url": "https://www.gov.br/mds/pt-br/acoes-e-programas/brasil-sem-fome",
+     "date": "2023-08-31",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q17",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Propõe manter os programas sociais com mais controle, combate a fraudes e prioridade ao trabalho.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Manter os programas sociais com mais controle e prioridade ao trabalho; proibir uso dos recursos em apostas",
+     "summary": "Compromete-se a manter os programas sociais existentes 'com aperfeiçoamento da gestão, correção de distorções e combate às fraudes'. Propõe que o beneficiário tenha prioridade em primeiro emprego, qualificação e intermediação de mão de obra, com retorno imediato ao benefício após o seguro-desemprego. Prevê proibir o uso de recursos de programas sociais em apostas e orientação financeira pela rede da CAIXA.",
+     "excerpt": "vamos manter os programas sociais existentes, com aperfeiçoamento da gestão, correção de distorções e combate às fraudes. Quem depende hoje da ajuda do Estado para pôr comida na mesa não vai ter essa ajuda tirada.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      33,
+      42,
+      43
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q18",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "As leis do Bolsa Família sancionadas em seus governos condicionam o benefício a acompanhamento de saúde e frequência escolar.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Manter, aperfeiçoar e ampliar o Bolsa Família e a proteção social; fortalecer SUAS e Política de Cuidados",
+     "summary": "O programa afirma que se deve 'manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita', citando o Bolsa Família recriado com benefícios para crianças e a valorização do salário mínimo. Propõe fortalecer o SUAS, expandir a Política Nacional de Cuidados (Cuidotecas, lavanderias públicas, cozinhas solidárias, capacitação de cuidadores) e ampliar o combate à pobreza infantil.",
+     "excerpt": "Por isso, devemos manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      18,
+      19,
+      24,
+      25,
+      26
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 10.836/2004 — cria o Programa Bolsa Família",
+     "summary": "Lei sancionada no primeiro mandato, criando o Bolsa Família. O art. 3º condiciona os benefícios a acompanhamento de saúde e frequência escolar.",
+     "excerpt": "Cria o Programa Bolsa Família e dá outras providências.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l10.836.htm",
+     "date": "2004-01-09",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 14.601/2023 — institui o Programa Bolsa Família (novo)",
+     "summary": "Lei sancionada no terceiro mandato, recriando o Bolsa Família com benefícios por criança e mantendo condicionalidades de saúde e educação.",
+     "excerpt": "Institui o Programa Bolsa Família; altera a Lei nº 8.742, de 7 de dezembro de 1993 (Lei Orgânica da Assistência Social).",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14601.htm",
+     "date": "2023-06-19",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q18",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa fala em correção de distorções e combate a fraudes; não trata de condicionalidades de escola e saúde.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Manter os programas sociais com mais controle e prioridade ao trabalho; proibir uso dos recursos em apostas",
+     "summary": "Compromete-se a manter os programas sociais existentes 'com aperfeiçoamento da gestão, correção de distorções e combate às fraudes'. Propõe que o beneficiário tenha prioridade em primeiro emprego, qualificação e intermediação de mão de obra, com retorno imediato ao benefício após o seguro-desemprego. Prevê proibir o uso de recursos de programas sociais em apostas e orientação financeira pela rede da CAIXA.",
+     "excerpt": "vamos manter os programas sociais existentes, com aperfeiçoamento da gestão, correção de distorções e combate às fraudes. Quem depende hoje da ajuda do Estado para pôr comida na mesa não vai ter essa ajuda tirada.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      33,
+      42,
+      43
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q19",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe manter a tributação de rendas muito altas e reduzir a regressividade.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Implementar a reforma do consumo, usar o Imposto Seletivo e manter a tributação dos mais ricos",
+     "summary": "O programa apresenta como já realizadas a isenção do IR para quem ganha até R$ 5.000 e a tributação de rendas muito altas, e propõe seguir reduzindo a regressividade do sistema. Prevê a implementação da reforma tributária do consumo (CBS e IBS, cesta básica isenta, cashback) e o uso do Imposto Seletivo para desestimular produtos nocivos à saúde. Garante tratamento tributário justo às pequenas empresas na transição.",
+     "excerpt": "isentamos de imposto de renda todos os que ganham até R$ 5.000, compromisso assumido na campanha de 2022, marcos do início do processo de redução da regressividade do sistema tributário brasileiro.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      11,
+      19,
+      57,
+      59
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 15.270/2025 — fim do Imposto de Renda para quem ganha até R$ 5 mil",
+     "summary": "Lei sancionada em 26/11/2025 (terceiro mandato) que zera o Imposto de Renda para quem ganha até R$ 5.000 por mês a partir de janeiro de 2026, com redução progressiva até R$ 7.350, e cria tributação mínima para altas rendas.",
+     "excerpt": "Lei nº 15.270, de 26 de novembro de 2025 — Altera a Lei nº 9.250, de 26 de dezembro de 1995, e a Lei nº 9.249, de 26 de dezembro de 1995, para instituir a redução do imposto sobre a renda devido nas bases de cálculo mensal e anual e a tributação mínima para as pessoas físicas que auferem altas rendas; e dá outras providências.",
+     "sourceId": "lei-15270-2025",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm",
+     "date": "2025-11-26",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q19",
+   "direction": "PARTIALLY_OPPOSES",
+   "closestOption": 2,
+   "summary": "Tende a discordar: a linha econômica do plano prioriza redução da carga tributária, especialmente sobre produção e consumo, revisão da reforma tributária e redução de impostos. Não há proposta de aumento da tributação sobre pessoas muito ricas.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Revisar a reforma tributária, reduzir o IVA e os impostos sobre consumo, energia e combustíveis",
+     "summary": "Propõe revisar e redimensionar a reforma tributária em curso e as majorações recentes, com o objetivo de reduzir a carga sobre produção e consumo, reduzir a alíquota do IVA, assegurar não cumulatividade e reduzir exceções. Prevê redução de impostos sobre energia elétrica e combustíveis e desoneração de exportações e investimentos. Inclui fim gradual do IOF sobre câmbio como etapa da adesão à OCDE.",
+     "excerpt": "Vamos promover a revisão e o redimensionamento da reforma tributária em curso e da majoração de impostos efetuada pelo atual governo, com o objetivo de reduzir efetivamente a carga sobre a produção e o consumo.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      30,
+      31,
+      63,
+      71,
+      72
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reduzir a carga tributária e revisar as majorações de impostos do governo atual; sem proposta de tributar altas rendas",
+     "summary": "O programa propõe reduzir impostos sobre produção e consumo e rever a \"majoração de impostos efetuada pelo atual governo\". Em 76 páginas não há proposta de aumentar a tributação de rendas altas; as palavras \"Imposto de Renda\", \"altas rendas\" e \"progressividade\" não aparecem.",
+     "excerpt": "Vamos promover a revisão e o redimensionamento da reforma tributária em curso e da majoração de impostos efetuada pelo atual governo, com o objetivo de reduzir efetivamente a carga sobre a produção e o consumo.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      30,
+      71
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q20",
+   "direction": "SUPPORTS",
+   "closestOption": 5,
+   "summary": "Combina proteção social, valorização do salário mínimo, emprego e educação.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Manter, aperfeiçoar e ampliar o Bolsa Família e a proteção social; fortalecer SUAS e Política de Cuidados",
+     "summary": "O programa afirma que se deve 'manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita', citando o Bolsa Família recriado com benefícios para crianças e a valorização do salário mínimo. Propõe fortalecer o SUAS, expandir a Política Nacional de Cuidados (Cuidotecas, lavanderias públicas, cozinhas solidárias, capacitação de cuidadores) e ampliar o combate à pobreza infantil.",
+     "excerpt": "Por isso, devemos manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      18,
+      19,
+      24,
+      25,
+      26
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 10.689/2003 — Fome Zero (Programa Nacional de Acesso à Alimentação)",
+     "summary": "Lei sancionada no primeiro mandato, base legal do Fome Zero.",
+     "excerpt": "Cria o Programa Nacional de Acesso à Alimentação – PNAA.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.689.htm",
+     "date": "2003-06-13",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Brasil Sem Fome",
+     "summary": "Estratégia nacional de combate à fome do terceiro mandato, articulando renda, alimentação, assistência social, agricultura familiar, saúde e educação.",
+     "excerpt": "Página oficial do programa Brasil Sem Fome (gov.br).",
+     "sourceId": "govbr-programas",
+     "url": "https://www.gov.br/mds/pt-br/acoes-e-programas/brasil-sem-fome",
+     "date": "2023-08-31",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q20",
+   "direction": "SUPPORTS",
+   "closestOption": 2,
+   "summary": "Dá prioridade ao trabalho: primeiro emprego, qualificação e intermediação de mão de obra para beneficiários.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Manter os programas sociais com mais controle e prioridade ao trabalho; proibir uso dos recursos em apostas",
+     "summary": "Compromete-se a manter os programas sociais existentes 'com aperfeiçoamento da gestão, correção de distorções e combate às fraudes'. Propõe que o beneficiário tenha prioridade em primeiro emprego, qualificação e intermediação de mão de obra, com retorno imediato ao benefício após o seguro-desemprego. Prevê proibir o uso de recursos de programas sociais em apostas e orientação financeira pela rede da CAIXA.",
+     "excerpt": "vamos manter os programas sociais existentes, com aperfeiçoamento da gestão, correção de distorções e combate às fraudes. Quem depende hoje da ajuda do Estado para pôr comida na mesa não vai ter essa ajuda tirada.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      33,
+      42,
+      43
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q21",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe a PEC da Segurança para ampliar o papel federal e um Ministério da Segurança Pública.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "PEC da Segurança, Ministério da Segurança Pública, SUSP, asfixia financeira do crime e controle de armas",
+     "summary": "Propõe aprovar a PEC da Segurança Pública enviada pelo Executivo para revisar atribuições federativas e ampliar o papel federal, e criar o Ministério da Segurança Pública para coordenar o SUSP. Prevê manter a estratégia de asfixia financeira do crime organizado (Lei Antifacção), R$ 10 bilhões para estados e municípios, ampliar FICCOs, fortalecer o sistema penitenciário federal com isolamento de lideranças, câmeras corporais e policiamento de proximidade. Reafirma a política de controle de armas e munições.",
+     "excerpt": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "PEC 18/2025 — PEC da Segurança Pública (em tramitação)",
+     "summary": "Proposta de emenda constitucional registrada na Câmara para ampliar a coordenação federal na segurança pública. É proposta, não política implementada.",
+     "excerpt": "Altera os art. 21, 22, 23, 24 e 144 da Constituição, para dispor sobre competências da União, dos Estados, do Distrito Federal e dos Municípios em segurança pública. Autoria: Poder Executivo.",
+     "sourceId": "camara-dados-abertos",
+     "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2500080",
+     "date": "2025-04-23",
+     "inForce": false
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 15.358/2026 — Lei Antifacção (autoria do Poder Executivo)",
+     "summary": "Lei sancionada em 24/03/2026 a partir de projeto enviado pelo Executivo em novembro de 2025: penas de 20 a 40 anos para lideranças de facções, restrições a progressão e benefícios, e asfixia financeira das organizações criminosas.",
+     "excerpt": "Transformado na Lei Ordinária 15358/2026. DOU 25/03/2026. Ementa: Altera a Lei nº 12.850/2013, o Código Penal, o Código de Processo Penal, a Lei nº 8.072/1990 e outras, para dispor sobre o combate às organizações criminosas no País. Autor: Poder Executivo.",
+     "sourceId": "camara-dados-abertos",
+     "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2579832",
+     "date": "2026-03-24",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q21",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe Sistema Nacional de Fronteira com Forças Armadas, presídios federais e dobrar o investimento federal em segurança.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Facções como organizações 'narcoterroristas', presídios de segurança máxima, maioridade penal aos 16 e fim da progressão para hediondos",
+     "summary": "Propõe declarar PCC, CV e milícias como organizações narcoterroristas, criar o Sistema Nacional de Fronteira com tropa de elite das Forças Armadas, construir 5 presídios de segurança máxima (complexo 'TREVA') e meio milhão de vagas prisionais em 4 anos, e dobrar o investimento federal em segurança. Defende reduzir a maioridade penal para 16 anos, castração química para estupradores condenados, fim da progressão de regime para crimes hediondos, cumprimento integral da pena por agressores de mulheres, reconhecimento facial nacional ('Muralha Brasileira') e penas quadruplicadas para roubo e revenda de celulares.",
+     "excerpt": "O novo governo do Brasil vai apoiar e sancionar a redução da maioridade penal de 18 para 16 anos. [...] O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      13,
+      14,
+      15,
+      16
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q22",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe ampliar as FICCOs (coordenadas pela PF), R$ 10 bilhões para estados e asfixia financeira do crime.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "PEC da Segurança, Ministério da Segurança Pública, SUSP, asfixia financeira do crime e controle de armas",
+     "summary": "Propõe aprovar a PEC da Segurança Pública enviada pelo Executivo para revisar atribuições federativas e ampliar o papel federal, e criar o Ministério da Segurança Pública para coordenar o SUSP. Prevê manter a estratégia de asfixia financeira do crime organizado (Lei Antifacção), R$ 10 bilhões para estados e municípios, ampliar FICCOs, fortalecer o sistema penitenciário federal com isolamento de lideranças, câmeras corporais e policiamento de proximidade. Reafirma a política de controle de armas e munições.",
+     "excerpt": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "PEC 18/2025 — PEC da Segurança Pública (em tramitação)",
+     "summary": "Proposta de emenda constitucional registrada na Câmara para ampliar a coordenação federal na segurança pública. É proposta, não política implementada.",
+     "excerpt": "Altera os art. 21, 22, 23, 24 e 144 da Constituição, para dispor sobre competências da União, dos Estados, do Distrito Federal e dos Municípios em segurança pública. Autoria: Poder Executivo.",
+     "sourceId": "camara-dados-abertos",
+     "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2500080",
+     "date": "2025-04-23",
+     "inForce": false
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 15.358/2026 — Lei Antifacção (autoria do Poder Executivo)",
+     "summary": "Lei sancionada em 24/03/2026 a partir de projeto enviado pelo Executivo em novembro de 2025: penas de 20 a 40 anos para lideranças de facções, restrições a progressão e benefícios, e asfixia financeira das organizações criminosas.",
+     "excerpt": "Transformado na Lei Ordinária 15358/2026. DOU 25/03/2026. Ementa: Altera a Lei nº 12.850/2013, o Código Penal, o Código de Processo Penal, a Lei nº 8.072/1990 e outras, para dispor sobre o combate às organizações criminosas no País. Autor: Poder Executivo.",
+     "sourceId": "camara-dados-abertos",
+     "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2579832",
+     "date": "2026-03-24",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q22",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe dobrar o investimento federal em segurança, com foco em Forças Armadas e presídios; não trata da PF especificamente.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Facções como organizações 'narcoterroristas', presídios de segurança máxima, maioridade penal aos 16 e fim da progressão para hediondos",
+     "summary": "Propõe declarar PCC, CV e milícias como organizações narcoterroristas, criar o Sistema Nacional de Fronteira com tropa de elite das Forças Armadas, construir 5 presídios de segurança máxima (complexo 'TREVA') e meio milhão de vagas prisionais em 4 anos, e dobrar o investimento federal em segurança. Defende reduzir a maioridade penal para 16 anos, castração química para estupradores condenados, fim da progressão de regime para crimes hediondos, cumprimento integral da pena por agressores de mulheres, reconhecimento facial nacional ('Muralha Brasileira') e penas quadruplicadas para roubo e revenda de celulares.",
+     "excerpt": "O novo governo do Brasil vai apoiar e sancionar a redução da maioridade penal de 18 para 16 anos. [...] O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      13,
+      14,
+      15,
+      16
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q23",
+   "direction": "SUPPORTS",
+   "closestOption": 3,
+   "summary": "Combina repressão (presídios federais, asfixia financeira) com policiamento de proximidade e câmeras corporais.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "PEC da Segurança, Ministério da Segurança Pública, SUSP, asfixia financeira do crime e controle de armas",
+     "summary": "Propõe aprovar a PEC da Segurança Pública enviada pelo Executivo para revisar atribuições federativas e ampliar o papel federal, e criar o Ministério da Segurança Pública para coordenar o SUSP. Prevê manter a estratégia de asfixia financeira do crime organizado (Lei Antifacção), R$ 10 bilhões para estados e municípios, ampliar FICCOs, fortalecer o sistema penitenciário federal com isolamento de lideranças, câmeras corporais e policiamento de proximidade. Reafirma a política de controle de armas e munições.",
+     "excerpt": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 15.358/2026 — Lei Antifacção (autoria do Poder Executivo)",
+     "summary": "Lei sancionada em 24/03/2026 a partir de projeto enviado pelo Executivo em novembro de 2025: penas de 20 a 40 anos para lideranças de facções, restrições a progressão e benefícios, e asfixia financeira das organizações criminosas.",
+     "excerpt": "Transformado na Lei Ordinária 15358/2026. DOU 25/03/2026. Ementa: Altera a Lei nº 12.850/2013, o Código Penal, o Código de Processo Penal, a Lei nº 8.072/1990 e outras, para dispor sobre o combate às organizações criminosas no País. Autor: Poder Executivo.",
+     "sourceId": "camara-dados-abertos",
+     "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2579832",
+     "date": "2026-03-24",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q23",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "O eixo do programa é punição e encarceramento: presídios de segurança máxima, maioridade penal aos 16, fim da progressão.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Facções como organizações 'narcoterroristas', presídios de segurança máxima, maioridade penal aos 16 e fim da progressão para hediondos",
+     "summary": "Propõe declarar PCC, CV e milícias como organizações narcoterroristas, criar o Sistema Nacional de Fronteira com tropa de elite das Forças Armadas, construir 5 presídios de segurança máxima (complexo 'TREVA') e meio milhão de vagas prisionais em 4 anos, e dobrar o investimento federal em segurança. Defende reduzir a maioridade penal para 16 anos, castração química para estupradores condenados, fim da progressão de regime para crimes hediondos, cumprimento integral da pena por agressores de mulheres, reconhecimento facial nacional ('Muralha Brasileira') e penas quadruplicadas para roubo e revenda de celulares.",
+     "excerpt": "O novo governo do Brasil vai apoiar e sancionar a redução da maioridade penal de 18 para 16 anos. [...] O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      13,
+      14,
+      15,
+      16
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "PEC 32/2019 — maioridade penal aos 16 anos (autor)",
+     "summary": "Proposta de emenda constitucional de sua autoria no Senado.",
+     "excerpt": "Altera a redação do art. 228 da Constituição Federal, a fim de reduzir a maioridade penal para dezesseis anos.",
+     "sourceId": "senado-dados-abertos-flavio-bolsonaro",
+     "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/135977",
+     "date": "2019-03-26",
+     "inForce": false
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "PL 2393/2019 — legítima defesa do agente de segurança (autor)",
+     "summary": "Projeto de lei de sua autoria no Senado.",
+     "excerpt": "Altera o Código Penal para dispor sobre a legítima defesa da sociedade pelo agente de segurança pública.",
+     "sourceId": "senado-dados-abertos-flavio-bolsonaro",
+     "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/136390",
+     "date": "2019-04-16",
+     "inForce": false
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q24",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Sancionou a Lei Antifacção (2026), com penas de 20 a 40 anos para lideranças de facções e fim de benefícios; o aumento de pena é dirigido ao crime organizado, não a todos os crimes violentos.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "PEC da Segurança, Ministério da Segurança Pública, SUSP, asfixia financeira do crime e controle de armas",
+     "summary": "Propõe aprovar a PEC da Segurança Pública enviada pelo Executivo para revisar atribuições federativas e ampliar o papel federal, e criar o Ministério da Segurança Pública para coordenar o SUSP. Prevê manter a estratégia de asfixia financeira do crime organizado (Lei Antifacção), R$ 10 bilhões para estados e municípios, ampliar FICCOs, fortalecer o sistema penitenciário federal com isolamento de lideranças, câmeras corporais e policiamento de proximidade. Reafirma a política de controle de armas e munições.",
+     "excerpt": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 15.358/2026 — Lei Antifacção (autoria do Poder Executivo)",
+     "summary": "Lei sancionada em 24/03/2026 a partir de projeto enviado pelo Executivo em novembro de 2025: penas de 20 a 40 anos para lideranças de facções, restrições a progressão e benefícios, e asfixia financeira das organizações criminosas.",
+     "excerpt": "Transformado na Lei Ordinária 15358/2026. DOU 25/03/2026. Ementa: Altera a Lei nº 12.850/2013, o Código Penal, o Código de Processo Penal, a Lei nº 8.072/1990 e outras, para dispor sobre o combate às organizações criminosas no País. Autor: Poder Executivo.",
+     "sourceId": "camara-dados-abertos",
+     "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2579832",
+     "date": "2026-03-24",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q24",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe fim da progressão de regime para hediondos e penas quadruplicadas para roubo de celulares; projetos no Senado no mesmo sentido.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Facções como organizações 'narcoterroristas', presídios de segurança máxima, maioridade penal aos 16 e fim da progressão para hediondos",
+     "summary": "Propõe declarar PCC, CV e milícias como organizações narcoterroristas, criar o Sistema Nacional de Fronteira com tropa de elite das Forças Armadas, construir 5 presídios de segurança máxima (complexo 'TREVA') e meio milhão de vagas prisionais em 4 anos, e dobrar o investimento federal em segurança. Defende reduzir a maioridade penal para 16 anos, castração química para estupradores condenados, fim da progressão de regime para crimes hediondos, cumprimento integral da pena por agressores de mulheres, reconhecimento facial nacional ('Muralha Brasileira') e penas quadruplicadas para roubo e revenda de celulares.",
+     "excerpt": "O novo governo do Brasil vai apoiar e sancionar a redução da maioridade penal de 18 para 16 anos. [...] O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      13,
+      14,
+      15,
+      16
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "PL 4082/2024 — veda liberdade provisória em crimes hediondos (autor)",
+     "summary": "Projeto de lei de sua autoria no Senado.",
+     "excerpt": "Veda a concessão de liberdade provisória e aplicação de medidas cautelares diversas à prisão para presos em flagrante pela prática de crimes hediondos.",
+     "sourceId": "senado-dados-abertos-flavio-bolsonaro",
+     "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/165920",
+     "date": "2024-10-29",
+     "inForce": false
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "PL 494/2025 — furto de aparelho celular (autor)",
+     "summary": "Projeto de lei de sua autoria no Senado.",
+     "excerpt": "Altera o art. 155 do Decreto-Lei nº 2.848, de 07 de dezembro de 1940 (Código Penal) para dispor sobre o crime de furto de aparelho de celular.",
+     "sourceId": "senado-dados-abertos-flavio-bolsonaro",
+     "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/167238",
+     "date": "2025-02-11",
+     "inForce": false
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q25",
+   "direction": "NEUTRAL",
+   "closestOption": 2,
+   "summary": "Propõe manter a política atual de controle de armas e munições.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "PEC da Segurança, Ministério da Segurança Pública, SUSP, asfixia financeira do crime e controle de armas",
+     "summary": "Propõe aprovar a PEC da Segurança Pública enviada pelo Executivo para revisar atribuições federativas e ampliar o papel federal, e criar o Ministério da Segurança Pública para coordenar o SUSP. Prevê manter a estratégia de asfixia financeira do crime organizado (Lei Antifacção), R$ 10 bilhões para estados e municípios, ampliar FICCOs, fortalecer o sistema penitenciário federal com isolamento de lideranças, câmeras corporais e policiamento de proximidade. Reafirma a política de controle de armas e munições.",
+     "excerpt": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Decreto nº 11.615/2023 — regras para armas de fogo e CACs",
+     "summary": "Decreto do terceiro mandato que define as regras de aquisição, registro, posse e porte, inclusive para colecionadores, atiradores e caçadores (CACs).",
+     "excerpt": "Regulamenta a Lei nº 10.826, de 22 de dezembro de 2003, para estabelecer regras e procedimentos relativos à aquisição, ao registro, à posse, ao porte e à comercialização de armas de fogo.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/decreto/d11615.htm",
+     "date": "2023-07-21",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q25",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 3,
+   "summary": "Projeto de sua autoria concede porte de arma a advogados, ampliando o acesso para uma categoria; o programa de 2026 não trata do tema.",
+   "evidence": [
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "PL 2734/2021 — porte de arma de fogo para advogados (autor)",
+     "summary": "Projeto de lei de sua autoria no Senado.",
+     "excerpt": "Altera a Lei nº 8.906, de 4 de julho de 1994, e a Lei nº 10.826, de 22 de dezembro de 2003, para conceder porte de arma de fogo aos advogados.",
+     "sourceId": "senado-dados-abertos-flavio-bolsonaro",
+     "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/149286",
+     "date": "2021-08-03",
+     "inForce": false
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q26",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "O Decreto nº 11.615/2023 mantém um regime próprio para colecionadores, atiradores e caçadores, com regras e limites específicos, e o programa fala em fiscalização de CACs: regras diferentes, em alguns casos.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "PEC da Segurança, Ministério da Segurança Pública, SUSP, asfixia financeira do crime e controle de armas",
+     "summary": "Propõe aprovar a PEC da Segurança Pública enviada pelo Executivo para revisar atribuições federativas e ampliar o papel federal, e criar o Ministério da Segurança Pública para coordenar o SUSP. Prevê manter a estratégia de asfixia financeira do crime organizado (Lei Antifacção), R$ 10 bilhões para estados e municípios, ampliar FICCOs, fortalecer o sistema penitenciário federal com isolamento de lideranças, câmeras corporais e policiamento de proximidade. Reafirma a política de controle de armas e munições.",
+     "excerpt": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Decreto nº 11.615/2023 — regras para armas de fogo e CACs",
+     "summary": "Decreto do terceiro mandato que define as regras de aquisição, registro, posse e porte, inclusive para colecionadores, atiradores e caçadores (CACs).",
+     "excerpt": "Regulamenta a Lei nº 10.826, de 22 de dezembro de 2003, para estabelecer regras e procedimentos relativos à aquisição, ao registro, à posse, ao porte e à comercialização de armas de fogo.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/decreto/d11615.htm",
+     "date": "2023-07-21",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q26",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "Sem posição documentada sobre CACs no programa ou nos projetos conferidos.",
+   "evidence": []
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q27",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa trata do crime organizado; não define a abordagem para drogas (repressão, saúde ou prevenção).",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "PEC da Segurança, Ministério da Segurança Pública, SUSP, asfixia financeira do crime e controle de armas",
+     "summary": "Propõe aprovar a PEC da Segurança Pública enviada pelo Executivo para revisar atribuições federativas e ampliar o papel federal, e criar o Ministério da Segurança Pública para coordenar o SUSP. Prevê manter a estratégia de asfixia financeira do crime organizado (Lei Antifacção), R$ 10 bilhões para estados e municípios, ampliar FICCOs, fortalecer o sistema penitenciário federal com isolamento de lideranças, câmeras corporais e policiamento de proximidade. Reafirma a política de controle de armas e munições.",
+     "excerpt": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q27",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Trata o tráfico como narcoterrorismo, com Forças Armadas nas fronteiras: abordagem de repressão.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Facções como organizações 'narcoterroristas', presídios de segurança máxima, maioridade penal aos 16 e fim da progressão para hediondos",
+     "summary": "Propõe declarar PCC, CV e milícias como organizações narcoterroristas, criar o Sistema Nacional de Fronteira com tropa de elite das Forças Armadas, construir 5 presídios de segurança máxima (complexo 'TREVA') e meio milhão de vagas prisionais em 4 anos, e dobrar o investimento federal em segurança. Defende reduzir a maioridade penal para 16 anos, castração química para estupradores condenados, fim da progressão de regime para crimes hediondos, cumprimento integral da pena por agressores de mulheres, reconhecimento facial nacional ('Muralha Brasileira') e penas quadruplicadas para roubo e revenda de celulares.",
+     "excerpt": "O novo governo do Brasil vai apoiar e sancionar a redução da maioridade penal de 18 para 16 anos. [...] O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      13,
+      14,
+      15,
+      16
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q28",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Em setembro de 2026 editou a MP 1.394, que proíbe as apostas de quota fixa, inclusive a publicidade. Antes, o programa falava em manter controles e o governo havia regulamentado o mercado (Lei 14.790/2023): a posição mudou ao longo do período.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Manter controles de gastos em apostas on-line e ampliar atendimento a pessoas com problemas com jogos",
+     "summary": "O programa menciona manter os mecanismos de controle de gastos excessivos em apostas on-line e aprimorar regras de crédito ao consumidor, além de ampliar profissionais e estratégias de saúde mental voltadas a pessoas com problemas relacionados a jogos de apostas. Não detalha posição sobre a proibição estabelecida pela MP 1.394/2026.",
+     "excerpt": "mantendo os mecanismos de controle de gastos excessivos em apostas on-line e aprimorando as regras de oferta e responsabilidade na concessão de crédito",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      39,
+      49
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "MPV 1.394/2026 — proíbe apostas de quota fixa, inclusive publicidade",
+     "summary": "Medida provisória editada em setembro de 2026. Mudança de política: o mesmo governo havia regulamentado o mercado pela Lei nº 14.790/2023.",
+     "excerpt": "Proíbe a exploração, a oferta, a intermediação e a publicidade de loterias de apostas de quota fixa no território nacional, institui o Comitê Interinstitucional de fiscalização.",
+     "sourceId": "mpv-1394-2026",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1394.htm",
+     "date": "2026-09-25",
+     "inForce": true
+    }
+   ],
+   "timeline": [
+    {
+     "date": "2023-12-29",
+     "text": "Regulamentação do mercado de apostas de quota fixa (Lei nº 14.790/2023)."
+    },
+    {
+     "date": "2026-07-22",
+     "text": "Programa de 2026: manter mecanismos de controle de gastos em apostas."
+    },
+    {
+     "date": "2026-09-25",
+     "text": "MP 1.394/2026: proibição da exploração, oferta, intermediação e publicidade das apostas de quota fixa."
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q28",
+   "direction": "SUPPORTS",
+   "closestOption": 2,
+   "summary": "Propõe proibir o uso de recursos de programas sociais em apostas e campanhas educativas: regras rígidas, sem proibição geral.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Proibir uso de recursos de programas sociais em apostas e promover campanhas de conscientização",
+     "summary": "Propõe proibir o uso de recursos de programas sociais em apostas e promover campanhas educativas sobre os riscos do endividamento com jogos, além de orientação financeira às famílias para se proteger do impacto das apostas online. Não há proposta explícita sobre o regime geral de exploração das apostas nem menção à MP 1.394/2026.",
+     "excerpt": "Vamos proibir o uso dos recursos dos programas sociais para apostas, porque dinheiro destinado a pôr comida na mesa não pode escoar para a casa de apostas",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      19,
+      33
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q29",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "A MP 1.394/2026 proíbe a publicidade das apostas de quota fixa em todo o território nacional.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Manter controles de gastos em apostas on-line e ampliar atendimento a pessoas com problemas com jogos",
+     "summary": "O programa menciona manter os mecanismos de controle de gastos excessivos em apostas on-line e aprimorar regras de crédito ao consumidor, além de ampliar profissionais e estratégias de saúde mental voltadas a pessoas com problemas relacionados a jogos de apostas. Não detalha posição sobre a proibição estabelecida pela MP 1.394/2026.",
+     "excerpt": "mantendo os mecanismos de controle de gastos excessivos em apostas on-line e aprimorando as regras de oferta e responsabilidade na concessão de crédito",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      39,
+      49
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "MPV 1.394/2026 — proíbe apostas de quota fixa, inclusive publicidade",
+     "summary": "Medida provisória editada em setembro de 2026. Mudança de política: o mesmo governo havia regulamentado o mercado pela Lei nº 14.790/2023.",
+     "excerpt": "Proíbe a exploração, a oferta, a intermediação e a publicidade de loterias de apostas de quota fixa no território nacional, institui o Comitê Interinstitucional de fiscalização.",
+     "sourceId": "mpv-1394-2026",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1394.htm",
+     "date": "2026-09-25",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q29",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa não trata da propaganda de apostas.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Proibir uso de recursos de programas sociais em apostas e promover campanhas de conscientização",
+     "summary": "Propõe proibir o uso de recursos de programas sociais em apostas e promover campanhas educativas sobre os riscos do endividamento com jogos, além de orientação financeira às famílias para se proteger do impacto das apostas online. Não há proposta explícita sobre o regime geral de exploração das apostas nem menção à MP 1.394/2026.",
+     "excerpt": "Vamos proibir o uso dos recursos dos programas sociais para apostas, porque dinheiro destinado a pôr comida na mesa não pode escoar para a casa de apostas",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      19,
+      33
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q30",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa reafirma metas climáticas e unidades de conservação; não se manifesta sobre barrar obras por risco ambiental.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Desmatamento líquido zero até 2030, cumprir a NDC (59% a 67% até 2035) e ampliar o financiamento climático",
+     "summary": "Reafirma a meta de desmatamento líquido zero até 2030, a NDC de redução de 59% a 67% das emissões líquidas até 2035 e o Plano Clima. Propõe implementar o Sistema Brasileiro de Comércio de Emissões, manter Fundo Clima, Eco Invest, Fundo Amazônia e o TFFF, expandir monitoramento por satélite e inteligência artificial contra crimes ambientais e destinar terras públicas a unidades de conservação, territórios indígenas e quilombolas.",
+     "excerpt": "No próximo mandato, continuaremos trabalhando para alcançar o desmatamento líquido zero até 2030, meta que reafirmamos.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      69,
+      70,
+      71,
+      72
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q30",
+   "direction": "PARTIALLY_OPPOSES",
+   "closestOption": 3,
+   "summary": "Tende a discordar, ou a defender menos restrições: o programa trata o licenciamento como entrave, propõe licença concedida por decurso de prazo, acelerar o licenciamento minerário, \"destravar\" grandes obras e reorganizar os órgãos ambientais; a imprensa registra promessas de campanha de afrouxar leis ambientais. Não há proposta de barrar empreendimentos por risco ambiental.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Desmatamento ilegal zero até 2029, licenciamento com prazo e licença tácita, PSA e fusão de funções de Ibama, Funai e ICMBio",
+     "summary": "Estabelece meta de zerar o desmatamento ilegal até 2029 e combater queimadas ilegais com satélite e inteligência artificial, com foco em grilagem e crime organizado e 'sem criminalizar o morador da floresta'. Propõe licenciamento ambiental com prazos definidos e concessão da licença se o órgão não decidir no prazo, estabilidade de regras por até 20 anos, ampliação do pagamento por serviços ambientais, mercado regulado de carbono, eliminação de superposições entre Ibama, Funai e ICMBio e exigência de transparência de ONGs com recursos internacionais.",
+     "excerpt": "Teremos a meta de zerar o desmatamento ilegal até 2029 [...] Se não decidir nem se manifestar dentro desse prazo, a licença deve ser concedida",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      49,
+      50,
+      57,
+      58,
+      59
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Licenciamento ambiental \"ágil, moderno e com segurança jurídica\"",
+     "summary": "Trata o licenciamento como entrave a investimentos e propõe prazos definidos, com licença concedida se o órgão não decidir no prazo.",
+     "excerpt": "Parte essencial de mudar essa lógica é um licenciamento ambiental ágil, moderno e com segurança jurídica: grandes obras, usinas, minas e projetos industriais vivem parados anos à espera de uma licença, e cada mês de atraso é investimento que foge e emprego que não vem.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      49
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Licença concedida se o órgão ambiental não decidir no prazo",
+     "summary": "Propõe prazo definido para a análise e concessão da licença por decurso de prazo quando o órgão não se manifesta.",
+     "excerpt": "Quando o empreendedor cumpre a lei e apresenta tudo o que a norma exige, o órgão responsável deve ter um prazo definido para concluir a análise. Se não decidir nem se manifestar dentro desse prazo, a licença deve ser concedida, porque a demora do Estado não pode ser um castigo para quem fez a sua parte.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      49,
+      50
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Acelerar o licenciamento e os direitos minerários; \"destravar\" a Hidrovia do Tapajós",
+     "summary": "Prevê acelerar licenciamento de mineração e destravar grandes projetos de infraestrutura, \"sempre com responsabilidade ambiental\".",
+     "excerpt": "Vamos equacionar as garantias de crédito ao financiamento dos projetos e acelerar o licenciamento e o processo de direitos minerários. [...] Vamos trabalhar para destravar, sempre com responsabilidade ambiental, os projetos de infraestrutura fluvial que escoam a produção do país, como a Hidrovia do Tapajós.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      51,
+      56
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Eliminar superposições entre Ibama, Funai e ICMBio",
+     "summary": "Propõe reorganizar os órgãos ambientais e exigir transparência de ONGs com recursos internacionais.",
+     "excerpt": "Vamos eliminar superposições entre Ibama, Funai e ICMBio, dando eficiência à fiscalização, e exigir transparência de financiadores e de projetos das ONGs que recebem recursos internacionais e judicializam ações contra a União.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      59
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "POSICAO",
+     "strength": "C",
+     "title": "Folha: \"Em busca de votos, Flávio Bolsonaro promete afrouxar leis ambientais\" (out/2026)",
+     "summary": "Matéria registra promessas de campanha de flexibilizar leis ambientais e declarações do candidato sobre clima. Fonte jornalística (nível C): reforça o que o programa já mostra, não define a posição sozinha.",
+     "excerpt": "Título da matéria: \"Em busca de votos, Flávio Bolsonaro promete afrouxar leis ambientais\" (Folha de S.Paulo, outubro de 2026).",
+     "sourceId": "folha-flavio-leis-ambientais-2026",
+     "url": "https://www1.folha.uol.com.br/ambiente/2026/10/em-busca-de-votos-flavio-bolsonaro-promete-afrouxar-leis-ambientais.shtml",
+     "date": "2026-10-01",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q31",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Reafirma a meta de desmatamento líquido zero até 2030.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Desmatamento líquido zero até 2030, cumprir a NDC (59% a 67% até 2035) e ampliar o financiamento climático",
+     "summary": "Reafirma a meta de desmatamento líquido zero até 2030, a NDC de redução de 59% a 67% das emissões líquidas até 2035 e o Plano Clima. Propõe implementar o Sistema Brasileiro de Comércio de Emissões, manter Fundo Clima, Eco Invest, Fundo Amazônia e o TFFF, expandir monitoramento por satélite e inteligência artificial contra crimes ambientais e destinar terras públicas a unidades de conservação, territórios indígenas e quilombolas.",
+     "excerpt": "No próximo mandato, continuaremos trabalhando para alcançar o desmatamento líquido zero até 2030, meta que reafirmamos.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      69,
+      70,
+      71,
+      72
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Decreto nº 11.368/2023 — governança do Fundo Amazônia",
+     "summary": "Decreto do primeiro dia do terceiro mandato, reativando a governança do Fundo Amazônia.",
+     "excerpt": "Altera o Decreto nº 6.527, de 1º de agosto de 2008, para dispor sobre a governança do Fundo Amazônia.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/decreto/d11368.htm",
+     "date": "2023-01-01",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "COP30 em Belém: abertura (10/11/2025)",
+     "summary": "Brasil sediou a COP30; discurso oficial de abertura.",
+     "excerpt": "Planalto: \"A mudança do clima já não é ameaça do futuro. É uma tragédia do presente\"; compromisso reiterado com desmatamento zero até 2030.",
+     "sourceId": "planalto-cop30-2025",
+     "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/discursos-e-pronunciamentos/2025/11/discurso-do-presidente-lula-na-abertura-da-cop30-em-belem-pa",
+     "date": "2025-11-10",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q31",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Concorda, especificamente quanto ao desmatamento ilegal: meta de zerar o desmatamento ilegal até 2029. Ao mesmo tempo propõe licenciamento mais ágil e reorganização dos órgãos ambientais; não equivale a desmatamento zero em qualquer circunstância.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Desmatamento ilegal zero até 2029, licenciamento com prazo e licença tácita, PSA e fusão de funções de Ibama, Funai e ICMBio",
+     "summary": "Estabelece meta de zerar o desmatamento ilegal até 2029 e combater queimadas ilegais com satélite e inteligência artificial, com foco em grilagem e crime organizado e 'sem criminalizar o morador da floresta'. Propõe licenciamento ambiental com prazos definidos e concessão da licença se o órgão não decidir no prazo, estabilidade de regras por até 20 anos, ampliação do pagamento por serviços ambientais, mercado regulado de carbono, eliminação de superposições entre Ibama, Funai e ICMBio e exigência de transparência de ONGs com recursos internacionais.",
+     "excerpt": "Teremos a meta de zerar o desmatamento ilegal até 2029 [...] Se não decidir nem se manifestar dentro desse prazo, a licença deve ser concedida",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      49,
+      50,
+      57,
+      58,
+      59
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q32",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Reafirma a NDC de redução de 59% a 67% das emissões até 2035.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Desmatamento líquido zero até 2030, cumprir a NDC (59% a 67% até 2035) e ampliar o financiamento climático",
+     "summary": "Reafirma a meta de desmatamento líquido zero até 2030, a NDC de redução de 59% a 67% das emissões líquidas até 2035 e o Plano Clima. Propõe implementar o Sistema Brasileiro de Comércio de Emissões, manter Fundo Clima, Eco Invest, Fundo Amazônia e o TFFF, expandir monitoramento por satélite e inteligência artificial contra crimes ambientais e destinar terras públicas a unidades de conservação, territórios indígenas e quilombolas.",
+     "excerpt": "No próximo mandato, continuaremos trabalhando para alcançar o desmatamento líquido zero até 2030, meta que reafirmamos.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      69,
+      70,
+      71,
+      72
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 15.042/2024 — mercado regulado de carbono (SBCE)",
+     "summary": "Lei sancionada no terceiro mandato criando o mercado regulado de carbono.",
+     "excerpt": "Institui o Sistema Brasileiro de Comércio de Emissões de Gases de Efeito Estufa (SBCE); e altera as Leis nºs 12.187/2009 e 12.651/2012 (Código Florestal).",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/l15042.htm",
+     "date": "2024-12-11",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "COP30 em Belém: abertura (10/11/2025)",
+     "summary": "Brasil sediou a COP30; discurso oficial de abertura.",
+     "excerpt": "Planalto: \"A mudança do clima já não é ameaça do futuro. É uma tragédia do presente\"; compromisso reiterado com desmatamento zero até 2030.",
+     "sourceId": "planalto-cop30-2025",
+     "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/discursos-e-pronunciamentos/2025/11/discurso-do-presidente-lula-na-abertura-da-cop30-em-belem-pa",
+     "date": "2025-11-10",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q32",
+   "direction": "NEUTRAL",
+   "closestOption": 2,
+   "summary": "Posição dividida: o programa apoia mercado regulado de carbono, Renovabio e biocombustíveis e trata a transição energética como oportunidade, mas não assume meta de emissões, não menciona mudanças climáticas, propõe ampliar petróleo e gás e liberar o fracking; a imprensa registra declarações de campanha que relativizam a influência humana sobre o clima. Resultado: nem a favor nem contra metas, neutro.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Desmatamento ilegal zero até 2029, licenciamento com prazo e licença tácita, PSA e fusão de funções de Ibama, Funai e ICMBio",
+     "summary": "Estabelece meta de zerar o desmatamento ilegal até 2029 e combater queimadas ilegais com satélite e inteligência artificial, com foco em grilagem e crime organizado e 'sem criminalizar o morador da floresta'. Propõe licenciamento ambiental com prazos definidos e concessão da licença se o órgão não decidir no prazo, estabilidade de regras por até 20 anos, ampliação do pagamento por serviços ambientais, mercado regulado de carbono, eliminação de superposições entre Ibama, Funai e ICMBio e exigência de transparência de ONGs com recursos internacionais.",
+     "excerpt": "Teremos a meta de zerar o desmatamento ilegal até 2029 [...] Se não decidir nem se manifestar dentro desse prazo, a licença deve ser concedida",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      49,
+      50,
+      57,
+      58,
+      59
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Mercado regulado de carbono e Renovabio; o programa não menciona clima nem metas de emissões",
+     "summary": "O programa de 76 páginas não usa as palavras \"clima\", \"mudanças climáticas\", \"emissões\" ou \"Acordo de Paris\" e não fixa meta de redução de poluentes. Prevê consolidar o mercado regulado de carbono, vender créditos de carbono pelo Renovabio e liberar o fracking \"com responsabilidade ambiental\".",
+     "excerpt": "E vamos consolidar o mercado regulado de carbono com segurança jurídica, posicionando o Brasil como fornecedor global de ativos ambientais, e impulsionar a bioeconomia [...]. Preservar deve gerar oportunidade.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      53,
+      57
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Programa Nacional de Segurança Energética com fracking",
+     "summary": "Propõe permitir a exploração do gás não convencional (fracking) e transformar petróleo e gás \"em energia e emprego\".",
+     "excerpt": "permitir a exploração do gás não convencional (fracking) com responsabilidade ambiental e cumprindo a lei, e expandir e modernizar a rede de transmissão, integrando novas fontes renováveis [...]. E vamos transformar em energia e emprego a nossa riqueza de petróleo e gás.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      52
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Potência de biocombustíveis e matriz renovável para data centers",
+     "summary": "Propõe etanol, biodiesel, HVO, SAF e biogás, Lei do Combustível do Futuro e Renovabio, e data centers \"aproveitando a matriz elétrica renovável\".",
+     "excerpt": "E vamos transformar o Brasil em potência de biocombustíveis: etanol, biodiesel, HVO, SAF e biogás, fomentando a aplicação da Lei do Combustível do Futuro e oferecendo linhas especiais de financiamento para empresas de biogás.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      53
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Transição energética como destino de investimento: biocombustíveis, solar, eólica e hidrogênio verde",
+     "summary": "Meta para 2030 de posicionar o Brasil entre os principais destinos de investimento em transição energética.",
+     "excerpt": "nossa meta para 2030 é posicionar o Brasil entre os principais destinos mundiais de investimento em transição energética, tendo os biocombustíveis, a energia solar, a eólica e o hidrogênio verde como alavancas e a diplomacia como instrumento permanente.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "POSICAO",
+     "strength": "C",
+     "title": "Folha: \"Em busca de votos, Flávio Bolsonaro promete afrouxar leis ambientais\" (out/2026)",
+     "summary": "Matéria registra promessas de campanha de flexibilizar leis ambientais e declarações do candidato sobre clima. Fonte jornalística (nível C): reforça o que o programa já mostra, não define a posição sozinha.",
+     "excerpt": "Título da matéria: \"Em busca de votos, Flávio Bolsonaro promete afrouxar leis ambientais\" (Folha de S.Paulo, outubro de 2026).",
+     "sourceId": "folha-flavio-leis-ambientais-2026",
+     "url": "https://www1.folha.uol.com.br/ambiente/2026/10/em-busca-de-votos-flavio-bolsonaro-promete-afrouxar-leis-ambientais.shtml",
+     "date": "2026-10-01",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q33",
+   "direction": "SUPPORTS",
+   "closestOption": 4,
+   "summary": "Investe em várias fontes ao mesmo tempo: sancionou o marco do hidrogênio, o Combustível do Futuro e a lei das eólicas offshore, e o programa combina petróleo e gás com renováveis numa \"transição energética justa\". Alternativa mais próxima: todas de forma equilibrada.",
+   "evidence": [
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 14.948/2024 — hidrogênio de baixa emissão",
+     "summary": "Lei sancionada no terceiro mandato.",
+     "excerpt": "Institui o marco legal do hidrogênio de baixa emissão de carbono; dispõe sobre a Política Nacional do Hidrogênio de Baixa Emissão de Carbono.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/l14948.htm",
+     "date": "2024-08-02",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 14.993/2024 — Combustível do Futuro",
+     "summary": "Lei sancionada no terceiro mandato: biocombustíveis e captura de carbono.",
+     "excerpt": "Dispõe sobre a promoção da mobilidade sustentável de baixo carbono e a captura e a estocagem geológica de dióxido de carbono; institui o Programa Combustível do Futuro.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/l14993.htm",
+     "date": "2024-10-08",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 15.097/2025 — energia eólica offshore",
+     "summary": "Lei sancionada no terceiro mandato.",
+     "excerpt": "Disciplina o aproveitamento de potencial energético offshore.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15097.htm",
+     "date": "2025-01-10",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q33",
+   "direction": "SUPPORTS",
+   "closestOption": 2,
+   "summary": "Petróleo e gás aparecem como prioridade explícita (\"transformar em energia e emprego a nossa riqueza de petróleo e gás\", fracking), junto com biocombustíveis e, como meta de atração de investimento, solar, eólica e hidrogênio verde. Energia nuclear e Angra 3 não aparecem no programa.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Soberania 'com profissionalismo': evitar dependência em cadeias críticas, fertilizantes nacionais e capital estrangeiro em minerais",
+     "summary": "Define soberania como governar-se e cuidar do território 'na prática', começando pela segurança interna. Propõe equilibrar abertura comercial com o papel do Estado de 'evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia', apoiar produção nacional de fertilizantes (potássio e fosfato) e produzir IA e tecnologia no país a partir de energia barata e minerais críticos. Ao mesmo tempo, prevê atrair capital e tecnologia estrangeiros para a mineração e tratar a defesa com foco em drones e IA.",
+     "excerpt": "Nosso projeto equilibra a abertura comercial com o papel do Estado de evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      32,
+      53,
+      54,
+      55,
+      56,
+      61,
+      62,
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Programa Nacional de Segurança Energética com fracking",
+     "summary": "Propõe permitir a exploração do gás não convencional (fracking) e transformar petróleo e gás \"em energia e emprego\".",
+     "excerpt": "permitir a exploração do gás não convencional (fracking) com responsabilidade ambiental e cumprindo a lei, e expandir e modernizar a rede de transmissão, integrando novas fontes renováveis [...]. E vamos transformar em energia e emprego a nossa riqueza de petróleo e gás.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      52
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Potência de biocombustíveis e matriz renovável para data centers",
+     "summary": "Propõe etanol, biodiesel, HVO, SAF e biogás, Lei do Combustível do Futuro e Renovabio, e data centers \"aproveitando a matriz elétrica renovável\".",
+     "excerpt": "E vamos transformar o Brasil em potência de biocombustíveis: etanol, biodiesel, HVO, SAF e biogás, fomentando a aplicação da Lei do Combustível do Futuro e oferecendo linhas especiais de financiamento para empresas de biogás.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      53
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Transição energética como destino de investimento: biocombustíveis, solar, eólica e hidrogênio verde",
+     "summary": "Meta para 2030 de posicionar o Brasil entre os principais destinos de investimento em transição energética.",
+     "excerpt": "nossa meta para 2030 é posicionar o Brasil entre os principais destinos mundiais de investimento em transição energética, tendo os biocombustíveis, a energia solar, a eólica e o hidrogênio verde como alavancas e a diplomacia como instrumento permanente.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q34",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe aprofundar a Nova Indústria Brasil com financiamento, compras públicas e conteúdo local.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Aprofundar a Nova Indústria Brasil, política de minerais críticos e conteúdo local",
+     "summary": "Propõe aprimorar a 'neoindustrialização' com foco em inovação, inteligência artificial e minerais críticos, integrando políticas industrial, científica e de comércio exterior. Prevê financiamento direcionado, compras públicas, margens de preferência e benefícios condicionados a conteúdo local, uso estratégico do FNDCT, política específica para minerais críticos e terras raras evitando exportação de matéria-prima bruta, e regulamentação do mercado de carbono articulada à NIB.",
+     "excerpt": "Utilizaremos financiamento direcionado [...], compras públicas, concessões, regulações e benefícios condicionados a conteúdo local, valor agregado nacional, margens de preferência com estímulos para empresas brasileiras.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      50,
+      51,
+      52
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q34",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Estado \"regulador, não empresário\" e abertura comercial, com apoio em setores específicos (minerais críticos, PMEs).",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Estado regulador, não empresário: minerais críticos com capital estrangeiro, abertura comercial e integração a cadeias globais",
+     "summary": "Propõe que o Estado atue 'como regulador e coordenador, não como empresário', com marco regulatório estável, licenciamento ágil, atração de capital e tecnologia estrangeiros e verticalização de minerais críticos 'com incentivos de mercado'. Prevê abertura comercial com acesso a bens de capital importados, plano de integração às cadeias globais de valor (agroindústria, minerais críticos, saúde, economia digital), internacionalização de pequenas e médias empresas via BNDES e Apex e segurança jurídica com estabilidade de regras por até 20 anos.",
+     "excerpt": "O Estado atuará como regulador e coordenador, não como empresário, apoiado em seis pilares: marco regulatório claro e estável, licenciamento ágil e técnico, atração de capital e tecnologia, verticalização com incentivos de mercado, governança e transparência.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      49,
+      50,
+      55,
+      56,
+      62,
+      63,
+      64
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q35",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe reduzir a dependência externa: fertilizantes pela Petrobras, insulina, hemoderivados, defesa cibernética.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Soberania digital, Base Industrial de Defesa, defesa cibernética e produção nacional de fertilizantes e insumos de saúde",
+     "summary": "Define 'soberania digital' como capacidade de desenvolver, operar, regular e governar tecnologias estratégicas e infraestruturas críticas. Propõe fortalecer a Base Industrial e Tecnológica de Defesa, reforçar a defesa cibernética 'desenvolvendo tecnologias próprias e reduzindo a dependência externa', preservar a competência nuclear com autonomia do ciclo do combustível, acelerar a produção nacional de fertilizantes pela Petrobras e ampliar a produção nacional de insulina, hemoderivados e insumos farmacêuticos.",
+     "excerpt": "Reforçaremos a defesa cibernética, protegendo infraestruturas críticas e bases de dados governamentais, desenvolvendo tecnologias próprias e reduzindo a dependência externa em áreas estratégicas.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      39,
+      54,
+      63,
+      68,
+      78,
+      79
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q35",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Propõe evitar \"dependência excessiva em áreas críticas\" (suprimentos, tecnologia, fertilizantes), com abertura comercial no restante.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Soberania 'com profissionalismo': evitar dependência em cadeias críticas, fertilizantes nacionais e capital estrangeiro em minerais",
+     "summary": "Define soberania como governar-se e cuidar do território 'na prática', começando pela segurança interna. Propõe equilibrar abertura comercial com o papel do Estado de 'evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia', apoiar produção nacional de fertilizantes (potássio e fosfato) e produzir IA e tecnologia no país a partir de energia barata e minerais críticos. Ao mesmo tempo, prevê atrair capital e tecnologia estrangeiros para a mineração e tratar a defesa com foco em drones e IA.",
+     "excerpt": "Nosso projeto equilibra a abertura comercial com o papel do Estado de evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      32,
+      53,
+      54,
+      55,
+      56,
+      61,
+      62,
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q36",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Nova edição do Novo PAC, Minha Casa Minha Vida ampliado e universalização de água e esgoto.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Nova edição do Novo PAC, concessões, Minha Casa Minha Vida ampliado, saneamento e mobilidade",
+     "summary": "Propõe uma nova edição do Novo PAC combinando obras públicas e concessões (rodovias, ferrovias, portos, aeroportos regionais), com meta de R$ 300 bilhões em investimento em infraestrutura em 2026. Prevê manter e ampliar o Minha Casa Minha Vida para todas as faixas, Compra Assistida, Reforma Casa Brasil, Periferia Viva, universalização de água e esgoto e apoio a transporte coletivo de alta capacidade e eletrificação de frotas.",
+     "excerpt": "O MCMV será mantido e ampliado no próximo mandato, para todas as faixas de renda e preservando seu foco nas famílias de mais baixa renda.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      44,
+      45,
+      46,
+      47,
+      53,
+      54
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Decreto nº 6.025/2007 — institui o PAC",
+     "summary": "Decreto do segundo mandato criando o programa de investimentos em infraestrutura.",
+     "excerpt": "Institui o Programa de Aceleração do Crescimento - PAC, o seu Comitê Gestor, e dá outras providências.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6025.htm",
+     "date": "2007-01-22",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Lei nº 11.977/2009 — Minha Casa, Minha Vida",
+     "summary": "Lei sancionada no segundo mandato criando o programa habitacional.",
+     "excerpt": "Dispõe sobre o Programa Minha Casa, Minha Vida – PMCMV e a regularização fundiária de assentamentos localizados em áreas urbanas.",
+     "sourceId": "planalto-legislacao",
+     "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/lei/l11977.htm",
+     "date": "2009-07-07",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q36",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "R$ 900 bilhões em quatro anos, mas apoiados no setor privado, concessões e securitização, com corte de gastos públicos.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "R$ 900 bilhões em 4 anos via setor privado, Casa Verde e Amarela (2,5 milhões), ferrovias e saneamento por concessões",
+     "summary": "Propõe investir R$ 900 bilhões em quatro anos em rodovias, hidrovias, portos, aeroportos e ferrovias, com estratégia apoiada na iniciativa privada, novo modelo de financiamento (securitização de ativos da União, PPPs, BNDES só para obras no Brasil), Corredores Logísticos Inteligentes, Ferrogrão, Trem do Nordeste e Transnordestina. Prevê retomar o Casa Verde e Amarela com meta de 2,5 milhões de residências, acelerar concessões de saneamento sob o Marco Legal de 2020, 'nenhuma escola sem água até 2030' e Lixão Zero.",
+     "excerpt": "Vamos retomar o Casa Verde e Amarela, com meta de 2,5 milhões de residências e a menor taxa de juros possível no financiamento.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      47,
+      48,
+      50,
+      51,
+      52
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q37",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe compras públicas com margens de preferência e benefícios condicionados a conteúdo local.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Aprofundar a Nova Indústria Brasil, política de minerais críticos e conteúdo local",
+     "summary": "Propõe aprimorar a 'neoindustrialização' com foco em inovação, inteligência artificial e minerais críticos, integrando políticas industrial, científica e de comércio exterior. Prevê financiamento direcionado, compras públicas, margens de preferência e benefícios condicionados a conteúdo local, uso estratégico do FNDCT, política específica para minerais críticos e terras raras evitando exportação de matéria-prima bruta, e regulamentação do mercado de carbono articulada à NIB.",
+     "excerpt": "Utilizaremos financiamento direcionado [...], compras públicas, concessões, regulações e benefícios condicionados a conteúdo local, valor agregado nacional, margens de preferência com estímulos para empresas brasileiras.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      50,
+      51,
+      52
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q37",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa defende abertura comercial e BNDES só para obras no Brasil; não trata de preferência em compras públicas.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Estado regulador, não empresário: minerais críticos com capital estrangeiro, abertura comercial e integração a cadeias globais",
+     "summary": "Propõe que o Estado atue 'como regulador e coordenador, não como empresário', com marco regulatório estável, licenciamento ágil, atração de capital e tecnologia estrangeiros e verticalização de minerais críticos 'com incentivos de mercado'. Prevê abertura comercial com acesso a bens de capital importados, plano de integração às cadeias globais de valor (agroindústria, minerais críticos, saúde, economia digital), internacionalização de pequenas e médias empresas via BNDES e Apex e segurança jurídica com estabilidade de regras por até 20 anos.",
+     "excerpt": "O Estado atuará como regulador e coordenador, não como empresário, apoiado em seis pilares: marco regulatório claro e estável, licenciamento ágil e técnico, atração de capital e tecnologia, verticalização com incentivos de mercado, governança e transparência.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      49,
+      50,
+      55,
+      56,
+      62,
+      63,
+      64
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q38",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Define soberania digital como desenvolver, operar e governar tecnologias estratégicas com tecnologias próprias.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Soberania digital, Base Industrial de Defesa, defesa cibernética e produção nacional de fertilizantes e insumos de saúde",
+     "summary": "Define 'soberania digital' como capacidade de desenvolver, operar, regular e governar tecnologias estratégicas e infraestruturas críticas. Propõe fortalecer a Base Industrial e Tecnológica de Defesa, reforçar a defesa cibernética 'desenvolvendo tecnologias próprias e reduzindo a dependência externa', preservar a competência nuclear com autonomia do ciclo do combustível, acelerar a produção nacional de fertilizantes pela Petrobras e ampliar a produção nacional de insulina, hemoderivados e insumos farmacêuticos.",
+     "excerpt": "Reforçaremos a defesa cibernética, protegendo infraestruturas críticas e bases de dados governamentais, desenvolvendo tecnologias próprias e reduzindo a dependência externa em áreas estratégicas.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      39,
+      54,
+      63,
+      68,
+      78,
+      79
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q38",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Propõe evitar dependência excessiva em áreas críticas, mas atrair capital e tecnologia estrangeiros na mineração.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Soberania 'com profissionalismo': evitar dependência em cadeias críticas, fertilizantes nacionais e capital estrangeiro em minerais",
+     "summary": "Define soberania como governar-se e cuidar do território 'na prática', começando pela segurança interna. Propõe equilibrar abertura comercial com o papel do Estado de 'evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia', apoiar produção nacional de fertilizantes (potássio e fosfato) e produzir IA e tecnologia no país a partir de energia barata e minerais críticos. Ao mesmo tempo, prevê atrair capital e tecnologia estrangeiros para a mineração e tratar a defesa com foco em drones e IA.",
+     "excerpt": "Nosso projeto equilibra a abertura comercial com o papel do Estado de evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      32,
+      53,
+      54,
+      55,
+      56,
+      61,
+      62,
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q39",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe supercomputadores nacionais e modelos de linguagem em português desenvolvidos por instituições nacionais.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Supercomputadores nacionais, modelos de linguagem em português, data centers com contrapartidas e transparência algorítmica",
+     "summary": "Propõe infraestrutura computacional soberana com supercomputadores desenvolvidos e operados por instituições nacionais, desenvolver e sustentar modelos de linguagem em português apoiados em plataforma nacional de dados, e exigir que a expansão de data centers tenha salvaguardas socioambientais, energia 100% renovável e contrapartidas de conteúdo local. Prevê Centro Nacional de Transparência Algorítmica, Conselho Nacional pela Soberania Digital, Política Nacional de Letramento Digital, regulação democrática de plataformas e expansão de fibra e 5G.",
+     "excerpt": "Vamos avançar numa infraestrutura computacional soberana, com supercomputadores desenvolvidos e operados por instituições nacionais. [...] Vamos desenvolver e sustentar modelos de linguagem em português",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      16,
+      17,
+      54,
+      55
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q39",
+   "direction": "PARTIALLY_OPPOSES",
+   "closestOption": 3,
+   "summary": "Propõe legislação \"voltada à liberdade de criar e inovar\" e Estratégia de IA para empresas: o Estado usa IA nos serviços, o desenvolvimento fica com o mercado.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Estado 100% digital, Estratégia Nacional de IA para empresas, polo de data centers e legislação de 'liberdade de criar e inovar'",
+     "summary": "Propõe digitalizar 100% dos serviços federais, identidade digital única, assistentes de IA que indicam benefícios ao cidadão (ClarIA), prontuário eletrônico único e pacotes de internet com prioridade a mulheres. Na economia, prevê Estratégia Nacional de IA para difundir IA em micro, pequenas e médias empresas, tornar o Brasil polo global de data centers sustentáveis com energia barata, elevar patentes em IA e propor legislação 'voltada à liberdade de criar e inovar' em vez de regras 'que afugentam o investimento'. Afirma fortalecer a defesa cibernética e a proteção de dados.",
+     "excerpt": "Proporemos uma legislação voltada à liberdade de criar e inovar, inspirada nas melhores práticas internacionais, para que a tecnologia seja desenvolvida aqui sem entraves",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      24,
+      25,
+      26,
+      53,
+      56,
+      57
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q40",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe proteger bases de dados governamentais, defesa cibernética e Conselho Nacional pela Soberania Digital.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Soberania digital, Base Industrial de Defesa, defesa cibernética e produção nacional de fertilizantes e insumos de saúde",
+     "summary": "Define 'soberania digital' como capacidade de desenvolver, operar, regular e governar tecnologias estratégicas e infraestruturas críticas. Propõe fortalecer a Base Industrial e Tecnológica de Defesa, reforçar a defesa cibernética 'desenvolvendo tecnologias próprias e reduzindo a dependência externa', preservar a competência nuclear com autonomia do ciclo do combustível, acelerar a produção nacional de fertilizantes pela Petrobras e ampliar a produção nacional de insulina, hemoderivados e insumos farmacêuticos.",
+     "excerpt": "Reforçaremos a defesa cibernética, protegendo infraestruturas críticas e bases de dados governamentais, desenvolvendo tecnologias próprias e reduzindo a dependência externa em áreas estratégicas.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      39,
+      54,
+      63,
+      68,
+      78,
+      79
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q40",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Afirma fortalecer a defesa cibernética e a proteção de dados, sem detalhar regras.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Estado 100% digital, Estratégia Nacional de IA para empresas, polo de data centers e legislação de 'liberdade de criar e inovar'",
+     "summary": "Propõe digitalizar 100% dos serviços federais, identidade digital única, assistentes de IA que indicam benefícios ao cidadão (ClarIA), prontuário eletrônico único e pacotes de internet com prioridade a mulheres. Na economia, prevê Estratégia Nacional de IA para difundir IA em micro, pequenas e médias empresas, tornar o Brasil polo global de data centers sustentáveis com energia barata, elevar patentes em IA e propor legislação 'voltada à liberdade de criar e inovar' em vez de regras 'que afugentam o investimento'. Afirma fortalecer a defesa cibernética e a proteção de dados.",
+     "excerpt": "Proporemos uma legislação voltada à liberdade de criar e inovar, inspirada nas melhores práticas internacionais, para que a tecnologia seja desenvolvida aqui sem entraves",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      24,
+      25,
+      26,
+      53,
+      56,
+      57
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q41",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe infraestrutura computacional soberana, fibra e 5G, Base Industrial de Defesa e autonomia nuclear.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Supercomputadores nacionais, modelos de linguagem em português, data centers com contrapartidas e transparência algorítmica",
+     "summary": "Propõe infraestrutura computacional soberana com supercomputadores desenvolvidos e operados por instituições nacionais, desenvolver e sustentar modelos de linguagem em português apoiados em plataforma nacional de dados, e exigir que a expansão de data centers tenha salvaguardas socioambientais, energia 100% renovável e contrapartidas de conteúdo local. Prevê Centro Nacional de Transparência Algorítmica, Conselho Nacional pela Soberania Digital, Política Nacional de Letramento Digital, regulação democrática de plataformas e expansão de fibra e 5G.",
+     "excerpt": "Vamos avançar numa infraestrutura computacional soberana, com supercomputadores desenvolvidos e operados por instituições nacionais. [...] Vamos desenvolver e sustentar modelos de linguagem em português",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      16,
+      17,
+      54,
+      55
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q41",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Propõe produzir IA e tecnologia no país a partir de energia barata e minerais críticos, e drones e IA na defesa.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Soberania 'com profissionalismo': evitar dependência em cadeias críticas, fertilizantes nacionais e capital estrangeiro em minerais",
+     "summary": "Define soberania como governar-se e cuidar do território 'na prática', começando pela segurança interna. Propõe equilibrar abertura comercial com o papel do Estado de 'evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia', apoiar produção nacional de fertilizantes (potássio e fosfato) e produzir IA e tecnologia no país a partir de energia barata e minerais críticos. Ao mesmo tempo, prevê atrair capital e tecnologia estrangeiros para a mineração e tratar a defesa com foco em drones e IA.",
+     "excerpt": "Nosso projeto equilibra a abertura comercial com o papel do Estado de evitar a dependência excessiva em áreas críticas, como as cadeias de suprimentos e de tecnologia.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      32,
+      53,
+      54,
+      55,
+      56,
+      61,
+      62,
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q42",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe supercomputadores \"desenvolvidos e operados por instituições nacionais\" e modelos próprios.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Supercomputadores nacionais, modelos de linguagem em português, data centers com contrapartidas e transparência algorítmica",
+     "summary": "Propõe infraestrutura computacional soberana com supercomputadores desenvolvidos e operados por instituições nacionais, desenvolver e sustentar modelos de linguagem em português apoiados em plataforma nacional de dados, e exigir que a expansão de data centers tenha salvaguardas socioambientais, energia 100% renovável e contrapartidas de conteúdo local. Prevê Centro Nacional de Transparência Algorítmica, Conselho Nacional pela Soberania Digital, Política Nacional de Letramento Digital, regulação democrática de plataformas e expansão de fibra e 5G.",
+     "excerpt": "Vamos avançar numa infraestrutura computacional soberana, com supercomputadores desenvolvidos e operados por instituições nacionais. [...] Vamos desenvolver e sustentar modelos de linguagem em português",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      16,
+      17,
+      54,
+      55
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q42",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa propõe Estado 100% digital, sem tratar da dependência de fornecedor estrangeiro.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Estado 100% digital, Estratégia Nacional de IA para empresas, polo de data centers e legislação de 'liberdade de criar e inovar'",
+     "summary": "Propõe digitalizar 100% dos serviços federais, identidade digital única, assistentes de IA que indicam benefícios ao cidadão (ClarIA), prontuário eletrônico único e pacotes de internet com prioridade a mulheres. Na economia, prevê Estratégia Nacional de IA para difundir IA em micro, pequenas e médias empresas, tornar o Brasil polo global de data centers sustentáveis com energia barata, elevar patentes em IA e propor legislação 'voltada à liberdade de criar e inovar' em vez de regras 'que afugentam o investimento'. Afirma fortalecer a defesa cibernética e a proteção de dados.",
+     "excerpt": "Proporemos uma legislação voltada à liberdade de criar e inovar, inspirada nas melhores práticas internacionais, para que a tecnologia seja desenvolvida aqui sem entraves",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      24,
+      25,
+      26,
+      53,
+      56,
+      57
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q43",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Política externa universalista, com cooperação com todas as regiões do mundo.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Política externa universalista, Mercosul como plataforma, BRICS e Sul Global, reforma da ONU e OMC",
+     "summary": "Propõe política externa 'universalista' e 'independente', com a integração sul-americana como primeiro círculo estratégico: aprofundar o Mercosul (infraestrutura, energia, defesa, saúde), mercado comum sul-americano de energia e OTCA. Prevê aprofundar a aproximação com BRICS, Sul Global e G20, relações com África, CPLP, ASEAN, Ásia, Oriente Médio e Europa, reforma do Conselho de Segurança da ONU, da OMC e da arquitetura financeira (FMI, Banco Mundial, NDB), novos acordos comerciais e Aliança Global contra a Fome.",
+     "excerpt": "Manteremos uma política externa universalista e ampliaremos os esforços de cooperação e negociação com todas as regiões do mundo, diversificando nossas parcerias estratégicas.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      79,
+      80,
+      81,
+      82
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Acordo Mercosul–União Europeia sancionado (28/04/2026)",
+     "summary": "Decreto que internaliza o acordo comercial Mercosul–União Europeia.",
+     "excerpt": "Secretaria de Relações Institucionais: \"Lula sanciona acordo UE-Mercosul\" — decreto que valida o acordo após 26 anos de negociação; vigência provisória a partir de 1º/05/2026.",
+     "sourceId": "sri-mercosul-ue-2026",
+     "url": "https://www.gov.br/sri/pt-br/lula-sanciona-acordo-ue-mercosul-1",
+     "date": "2026-04-28",
+     "inForce": true
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Discurso de abertura da 80ª Assembleia Geral da ONU (23/09/2025)",
+     "summary": "Discurso oficial defendendo multilateralismo, reforma do Conselho de Segurança e combate à fome.",
+     "excerpt": "Planalto: \"Lula na ONU: Única guerra de que todos podem sair vencedores é contra a fome e a pobreza\" (23/09/2025).",
+     "sourceId": "planalto-discurso-onu-2025",
+     "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/discursos-e-pronunciamentos/2025/09/discurso-do-presidente-lula-na-abertura-do-debate-geral-da-80a-assembleia-geral-das-nacoes-unidas",
+     "date": "2025-09-23",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q43",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Diplomacia \"pragmática\": negociar com todos os que interessam ao Brasil, com reaproximação de EUA, Argentina e Israel.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Diplomacia 'pragmática', reaproximação com EUA, Argentina e Israel, adesão à OCDE e negociação com todos",
+     "summary": "Propõe diplomacia 'guiada pelo profissionalismo e pelo pragmatismo, não pela ideologia', revertendo o que descreve como desgaste nas relações com Argentina, Estados Unidos e Israel, e negociando 'com todos os que interessam ao Brasil, da China à União Europeia'. Prioriza retomar a adesão à OCDE (com fim gradual do IOF sobre câmbio), acordos comerciais de ganho mútuo e posicionar o Brasil como destino de investimento em transição energética. Não menciona Mercosul nem BRICS no capítulo de política externa.",
+     "excerpt": "Negociaremos com todos os que interessam ao Brasil, da China à União Europeia, dos Estados Unidos aos mercados asiáticos, porque o que orienta a nossa diplomacia é o interesse do produtor e do trabalhador brasileiro",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      61,
+      62,
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q44",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Política externa \"universalista\" e \"independente\", com BRICS, Sul Global e todas as regiões.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Política externa universalista, Mercosul como plataforma, BRICS e Sul Global, reforma da ONU e OMC",
+     "summary": "Propõe política externa 'universalista' e 'independente', com a integração sul-americana como primeiro círculo estratégico: aprofundar o Mercosul (infraestrutura, energia, defesa, saúde), mercado comum sul-americano de energia e OTCA. Prevê aprofundar a aproximação com BRICS, Sul Global e G20, relações com África, CPLP, ASEAN, Ásia, Oriente Médio e Europa, reforma do Conselho de Segurança da ONU, da OMC e da arquitetura financeira (FMI, Banco Mundial, NDB), novos acordos comerciais e Aliança Global contra a Fome.",
+     "excerpt": "Manteremos uma política externa universalista e ampliaremos os esforços de cooperação e negociação com todas as regiões do mundo, diversificando nossas parcerias estratégicas.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      79,
+      80,
+      81,
+      82
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Discurso de abertura da 80ª Assembleia Geral da ONU (23/09/2025)",
+     "summary": "Discurso oficial defendendo multilateralismo, reforma do Conselho de Segurança e combate à fome.",
+     "excerpt": "Planalto: \"Lula na ONU: Única guerra de que todos podem sair vencedores é contra a fome e a pobreza\" (23/09/2025).",
+     "sourceId": "planalto-discurso-onu-2025",
+     "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/discursos-e-pronunciamentos/2025/09/discurso-do-presidente-lula-na-abertura-do-debate-geral-da-80a-assembleia-geral-das-nacoes-unidas",
+     "date": "2025-09-23",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Presidência brasileira do BRICS e Cúpula do Rio (2025)",
+     "summary": "Presidência brasileira do BRICS em 2025 e cúpula sediada no Rio de Janeiro.",
+     "excerpt": "Planalto: \"Lula: BRICS é o novo nome da defesa do multilateralismo\"; na Cúpula do Rio (6 e 7/07/2025), defesa de novos membros permanentes no Conselho de Segurança da ONU e declarações sobre governança da IA e financiamento climático.",
+     "sourceId": "planalto-brics-2025",
+     "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/discursos-e-pronunciamentos/2025/02/discurso-do-presidente-lula-na-abertura-da-primeira-reuniao-de-sherpas-da-presidencia-brasileira-do-brics",
+     "date": "2025-07-06",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q44",
+   "direction": "SUPPORTS",
+   "closestOption": 2,
+   "summary": "Reaproximação com Estados Unidos, Argentina e Israel e adesão à OCDE.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Diplomacia 'pragmática', reaproximação com EUA, Argentina e Israel, adesão à OCDE e negociação com todos",
+     "summary": "Propõe diplomacia 'guiada pelo profissionalismo e pelo pragmatismo, não pela ideologia', revertendo o que descreve como desgaste nas relações com Argentina, Estados Unidos e Israel, e negociando 'com todos os que interessam ao Brasil, da China à União Europeia'. Prioriza retomar a adesão à OCDE (com fim gradual do IOF sobre câmbio), acordos comerciais de ganho mútuo e posicionar o Brasil como destino de investimento em transição energética. Não menciona Mercosul nem BRICS no capítulo de política externa.",
+     "excerpt": "Negociaremos com todos os que interessam ao Brasil, da China à União Europeia, dos Estados Unidos aos mercados asiáticos, porque o que orienta a nossa diplomacia é o interesse do produtor e do trabalhador brasileiro",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      61,
+      62,
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q45",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe aprofundar o Mercosul, o BRICS e reformar a ONU e a OMC.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Política externa universalista, Mercosul como plataforma, BRICS e Sul Global, reforma da ONU e OMC",
+     "summary": "Propõe política externa 'universalista' e 'independente', com a integração sul-americana como primeiro círculo estratégico: aprofundar o Mercosul (infraestrutura, energia, defesa, saúde), mercado comum sul-americano de energia e OTCA. Prevê aprofundar a aproximação com BRICS, Sul Global e G20, relações com África, CPLP, ASEAN, Ásia, Oriente Médio e Europa, reforma do Conselho de Segurança da ONU, da OMC e da arquitetura financeira (FMI, Banco Mundial, NDB), novos acordos comerciais e Aliança Global contra a Fome.",
+     "excerpt": "Manteremos uma política externa universalista e ampliaremos os esforços de cooperação e negociação com todas as regiões do mundo, diversificando nossas parcerias estratégicas.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      79,
+      80,
+      81,
+      82
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Presidência brasileira do BRICS e Cúpula do Rio (2025)",
+     "summary": "Presidência brasileira do BRICS em 2025 e cúpula sediada no Rio de Janeiro.",
+     "excerpt": "Planalto: \"Lula: BRICS é o novo nome da defesa do multilateralismo\"; na Cúpula do Rio (6 e 7/07/2025), defesa de novos membros permanentes no Conselho de Segurança da ONU e declarações sobre governança da IA e financiamento climático.",
+     "sourceId": "planalto-brics-2025",
+     "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/discursos-e-pronunciamentos/2025/02/discurso-do-presidente-lula-na-abertura-da-primeira-reuniao-de-sherpas-da-presidencia-brasileira-do-brics",
+     "date": "2025-07-06",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Discurso de abertura da 80ª Assembleia Geral da ONU (23/09/2025)",
+     "summary": "Discurso oficial defendendo multilateralismo, reforma do Conselho de Segurança e combate à fome.",
+     "excerpt": "Planalto: \"Lula na ONU: Única guerra de que todos podem sair vencedores é contra a fome e a pobreza\" (23/09/2025).",
+     "sourceId": "planalto-discurso-onu-2025",
+     "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/discursos-e-pronunciamentos/2025/09/discurso-do-presidente-lula-na-abertura-do-debate-geral-da-80a-assembleia-geral-das-nacoes-unidas",
+     "date": "2025-09-23",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Acordo Mercosul–União Europeia sancionado (28/04/2026)",
+     "summary": "Decreto que internaliza o acordo comercial Mercosul–União Europeia.",
+     "excerpt": "Secretaria de Relações Institucionais: \"Lula sanciona acordo UE-Mercosul\" — decreto que valida o acordo após 26 anos de negociação; vigência provisória a partir de 1º/05/2026.",
+     "sourceId": "sri-mercosul-ue-2026",
+     "url": "https://www.gov.br/sri/pt-br/lula-sanciona-acordo-ue-mercosul-1",
+     "date": "2026-04-28",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q45",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa prioriza a OCDE e não menciona Mercosul nem BRICS.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Diplomacia 'pragmática', reaproximação com EUA, Argentina e Israel, adesão à OCDE e negociação com todos",
+     "summary": "Propõe diplomacia 'guiada pelo profissionalismo e pelo pragmatismo, não pela ideologia', revertendo o que descreve como desgaste nas relações com Argentina, Estados Unidos e Israel, e negociando 'com todos os que interessam ao Brasil, da China à União Europeia'. Prioriza retomar a adesão à OCDE (com fim gradual do IOF sobre câmbio), acordos comerciais de ganho mútuo e posicionar o Brasil como destino de investimento em transição energética. Não menciona Mercosul nem BRICS no capítulo de política externa.",
+     "excerpt": "Negociaremos com todos os que interessam ao Brasil, da China à União Europeia, dos Estados Unidos aos mercados asiáticos, porque o que orienta a nossa diplomacia é o interesse do produtor e do trabalhador brasileiro",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      61,
+      62,
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q46",
+   "direction": "SUPPORTS",
+   "closestOption": 3,
+   "summary": "Novos acordos comerciais combinados com política industrial e conteúdo local.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Política externa universalista, Mercosul como plataforma, BRICS e Sul Global, reforma da ONU e OMC",
+     "summary": "Propõe política externa 'universalista' e 'independente', com a integração sul-americana como primeiro círculo estratégico: aprofundar o Mercosul (infraestrutura, energia, defesa, saúde), mercado comum sul-americano de energia e OTCA. Prevê aprofundar a aproximação com BRICS, Sul Global e G20, relações com África, CPLP, ASEAN, Ásia, Oriente Médio e Europa, reforma do Conselho de Segurança da ONU, da OMC e da arquitetura financeira (FMI, Banco Mundial, NDB), novos acordos comerciais e Aliança Global contra a Fome.",
+     "excerpt": "Manteremos uma política externa universalista e ampliaremos os esforços de cooperação e negociação com todas as regiões do mundo, diversificando nossas parcerias estratégicas.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      79,
+      80,
+      81,
+      82
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Acordo Mercosul–União Europeia sancionado (28/04/2026)",
+     "summary": "Decreto que internaliza o acordo comercial Mercosul–União Europeia.",
+     "excerpt": "Secretaria de Relações Institucionais: \"Lula sanciona acordo UE-Mercosul\" — decreto que valida o acordo após 26 anos de negociação; vigência provisória a partir de 1º/05/2026.",
+     "sourceId": "sri-mercosul-ue-2026",
+     "url": "https://www.gov.br/sri/pt-br/lula-sanciona-acordo-ue-mercosul-1",
+     "date": "2026-04-28",
+     "inForce": true
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q46",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Abertura comercial, integração a cadeias globais e adesão à OCDE.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Diplomacia 'pragmática', reaproximação com EUA, Argentina e Israel, adesão à OCDE e negociação com todos",
+     "summary": "Propõe diplomacia 'guiada pelo profissionalismo e pelo pragmatismo, não pela ideologia', revertendo o que descreve como desgaste nas relações com Argentina, Estados Unidos e Israel, e negociando 'com todos os que interessam ao Brasil, da China à União Europeia'. Prioriza retomar a adesão à OCDE (com fim gradual do IOF sobre câmbio), acordos comerciais de ganho mútuo e posicionar o Brasil como destino de investimento em transição energética. Não menciona Mercosul nem BRICS no capítulo de política externa.",
+     "excerpt": "Negociaremos com todos os que interessam ao Brasil, da China à União Europeia, dos Estados Unidos aos mercados asiáticos, porque o que orienta a nossa diplomacia é o interesse do produtor e do trabalhador brasileiro",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      61,
+      62,
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q47",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Política externa \"independente\".",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Política externa universalista, Mercosul como plataforma, BRICS e Sul Global, reforma da ONU e OMC",
+     "summary": "Propõe política externa 'universalista' e 'independente', com a integração sul-americana como primeiro círculo estratégico: aprofundar o Mercosul (infraestrutura, energia, defesa, saúde), mercado comum sul-americano de energia e OTCA. Prevê aprofundar a aproximação com BRICS, Sul Global e G20, relações com África, CPLP, ASEAN, Ásia, Oriente Médio e Europa, reforma do Conselho de Segurança da ONU, da OMC e da arquitetura financeira (FMI, Banco Mundial, NDB), novos acordos comerciais e Aliança Global contra a Fome.",
+     "excerpt": "Manteremos uma política externa universalista e ampliaremos os esforços de cooperação e negociação com todas as regiões do mundo, diversificando nossas parcerias estratégicas.",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      79,
+      80,
+      81,
+      82
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Discurso de abertura da 80ª Assembleia Geral da ONU (23/09/2025)",
+     "summary": "Discurso oficial defendendo multilateralismo, reforma do Conselho de Segurança e combate à fome.",
+     "excerpt": "Planalto: \"Lula na ONU: Única guerra de que todos podem sair vencedores é contra a fome e a pobreza\" (23/09/2025).",
+     "sourceId": "planalto-discurso-onu-2025",
+     "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/discursos-e-pronunciamentos/2025/09/discurso-do-presidente-lula-na-abertura-do-debate-geral-da-80a-assembleia-geral-das-nacoes-unidas",
+     "date": "2025-09-23",
+     "inForce": null
+    },
+    {
+     "classification": "ATUACAO",
+     "strength": "A",
+     "title": "Presidência brasileira do BRICS e Cúpula do Rio (2025)",
+     "summary": "Presidência brasileira do BRICS em 2025 e cúpula sediada no Rio de Janeiro.",
+     "excerpt": "Planalto: \"Lula: BRICS é o novo nome da defesa do multilateralismo\"; na Cúpula do Rio (6 e 7/07/2025), defesa de novos membros permanentes no Conselho de Segurança da ONU e declarações sobre governança da IA e financiamento climático.",
+     "sourceId": "planalto-brics-2025",
+     "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/discursos-e-pronunciamentos/2025/02/discurso-do-presidente-lula-na-abertura-da-primeira-reuniao-de-sherpas-da-presidencia-brasileira-do-brics",
+     "date": "2025-07-06",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q47",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Diplomacia guiada pelo \"interesse do produtor e do trabalhador brasileiro\", com reaproximação de parceiros tradicionais.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Diplomacia 'pragmática', reaproximação com EUA, Argentina e Israel, adesão à OCDE e negociação com todos",
+     "summary": "Propõe diplomacia 'guiada pelo profissionalismo e pelo pragmatismo, não pela ideologia', revertendo o que descreve como desgaste nas relações com Argentina, Estados Unidos e Israel, e negociando 'com todos os que interessam ao Brasil, da China à União Europeia'. Prioriza retomar a adesão à OCDE (com fim gradual do IOF sobre câmbio), acordos comerciais de ganho mútuo e posicionar o Brasil como destino de investimento em transição energética. Não menciona Mercosul nem BRICS no capítulo de política externa.",
+     "excerpt": "Negociaremos com todos os que interessam ao Brasil, da China à União Europeia, dos Estados Unidos aos mercados asiáticos, porque o que orienta a nossa diplomacia é o interesse do produtor e do trabalhador brasileiro",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      61,
+      62,
+      63
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q48",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Reafirma políticas para pessoas LGBTQIAP+ entre os direitos de grupos.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reforma política, debate sobre emendas parlamentares, regulação de plataformas, diálogo com o Judiciário e direitos de grupos",
+     "summary": "Defende reforma política e eleitoral, debate público sobre o sistema de emendas parlamentares e o 'orçamento secreto', regulação democrática das redes sociais contra desinformação e ódio, e diálogo com o Judiciário 'respeitada a autonomia dos Poderes'. Reafirma políticas para mulheres (Pacto contra o Feminicídio, Lei da Igualdade Salarial), igualdade racial e cotas, povos indígenas e quilombolas (demarcação e titulação), pessoas LGBTQIAP+, pessoas com deficiência, combate à corrupção com independência das instituições e Inteligência de Estado civil sob controle democrático.",
+     "excerpt": "É parte da reafirmação da democracia avançar ainda mais na regulação democrática das redes sociais e das plataformas digitais",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      15,
+      16,
+      18,
+      19,
+      20,
+      21,
+      26,
+      79
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q48",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "Declara valores de família, vida desde a concepção e liberdade religiosa; não trata de direitos de casais do mesmo sexo.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "STF como corte constitucional, fim da reeleição, 'Tesouraço na Censura', valores declarados e categoria feminina no esporte",
+     "summary": "Propõe fim das competências criminais originárias do STF, limitação de decisões monocráticas, revisão do escopo das ADPFs, quarentena de um ano para ministros de Estado indicados ao STF, ampliação da participação no CNJ e CNMP, reforma política e fim da reeleição presidencial (PEC já protocolada). Prevê extinguir estruturas estatais de combate à desinformação ('Ministério da Verdade') e revogar atos relacionados. Declara valores de 'respeito à liberdade, à família, à vida desde a concepção, à propriedade privada, à democracia, à liberdade de expressão e à liberdade religiosa' e propõe que a categoria feminina no esporte seja disputada 'por atletas do sexo feminino'. Prevê autonomia de indígenas e quilombolas para decidir atividades produtivas em suas terras.",
+     "excerpt": "Fim das competências criminais originárias do STF [...] Limitação das decisões monocráticas do STF [...] E propomos o fim da reeleição para o cargo de Presidente da República.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      9,
+      40,
+      41,
+      50,
+      65,
+      66,
+      67
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q49",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa não trata da influência de religiões nas decisões de governo.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reforma política, debate sobre emendas parlamentares, regulação de plataformas, diálogo com o Judiciário e direitos de grupos",
+     "summary": "Defende reforma política e eleitoral, debate público sobre o sistema de emendas parlamentares e o 'orçamento secreto', regulação democrática das redes sociais contra desinformação e ódio, e diálogo com o Judiciário 'respeitada a autonomia dos Poderes'. Reafirma políticas para mulheres (Pacto contra o Feminicídio, Lei da Igualdade Salarial), igualdade racial e cotas, povos indígenas e quilombolas (demarcação e titulação), pessoas LGBTQIAP+, pessoas com deficiência, combate à corrupção com independência das instituições e Inteligência de Estado civil sob controle democrático.",
+     "excerpt": "É parte da reafirmação da democracia avançar ainda mais na regulação democrática das redes sociais e das plataformas digitais",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      15,
+      16,
+      18,
+      19,
+      20,
+      21,
+      26,
+      79
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q49",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "Defende liberdade religiosa e valores declarados; não trata de religiões decidirem políticas.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "STF como corte constitucional, fim da reeleição, 'Tesouraço na Censura', valores declarados e categoria feminina no esporte",
+     "summary": "Propõe fim das competências criminais originárias do STF, limitação de decisões monocráticas, revisão do escopo das ADPFs, quarentena de um ano para ministros de Estado indicados ao STF, ampliação da participação no CNJ e CNMP, reforma política e fim da reeleição presidencial (PEC já protocolada). Prevê extinguir estruturas estatais de combate à desinformação ('Ministério da Verdade') e revogar atos relacionados. Declara valores de 'respeito à liberdade, à família, à vida desde a concepção, à propriedade privada, à democracia, à liberdade de expressão e à liberdade religiosa' e propõe que a categoria feminina no esporte seja disputada 'por atletas do sexo feminino'. Prevê autonomia de indígenas e quilombolas para decidir atividades produtivas em suas terras.",
+     "excerpt": "Fim das competências criminais originárias do STF [...] Limitação das decisões monocráticas do STF [...] E propomos o fim da reeleição para o cargo de Presidente da República.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      9,
+      40,
+      41,
+      50,
+      65,
+      66,
+      67
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q50",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Propõe diálogo com o Judiciário \"respeitada a autonomia dos Poderes\".",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reforma política, debate sobre emendas parlamentares, regulação de plataformas, diálogo com o Judiciário e direitos de grupos",
+     "summary": "Defende reforma política e eleitoral, debate público sobre o sistema de emendas parlamentares e o 'orçamento secreto', regulação democrática das redes sociais contra desinformação e ódio, e diálogo com o Judiciário 'respeitada a autonomia dos Poderes'. Reafirma políticas para mulheres (Pacto contra o Feminicídio, Lei da Igualdade Salarial), igualdade racial e cotas, povos indígenas e quilombolas (demarcação e titulação), pessoas LGBTQIAP+, pessoas com deficiência, combate à corrupção com independência das instituições e Inteligência de Estado civil sob controle democrático.",
+     "excerpt": "É parte da reafirmação da democracia avançar ainda mais na regulação democrática das redes sociais e das plataformas digitais",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      15,
+      16,
+      18,
+      19,
+      20,
+      21,
+      26,
+      79
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q50",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "Propõe reduzir competências do STF e limitar decisões monocráticas; não se manifesta sobre cumprir decisões vigentes.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "STF como corte constitucional, fim da reeleição, 'Tesouraço na Censura', valores declarados e categoria feminina no esporte",
+     "summary": "Propõe fim das competências criminais originárias do STF, limitação de decisões monocráticas, revisão do escopo das ADPFs, quarentena de um ano para ministros de Estado indicados ao STF, ampliação da participação no CNJ e CNMP, reforma política e fim da reeleição presidencial (PEC já protocolada). Prevê extinguir estruturas estatais de combate à desinformação ('Ministério da Verdade') e revogar atos relacionados. Declara valores de 'respeito à liberdade, à família, à vida desde a concepção, à propriedade privada, à democracia, à liberdade de expressão e à liberdade religiosa' e propõe que a categoria feminina no esporte seja disputada 'por atletas do sexo feminino'. Prevê autonomia de indígenas e quilombolas para decidir atividades produtivas em suas terras.",
+     "excerpt": "Fim das competências criminais originárias do STF [...] Limitação das decisões monocráticas do STF [...] E propomos o fim da reeleição para o cargo de Presidente da República.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      9,
+      40,
+      41,
+      50,
+      65,
+      66,
+      67
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q51",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Combate à corrupção \"com independência das instituições\".",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reforma política, debate sobre emendas parlamentares, regulação de plataformas, diálogo com o Judiciário e direitos de grupos",
+     "summary": "Defende reforma política e eleitoral, debate público sobre o sistema de emendas parlamentares e o 'orçamento secreto', regulação democrática das redes sociais contra desinformação e ódio, e diálogo com o Judiciário 'respeitada a autonomia dos Poderes'. Reafirma políticas para mulheres (Pacto contra o Feminicídio, Lei da Igualdade Salarial), igualdade racial e cotas, povos indígenas e quilombolas (demarcação e titulação), pessoas LGBTQIAP+, pessoas com deficiência, combate à corrupção com independência das instituições e Inteligência de Estado civil sob controle democrático.",
+     "excerpt": "É parte da reafirmação da democracia avançar ainda mais na regulação democrática das redes sociais e das plataformas digitais",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      15,
+      16,
+      18,
+      19,
+      20,
+      21,
+      26,
+      79
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q51",
+   "direction": "PARTIALLY_SUPPORTS",
+   "closestOption": 2,
+   "summary": "Propõe ampliar a participação no CNJ e no CNMP e quarentena para ministros: investigação com mais controle sobre as instituições.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "STF como corte constitucional, fim da reeleição, 'Tesouraço na Censura', valores declarados e categoria feminina no esporte",
+     "summary": "Propõe fim das competências criminais originárias do STF, limitação de decisões monocráticas, revisão do escopo das ADPFs, quarentena de um ano para ministros de Estado indicados ao STF, ampliação da participação no CNJ e CNMP, reforma política e fim da reeleição presidencial (PEC já protocolada). Prevê extinguir estruturas estatais de combate à desinformação ('Ministério da Verdade') e revogar atos relacionados. Declara valores de 'respeito à liberdade, à família, à vida desde a concepção, à propriedade privada, à democracia, à liberdade de expressão e à liberdade religiosa' e propõe que a categoria feminina no esporte seja disputada 'por atletas do sexo feminino'. Prevê autonomia de indígenas e quilombolas para decidir atividades produtivas em suas terras.",
+     "excerpt": "Fim das competências criminais originárias do STF [...] Limitação das decisões monocráticas do STF [...] E propomos o fim da reeleição para o cargo de Presidente da República.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      9,
+      40,
+      41,
+      50,
+      65,
+      66,
+      67
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "lula",
+   "questionId": "q52",
+   "direction": "SUPPORTS",
+   "closestOption": 1,
+   "summary": "Independência das instituições no combate à corrupção.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "Reforma política, debate sobre emendas parlamentares, regulação de plataformas, diálogo com o Judiciário e direitos de grupos",
+     "summary": "Defende reforma política e eleitoral, debate público sobre o sistema de emendas parlamentares e o 'orçamento secreto', regulação democrática das redes sociais contra desinformação e ódio, e diálogo com o Judiciário 'respeitada a autonomia dos Poderes'. Reafirma políticas para mulheres (Pacto contra o Feminicídio, Lei da Igualdade Salarial), igualdade racial e cotas, povos indígenas e quilombolas (demarcação e titulação), pessoas LGBTQIAP+, pessoas com deficiência, combate à corrupção com independência das instituições e Inteligência de Estado civil sob controle democrático.",
+     "excerpt": "É parte da reafirmação da democracia avançar ainda mais na regulação democrática das redes sociais e das plataformas digitais",
+     "sourceId": "tse-proposta-governo-2026-lula",
+     "pages": [
+      15,
+      16,
+      18,
+      19,
+      20,
+      21,
+      26,
+      79
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  },
+  {
+   "candidateId": "flavio-bolsonaro",
+   "questionId": "q52",
+   "direction": "UNCLEAR",
+   "closestOption": null,
+   "summary": "O programa não define regra para investigação de suspeitas de corrupção.",
+   "evidence": [
+    {
+     "classification": "PROPOSTA",
+     "strength": "A",
+     "title": "STF como corte constitucional, fim da reeleição, 'Tesouraço na Censura', valores declarados e categoria feminina no esporte",
+     "summary": "Propõe fim das competências criminais originárias do STF, limitação de decisões monocráticas, revisão do escopo das ADPFs, quarentena de um ano para ministros de Estado indicados ao STF, ampliação da participação no CNJ e CNMP, reforma política e fim da reeleição presidencial (PEC já protocolada). Prevê extinguir estruturas estatais de combate à desinformação ('Ministério da Verdade') e revogar atos relacionados. Declara valores de 'respeito à liberdade, à família, à vida desde a concepção, à propriedade privada, à democracia, à liberdade de expressão e à liberdade religiosa' e propõe que a categoria feminina no esporte seja disputada 'por atletas do sexo feminino'. Prevê autonomia de indígenas e quilombolas para decidir atividades produtivas em suas terras.",
+     "excerpt": "Fim das competências criminais originárias do STF [...] Limitação das decisões monocráticas do STF [...] E propomos o fim da reeleição para o cargo de Presidente da República.",
+     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
+     "pages": [
+      9,
+      40,
+      41,
+      50,
+      65,
+      66,
+      67
+     ],
+     "date": "2026-07-22",
+     "inForce": null
+    }
+   ]
+  }
+ ]
+}
