@@ -12,10 +12,11 @@ import type {
  *
  * Regras:
  * - Só posições PUBLICADAS (revisadas e aprovadas) são consideradas.
- * - Sem posição publicada, ou direção UNCLEAR: "Não há evidência suficiente".
+ * - Sem posição publicada, ou direção UNCLEAR: INSUFFICIENT_EVIDENCE (no relatório,
+ *   "não se posicionou nas fontes oficiais"; por tema conta como diferente, ver theme-proximity.ts).
  * - Se o usuário marcou "Não sei", não há comparação (null).
- * - O resultado NUNCA é somado, ponderado ou consolidado entre questões.
- *   Não existe, e não deve existir, função que agregue estes indicadores.
+ * - O resultado NUNCA é ponderado pela importância do tema nem convertido em nota.
+ *   theme-proximity.ts apenas conta iguais e parecidas por tema, com a fórmula pública.
  */
 
 const DIRECTION_VALUE: Record<Exclude<PositionDirection, "UNCLEAR">, number> = {

@@ -407,10 +407,10 @@ export const REGIONS: { value: Region; label: string }[] = [
 export type ComparisonIndicator = "SIMILAR" | "PARTIALLY_SIMILAR" | "DIFFERENT" | "INSUFFICIENT_EVIDENCE";
 
 export const COMPARISON_LABELS: Record<ComparisonIndicator, string> = {
-  SIMILAR: "Posição semelhante à resposta informada",
-  PARTIALLY_SIMILAR: "Posição parcialmente semelhante",
-  DIFFERENT: "Posição diferente",
-  INSUFFICIENT_EVIDENCE: "Não há evidência suficiente",
+  SIMILAR: "Igual a você: sua resposta e a posição documentada do candidato coincidem (distância 0).",
+  PARTIALLY_SIMILAR: "Parecido com você: um passo de distância na escala (distância 1).",
+  DIFFERENT: "Diferente de você: dois passos ou mais de distância.",
+  INSUFFICIENT_EVIDENCE: "Não se posicionou nas fontes oficiais: conta como diferente para o candidato, sem atribuir a ele nenhuma posição.",
 };
 
 export const NO_EVIDENCE_MESSAGE =

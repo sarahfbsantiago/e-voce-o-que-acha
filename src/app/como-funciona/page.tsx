@@ -10,7 +10,7 @@ const STEPS: [string, string][] = [
   ["Nós organizamos as evidências", "Para cada pergunta, comparamos sua resposta com a posição documentada de cada candidato: igual, parecida ou diferente. Se o candidato não se posicionou nas fontes oficiais, a pergunta conta como diferente para ele, e o site diz isso. Depois, você conhece melhor os candidatos: trajetória, cargos, o que fizeram e o que prometem, com link para cada documento."],
   ["Você consulta o histórico", "Atuação legislativa e políticas executadas são apresentadas conforme o cargo que o candidato ocupou. Um parlamentar não é penalizado por não ter competências executivas."],
   ["Você vê a diferença", "Proposta eleitoral, declaração, atuação legislativa, política executada e indicador estatístico são sempre separados e nunca misturados."],
-  ["Você abre a fonte", "Cada afirmação tem o botão “Ver fonte original” e o botão “Por que estou vendo isso?”, que mostra o documento, o trecho, a instituição, as datas e o critério de classificação."],
+  ["Você abre a fonte", "Cada afirmação sobre um candidato aponta para o documento original. No relatório, cada pergunta mostra qual documento sustenta a posição, com data e link. Na trajetória, o botão “Como sabemos disso?” mostra a fonte, a instituição, o trecho utilizado e o tipo de evidência. O catálogo de fontes abre a origem de cada uma."],
   ["Você entende o sistema", "A metodologia é pública: perguntas, critérios de inclusão e exclusão, hierarquia de evidências, tratamento de lacunas e histórico de alterações."],
   ["Você decide", "O site não recomenda candidato nem monta ranking. Mostra, com a conta aberta, quanto suas respostas concordam com cada um e em quantos temas cada um ficou mais perto. A decisão é sua."],
 ];
@@ -37,7 +37,7 @@ export default function ComoFuncionaPage() {
       <div className="mt-12 grid gap-4 md:grid-cols-2">
         <section className="card p-6 border-t-4 border-t-accent shadow-sm">
           <h2 className="font-semibold text-lg">O que os indicadores significam</h2>
-          <p className="mt-2 text-sm text-ink-2">Em cada questão, para cada candidato, aparece um destes indicadores. No fim, o relatório mostra a proporção de iguais e parecidas por candidato e em quantos temas cada um ficou mais perto, com a fórmula à vista. Nada vira nota.</p>
+          <p className="mt-2 text-sm text-ink-2">No relatório, ao abrir uma das cinco áreas, cada pergunta que você respondeu mostra, para cada candidato, um destes indicadores. No fim, o relatório mostra a proporção de iguais e parecidas por candidato e em quantos temas cada um ficou mais perto, com a fórmula à vista. Nada vira nota.</p>
           <ul className="mt-3 space-y-2 text-sm">
             {Object.values(COMPARISON_LABELS).map((l) => (
               <li key={l} className="flex gap-2"><span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />{l}</li>

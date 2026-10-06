@@ -99,9 +99,9 @@ export default function HomePage() {
         <section className="animate-fade-up [animation-delay:1200ms] card mx-auto mt-12 sm:mt-20 max-w-3xl px-5 py-6 shadow-sm md:px-10 md:py-8 prose-vd">
           <h2 className="!mt-0 text-center">O que você recebe ao final</h2>
           <ul>
-            <li><strong className="text-accent">Seu mapa de prioridades:</strong> seus temas na ordem de importância que você declarou.</li>
-            <li><strong className="text-purple-strong">Comparação por questão:</strong> sua resposta ao lado do que cada candidato propõe, defende ou fez, com a fonte de cada afirmação.</li>
-            <li><strong className="text-mint-strong">Trajetória e propostas:</strong> o que cada candidato fez e promete, por tema, com link para a lei, o projeto ou o programa registrado no TSE.</li>
+            <li><strong className="text-accent">Seu perfil por área:</strong> a pizza com a importância que você deu a cada uma das cinco áreas e, tema a tema, como você respondeu.</li>
+            <li><strong className="text-purple-strong">Comparação por pergunta:</strong> em cada área, pergunta por pergunta, o que cada candidato defende ou fez, com o documento, a data e o link.</li>
+            <li><strong className="text-mint-strong">Trajetória e atos:</strong> o que cada candidato fez e promete, por área e tema, com a pizza do que fez e link para a lei, o projeto ou o programa registrado no TSE.</li>
             <li><strong className="text-gold-strong">A conta aberta:</strong> quanto suas respostas concordam com cada candidato e em quantos temas cada um ficou mais perto, com a fórmula à vista. Sem nota, sem ranking, sem recomendação.</li>
           </ul>
         </section>

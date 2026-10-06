@@ -58,7 +58,7 @@ export default function PrivacidadePage() {
       <p>Armazenamento local do navegador (localStorage) para as suas respostas; um banco de dados PostgreSQL para os envios anônimos; nenhum serviço de analytics de terceiros.</p>
 
       <h2>Como recusar ou revogar</h2>
-      <p>A recusa não impede o uso do questionário. Você pode recusar na tela de consentimento ou revogar aqui para respostas futuras:</p>
+      <p>A recusa não impede o uso do questionário. A tela de consentimento abre com “Sim” marcado; para não enviar, escolha “Continuar sem enviar”. O envio acontece uma única vez, ao abrir o relatório. Se você já aceitou, pode revogar aqui para respostas futuras:</p>
       <RevokeConsent />
     </div>
   );

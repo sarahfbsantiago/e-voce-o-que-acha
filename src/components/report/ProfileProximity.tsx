@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Candidate, CandidatePosition, Evidence, Question, UserAnswer } from "@/domain/types";
+import type { Candidate, CandidatePosition, Evidence, Question, SourceRegistryEntry, UserAnswer } from "@/domain/types";
 import type { TopicSection } from "@/domain/user-summary";
 import { themeProximity } from "@/domain/theme-proximity";
 import { compareAnswerToPosition } from "@/domain/comparison";
@@ -39,13 +39,14 @@ const RESULT_TONE: Record<string, string> = { SIMILAR: "bg-mint-soft text-mint-s
  * Cada cartão vira ao clicar e explica, em linguagem simples, o que cada candidato pensa e por causa de qual
  * proposta ou projeto. No fim, a conta aberta: perguntas comparáveis, concordâncias e porcentagens.
  */
-export function ProfileProximity({ sections, questions, answers, candidates, positions, evidence }: {
+export function ProfileProximity({ sections, questions, answers, candidates, positions, evidence, sources = [] }: {
   sections: TopicSection[];
   questions: Question[];
   answers: UserAnswer[];
   candidates: Candidate[];
   positions: CandidatePosition[];
   evidence: Evidence[];
+  sources?: SourceRegistryEntry[];
 }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -58,6 +59,8 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
   const ordered = [...sections].sort((a, b) => a.topic.order - b.topic.order);
   const answerByQ = new Map(answers.map((a) => [a.questionId, a]));
   const evidenceById = new Map(evidence.map((e) => [e.id, e]));
+  const sourceById = new Map(sources.map((s) => [s.id, s]));
+  const linkOf = (e: Evidence) => { const s = sourceById.get(e.sourceId); return s?.documentUrl ?? s?.url ?? null; };
   const name = (id: string) => candidates.find((c) => c.id === id)?.name ?? id;
   const first = (id: string) => name(id).split(" ")[0];
 
@@ -186,7 +189,7 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
                             {pos && pos.direction !== "UNCLEAR" ? (
                               <p className="mt-1">
                                 <span className="font-medium text-ink">{scaled || !closestLabel ? `${first(c.id)} ${DIRECTION_TEXT[pos.direction]}` : `${first(c.id)} escolheria “${closestLabel}”`}</span>
-                                {main ? <span className="text-ink-2"> por causa de <em>{main.title}</em>{fmt((main.eventDate ?? main.publicationDate) as string | null)}{ev.length > 1 ? ` (+${ev.length - 1})` : ""}</span> : null}
+                                {main ? <span className="text-ink-2"> por causa de {linkOf(main) ? <a href={linkOf(main) as string} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:text-purple-strong"><em>{main.title}</em></a> : <em>{main.title}</em>}{fmt((main.eventDate ?? main.publicationDate) as string | null)}{ev.length > 1 ? ` (+${ev.length - 1})` : ""}</span> : null}
                                 {result && result !== "INSUFFICIENT_EVIDENCE" ? <span className={`ml-1 rounded px-1.5 py-0.5 text-[10px] font-semibold ${RESULT_TONE[result]}`}>{RESULT_TEXT[result]}</span> : <span className="ml-1 text-[10px] text-ink-3">você não respondeu</span>}
                               </p>
                             ) : (

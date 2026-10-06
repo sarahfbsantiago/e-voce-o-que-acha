@@ -70,6 +70,9 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Texto das perguntas 5 ('trabalhar 5 dias e folgar 2 por semana, sem redução do salário'), 19 ('cobrar mais impostos de pessoas muito ricas') e 35 ('produzir dentro do país alguns produtos importantes') ajustado.",
       "Relatório enxuto: pizza das áreas por importância, proximidade por tema com detalhe por pergunta, cobertura das respostas, trajetória dos candidatos e fontes; comparação pergunta a pergunta por candidato e resumos longos do programa saíram da interface pública.",
       "Consentimento para estatísticas anônimas vem pré-marcado como 'Sim', com 'Não' a um toque e explicação dos benefícios.",
+      "Pizzas dos candidatos medem atos, não promessas: leis, decretos, medidas provisórias e programas conferidos (Lula) e proposições de autoria principal no Senado (Flávio Bolsonaro), classificados por área pelo objeto do ato. Os 12 temas aparecem agrupados em cinco áreas nas pizzas e no bloco de proximidade, sem efeito no cálculo.",
+      "A explicação por pergunta no relatório cita o documento que sustenta a posição, com data e link para a fonte.",
+      "O relatório pode ser baixado em PDF e o questionário pode ser reiniciado do zero.",
     ],
   },
 ];
