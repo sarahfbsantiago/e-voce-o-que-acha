@@ -11,12 +11,13 @@ import {
   type SubmissionLike,
 } from "@/domain/aggregates";
 import { STATISTICS_DISCLAIMER } from "@/domain/neutrality";
+import type { ProfileProximityAggregate } from "@/domain/profile-proximity";
 
 /**
  * Relatório agregado para o painel administrativo privado.
  * Só agregações. Nenhum registro individual. Nenhuma intenção de voto.
  */
-export function buildResearchReport(submissions: SubmissionLike[], feedback: FeedbackLike[]) {
+export function buildResearchReport(submissions: SubmissionLike[], feedback: FeedbackLike[], profileProximity: ProfileProximityAggregate | null = null) {
   const total = submissions.length;
   const completed = submissions.filter((s) => s.answers.length >= QUESTIONS.length).length;
   return {
@@ -51,6 +52,8 @@ export function buildResearchReport(submissions: SubmissionLike[], feedback: Fee
       region: demographicDistribution(submissions.map((s) => s.optionalRegion)),
     },
     feedback: aggregateFeedback(feedback),
+    /** Perfil mais próximo por questionário, agregado com as posições publicadas no momento da consulta. */
+    profileProximity,
   };
 }
 

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { PageTitle } from "@/components/ui";
 import { isAdminSession } from "@/lib/admin-auth";
-import { getStatsRepository } from "@/lib/repository";
+import { getContentRepository, getStatsRepository } from "@/lib/repository";
+import { aggregateProfileProximity } from "@/domain/profile-proximity";
+import { QUESTIONS } from "@/data/questions";
 import { buildResearchReport } from "@/lib/research-report";
 import { INSUFFICIENT_DATA_MESSAGE } from "@/domain/aggregates";
 import { AGE_RANGES, REGIONS } from "@/domain/types";
@@ -25,8 +27,11 @@ export default async function AdminResearchPage() {
     );
   }
 
-  const [submissions, feedback] = await Promise.all([stats.listSubmissions(), stats.listFeedback()]);
-  const r = buildResearchReport(submissions, feedback);
+  const content = await getContentRepository();
+  const [submissions, feedback, candidates, positions] = await Promise.all([stats.listSubmissions(), stats.listFeedback(), content.getCandidates(), content.getPublishedPositions()]);
+  const pp = aggregateProfileProximity(submissions, QUESTIONS, candidates, positions);
+  const r = buildResearchReport(submissions, feedback, pp);
+  const candidateName = Object.fromEntries(candidates.map((c) => [c.id, c.name]));
   const ageLabel = Object.fromEntries(AGE_RANGES.map((a) => [a.value, a.label]));
   const regionLabel = Object.fromEntries(REGIONS.map((a) => [a.value, a.label]));
 
@@ -40,7 +45,7 @@ export default async function AdminResearchPage() {
       <p className="rounded-xl border border-note-line bg-note px-4 py-3 text-sm font-medium">{r.disclaimer}</p>
 
       <nav aria-label="Seções" className="card p-3 text-sm flex flex-wrap gap-x-4 gap-y-1">
-        {[["#visao", "Visão geral"], ["#temas", "Temas"], ["#perguntas", "Perguntas"], ["#prioridades", "Prioridades"], ["#tempo", "Evolução temporal"], ["#demografia", "Demografia opcional"], ["#avaliacao", "Avaliação da pesquisa"], ["#exportacao", "Exportação"]].map(([h, l]) => <a key={h} href={h} className="underline underline-offset-4">{l}</a>)}
+        {[["#visao", "Visão geral"], ["#temas", "Temas"], ["#perguntas", "Perguntas"], ["#prioridades", "Prioridades"], ["#perfil", "Perfil mais próximo"], ["#tempo", "Evolução temporal"], ["#demografia", "Demografia opcional"], ["#avaliacao", "Avaliação da pesquisa"], ["#exportacao", "Exportação"]].map(([h, l]) => <a key={h} href={h} className="underline underline-offset-4">{l}</a>)}
       </nav>
 
       <section id="visao" className="grid gap-3 sm:grid-cols-3">
@@ -89,6 +94,36 @@ export default async function AdminResearchPage() {
         <ol className="mt-3 card p-4 text-sm list-decimal pl-6 space-y-1">
           {[...r.priorities].sort((a, b) => b.shareHighPriority - a.shareHighPriority).slice(0, 5).map((p) => <li key={p.topicId}>{p.topicName} — {p.totalResponses ? formatShare(p.shareHighPriority) : "—"} marcaram muito importante ou prioridade máxima</li>)}
         </ol>
+      </section>
+
+      <section id="perfil" aria-labelledby="perfil-h">
+        <h2 id="perfil-h" className="text-xl font-bold">Perfil mais próximo</h2>
+        <p className="mt-1 text-sm text-ink-2 max-w-3xl">Para cada questionário enviado, a mesma conta aberta do relatório: por tema, quem ficou mais perto (iguais = 1, parecidas = 0,5, silêncio conta como diferente); depois, quem ficou mais perto em mais temas. Descreve concordância com documentos publicados, não intenção de voto. Calculado com as posições publicadas agora; se uma posição mudar, o número muda.</p>
+        {pp.withComparison > 0 ? (
+          <>
+            <table className="mt-3 w-full max-w-2xl text-sm card"><thead><tr className="bg-paper text-left"><th className="p-2">Resultado do perfil</th><th className="p-2">Questionários</th><th className="p-2">Proporção</th><th className="p-2">Concordância média</th></tr></thead>
+              <tbody>
+                {pp.byCandidate.map((b) => (
+                  <tr key={b.candidateId} className="border-t border-line">
+                    <td className="p-2">Mais perto de {candidateName[b.candidateId] ?? b.candidateId}</td>
+                    <td className="p-2 tabular-nums">{b.count}</td>
+                    <td className="p-2 tabular-nums font-medium">{b.share === null ? "—" : `${b.share.toLocaleString("pt-BR")}%`}</td>
+                    <td className="p-2 tabular-nums">{b.meanAgreement === null ? "—" : `${b.meanAgreement.toLocaleString("pt-BR")}%`}</td>
+                  </tr>
+                ))}
+                <tr className="border-t border-line"><td className="p-2">Empate em temas</td><td className="p-2 tabular-nums">{pp.ties}</td><td className="p-2 tabular-nums">{`${(Math.round((pp.ties / pp.withComparison) * 1000) / 10).toLocaleString("pt-BR")}%`}</td><td className="p-2">—</td></tr>
+                <tr className="border-t border-line text-ink-3"><td className="p-2">Sem comparação possível</td><td className="p-2 tabular-nums">{pp.noComparison}</td><td className="p-2" colSpan={2}>fora da proporção</td></tr>
+              </tbody>
+            </table>
+            <div className="mt-3 max-w-2xl">
+              <div className="flex h-4 w-full overflow-hidden rounded-full bg-line" role="img" aria-label={pp.byCandidate.map((b) => `${candidateName[b.candidateId] ?? b.candidateId}: ${b.count}`).join("; ")}>
+                {pp.byCandidate.map((b, i) => b.count > 0 ? <span key={b.candidateId} className={`flex items-center justify-center text-[10px] font-semibold text-white ${i === 0 ? "bg-accent" : "bg-mint"}`} style={{ width: `${(b.count / pp.withComparison) * 100}%` }}>{Math.round((b.count / pp.withComparison) * 100)}%</span> : null)}
+                {pp.ties > 0 ? <span className="flex items-center justify-center text-[10px] font-semibold text-ink-2 bg-paper" style={{ width: `${(pp.ties / pp.withComparison) * 100}%` }}>{Math.round((pp.ties / pp.withComparison) * 100)}%</span> : null}
+              </div>
+              <p className="mt-1 text-xs text-ink-3">Base: {pp.withComparison} de {pp.total} questionários enviados. Concordância média = média, entre os questionários, de (iguais + 0,5 × parecidas) ÷ perguntas respondidas.</p>
+            </div>
+          </>
+        ) : <p className="mt-3 text-sm text-ink-3">Sem dados: nenhum questionário com tema comparável.</p>}
       </section>
 
       <section id="tempo" aria-labelledby="tempo-h">
