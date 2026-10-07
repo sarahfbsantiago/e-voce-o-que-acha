@@ -224,12 +224,12 @@ export const CANDIDATE_PROFILES: CandidateProfile[] = [
       { text: "Na primeira candidatura, aos 21 anos, declarou ao TSE a ocupação \"estudante, bolsista, estagiário e assemelhados\" e grau de instrução superior incompleto.", date: "2002", sourceIds: ["tse-dados-abertos-candidatos-historico"], verified: true, excerpt: "TSE, consulta_cand_2002_RJ: FLAVIO NANTES BOLSONARO, DEPUTADO ESTADUAL, PPB; grau de instrução SUPERIOR INCOMPLETO; ocupação ESTUDANTE, BOLSISTA, ESTAGIARIO E ASSEMELHADOS; nascimento 30/04/1981, RESENDE." },
       { text: "Desde 2003 a ocupação registrada é a de parlamentar (deputado estadual e, depois, senador). Em 2026 declara ao TSE grau de instrução superior completo e ocupação \"senador\". Nenhuma outra atividade profissional consta nas fontes oficiais consultadas.", date: "2003–2026", sourceIds: ["tse-dados-abertos-candidatos-2026", "senado-perfil-flavio-bolsonaro"], verified: true, excerpt: "TSE, consulta_cand_2026_BR: FLÁVIO NANTES BOLSONARO, PRESIDENTE, PL, nº 22; ocupação SENADOR; grau de instrução SUPERIOR COMPLETO; UF de nascimento RJ." },
     ],
-    trajectoryStart: { year: 2002, basis: "primeira eleição para cargo público" },
+    trajectoryStart: { year: 2003, basis: "início do primeiro mandato (deputado estadual, eleito em 2002)" },
     firstElection: { year: 2002, office: "deputado estadual pelo Rio de Janeiro" },
     approxYearsOfExperience: {
-      years: 24,
+      years: 23,
       until: 2026,
-      note: "Os 24 anos consideram o período desde a primeira eleição para cargo público, em 2002.",
+      note: "Os 23 anos consideram o período desde 2003, início do primeiro mandato (deputado estadual, eleito em 2002). Revisão humana.",
     },
     timeline: [
       { text: "Nasce em Resende, interior do Rio de Janeiro.", date: "1981", sourceIds: ["senado-perfil-flavio-bolsonaro", "senado-dados-abertos-flavio-bolsonaro"], verified: true, excerpt: "Perfil oficial do Senado — Dados Pessoais: Nome civil: Flávio Nantes Bolsonaro. Data de Nascimento: 30/04/1981. Naturalidade: Resende (RJ). Dados Abertos: DataNascimento 1981-04-30, Naturalidade Resende, UF RJ." },
@@ -309,7 +309,7 @@ export const CANDIDATE_PROFILE_BY_ID: Record<string, CandidateProfile> = Object.
 
 /** Tabela de comparação de experiência (mesmos critérios para os dois). */
 export const EXPERIENCE_ROWS: ExperienceRow[] = [
-  { label: "Experiência política aproximada", byCandidate: { lula: "Cerca de 46 anos desde a fundação do PT em 1980", "flavio-bolsonaro": "Cerca de 24 anos desde sua primeira eleição em 2002" } },
+  { label: "Experiência política aproximada", byCandidate: { lula: "Cerca de 46 anos desde a fundação do PT em 1980", "flavio-bolsonaro": "Cerca de 23 anos na política, desde 2003" } },
   { label: "Primeira eleição para cargo público", byCandidate: { lula: "Deputado federal em 1986", "flavio-bolsonaro": "Deputado estadual em 2002" } },
   { label: "Experiência no Legislativo", byCandidate: { lula: "Deputado federal constituinte", "flavio-bolsonaro": "Quatro mandatos de deputado estadual e mandato de senador" } },
   { label: "Experiência como chefe do Executivo", byCandidate: { lula: "Três mandatos como Presidente da República até 2026", "flavio-bolsonaro": "Não exerceu cargo de chefe do Executivo" } },

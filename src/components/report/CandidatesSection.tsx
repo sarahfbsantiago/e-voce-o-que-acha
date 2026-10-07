@@ -47,7 +47,7 @@ export function CandidatesSection({ ordered, profiles, summaries, sourceById }: 
               <p className="text-sm text-ink-2 leading-relaxed">{firstSentences(p.shortBio.text, 2)}</p>
               {p.professionalExperience?.length ? (
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-ink-3">Experiência profissional</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-ink-3">Currículo</p>
                   <ul className="mt-1.5 space-y-1 text-[13px] leading-snug text-ink-2">
                     {p.professionalExperience.slice(0, 3).map((f, i) => (
                       <li key={i} className="flex items-baseline gap-2"><span className="shrink-0 text-xs text-ink-3 tabular-nums">{f.date}</span><span>{f.text}</span></li>
@@ -166,7 +166,7 @@ function CandidateDetails({ c, p, program, sourceById, tse }: { c: Candidate; p:
         )}
       </Block>
 
-      <Block title="Experiência profissional">
+      <Block title="Currículo">
         {p.professionalExperience?.length ? (
           <ul className="space-y-2">
             {p.professionalExperience.map((f, i) => (

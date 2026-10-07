@@ -92,6 +92,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "As pizzas de atuação dos candidatos saíram do relatório: comparavam uma seleção de 49 atos de Lula com todas as 66 proposições de Flávio Bolsonaro e davam a impressão errada de quantidade. O perfil de Lula passa a mostrar o total oficial de proposições do Poder Executivo nos mandatos dele (1.303 na Câmara, 455 projetos de lei), e o de Flávio, as 66 do Senado (53 projetos de lei).",
       "O site passa a se chamar Menos Pior, com o lema 'Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.'",
       "Revisão humana: a página 'Privacidade e dados' foi excluída, e o aceite fica só com o texto 'Concordo e autorizo o uso anônimo dos dados, em nível de pesquisa, conforme a LGPD', sem link para outra página.",
+      "Revisão humana: no perfil dos candidatos, o título 'Experiência profissional' passa a ser 'Currículo', e Flávio Bolsonaro aparece na política desde 2003 (cerca de 23 anos até 2026), início do primeiro mandato; a primeira eleição continua 2002.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
   },
