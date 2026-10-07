@@ -63,7 +63,7 @@ export function QuestionnaireFlow() {
   const [navigatedIndex, setNavigatedIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    if (hydrated && session.consent === null) router.replace("/questionario");
+    if (hydrated && session.consent !== "accepted") router.replace("/questionario");
   }, [hydrated, session.consent, router]);
 
   if (!hydrated) return <div className="container-page py-12 text-ink-3">Carregando…</div>;

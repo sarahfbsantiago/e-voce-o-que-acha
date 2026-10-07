@@ -63,7 +63,7 @@ describe("API pública (modo estático)", () => {
   });
   it("GET /api/methodology e /history mantêm versões anteriores acessíveis", async () => {
     const m = await (await getMethodology()).json();
-    expect(m.current.version).toBe("1.2.0");
+    expect(m.current.version).toBe("1.3.0");
     const h = await (await getHistory()).json();
     expect(h.versions.length).toBeGreaterThanOrEqual(3);
     expect(h.versions.find((v: { version: string }) => v.version === "1.1.0")).toBeDefined();

@@ -1,6 +1,6 @@
 import type { MethodologyVersion } from "@/domain/types";
 
-export const CURRENT_METHODOLOGY_VERSION = "1.2.0";
+export const CURRENT_METHODOLOGY_VERSION = "1.3.0";
 
 /** Data da última atualização de dados políticos e legislativos. */
 export const POLITICAL_DATA_UPDATED_AT = "2026-10-06";
@@ -55,7 +55,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
     description:
       "Primeira versão com posições dos dois candidatos publicadas para as 52 perguntas, classificadas a partir do programa de governo de 2026 registrado no TSE e da atuação em fontes oficiais (leis, decretos e medidas provisórias no Planalto; projetos de autoria no Senado; proposições e votações na Câmara; páginas oficiais do gov.br), com revisão humana antes da publicação. O relatório passa a comparar cada resposta com a posição documentada (igual, parecida, diferente), a indicar por tema quem ficou mais perto, a contar os temas e a mostrar a proporção de concordância por candidato, sempre com a fórmula à vista. Silêncio do candidato conta como diferente, para os dois, e nunca vira posição atribuída.",
     effectiveFrom: "2026-10-06",
-    effectiveUntil: null,
+    effectiveUntil: "2026-10-07",
     createdAt: "2026-10-06",
     changeLog: [
       "104 posições publicadas (52 perguntas × 2 candidatos), cada uma com direção, alternativa mais próxima, resumo e evidências com trecho literal, data, link e classificação (proposta, posição, atuação).",
@@ -73,6 +73,22 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Pizzas dos candidatos medem atos, não promessas: leis, decretos, medidas provisórias e programas conferidos (Lula) e proposições de autoria principal no Senado (Flávio Bolsonaro), classificados por área pelo objeto do ato. Os 12 temas aparecem agrupados em cinco áreas nas pizzas e no bloco de proximidade, sem efeito no cálculo.",
       "A explicação por pergunta no relatório cita o documento que sustenta a posição, com data e link para a fonte.",
       "O relatório pode ser baixado em PDF e o questionário pode ser reiniciado do zero.",
+    ],
+  },
+  {
+    id: "mv-1.3.0",
+    version: "1.3.0",
+    title: "Aceite obrigatório para participar",
+    description:
+      "A tela antes das perguntas passa a ter um único aceite, no modelo da LGPD: para participar, a pessoa concorda com a Política de Privacidade e com o uso anônimo, em nível de pesquisa, das respostas, do resultado do relatório (com qual candidato as respostas ficaram mais próximas), da nota dada à pesquisa e de se ela ajudou na decisão. Faixa etária e região continuam opcionais. A regra das versões anteriores, em que recusar a coleta não impedia o questionário, deixa de valer. Algoritmo, posições e perguntas não mudam.",
+    effectiveFrom: "2026-10-07",
+    effectiveUntil: null,
+    createdAt: "2026-10-07",
+    changeLog: [
+      "Saem as opções 'Sim, contribuir anonimamente' e 'Não, responder sem enviar'. Entra uma caixa de aceite obrigatória, desmarcada por padrão, com link para a Política de Privacidade e a lista do que é compartilhado.",
+      "A condição é informada com destaque ('Para participar, é preciso concordar'), como pede a LGPD (art. 9º, § 3º).",
+      "A avaliação da pesquisa só é enviada por quem aceitou.",
+      "Quem revogar o consentimento em Privacidade e dados precisa aceitar de novo para voltar a responder; envios anteriores são anônimos e não podem ser identificados.",
     ],
   },
 ];

@@ -9,27 +9,34 @@ import { useSession } from "@/store/session";
 
 const BENEFITS: [string, string][] = [
   ["Anônimo de verdade", "Sem nome, email, documento, IP ou cidade. Não existe campo para isso."],
-  ["Só estatísticas", "Suas respostas viram números agregados: quais temas importam mais e como as opiniões se dividem."],
-  ["Você manda", "Dá para mudar de ideia a qualquer momento em Privacidade e dados."],
+  ["Só para pesquisa", "Os dados viram estatísticas agregadas, nunca registros individuais nem propaganda."],
+  ["Você pode revogar", "Dá para retirar o consentimento a qualquer momento em Privacidade e dados."],
+];
+
+/** O que é compartilhado em nível de pesquisa, de forma anônima. Mostrado junto do aceite. */
+const SHARED_FOR_RESEARCH = [
+  "suas respostas e a importância que você deu a cada tema;",
+  "o resultado do seu relatório: com qual candidato, Lula ou Flávio Bolsonaro, suas respostas ficaram mais próximas;",
+  "a nota que você der à pesquisa e se ela ajudou na sua decisão;",
+  "faixa etária e região, somente se você escolher informar.",
 ];
 
 export function ConsentForm() {
   const router = useRouter();
   const { session, hydrated, update } = useSession();
-  // "Sim" vem sempre marcado ao abrir a tela, mesmo que a pessoa tenha recusado antes; "Não" fica a um toque.
-  // O consentimento gravado só muda quando a pessoa clica em continuar.
-  const [choice, setChoice] = useState<"accepted" | "declined" | null>(null);
+  // Aceite obrigatório (LGPD): a caixa começa desmarcada e o botão só libera depois do aceite.
+  const [agreed, setAgreed] = useState(false);
   const [age, setAge] = useState<AgeRange | "">("");
   const [region, setRegion] = useState<Region | "">("");
 
-  const effective = choice ?? "accepted";
   const hasProgress = session.answers.length > 0;
 
   function start() {
+    if (!agreed) return;
     update({
-      consent: effective,
+      consent: "accepted",
       consentUpdatedAt: new Date().toISOString(),
-      demographics: effective === "accepted" ? { ageRange: age || null, region: region || null } : { ageRange: null, region: null },
+      demographics: { ageRange: age || null, region: region || null },
     });
     router.push("/questionario/perguntas");
   }
@@ -52,43 +59,41 @@ export function ConsentForm() {
         ))}
       </ul>
 
-      <fieldset className="grid gap-3 pt-1 sm:grid-cols-2">
-        <legend className="sr-only">Consentimento</legend>
-        {[
-          ["accepted", "Sim, contribuir anonimamente", "Recomendado"],
-          ["declined", "Não, responder sem enviar", ""],
-        ].map(([v, label, tag]) => (
-          <label key={v} className={`relative flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border p-4 pr-5 transition-colors ${effective === v ? "border-accent bg-accent-soft" : "border-line hover:border-line-strong hover:bg-paper"}`}>
-            <input type="radio" name="consent" value={v} checked={effective === v} onChange={() => setChoice(v as "accepted" | "declined")} className="h-[1.125rem] w-[1.125rem] shrink-0 accent-accent" />
-            <span className="text-sm font-medium leading-snug">{label}</span>
-            {tag ? <span className="absolute -top-2 right-3 whitespace-nowrap rounded-full border border-mint/40 bg-mint-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-mint-strong">{tag}</span> : null}
+      <div className="rounded-xl border border-line bg-paper/60 p-4 space-y-3">
+        <p className="text-sm font-medium">Dados opcionais <span className="font-normal text-ink-3">(categorias amplas, sem cidade ou CEP; não informar não impede nada)</span></p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <label className="text-sm flex flex-col gap-1">Faixa etária
+            <select className="field" value={age} onChange={(e) => setAge(e.target.value as AgeRange | "")}>
+              <option value="">Não informar</option>
+              {AGE_RANGES.map((a) => <option key={a.value} value={a.value}>{a.label}</option>)}
+            </select>
           </label>
-        ))}
-      </fieldset>
-
-      {effective === "accepted" ? (
-        <div className="rounded-xl border border-line bg-paper/60 p-4 space-y-3">
-          <p className="text-sm font-medium">Dados opcionais <span className="font-normal text-ink-3">(categorias amplas, sem cidade ou CEP)</span></p>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <label className="text-sm flex flex-col gap-1">Faixa etária
-              <select className="field" value={age} onChange={(e) => setAge(e.target.value as AgeRange | "")}>
-                <option value="">Não informar</option>
-                {AGE_RANGES.map((a) => <option key={a.value} value={a.value}>{a.label}</option>)}
-              </select>
-            </label>
-            <label className="text-sm flex flex-col gap-1">Região do Brasil
-              <select className="field" value={region} onChange={(e) => setRegion(e.target.value as Region | "")}>
-                <option value="">Não informar</option>
-                {REGIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
-              </select>
-            </label>
-          </div>
+          <label className="text-sm flex flex-col gap-1">Região do Brasil
+            <select className="field" value={region} onChange={(e) => setRegion(e.target.value as Region | "")}>
+              <option value="">Não informar</option>
+              {REGIONS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
+            </select>
+          </label>
         </div>
-      ) : null}
+      </div>
+
+      <div className={`rounded-xl border p-4 transition-colors ${agreed ? "border-accent bg-accent-soft" : "border-line-strong"}`}>
+        <label className="flex cursor-pointer items-start gap-3">
+          <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required aria-describedby="consent-detail" className="mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0 accent-accent" />
+          <span className="text-sm leading-relaxed">
+            <span className="font-semibold">Li e concordo com a <a href="/privacidade" target="_blank" className="underline underline-offset-4 hover:text-purple-strong">Política de Privacidade</a></span> e autorizo o uso anônimo dos meus dados, em nível de pesquisa, conforme a Lei Geral de Proteção de Dados (LGPD).
+          </span>
+        </label>
+        <div id="consent-detail" className="mt-3 pl-8 text-xs text-ink-2 leading-relaxed">
+          <p>Serão compartilhados de forma anônima, apenas em estatísticas agregadas:</p>
+          <ul className="mt-1 list-disc pl-4 space-y-0.5">{SHARED_FOR_RESEARCH.map((t) => <li key={t}>{t}</li>)}</ul>
+          <p className="mt-2 font-medium text-ink">Para participar, é preciso concordar.</p>
+        </div>
+      </div>
 
       <div className="flex flex-wrap items-center gap-2 pt-1">
-        <Button onClick={start} className="min-h-10! px-5!">
-          {effective === "accepted" ? "Concordar e continuar" : "Continuar sem enviar"}
+        <Button onClick={start} disabled={!agreed} className="min-h-10! px-5!">
+          Concordar e continuar
           <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
         </Button>
         {hasProgress ? <RestartButton variant="secondary" className="min-h-10! px-4! text-xs" /> : null}

@@ -3,15 +3,18 @@
 import { useState } from "react";
 import { Button } from "@/components/ui";
 import { CURRENT_METHODOLOGY_VERSION } from "@/data/methodology";
+import { useSession } from "@/store/session";
 
-/** Avaliação anônima da pesquisa: nota (1–5) e se ajudou na decisão. Enviada só ao clicar. */
+/** Avaliação anônima da pesquisa: nota (1–5) e se ajudou na decisão. Enviada só ao clicar e só com o consentimento aceito. */
 export function FeedbackForm() {
+  const { session } = useSession();
+  const consented = session.consent === "accepted";
   const [rating, setRating] = useState<number | null>(null);
   const [helped, setHelped] = useState<"yes" | "no" | "skip" | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "unavailable" | "error">("idle");
 
   async function submit() {
-    if (!rating) return;
+    if (!rating || !consented) return;
     setStatus("sending");
     try {
       const res = await fetch("/api/survey/feedback", {
@@ -28,7 +31,7 @@ export function FeedbackForm() {
   return (
     <section className="card p-5 md:p-6 max-w-2xl" aria-labelledby="avaliacao">
       <h2 id="avaliacao" className="text-xl font-bold">Avalie esta pesquisa</h2>
-      <p className="text-sm text-ink-2 mt-1">Avaliação anônima: não pedimos nome, email ou documento, e ela só é enviada se você clicar em Enviar.</p>
+      <p className="text-sm text-ink-2 mt-1">Avaliação anônima, compartilhada só em nível de pesquisa: não pedimos nome, email ou documento, e ela só é enviada se você clicar em Enviar.</p>
 
       <fieldset className="mt-4">
         <legend className="text-sm font-semibold">Que nota você dá para a pesquisa?</legend>

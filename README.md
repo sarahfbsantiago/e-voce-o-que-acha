@@ -25,8 +25,8 @@ O site não recomenda voto, não monta ranking e não usa algoritmo secreto.
 - **Mudança de posição.** Vale a evidência mais recente, e o relatório mostra a linha do tempo.
 - **Cargo considerado.** Um parlamentar é avaliado pelo que um parlamentar faz; nunca é penalizado por não ter poderes de presidente.
 - **Revisão humana.** Nenhuma posição aparece no site sem ser publicada no painel de administração (`/admin/posicoes`), com registro de auditoria.
-- **Versões públicas.** Metodologia na versão 1.2.0, com histórico completo em `/metodologia` e em `src/data/methodology.ts`.
-- **Privacidade.** As respostas ficam no navegador. Só com consentimento seguem como estatística anônima, sem nome, email, documento ou IP.
+- **Versões públicas.** Metodologia na versão 1.3.0, com histórico completo em `/metodologia` e em `src/data/methodology.ts`.
+- **Privacidade.** Para participar, a pessoa concorda com o uso anônimo dos dados em nível de pesquisa (aceite no modelo da LGPD): respostas, resultado do relatório, nota da pesquisa e se ela ajudou na decisão. Faixa etária e região são opcionais. Nada de nome, email, documento ou IP.
 
 ## Perguntas
 
@@ -1199,7 +1199,7 @@ Página inicial → Como funciona / Metodologia → Consentimento estatístico (
 | `GET /api/topics` | Temas |
 | `GET /api/candidates`, `GET /api/candidates/[id]`, `GET /api/candidates/[id]/positions` | Candidatos e posições publicadas por pergunta |
 | `GET /api/sources`, `GET /api/sources/[id]` | Registro de fontes (filtros `institution`, `legend`, `type`) |
-| `GET /api/methodology`, `GET /api/methodology/history` | Metodologia vigente (1.2.0) e todas as versões, inclusive a 1.0.0 |
+| `GET /api/methodology`, `GET /api/methodology/history` | Metodologia vigente (1.3.0) e todas as versões, inclusive a 1.0.0 |
 | `GET /api/research/protocols?questionId=` | Protocolos de pesquisa |
 | `POST /api/survey/submissions` | Envio anônimo (schema estrito; rejeita qualquer campo identificável) |
 | `POST /api/survey/feedback` | Avaliação anônima da pesquisa |
