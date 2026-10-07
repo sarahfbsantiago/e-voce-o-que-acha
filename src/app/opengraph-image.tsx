@@ -21,7 +21,7 @@ export default function OpenGraphImage() {
           </div>
           <div style={{ display: "flex", fontSize: 96, fontWeight: 700, lineHeight: 1, marginTop: 28, letterSpacing: -3 }}>Menos Pior</div>
           <div style={{ display: "flex", fontSize: 30, lineHeight: 1.35, marginTop: 28, color: "#4a4a46" }}>Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.</div>
-          <div style={{ display: "flex", fontSize: 22, lineHeight: 1.4, marginTop: 36, color: "#7a7a74" }}>47 perguntas · sem nome de candidato · fontes no final</div>
+          <div style={{ display: "flex", fontSize: 22, lineHeight: 1.4, marginTop: 36, color: "#7a7a74" }}>46 perguntas · sem nome de candidato · fontes no final</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flex: 1 }}>
           <svg width={mapW} height={mapH} viewBox={`0 0 ${BRAZIL_W} ${BRAZIL_H}`}>

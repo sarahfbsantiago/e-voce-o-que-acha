@@ -5,16 +5,18 @@
  * para que tudo possa ser restaurado. Respostas antigas guardadas em SurveySubmission não são alteradas;
  * as contas já usam só as perguntas que ficaram.
  *
- * Uso: npx tsx scripts/remove-questions.ts
+ * Uso: npx tsx scripts/remove-questions.ts q07 [q.. ]
+ * Histórico: q24, q39, q41, q48, q49 (07/10/2026); q07 (07/10/2026).
  */
 import { writeFileSync } from "node:fs";
 import { PrismaClient, Prisma } from "@prisma/client";
 import { QUESTION_BY_ID } from "../src/data/questions";
 
-export const REMOVED_QUESTION_IDS = ["q24", "q39", "q41", "q48", "q49"];
+const REMOVED_QUESTION_IDS = process.argv.slice(2);
 const prisma = new PrismaClient();
 
 async function main() {
+  if (REMOVED_QUESTION_IDS.length === 0) throw new Error("Informe os ids das perguntas, ex.: q07");
   for (const id of REMOVED_QUESTION_IDS) if (QUESTION_BY_ID[id]) throw new Error(`${id} ainda está em src/data/questions.ts`);
 
   const where = { questionId: { in: REMOVED_QUESTION_IDS } };
@@ -24,7 +26,7 @@ async function main() {
     evidence: await prisma.evidence.findMany({ where }),
     protocols: await prisma.researchProtocol.findMany({ where }),
   };
-  const file = `remocao-perguntas-${new Date().toISOString().slice(0, 10)}.json`;
+  const file = `remocao-perguntas-${REMOVED_QUESTION_IDS.join("-")}-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
   writeFileSync(file, JSON.stringify(backup, null, 1));
 
   await prisma.$transaction([

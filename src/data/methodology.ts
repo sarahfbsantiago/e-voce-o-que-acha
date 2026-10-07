@@ -102,6 +102,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: entra o texto 'Visão Lula' (71 itens em 12 temas), escrito pela responsável, no quadrado abaixo da barra de porcentagem, em 'Entender por quê' e no PDF. As posições de Lula usadas na conta não mudam.",
       "Revisão humana: saem do questionário as perguntas Q24 (penas maiores para crimes violentos), Q39 (inteligência artificial brasileira), Q41 (chips, satélites e tecnologias próprias), Q48 (direitos de casais do mesmo sexo) e Q49 (religião nas decisões do governo). O questionário passa a ter 47 perguntas. A fórmula não muda; as contas por tema usam só as perguntas que ficaram.",
       "Revisão humana: o questionário passa a ter 5 seções, uma por área do relatório e com a cor dela no gráfico. Cada seção começa perguntando o quanto aqueles temas importam; a resposta vale para todos os temas da seção e continua servindo só para ordenar o relatório.",
+      "Revisão humana: sai a pergunta Q07 (direitos de motoristas e entregadores de aplicativos); o questionário passa a ter 46 perguntas. Mudam os textos de Q01 e Q02 (milionários e bilionários), a alternativa do meio de Q02 ('Concordo em parte') e de Q09 ('Sim, mas deveria privatizar uma parte'), as alternativas de Q11 e o texto de Q21, que ganha um exemplo. Os valores das alternativas e a fórmula não mudam.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
   },

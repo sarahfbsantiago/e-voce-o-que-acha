@@ -19,7 +19,7 @@ const params = (id: string) => ({ params: Promise.resolve({ id }) });
 describe("API pública (modo estático)", () => {
   it("GET /api/questions", async () => {
     const body = await (await getQuestions()).json();
-    expect(body.questions).toHaveLength(47);
+    expect(body.questions).toHaveLength(46);
     expect(body.topics).toHaveLength(12);
   });
   it("GET /api/questions/[id] inclui contexto, argumentos e protocolo", async () => {
@@ -49,7 +49,7 @@ describe("API pública (modo estático)", () => {
   });
   it("GET /api/candidates/[id]/positions não calcula nada: só itens por pergunta", async () => {
     const body = await (await getPositions(req("/x"), params("flavio-bolsonaro"))).json();
-    expect(body.items).toHaveLength(47);
+    expect(body.items).toHaveLength(46);
     expect(body.items.every((i: { status: string }) => i.status === "INSUFFICIENT_EVIDENCE")).toBe(true);
     expect(Object.keys(body)).toEqual(["candidateId", "items"]);
   });

@@ -106,6 +106,7 @@ export default async function AdminResearchPage() {
         {r.questions.map((q) => (
           <details key={q.questionId} className="card p-4">
             <summary className="text-sm font-medium">{q.questionId.toUpperCase()} — {q.text} <span className="text-ink-3">({q.totalResponses} respostas · {q.noOpinionCount} “não sei”)</span></summary>
+            {q.example ? <p className="mt-2 text-xs leading-relaxed text-ink-2">{q.example}</p> : null}
             <ul className="mt-3 space-y-2">
               {q.options.map((o) => (
                 <BarRow key={o.optionId} label={o.label} count={o.count} share={q.totalResponses ? o.shareOfResponses : null} tone={o.label === "Não sei" ? "bg-ink-3" : "bg-accent"} />

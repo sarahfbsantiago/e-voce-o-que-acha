@@ -11,7 +11,7 @@ export default function MetodologiaPage() {
 
       <h2 id="objetivo">Objetivo</h2>
       <p>O site ajuda você a comparar suas opiniões com as posições e ações documentadas dos candidatos.</p>
-      <p>Você responde 47 perguntas sobre políticas públicas e informa quais temas são mais importantes para você.</p>
+      <p>Você responde 46 perguntas sobre políticas públicas e informa quais temas são mais importantes para você.</p>
       <p>Depois, o site mostra onde suas respostas são iguais, parecidas ou diferentes das posições de cada candidato.</p>
       <p>O site não recomenda voto, não dá nota aos candidatos e não cria ranking.</p>
       <p><strong>Você decide. Nós organizamos as evidências.</strong></p>
@@ -29,7 +29,7 @@ export default function MetodologiaPage() {
       </ul>
 
       <h2 id="perguntas">Perguntas</h2>
-      <p>São 47 perguntas divididas em 5 seções, com 12 temas.</p>
+      <p>São 46 perguntas divididas em 5 seções, com 12 temas.</p>
       <p>Os nomes dos candidatos não aparecem durante o questionário.</p>
       <p>Todas as perguntas possuem a opção “Não sei”.</p>
 
@@ -137,7 +137,7 @@ export default function MetodologiaPage() {
       <p>A metodologia atual é a versão 1.3.0, vigente desde 7 de outubro de 2026.</p>
 
       <h2 id="resumo">Em resumo</h2>
-      <p>São 47 perguntas.</p>
+      <p>São 46 perguntas.</p>
       <p>Os candidatos ficam ocultos durante o questionário.</p>
       <p>As posições são baseadas principalmente em fontes oficiais.</p>
       <p>Você pode abrir as fontes e conferir as informações.</p>

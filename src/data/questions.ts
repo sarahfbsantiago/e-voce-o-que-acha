@@ -25,7 +25,7 @@ function options(qid: string, opts: Opt[]): QuestionOption[] {
   }));
 }
 
-type Extra = Partial<Pick<Question, "subtopic" | "contextNoteIds" | "argumentsId" | "evidenceDistinctions">>;
+type Extra = Partial<Pick<Question, "subtopic" | "contextNoteIds" | "argumentsId" | "evidenceDistinctions" | "example">>;
 
 function q(id: string, topicId: string, order: number, text: string, opts: Opt[], extra: Extra = {}): Question {
   return { id, topicId, order, text, kind: "SINGLE_CHOICE", options: options(id, opts), ...extra };
@@ -41,8 +41,8 @@ const SIM_NAO = (meio: string): Opt[] => [["Sim", 2], [meio, 1], ["Não", -2]];
 
 export const QUESTIONS: Question[] = [
   // ---- Sessão 1. Economia e impostos --------------------------------------
-  q("q01", "t01", 1, "Quem ganha muito dinheiro deveria pagar uma porcentagem maior de imposto?", CONCORDA),
-  q("q02", "t01", 2, "Pessoas que ganham menos deveriam pagar menos Imposto de Renda?", SIM_NAO("Sim, mas só para quem ganha pouco"), {
+  q("q01", "t01", 1, "Quem ganha muito dinheiro deveria pagar uma porcentagem maior de imposto (milionários e bilionários)?", CONCORDA),
+  q("q02", "t01", 2, "Pessoas que ganham menos deveriam pagar menos Imposto de Renda em relação a quem ganha muito (milionários e bilionários)?", SIM_NAO("Concordo em parte"), {
     contextNoteIds: ["ctx-ir-2026"],
   }),
   q("q03", "t01", 3, "Quando o governo precisa economizar dinheiro, o que deveria proteger primeiro?", [
@@ -66,16 +66,15 @@ export const QUESTIONS: Question[] = [
     ["Deveria existir apenas em alguns trabalhos", 0],
     ["Deveria continuar como hoje", 2],
   ], { evidenceDistinctions: ["proposta constitucional", "projeto legislativo", "apoio público", "posição em programa de governo", "medida efetivamente aprovada"] }),
-  q("q07", "t02", 3, "Motoristas e entregadores de aplicativos deveriam ter direitos como aposentadoria, férias ou proteção em caso de acidente?", SIM_NAO("Alguns direitos")),
   q("q08", "t02", 4, "O salário mínimo deveria aumentar acima da inflação quando a economia estiver crescendo?", SIM_NAO("Depende da situação econômica")),
 
   // ---- Sessão 3. Saúde -------------------------------------------------------
-  q("q09", "t03", 1, "O SUS deveria continuar atendendo qualquer pessoa gratuitamente?", SIM_NAO("Sim, mas deveria mudar algumas regras")),
+  q("q09", "t03", 1, "O SUS deveria continuar atendendo qualquer pessoa gratuitamente?", SIM_NAO("Sim, mas deveria privatizar uma parte")),
   q("q10", "t03", 2, "O governo deveria gastar mais dinheiro com saúde pública?", SIM_NAO("Sim, mas apenas se reduzir gastos em outras áreas")),
   q("q11", "t03", 3, "Na saúde, o que deveria ser prioridade?", [
-    ["Fortalecer principalmente o SUS", null],
-    ["Fortalecer o SUS e fazer parcerias com empresas", null],
-    ["Aumentar a participação de empresas privadas", null],
+    ["Fortalecer principalmente o SUS. Melhorar e expandir a sua atuação em todo território nacional", null],
+    ["Fortalecer o SUS e também fazer parcerias com empresas privadas", null],
+    ["Aumentar a participação de empresas privadas, apenas", null],
   ]),
   q("q12", "t03", 4, "O Brasil deveria produzir mais remédios, vacinas e equipamentos de saúde dentro do próprio país?", [
     ["Sim", 2],
@@ -113,7 +112,8 @@ export const QUESTIONS: Question[] = [
   ]),
 
   // ---- Sessão 6. Segurança pública e crime organizado ------------------------
-  q("q21", "t06", 1, "Em crimes graves que envolvem vários estados, como grandes facções, tráfico de drogas, armas e lavagem de dinheiro, o governo federal e a Polícia Federal deveriam atuar mais, ajudando e coordenando as polícias estaduais?", CONCORDA, {
+  q("q21", "t06", 1, "Quando crimes graves envolvem vários estados ao mesmo tempo, como grandes facções criminosas, tráfico de drogas e armas, lavagem de dinheiro e organizações que atuam em diferentes regiões do país, você acha que o governo federal e a Polícia Federal deveriam ter uma participação maior nas investigações?", CONCORDA, {
+    example: "Por exemplo, se uma facção compra armas em um estado, envia drogas para outros estados e lava o dinheiro em empresas espalhadas pelo país, a Polícia Federal poderia reunir essas informações, investigar toda a rede e coordenar operações junto com as polícias estaduais, em vez de cada estado investigar apenas uma parte do crime.",
     contextNoteIds: ["ctx-pf-federativa"],
     evidenceDistinctions: ["competência constitucional da Polícia Federal", "competências das polícias estaduais", "cooperação federativa", "integração de inteligência", "investigações interestaduais", "política nacional de segurança", "propostas de alteração constitucional ou legislativa"],
   }),

@@ -39,6 +39,8 @@ export interface Question {
   subtopic?: string;
   order: number;
   text: string;
+  /** Exemplo curto mostrado abaixo da pergunta, para explicar a situação. */
+  example?: string;
   kind: QuestionKind;
   options: QuestionOption[];
   /** Notas de contexto (legal, conceitual ou histórico) exibidas antes da pergunta. */

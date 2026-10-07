@@ -207,6 +207,7 @@ function QuestionCard({ question, number, total, selected, onChange, color }: { 
       </p>
       <fieldset>
         <legend className="mt-2 text-lg sm:text-xl md:text-2xl font-semibold leading-snug">{question.text}</legend>
+        {question.example ? <p className="mt-3 rounded-xl border border-line bg-paper/70 p-3 text-sm leading-relaxed text-ink-2">{question.example}</p> : null}
         <p className="mt-1 text-sm text-ink-3">{multiple ? "Marque uma ou mais alternativas e clique em Avançar." : "Marque uma alternativa e clique em Avançar."}</p>
         <div className="mt-5 space-y-2">
           {displayOptions(question).map((o) => {

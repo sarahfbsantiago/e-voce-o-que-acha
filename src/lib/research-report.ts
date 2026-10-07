@@ -37,6 +37,7 @@ export function buildResearchReport(submissions: SubmissionLike[], feedback: Fee
         questionId: q.id,
         topicId: q.topicId,
         text: q.text,
+        example: q.example,
         totalResponses: agg.totalResponses,
         noOpinionCount: noOpinion,
         options: agg.options.map((o) => ({ ...o, label: q.options.find((x) => x.id === o.optionId)?.label ?? o.optionId })),

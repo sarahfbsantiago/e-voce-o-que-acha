@@ -30,7 +30,7 @@ O site não recomenda voto, não monta ranking e não usa algoritmo secreto.
 
 ## Perguntas
 
-São 47 perguntas em 5 seções com 12 temas, todas com a opção "Não sei". No início de cada seção, a pessoa diz quanto aqueles temas importam para ela.
+São 46 perguntas em 5 seções com 12 temas, todas com a opção "Não sei". No início de cada seção, a pessoa diz quanto aqueles temas importam para ela.
 
 | Tema | Perguntas |
 |---|---|
@@ -52,7 +52,7 @@ No relatório, os 12 temas aparecem em cinco áreas: **Economia e trabalho**; **
 Abaixo estão todas as perguntas, na ordem em que aparecem, com as alternativas e o valor de cada uma na escala. A fonte é `src/data/questions.ts`, e a mesma lista aparece na página `/metodologia`.
 
 <details>
-<summary><strong>Ver as 47 perguntas e alternativas</strong></summary>
+<summary><strong>Ver as 46 perguntas e alternativas</strong></summary>
 
 <!-- perguntas:inicio (gerado por npm run docs:questions; não edite à mão) -->
 
@@ -63,13 +63,13 @@ Como ler as tabelas:
 - **Escala** é o valor da alternativa na etapa 1 do algoritmo. "—" indica alternativa sem escala, comparada pela posição na lista.
 - **Peso Lula** e **Peso Flávio Bolsonaro** é quanto a alternativa soma no numerador do score do tema para aquele candidato: 1 = igual, 0,5 = parecida, 0 = diferente ou candidato sem posição publicada. Toda pergunta respondida conta 1 no denominador.
 - "Não sei" fica fora da conta: não soma no numerador nem no denominador.
-- Os pesos refletem as posições publicadas em 07/10/2026 (94 posições). Quando uma posição é revisada, os pesos mudam e esta lista é regenerada.
+- Os pesos refletem as posições publicadas em 07/10/2026 (92 posições). Quando uma posição é revisada, os pesos mudam e esta lista é regenerada.
 
 ### 1. Economia e impostos
 
 _Impostos, contas públicas e apoio a empresas consideradas importantes._
 
-**1. Quem ganha muito dinheiro deveria pagar uma porcentagem maior de imposto?**
+**1. Quem ganha muito dinheiro deveria pagar uma porcentagem maior de imposto (milionários e bilionários)?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: opõe-se em parte (−1)
@@ -82,7 +82,7 @@ _Impostos, contas públicas e apoio a empresas consideradas importantes._
 | Discordo | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
-**2. Pessoas que ganham menos deveriam pagar menos Imposto de Renda?**
+**2. Pessoas que ganham menos deveriam pagar menos Imposto de Renda em relação a quem ganha muito (milionários e bilionários)?**
 
 > Contexto exibido antes: Situação atual: Imposto de Renda em 2026.
 
@@ -92,7 +92,7 @@ _Impostos, contas públicas e apoio a empresas consideradas importantes._
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
-| Sim, mas só para quem ganha pouco | +1 | 0,5 | 0 |
+| Concordo em parte | +1 | 0,5 | 0 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -152,19 +152,7 @@ _Jornada semanal, escala 6x1, trabalhadores de aplicativos e salário mínimo._
 | Deveria continuar como hoje | +2 | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
-**7. Motoristas e entregadores de aplicativos deveriam ter direitos como aposentadoria, férias ou proteção em caso de acidente?**
-
-- Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
-
-| Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
-|---|---|---|---|
-| Sim | +2 | 1 | 0 |
-| Alguns direitos | +1 | 0,5 | 0 |
-| Não | -2 | 0 | 0 |
-| Não sei | fora da conta | fora | fora |
-
-**8. O salário mínimo deveria aumentar acima da inflação quando a economia estiver crescendo?**
+**7. O salário mínimo deveria aumentar acima da inflação quando a economia estiver crescendo?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -182,7 +170,7 @@ _Jornada semanal, escala 6x1, trabalhadores de aplicativos e salário mínimo._
 
 _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 
-**9. O SUS deveria continuar atendendo qualquer pessoa gratuitamente?**
+**8. O SUS deveria continuar atendendo qualquer pessoa gratuitamente?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -190,11 +178,11 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Sim | +2 | 1 | 0,5 |
-| Sim, mas deveria mudar algumas regras | +1 | 0,5 | 1 |
+| Sim, mas deveria privatizar uma parte | +1 | 0,5 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**10. O governo deveria gastar mais dinheiro com saúde pública?**
+**9. O governo deveria gastar mais dinheiro com saúde pública?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -206,19 +194,19 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**11. Na saúde, o que deveria ser prioridade?**
+**10. Na saúde, o que deveria ser prioridade?**
 
-- Posição documentada de Lula: alternativa mais próxima: “Fortalecer o SUS e fazer parcerias com empresas”
-- Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Fortalecer o SUS e fazer parcerias com empresas”
+- Posição documentada de Lula: alternativa mais próxima: “Fortalecer o SUS e também fazer parcerias com empresas privadas”
+- Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Fortalecer o SUS e também fazer parcerias com empresas privadas”
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Fortalecer principalmente o SUS | — | 0,5 | 0,5 |
-| Fortalecer o SUS e fazer parcerias com empresas | — | 1 | 1 |
-| Aumentar a participação de empresas privadas | — | 0,5 | 0,5 |
+| Fortalecer principalmente o SUS. Melhorar e expandir a sua atuação em todo território nacional | — | 0,5 | 0,5 |
+| Fortalecer o SUS e também fazer parcerias com empresas privadas | — | 1 | 1 |
+| Aumentar a participação de empresas privadas, apenas | — | 0,5 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
-**12. O Brasil deveria produzir mais remédios, vacinas e equipamentos de saúde dentro do próprio país?**
+**11. O Brasil deveria produzir mais remédios, vacinas e equipamentos de saúde dentro do próprio país?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -236,7 +224,7 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 
 _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapas._
 
-**13. O governo deveria criar mais universidades e institutos federais?**
+**12. O governo deveria criar mais universidades e institutos federais?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -248,7 +236,7 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**14. O governo deveria ajudar estudantes de baixa renda a pagar faculdade particular?**
+**13. O governo deveria ajudar estudantes de baixa renda a pagar faculdade particular?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -260,7 +248,7 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**15. O Brasil deveria investir mais dinheiro em pesquisas científicas?**
+**14. O Brasil deveria investir mais dinheiro em pesquisas científicas?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -272,7 +260,7 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**16. Qual área deveria receber mais dinheiro primeiro?**
+**15. Qual área deveria receber mais dinheiro primeiro?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Educação infantil e ensino fundamental”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Ensino técnico”
@@ -292,7 +280,7 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 
 _Transferência de renda, condicionalidades, financiamento e prioridades contra a pobreza._
 
-**17. O governo deveria manter programas que dão dinheiro para famílias de baixa renda?**
+**16. O governo deveria manter programas que dão dinheiro para famílias de baixa renda?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -305,7 +293,7 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Não deveriam existir | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**18. Para receber alguns benefícios, famílias deveriam manter as crianças na escola e fazer acompanhamento de saúde?**
+**17. Para receber alguns benefícios, famílias deveriam manter as crianças na escola e fazer acompanhamento de saúde?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -317,7 +305,7 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**19. O governo deveria cobrar mais impostos de pessoas muito ricas?**
+**18. O governo deveria cobrar mais impostos de pessoas muito ricas?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: opõe-se em parte (−1)
@@ -329,7 +317,7 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
-**20. Para combater a pobreza, qual deveria ser a maior prioridade?**
+**19. Para combater a pobreza, qual deveria ser a maior prioridade?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Usar todas essas medidas”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Criar empregos”
@@ -349,7 +337,7 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 
 _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenção, punição e penas._
 
-**21. Em crimes graves que envolvem vários estados, como grandes facções, tráfico de drogas, armas e lavagem de dinheiro, o governo federal e a Polícia Federal deveriam atuar mais, ajudando e coordenando as polícias estaduais?**
+**20. Quando crimes graves envolvem vários estados ao mesmo tempo, como grandes facções criminosas, tráfico de drogas e armas, lavagem de dinheiro e organizações que atuam em diferentes regiões do país, você acha que o governo federal e a Polícia Federal deveriam ter uma participação maior nas investigações?**
 
 > Contexto exibido antes: Como a segurança pública se divide entre União e estados.
 
@@ -364,7 +352,7 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 | Discordo | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**22. A Polícia Federal deveria ter mais recursos para combater facções, corrupção, tráfico e crimes que acontecem em vários estados?**
+**21. A Polícia Federal deveria ter mais recursos para combater facções, corrupção, tráfico e crimes que acontecem em vários estados?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -376,7 +364,7 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**23. O que ajuda mais a reduzir a violência?**
+**22. O que ajuda mais a reduzir a violência?**
 
 - Posição documentada de Lula: alternativa mais próxima: “As duas coisas juntas”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Mais polícia e punição”
@@ -394,7 +382,7 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 
 _Acesso a armas, regime de CACs, política de drogas e apostas online._
 
-**24. Comprar e ter armas deveria ser:**
+**23. Comprar e ter armas deveria ser:**
 
 - Posição documentada de Lula: neutro (0)
 - Posição documentada de Flávio Bolsonaro: apoia (+2)
@@ -406,7 +394,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Mais fácil | +2 | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
-**25. Pessoas registradas como colecionadores, atiradores e caçadores deveriam ter regras diferentes para comprar armas?**
+**24. Pessoas registradas como colecionadores, atiradores e caçadores deveriam ter regras diferentes para comprar armas?**
 
 - Posição documentada de Lula: apoia em parte (+1)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -418,7 +406,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**26. Qual deveria ser a principal forma de lidar com drogas?**
+**25. Qual deveria ser a principal forma de lidar com drogas?**
 
 - Posição documentada de Lula: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Mais repressão policial”
@@ -431,7 +419,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Uma combinação dessas medidas | — | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**27. O que deveria acontecer com bets e apostas online?**
+**26. O que deveria acontecer com bets e apostas online?**
 
 > Contexto exibido antes: Situação atual: apostas de quota fixa em 2026.
 
@@ -446,7 +434,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Deveriam ter poucas restrições | — | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
-**28. Propagandas de bets deveriam ser permitidas?**
+**27. Propagandas de bets deveriam ser permitidas?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Não”
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -465,7 +453,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 
 _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de energia._
 
-**29. O governo deveria impedir obras ou negócios quando houver grande risco de destruir uma área ambiental importante?**
+**28. O governo deveria impedir obras ou negócios quando houver grande risco de destruir uma área ambiental importante?**
 
 - Posição documentada de Lula: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -477,7 +465,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**30. Reduzir o desmatamento da Amazônia deveria ser uma prioridade do governo?**
+**29. Reduzir o desmatamento da Amazônia deveria ser uma prioridade do governo?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia (+2)
@@ -489,7 +477,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**31. O Brasil deveria ter metas para reduzir a poluição que contribui para mudanças no clima?**
+**30. O Brasil deveria ter metas para reduzir a poluição que contribui para mudanças no clima?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -501,7 +489,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**32. Qual fonte de energia deveria receber mais investimentos?**
+**31. Qual fonte de energia deveria receber mais investimentos?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Todas de forma equilibrada”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Petróleo e gás”
@@ -520,7 +508,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 
 _Apoio à indústria, produção nacional, obras e preferência a produtos brasileiros._
 
-**33. O governo deveria ajudar a indústria brasileira a crescer?**
+**32. O governo deveria ajudar a indústria brasileira a crescer?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -532,7 +520,7 @@ _Apoio à indústria, produção nacional, obras e preferência a produtos brasi
 | Não, empresas deveriam competir sem ajuda | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**34. O Brasil deveria produzir dentro do país alguns produtos importantes?**
+**33. O Brasil deveria produzir dentro do país alguns produtos importantes?**
 
 > Contexto exibido antes: Exemplos apenas como contexto.
 
@@ -546,7 +534,7 @@ _Apoio à indústria, produção nacional, obras e preferência a produtos brasi
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**35. O governo deveria investir mais em estradas, transporte público, saneamento e habitação?**
+**34. O governo deveria investir mais em estradas, transporte público, saneamento e habitação?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -558,7 +546,7 @@ _Apoio à indústria, produção nacional, obras e preferência a produtos brasi
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**36. Quando preço e qualidade forem parecidos, o governo deveria dar preferência a produtos feitos no Brasil?**
+**35. Quando preço e qualidade forem parecidos, o governo deveria dar preferência a produtos feitos no Brasil?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -576,7 +564,7 @@ _Apoio à indústria, produção nacional, obras e preferência a produtos brasi
 
 _Dependência tecnológica, inteligência artificial, proteção de dados, tecnologias próprias e fornecedores._
 
-**37. O Brasil deveria depender menos de outros países para tecnologias importantes?**
+**36. O Brasil deveria depender menos de outros países para tecnologias importantes?**
 
 > Contexto exibido antes: O que significa autonomia tecnológica.
 
@@ -590,7 +578,7 @@ _Dependência tecnológica, inteligência artificial, proteção de dados, tecno
 | Não é necessário | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**38. Informações importantes do governo e dos cidadãos deveriam ter regras especiais para ficarem protegidas no Brasil?**
+**37. Informações importantes do governo e dos cidadãos deveriam ter regras especiais para ficarem protegidas no Brasil?**
 
 > Contexto exibido antes: Termos usados nesta pergunta.
 
@@ -604,7 +592,7 @@ _Dependência tecnológica, inteligência artificial, proteção de dados, tecno
 | Não é necessário | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**39. Sistemas importantes do governo deveriam evitar depender de uma única empresa estrangeira?**
+**38. Sistemas importantes do governo deveriam evitar depender de uma única empresa estrangeira?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -622,7 +610,7 @@ _Dependência tecnológica, inteligência artificial, proteção de dados, tecno
 
 _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU, acordos e independência._
 
-**40. O Brasil deveria manter boas relações com países mesmo quando discordar de seus governos?**
+**39. O Brasil deveria manter boas relações com países mesmo quando discordar de seus governos?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -634,7 +622,7 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**41. Quando Estados Unidos, China ou outras grandes potências entram em disputa, o Brasil deveria:**
+**40. Quando Estados Unidos, China ou outras grandes potências entram em disputa, o Brasil deveria:**
 
 - Posição documentada de Lula: alternativa mais próxima: “Tomar sua própria decisão em cada caso”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Ficar mais próximo dos Estados Unidos e da Europa”
@@ -647,7 +635,7 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 | Evitar tomar lado sempre que possível | — | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**42. O Brasil deveria fortalecer sua participação em grupos como Mercosul, BRICS e ONU?**
+**41. O Brasil deveria fortalecer sua participação em grupos como Mercosul, BRICS e ONU?**
 
 > Contexto exibido antes: ONU, Mercosul e BRICS não são instituições equivalentes.
 
@@ -661,7 +649,7 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**43. Ao fazer acordos com outros países, o Brasil deveria priorizar:**
+**42. Ao fazer acordos com outros países, o Brasil deveria priorizar:**
 
 - Posição documentada de Lula: alternativa mais próxima: “Equilibrar as duas coisas”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Comprar e vender com mais liberdade”
@@ -673,7 +661,7 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 | Equilibrar as duas coisas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**44. O Brasil deveria buscar mais independência nas decisões internacionais, mesmo quando isso desagradar países mais poderosos?**
+**43. O Brasil deveria buscar mais independência nas decisões internacionais, mesmo quando isso desagradar países mais poderosos?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -691,7 +679,7 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 
 _Direitos civis, religião e Estado, decisões do STF, independência dos órgãos de controle e corrupção._
 
-**45. Quando o STF toma uma decisão válida, governo e Congresso devem cumprir essa decisão mesmo discordando dela?**
+**44. Quando o STF toma uma decisão válida, governo e Congresso devem cumprir essa decisão mesmo discordando dela?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -703,7 +691,7 @@ _Direitos civis, religião e Estado, decisões do STF, independência dos órgã
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**46. Órgãos como Polícia Federal, Ministério Público e tribunais de contas deveriam poder investigar pessoas do próprio governo sem interferência política?**
+**45. Órgãos como Polícia Federal, Ministério Público e tribunais de contas deveriam poder investigar pessoas do próprio governo sem interferência política?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -715,7 +703,7 @@ _Direitos civis, religião e Estado, decisões do STF, independência dos órgã
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**47. Quando existem suspeitas de corrupção envolvendo políticos, qual deveria ser a regra?**
+**46. Quando existem suspeitas de corrupção envolvendo políticos, qual deveria ser a regra?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Investigar independentemente do partido”
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -1079,7 +1067,7 @@ O seed **não** insere posições de candidatos, evidências nem resumos de prog
 npm run db:import-drafts   # importa prisma/drafts/*.json e docs/levantamentos/*.csv como DRAFT
 ```
 
-`prisma/drafts/positions.draft.json` traz as 94 posições (47 perguntas × 2 candidatos) com suas
+`prisma/drafts/positions.draft.json` traz as 92 posições (46 perguntas × 2 candidatos) com suas
 evidências, classificadas a partir dos programas de 2026 registrados no TSE e de leis, decretos,
 medidas provisórias e projetos em fontes oficiais. `docs/levantamentos/` guarda a conferência de
 fontes e trajetória, os resumos dos programas por tema e a lista de projetos de Flávio Bolsonaro
@@ -1124,7 +1112,7 @@ tests/                     # domain/ e api/
 
 #### Fluxo do usuário
 
-Página inicial → Como funciona / Metodologia → Aceite obrigatório no modelo da LGPD, com idade e região opcionais → 47 perguntas em 5 seções e 12 temas, uma por tela, sem nomes de candidatos → Importância dos temas (no início de cada seção) → **Relatório**: pizza do seu perfil por área · **Qual candidato está mais próximo do seu perfil** (cinco áreas com os temas dentro; diálogo por pergunta com a alternativa de cada candidato, o documento, a data e o link; conta aberta) · como você respondeu por tema · trajetória de cada candidato (experiência, cargos, leis e projetos, quadro por área e tema, "Como sabemos disso?") · fontes usadas · avaliação anônima → mensagem final: "Este site não decide seu voto. A decisão é sua." → recomeçar do zero ou baixar em PDF.
+Página inicial → Como funciona / Metodologia → Aceite obrigatório no modelo da LGPD, com idade e região opcionais → 46 perguntas em 5 seções e 12 temas, uma por tela, sem nomes de candidatos → Importância dos temas (no início de cada seção) → **Relatório**: pizza do seu perfil por área · **Qual candidato está mais próximo do seu perfil** (cinco áreas com os temas dentro; diálogo por pergunta com a alternativa de cada candidato, o documento, a data e o link; conta aberta) · como você respondeu por tema · trajetória de cada candidato (experiência, cargos, leis e projetos, quadro por área e tema, "Como sabemos disso?") · fontes usadas · avaliação anônima → mensagem final: "Este site não decide seu voto. A decisão é sua." → recomeçar do zero ou baixar em PDF.
 
 #### Modelo de dados (resumo)
 
@@ -1169,7 +1157,7 @@ A aplicação não lê IP nem user agent. Se a infraestrutura de hospedagem (pro
 ### Estado atual e TODOs
 
 - [x] Programas de 2026 obtidos pelos Dados Abertos do TSE (`proposta_governo_2026_BR.zip`); o portal do TSE segue bloqueando acesso automatizado, mas o CDN oficial de dados abertos responde.
-- [x] 94 posições (47 perguntas × 2 candidatos) com evidências importadas e publicadas; painel `/admin/posicoes` com auditoria.
+- [x] 92 posições (46 perguntas × 2 candidatos) com evidências importadas e publicadas; painel `/admin/posicoes` com auditoria.
 - [x] Deploy no Railway (ver `DEPLOY.md`): Postgres, migrações no start, seed e importação via SSH.
 - [ ] **TODO(ingestão)** Implementar `SenadoAdapter` e `TseAdapter`; concluir `CamaraAdapter` (autores, tramitações, votos) e persistência de `RawDocument`.
 - [ ] **TODO(revisão)** Tela de revisão cega por evidência (`EvidenceReview`) e endpoints POST de evidência.

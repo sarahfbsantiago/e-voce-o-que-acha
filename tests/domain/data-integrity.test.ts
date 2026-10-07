@@ -26,8 +26,8 @@ describe("integridade dos dados", () => {
       expect(q.options.some((o) => o.isNoOpinion), q.id).toBe(true);
     }
   });
-  it("47 perguntas e 12 temas", () => {
-    expect(QUESTIONS.length).toBe(47);
+  it("46 perguntas e 12 temas", () => {
+    expect(QUESTIONS.length).toBe(46);
     expect(TOPICS.length).toBe(12);
   });
   it("notas de contexto, argumentos e protocolos referenciados existem", () => {

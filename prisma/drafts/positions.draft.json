@@ -372,56 +372,6 @@
   },
   {
    "candidateId": "lula",
-   "questionId": "q07",
-   "direction": "SUPPORTS",
-   "closestOption": 1,
-   "summary": "Propõe sistema de proteção aos trabalhadores de plataformas, com direitos previdenciários.",
-   "evidence": [
-    {
-     "classification": "PROPOSTA",
-     "strength": "A",
-     "title": "Fim da escala 6x1 e jornada de 40 horas sem redução salarial; regular o trabalho por plataformas",
-     "summary": "Compromete-se a atuar junto ao Senado pela aprovação do fim da escala 6x1 e da redução da jornada para 40 horas semanais sem redução salarial, nos termos aprovados na Câmara. Propõe manter a política de valorização do salário mínimo com aumento real, consolidar um sistema de proteção para trabalhadores de plataformas (relação de trabalho, remuneração, direitos previdenciários, transparência algorítmica) e combater a pejotização fraudulenta. Prevê fortalecer a negociação coletiva.",
-     "excerpt": "Manteremos nossa ação junto ao Senado Federal para assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial, nos termos aprovados na Câmara dos Deputados.",
-     "sourceId": "tse-proposta-governo-2026-lula",
-     "pages": [
-      73,
-      74,
-      75,
-      76,
-      77
-     ],
-     "date": "2026-07-22",
-     "inForce": null
-    }
-   ]
-  },
-  {
-   "candidateId": "flavio-bolsonaro",
-   "questionId": "q07",
-   "direction": "UNCLEAR",
-   "closestOption": null,
-   "summary": "Removido da comparação a pedido da revisão: o programa fala em \"manter as oportunidades do modelo atual com proteção social e previdenciária\" para aplicativos, mas não diz quais direitos (aposentadoria, férias, acidente). Sem posição suficientemente documentada.",
-   "evidence": [
-    {
-     "classification": "PROPOSTA",
-     "strength": "A",
-     "title": "Reduzir o custo do trabalho, 'negociado sobre o legislado' e novos contratos para jovens e maiores de 50",
-     "summary": "Propõe reduzir gradualmente o custo do trabalho formal 'sem retirar direitos', criar um contrato para o primeiro emprego (18 a 24 anos) com menor custo na folha e outro para pessoas com 50 anos ou mais desempregadas há 12 meses. Defende o 'negociado sobre o legislado' e jornadas flexíveis, e se posiciona contra o que chama de 'República Sindical'. Para trabalhadores de aplicativos, afirma manter as oportunidades do modelo atual com proteção social e previdenciária 'sem os interesses de dirigentes sindicais à frente'. Não há proposta explícita sobre o fim da escala 6x1; o texto critica a discussão de jornada que 'ignora a prevalência do negociado sobre o legislado'.",
-     "excerpt": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos, para que mais brasileiros tenham carteira assinada e a proteção que vem com ela.",
-     "sourceId": "tse-proposta-governo-2026-flavio-bolsonaro",
-     "pages": [
-      43,
-      44,
-      45
-     ],
-     "date": "2026-07-22",
-     "inForce": null
-    }
-   ]
-  },
-  {
-   "candidateId": "lula",
    "questionId": "q08",
    "direction": "SUPPORTS",
    "closestOption": 1,
