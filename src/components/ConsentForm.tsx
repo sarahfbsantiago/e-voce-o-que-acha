@@ -54,14 +54,11 @@ export function ConsentForm() {
 
       <div className={`rounded-xl border p-4 transition-colors ${agreed ? "border-accent bg-accent-soft" : "border-line-strong"}`}>
         <label className="flex cursor-pointer items-start gap-3">
-          <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required aria-describedby="consent-detail" className="mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0 accent-accent" />
+          <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required className="mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0 accent-accent" />
           <span className="text-sm leading-relaxed">
             <span className="font-semibold">Li e concordo com a <a href="/privacidade" target="_blank" className="underline underline-offset-4 hover:text-purple-strong">Política de Privacidade</a></span> e autorizo o uso anônimo dos meus dados, em nível de pesquisa, conforme a Lei Geral de Proteção de Dados (LGPD).
           </span>
         </label>
-        <div id="consent-detail" className="mt-3 pl-8 text-xs text-ink-2 leading-relaxed">
-          <p className="font-medium text-ink">Para participar, é preciso concordar.</p>
-        </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-2 pt-1">
