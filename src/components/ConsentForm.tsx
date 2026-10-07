@@ -7,11 +7,6 @@ import { RestartButton } from "@/components/RestartButton";
 import { AGE_RANGES, REGIONS, type AgeRange, type Region } from "@/domain/types";
 import { useSession } from "@/store/session";
 
-const BENEFITS: [string, string][] = [
-  ["Anônimo de verdade", "Sem nome, email, documento, IP ou cidade. Não existe campo para isso."],
-  ["Só para pesquisa", "Os dados viram estatísticas agregadas, nunca registros individuais nem propaganda."],
-];
-
 export function ConsentForm() {
   const router = useRouter();
   const { session, hydrated, update } = useSession();
@@ -38,17 +33,6 @@ export function ConsentForm() {
     <section className="animate-fade-up [animation-delay:200ms] mt-6 card p-6 md:p-8 space-y-5 shadow-sm border-t-4 border-t-purple" aria-labelledby="consent-title">
       <h2 id="consent-title" className="text-lg md:text-xl font-bold leading-snug">Ajude a pesquisa, sem contar quem você é</h2>
 
-      <ul className="grid gap-3 sm:grid-cols-2 text-sm">
-        {BENEFITS.map(([t, d], i) => (
-          <li key={t} className="rounded-xl border border-line bg-paper/60 p-4">
-            <p className="font-semibold flex items-center gap-2">
-              <span aria-hidden="true" className={`h-2 w-2 rounded-full ${["bg-purple", "bg-mint", "bg-gold"][i]}`} />
-              {t}
-            </p>
-            <p className="mt-1 text-xs text-ink-2 leading-relaxed">{d}</p>
-          </li>
-        ))}
-      </ul>
 
       <div className="rounded-xl border border-line bg-paper/60 p-4 space-y-3">
         <p className="text-sm font-medium">Dados opcionais <span className="font-normal text-ink-3">(categorias amplas, sem cidade ou CEP; não informar não impede nada)</span></p>
