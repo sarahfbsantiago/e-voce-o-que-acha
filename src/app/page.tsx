@@ -88,11 +88,12 @@ export default function HomePage() {
         <section className="animate-fade-up [animation-delay:1200ms] card mx-auto mt-12 sm:mt-20 max-w-3xl px-5 py-6 shadow-sm md:px-10 md:py-8 prose-vd">
           <h2 className="!mt-0 text-center">O que você recebe ao final</h2>
           <ul>
-            <li><strong className="text-accent">Seu perfil por área:</strong> a pizza com a importância que você deu a cada uma das cinco áreas e, tema a tema, como você respondeu.</li>
-            <li><strong className="text-purple-strong">Comparação por pergunta:</strong> em cada área, pergunta por pergunta, o que cada candidato defende ou fez, com o documento, a data e o link.</li>
-            <li><strong className="text-mint-strong">Trajetória e atos:</strong> o que cada candidato fez e promete, por área e tema, com link para a lei, o projeto ou o programa registrado no TSE.</li>
-            <li><strong className="text-gold-strong">A conta aberta:</strong> quanto suas respostas concordam com cada candidato e em quantos temas cada um ficou mais perto, com a fórmula à vista. Sem nota, sem ranking, sem recomendação.</li>
+            <li><strong className="text-accent">Seu perfil por área</strong><br />Veja quais assuntos são mais importantes para você.</li>
+            <li><strong className="text-purple-strong">Comparação das respostas</strong><br />Veja, pergunta por pergunta, o que cada candidato pensa, propõe ou já fez.</li>
+            <li><strong className="text-mint-strong">O que cada candidato fez e promete</strong><br />Veja as principais ações e propostas de cada candidato em cada assunto.</li>
+            <li><strong className="text-gold-strong">Veja com quem você mais concorda</strong><br />Veja quantas das suas respostas são parecidas com as ideias de cada candidato e em quais assuntos cada um ficou mais próximo do que você pensa. O cálculo fica disponível para você conferir.</li>
           </ul>
+          <p className="text-center font-semibold text-ink">O site não dá nota aos candidatos, não faz ranking e não diz em quem você deve votar.</p>
         </section>
       </div>
     </div>
