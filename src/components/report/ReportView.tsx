@@ -113,11 +113,10 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
             {AREA_GROUPS.map((g) => (
               <li key={g.id} className="flex items-baseline gap-2">
                 <span aria-hidden="true" className="mt-1 h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: g.color }} />
-                <span><span className="font-medium text-ink">{g.label}:</span> {g.topicIds.map((id) => TOPICS.find((t) => t.id === id)?.name.toLowerCase()).filter(Boolean).join("; ")}</span>
+                <span className="font-medium text-ink">{g.label}</span>
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-[11px] text-ink-3">Na sua pizza, cada fatia soma a importância que você deu aos temas da área.</p>
         </div>
         <ProfileProximity sections={sections} questions={QUESTIONS} answers={session.answers} candidates={ordered} positions={positions} evidence={evidence} sources={sources} />
       </section>

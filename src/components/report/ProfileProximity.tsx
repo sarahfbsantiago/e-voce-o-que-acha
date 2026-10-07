@@ -98,7 +98,6 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
     return { c, comparable, similar, partial, different, silent, answered, themes, agreement };
   });
   const decided = rows.filter((r) => r.closest).length;
-  const undecided = rows.length - decided;
   const REASON: Record<string, string> = {
     INSUFFICIENT_EVIDENCE: "nenhum dos candidatos tem posição documentada nas perguntas que você respondeu",
     TIE: "proximidade documentada equivalente entre os dois",
@@ -208,44 +207,19 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
         ) : null}
       </dialog>
 
-      {/* a conta aberta */}
-      <div className="mt-6 rounded-xl border border-line bg-paper/60 p-4">
-        <p className="text-sm font-semibold">A conta, aberta</p>
-        <p className="mt-0.5 text-xs text-ink-3">Para cada pergunta que você respondeu: igual = 1 ponto, parecido = meio ponto, diferente = 0. Se o candidato não se posicionou nas fontes oficiais, a pergunta conta como diferente, para que se abster não ajude ninguém. O site nunca atribui uma posição a quem não a manifestou. Depois, contamos em quantos temas cada um ficou mais perto.</p>
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          {totals.map(({ c, comparable, similar, partial, different, silent, answered, themes, agreement }) => (
-            <div key={c.id} className="rounded-lg border border-line bg-surface p-3 text-xs">
-              <p className="font-semibold text-sm">{c.name}</p>
-              <dl className="mt-2 grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 text-ink-2">
-                <dt>Perguntas que você respondeu</dt><dd className="tabular-nums text-right">{answered}</dd>
-                <dt>Com posição do candidato</dt><dd className="tabular-nums text-right">{comparable}</dd>
-                <dt>Iguais a você</dt><dd className="tabular-nums text-right">{similar}</dd>
-                <dt>Parecidas</dt><dd className="tabular-nums text-right">{partial}</dd>
-                <dt>Diferentes</dt><dd className="tabular-nums text-right">{different}</dd>
-                <dt>Sem posição (contam como diferentes)</dt><dd className="tabular-nums text-right">{silent}</dd>
-                <dt className="font-medium text-ink">Concordância nas perguntas</dt>
-                <dd className="tabular-nums text-right font-medium text-ink">{agreement === null ? "—" : `(${similar} + ${partial}×0,5) ÷ ${answered} = ${Math.round(agreement)}%`}</dd>
-                <dt className="font-medium text-ink">Temas em que ficou mais perto</dt>
-                <dd className="tabular-nums text-right font-medium text-ink">{decided ? `${themes} ÷ ${decided} = ${Math.round((themes / decided) * 100)}%` : "—"}</dd>
-              </dl>
-            </div>
-          ))}
-        </div>
-        {decided > 0 ? (
-          <div className="mt-3">
-            <p className="text-xs text-ink-3 mb-1">Divisão dos {decided} temas comparáveis{undecided ? ` (${undecided} sem comparação ficam fora)` : ""}</p>
-            <div className="flex h-4 w-full overflow-hidden rounded-full bg-line" role="img" aria-label={totals.map((t) => `${t.c.name}: ${t.themes} temas`).join("; ")}>
-              {totals.map((t, i) => t.themes > 0 ? (
-                <span key={t.c.id} className={`flex items-center justify-center text-[10px] font-semibold text-white ${i === 0 ? "bg-accent" : "bg-mint"}`} style={{ width: `${(t.themes / decided) * 100}%` }}>{Math.round((t.themes / decided) * 100)}%</span>
-              ) : null)}
-            </div>
-            <p className="mt-1 flex flex-wrap gap-x-4 text-[11px] text-ink-2">
-              {totals.map((t, i) => <span key={t.c.id} className="flex items-center gap-1"><span aria-hidden="true" className={`inline-block h-2.5 w-2.5 rounded-sm ${i === 0 ? "bg-accent" : "bg-mint"}`} />{t.c.name}</span>)}
-            </p>
+      {/* barra de porcentagem: divisão dos temas em que cada candidato ficou mais perto */}
+      {decided > 0 ? (
+        <div className="mt-6">
+          <div className="flex h-4 w-full overflow-hidden rounded-full bg-line" role="img" aria-label={totals.map((t) => `${t.c.name}: ${t.themes} temas`).join("; ")}>
+            {totals.map((t, i) => t.themes > 0 ? (
+              <span key={t.c.id} className={`flex items-center justify-center text-[10px] font-semibold text-white ${i === 0 ? "bg-accent" : "bg-mint"}`} style={{ width: `${(t.themes / decided) * 100}%` }}>{Math.round((t.themes / decided) * 100)}%</span>
+            ) : null)}
           </div>
-        ) : null}
-        <p className="mt-3 text-[11px] text-ink-3">Essas porcentagens mostram quanto suas respostas concordam com o que cada candidato documentou, não uma nota. Quem falou de menos assuntos perde pontos pelo silêncio, mas nunca recebe uma posição que não manifestou.</p>
-      </div>
+          <p className="mt-1 flex flex-wrap gap-x-4 text-[11px] text-ink-2">
+            {totals.map((t, i) => <span key={t.c.id} className="flex items-center gap-1"><span aria-hidden="true" className={`inline-block h-2.5 w-2.5 rounded-sm ${i === 0 ? "bg-accent" : "bg-mint"}`} />{t.c.name}</span>)}
+          </p>
+        </div>
+      ) : null}
     </section>
   );
 }
