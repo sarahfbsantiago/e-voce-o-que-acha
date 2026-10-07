@@ -18,7 +18,7 @@ export function SiteFooter() {
           <div className="max-w-sm">
             <p className="flex items-center gap-2 font-semibold text-ink">
               <BrazilMark size={26} className="shrink-0" />
-              Você decide
+              Menos Pior
             </p>
             <p className="mt-3 leading-relaxed">
               Este site não diz em quem você deve votar. Ele organiza evidências públicas para você

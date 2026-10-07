@@ -40,7 +40,7 @@ export default function HomePage() {
           </p>
 
           <TypewriterTitle
-            text="Você decide"
+            text="Menos Pior"
             className="animate-fade-up [animation-delay:120ms] mt-4 text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight"
           />
 

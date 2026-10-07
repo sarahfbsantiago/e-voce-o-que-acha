@@ -7,7 +7,7 @@ export function PrintButton({ label = "Baixar em PDF", className = "" }: { label
   return (
     <Button type="button" variant="secondary" className={`print:hidden ${className}`} onClick={() => {
       const prev = document.title;
-      document.title = `Você decide · Meu relatório · ${new Date().toLocaleDateString("pt-BR").replaceAll("/", "-")}`;
+      document.title = `Menos Pior · Meu relatório · ${new Date().toLocaleDateString("pt-BR").replaceAll("/", "-")}`;
       window.print();
       setTimeout(() => { document.title = prev; }, 500);
     }}>

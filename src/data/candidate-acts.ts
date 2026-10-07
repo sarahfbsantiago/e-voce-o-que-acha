@@ -12,10 +12,18 @@ export interface CandidateAct {
 
 /**
  * Atos por candidato, usados na pizza "Atuação por área" do relatório.
- * - Lula: leis, decretos, medidas provisórias e programas conferidos nas fontes oficiais (Planalto, gov.br) em 06/10/2026.
+ * - Lula: SELEÇÃO de leis, decretos, medidas provisórias e programas de grande alcance conferidos nas fontes oficiais
+ *   (Planalto, gov.br) em 06/10/2026. Não é o total: nos mandatos dele o Poder Executivo apresentou 1.303 proposições
+ *   na Câmara (455 PL, 34 PLP, 18 PEC, 660 MPV, 136 PLN), ver LULA_EXECUTIVE_PROPOSALS.
  * - Flávio Bolsonaro: todas as 66 proposições de sua autoria principal nos Dados Abertos do Senado (06/10/2026),
  *   classificadas por área pela ementa. Projeto de autoria não equivale a lei aprovada.
  */
+/** Totais oficiais (Câmara, arquivos anuais de proposições e autores; autor do tipo Poder Executivo; 2003–2010 e 2023–06/10/2026). */
+export const LULA_EXECUTIVE_PROPOSALS = { pl: 455, plp: 34, pec: 18, mpv: 660, pln: 136, total: 1303, asOf: "2026-10-06", sourceId: "camara-arquivos-proposicoes-executivo" } as const;
+
+/** Totais de Flávio Bolsonaro como autor principal no Senado (Dados Abertos, 06/10/2026). */
+export const FLAVIO_SENATE_PROPOSALS = { pl: 53, total: 66, asOf: "2026-10-06", sourceId: "senado-dados-abertos-flavio-bolsonaro" } as const;
+
 export const CANDIDATE_ACTS: Record<string, CandidateAct[]> = {
   lula: [
     {

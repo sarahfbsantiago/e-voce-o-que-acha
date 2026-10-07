@@ -74,6 +74,18 @@ export const SOURCE_REGISTRY: SourceRegistryEntry[] = [
     verification: { status: "VERIFIED", checkedAt: CHECKED },
   },
   {
+    id: "camara-arquivos-proposicoes-executivo",
+    name: "Câmara dos Deputados — arquivos anuais de proposições e autores (2003–2010 e 2023–2026)",
+    institution: "Câmara dos Deputados",
+    url: "https://dadosabertos.camara.leg.br/swagger/api.html#staticfile",
+    documentUrl: "https://dadosabertos.camara.leg.br/arquivos/proposicoesAutores/csv/proposicoesAutores-2023.csv",
+    type: "government_database",
+    legend: "PRIMARIA",
+    purpose: "Contagem das proposições de autoria do Poder Executivo (tipo de autor 30000) apresentadas na Câmara durante os mandatos de Lula: 455 PL, 34 PLP, 18 PEC, 660 MPV e 136 PLN, total 1.303 (2003-01-01 a 2010-12-31 e 2023-01-01 a 2026-10-06).",
+    retrievedAt: "2026-10-07",
+    verification: { status: "VERIFIED", checkedAt: "2026-10-07", note: "Arquivos proposicoes-AAAA.csv e proposicoesAutores-AAAA.csv baixados e cruzados por idProposicao; levantamento em docs/levantamentos/2026-10-07-proposicoes-poder-executivo-mandatos-lula.md." },
+  },
+  {
     id: "camara-dados-abertos",
     name: "API Dados Abertos da Câmara dos Deputados",
     institution: "Câmara dos Deputados",

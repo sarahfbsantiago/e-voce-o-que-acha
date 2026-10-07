@@ -1,12 +1,12 @@
-# Você decide
+# Menos Pior
 
 > **Você decide. Nós organizamos as evidências.**
 
-**No ar:** https://voce-decide-production.up.railway.app
+**No ar:** https://menos-pior.up.railway.app
 
 ## Sobre o quiz
 
-O **Você decide** é um questionário sobre políticas públicas para o segundo turno presidencial de 2026, entre **Lula** e **Flávio Bolsonaro**. A pessoa responde sem ver os nomes dos candidatos. No fim, o relatório mostra com quem as respostas mais concordam, tema a tema, com a fonte de cada afirmação e a conta aberta.
+O **Menos Pior** é um questionário sobre políticas públicas para o segundo turno presidencial de 2026, entre **Lula** e **Flávio Bolsonaro**. A pessoa responde sem ver os nomes dos candidatos. No fim, o relatório mostra com quem as respostas mais concordam, tema a tema, com a fonte de cada afirmação e a conta aberta.
 
 O site não recomenda voto, não monta ranking e não usa algoritmo secreto.
 
@@ -1047,7 +1047,7 @@ tendência(T) = média de u(q) para q ∈ Q(T) respondidas, sem "Não sei"
 ≤ −0,5 discorda · ≤ −1,5 discorda fortemente
 ```
 
-**Pizzas dos candidatos.** Contam os atos documentados de cada um por área (Lula: leis, decretos, medidas provisórias e programas; Flávio: proposições de sua autoria no Senado). São descritivas e não entram no cálculo.
+**Quantidade de proposições.** O perfil de cada candidato mostra os totais oficiais, que não entram no cálculo: o governo Lula apresentou 1.303 proposições na Câmara (455 projetos de lei) e Flávio Bolsonaro, 66 no Senado (53 projetos de lei). Detalhes em `docs/levantamentos/2026-10-07-proposicoes-poder-executivo-mandatos-lula.md`.
 
 **Ordem dos candidatos na tela.** Sorteada uma vez por sessão (Fisher–Yates), para que nenhum candidato fique sempre à esquerda. Não afeta a conta.
 
@@ -1132,7 +1132,7 @@ O seed **não** insere posições de candidatos, evidências nem resumos de prog
 | `DATABASE_URL` | não | Conexão PostgreSQL. Sem ela, modo estático. |
 | `DATA_SOURCE` | não | Força `static` ou `prisma`. |
 | `ADMIN_TOKEN` | não | Token (≥16 caracteres) dos painéis `/admin/research` (agregados) e `/admin/posicoes` (publicação de posições). Sem ele os painéis ficam desativados. |
-| `NEXT_PUBLIC_SITE_URL` | não | URL pública (ex.: `https://voce-decide-production.up.railway.app`) usada nas tags de compartilhamento. |
+| `NEXT_PUBLIC_SITE_URL` | não | URL pública (ex.: `https://menos-pior.up.railway.app`) usada nas tags de compartilhamento. |
 
 #### Rascunhos para revisão (levantamentos)
 
@@ -1185,7 +1185,7 @@ tests/                     # domain/ e api/
 
 #### Fluxo do usuário
 
-Página inicial → Como funciona / Metodologia → Consentimento estatístico ("Sim" pré-marcado, "Continuar sem enviar" a um toque) → 52 perguntas em 12 sessões, uma por tela, sem nomes de candidatos → Importância de cada tema (ao final de cada sessão) → **Relatório**: pizza do seu perfil por área · pizzas do que cada candidato fez por área · **Qual candidato está mais próximo do seu perfil** (cinco áreas com os temas dentro; diálogo por pergunta com a alternativa de cada candidato, o documento, a data e o link; conta aberta) · como você respondeu por tema · trajetória de cada candidato (experiência, cargos, leis e projetos, quadro por área e tema, "Como sabemos disso?") · fontes usadas · avaliação anônima → mensagem final: "Este site não decide seu voto. A decisão é sua." → recomeçar do zero ou baixar em PDF.
+Página inicial → Como funciona / Metodologia → Aceite obrigatório no modelo da LGPD, com idade e região opcionais → 52 perguntas em 12 sessões, uma por tela, sem nomes de candidatos → Importância de cada tema (ao final de cada sessão) → **Relatório**: pizza do seu perfil por área · **Qual candidato está mais próximo do seu perfil** (cinco áreas com os temas dentro; diálogo por pergunta com a alternativa de cada candidato, o documento, a data e o link; conta aberta) · como você respondeu por tema · trajetória de cada candidato (experiência, cargos, leis e projetos, quadro por área e tema, "Como sabemos disso?") · fontes usadas · avaliação anônima → mensagem final: "Este site não decide seu voto. A decisão é sua." → recomeçar do zero ou baixar em PDF.
 
 #### Modelo de dados (resumo)
 

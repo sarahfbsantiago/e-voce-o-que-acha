@@ -19,7 +19,6 @@ import { FeedbackForm } from "./FeedbackForm";
 import { PriorityCharts } from "./PriorityCharts";
 import { TopicPie } from "./TopicPie";
 import { ProfileProximity } from "./ProfileProximity";
-import { CandidatePies } from "./CandidatePies";
 import { AREA_GROUPS } from "./areaGroups";
 import { CandidatesSection } from "./CandidatesSection";
 
@@ -95,7 +94,7 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
           <PrintButton />
         </div>
         <h1 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Seu perfil</h1>
-        <p className="hidden print:block text-xs text-ink-3 mt-1">Gerado em {new Date().toLocaleDateString("pt-BR")} · Você decide · nada aqui é nota ou ranking</p>
+        <p className="hidden print:block text-xs text-ink-3 mt-1">Gerado em {new Date().toLocaleDateString("pt-BR")} · Menos Pior · nada aqui é nota ou ranking</p>
         <p className="mt-3 text-ink-2">
           O que você disse que importa, tema a tema, e com quem suas respostas ficaram mais próximas nos temas em que há posições publicadas. Nada aqui vira nota ou ranking.
         </p>
@@ -108,7 +107,6 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
       <section aria-labelledby="perfil" className="space-y-4">
         <h2 id="perfil" className="text-xl font-bold border-l-4 border-accent pl-3">Seu perfil por área</h2>
         <TopicPie sections={sections} />
-        <CandidatePies candidates={ordered} />
         <div className="card p-4 text-xs text-ink-2">
           <p className="font-semibold text-ink">As cinco áreas</p>
           <ul className="mt-1.5 grid gap-1 sm:grid-cols-2">
@@ -119,7 +117,7 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-[11px] text-ink-3">Na sua pizza, cada fatia soma a importância que você deu aos temas da área.<span className="print:hidden"> Nas dos candidatos, cada fatia é o que ele fez: para o Lula, as leis, decretos, medidas provisórias e programas conferidos; para o Flávio, todas as proposições de sua autoria no Senado. Cada ato é classificado por área pelo seu objeto. Promessas de programa não entram.</span></p>
+          <p className="mt-2 text-[11px] text-ink-3">Na sua pizza, cada fatia soma a importância que você deu aos temas da área.</p>
         </div>
         <ProfileProximity sections={sections} questions={QUESTIONS} answers={session.answers} candidates={ordered} positions={positions} evidence={evidence} sources={sources} />
       </section>

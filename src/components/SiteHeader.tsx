@@ -15,7 +15,7 @@ export function SiteHeader() {
       <div className="container-page flex items-center justify-between gap-4 py-3">
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-ink">
           <BrazilMark size={30} className="shrink-0" />
-          Você decide
+          Menos Pior
         </Link>
         <nav aria-label="Principal" className="hidden md:flex items-center gap-5 text-sm text-ink-2">
           {NAV.map((n) => (
