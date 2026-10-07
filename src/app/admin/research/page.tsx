@@ -10,6 +10,7 @@ import { INSUFFICIENT_DATA_MESSAGE } from "@/domain/aggregates";
 import { AGE_RANGES, REGIONS } from "@/domain/types";
 import { formatShare } from "@/domain/aggregates";
 import { logoutAction } from "../login/actions";
+import { AdminNav } from "@/components/AdminNav";
 
 export const metadata: Metadata = { title: "Dados da pesquisa", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -37,6 +38,7 @@ export default async function AdminResearchPage() {
 
   return (
     <div className="container-page py-12 space-y-10">
+      <AdminNav current="/admin/research" />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <PageTitle lead="Somente agregações. Nenhum registro individual é exibido.">Dados da pesquisa</PageTitle>
         <form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form>

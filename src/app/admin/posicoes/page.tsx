@@ -10,6 +10,7 @@ import { SOURCE_BY_ID } from "@/data/source-registry";
 import { sourceHref } from "@/components/SourceBits";
 import { EVIDENCE_CLASSIFICATION_LABELS } from "@/domain/types";
 import { logoutAction } from "../login/actions";
+import { AdminNav } from "@/components/AdminNav";
 import { publishAllDraftsAction, publishPositionAction, rejectPositionAction, unpublishPositionAction } from "./actions";
 
 export const metadata: Metadata = { title: "Revisão de posições", robots: { index: false, follow: false } };
@@ -33,6 +34,7 @@ export default async function AdminPositionsPage() {
 
   return (
     <div className="container-page py-12 space-y-10">
+      <AdminNav current="/admin/posicoes" />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <PageTitle eyebrow="Admin" tone="gold" lead="Cada posição mostra a direção, a alternativa mais próxima, o resumo e as evidências com trecho e link. Publique uma a uma ou todas de uma vez. Só o que está publicado entra no relatório.">
           Revisão de posições por pergunta
