@@ -2,40 +2,115 @@
 
 > **Você decide. Nós organizamos as evidências.**
 
-Aplicação web brasileira de educação política e comparação de evidências sobre os candidatos **Lula** e **Flávio Bolsonaro** no segundo turno das eleições presidenciais de 2026.
+**No ar:** https://voce-decide-production.up.railway.app
 
-**O projeto não utiliza um algoritmo secreto para determinar em quem uma pessoa deve votar. As respostas do usuário servem para selecionar, ordenar e contextualizar evidências públicas relacionadas aos assuntos que ele próprio declarou relevantes.**
+## Sobre o quiz
 
-## O que o site faz
+O **Você decide** é um questionário sobre políticas públicas para o segundo turno presidencial de 2026, entre **Lula** e **Flávio Bolsonaro**. A pessoa responde sem ver os nomes dos candidatos. No fim, o relatório mostra com quem as respostas mais concordam, tema a tema, com a fonte de cada afirmação e a conta aberta.
 
-1. Permite responder 52 perguntas em linguagem simples sobre políticas públicas e valores políticos, em 12 sessões (temas). Toda pergunta tem a opção "Não sei".
-2. Permite declarar quanto cada tema é importante para a pessoa.
-3. Mostra, no relatório, por área e pergunta: sua resposta, a alternativa que cada candidato escolheria, o documento que sustenta a posição (lei, decreto, projeto ou programa), a data e o link. Cada evidência tem classificação (proposta, posição, atuação, resultado observado) e força documental (A–D).
-4. Dá acesso ao histórico documentado conforme o cargo ocupado (métricas de Executivo vs. parlamentar).
-5. Abre a fonte original de qualquer afirmação: link no documento citado, "Como sabemos disso?" na trajetória e catálogo de fontes com "Abrir origem".
-6. Publica a metodologia completa, versionada, com histórico de alterações.
-7. Apresenta a trajetória de cada candidato: experiência profissional, cargos públicos, linha do tempo, leis e projetos com link, e um quadro de principais realizações, propostas e posições por tema, tudo com "Como sabemos disso?".
-8. No relatório, compara cada resposta com a posição documentada de cada candidato (igual / parecida / diferente), indica por tema quem ficou mais perto, conta os temas e mostra a proporção de concordância por candidato, sempre com a fórmula à vista. Silêncio do candidato conta como "diferente" para ele e nunca vira posição atribuída.
-9. Coleta, apenas com consentimento, estatísticas anônimas agregadas e uma avaliação anônima da pesquisa (nota 1–5 e se ajudou na decisão).
-10. Mostra pizzas por área: a da pessoa pela importância declarada às cinco áreas; as dos candidatos pelos atos (leis, decretos, medidas provisórias e programas para Lula; proposições de autoria no Senado para Flávio Bolsonaro), nunca por promessas. As pizzas não entram em nenhum cálculo.
-11. Permite baixar o relatório em PDF e reiniciar o questionário do zero.
+O site não recomenda voto, não monta ranking e não usa algoritmo secreto.
 
-## O que o site não faz
+## Objetivos
 
-- Não recomenda candidato nem voto.
-- Não produz nota, ranking nem "melhor candidato". As porcentagens do relatório são proporções de concordância com documentos publicados, explicadas com a conta aberta.
-- Não pondera respostas pela importância dos temas; a importância só ordena o relatório e a pizza das áreas.
-- Não atribui causalidade automática a indicadores observados durante um governo.
-- Não atribui a um candidato posições de partido, familiares, aliados ou apoiadores.
-- Não preenche lacunas: quando falta evidência, diz "não se posicionou nas fontes oficiais" e conta a pergunta como diferente, igualmente para os dois candidatos.
-- Não coleta nome, email, documento, IP em campo de aplicação, user agent, fingerprint ou dados de navegação.
-- Não trata as estatísticas da pesquisa como pesquisa eleitoral nem extrapola para "os brasileiros".
+- Ajudar cada pessoa a entender as próprias prioridades e compará-las com o que os candidatos propõem e fizeram.
+- Mostrar só informação verificável, com link para o documento original.
+- Aplicar os mesmos critérios aos dois candidatos.
+- Deixar a decisão com a pessoa: nada vira nota, recomendação ou intenção de voto.
 
-## Stack
+## Metodologia
+
+- **Neutralidade na coleta.** Nomes e cores partidárias ficam ocultos durante as perguntas. As alternativas aparecem da mais afirmativa para a mais negativa, com "Não sei" por último.
+- **Posições documentadas.** Cada candidato tem uma posição por pergunta, com trecho literal, data, link e classificação: proposta, posição ou atuação.
+- **Fatos antes de promessas.** A explicação de cada pergunta cita primeiro o que foi feito (lei, decreto, projeto) e depois o que foi prometido.
+- **Mudança de posição.** Vale a evidência mais recente, e o relatório mostra a linha do tempo.
+- **Cargo considerado.** Um parlamentar é avaliado pelo que um parlamentar faz; nunca é penalizado por não ter poderes de presidente.
+- **Revisão humana.** Nenhuma posição aparece no site sem ser publicada no painel de administração (`/admin/posicoes`), com registro de auditoria.
+- **Versões públicas.** Metodologia na versão 1.2.0, com histórico completo em `/metodologia` e em `src/data/methodology.ts`.
+- **Privacidade.** As respostas ficam no navegador. Só com consentimento seguem como estatística anônima, sem nome, email, documento ou IP.
+
+## Perguntas
+
+São 52 perguntas em 12 temas, todas com a opção "Não sei". Ao fim de cada tema, a pessoa diz quanto ele importa para ela.
+
+| Tema | Perguntas |
+|---|---|
+| Economia e impostos | 4 |
+| Trabalho, emprego e jornada | 4 |
+| Saúde | 4 |
+| Educação, ciência e pesquisa | 4 |
+| Programas sociais, pobreza e desigualdade | 4 |
+| Segurança pública e crime organizado | 4 |
+| Armas, drogas e apostas | 5 |
+| Meio ambiente e energia | 4 |
+| Infraestrutura, indústria e desenvolvimento | 4 |
+| Tecnologia e autonomia do Brasil | 5 |
+| Relações internacionais | 5 |
+| Direitos, democracia e instituições | 5 |
+
+No relatório, os 12 temas aparecem em cinco áreas: **Economia e trabalho**; **Social, saúde, educação e renda**; **Segurança**; **Ambiente e tecnologia**; **Instituições e mundo**.
+
+O texto completo das perguntas e alternativas está em `src/data/questions.ts` e na página `/metodologia`.
+
+## Algoritmo matemático
+
+Implementado em `src/domain/comparison.ts`, `src/domain/theme-proximity.ts` e `src/domain/profile-proximity.ts`, com testes em `tests/domain/`.
+
+**1. Escala.** Respostas e posições usam a mesma régua. "Não sei" fica fora de toda conta.
+
+```
+Resposta:  Concordo = 2 · Concordo em parte = 1 · Discordo em parte = −1 · Discordo = −2
+Posição:   apoia = 2 · apoia em parte = 1 · neutro = 0 · opõe-se em parte = −1 · opõe-se = −2
+```
+
+**2. Por pergunta.** A distância entre a resposta e a posição define o resultado.
+
+```
+distância = |resposta − posição|
+0 = igual · 1 = parecido · 2 ou mais = diferente
+```
+
+Nas perguntas de escolha entre itens, a mesma alternativa conta como igual, a vizinha como parecida e qualquer outra como diferente.
+
+**3. Regra do silêncio.** Se o candidato não tem posição documentada numa pergunta respondida, ela conta como **diferente** para ele. O site nunca inventa uma posição, e calar não ajuda ninguém.
+
+**4. Por tema.** Fica mais perto quem tiver o maior score. Empate não indica ninguém. Se nenhum dos dois tem posição no tema, ele aparece como "evidência insuficiente".
+
+```
+score = (iguais + 0,5 × parecidas) ÷ perguntas respondidas no tema
+```
+
+**5. Perfil.** O site conta em quantos temas cada candidato ficou mais perto e mostra duas proporções.
+
+```
+concordância = (iguais + 0,5 × parecidas) ÷ todas as perguntas respondidas
+temas        = temas em que ficou mais perto ÷ temas comparáveis
+```
+
+**6. Fora da conta.** A importância que a pessoa dá a cada tema nunca multiplica nada: só ordena o relatório e desenha a pizza da pessoa. As pizzas dos candidatos contam os atos de cada um por área (Lula: leis, decretos, medidas provisórias e programas; Flávio: proposições de sua autoria no Senado) e também não entram no cálculo.
+
+**7. Painel de administração.** `/admin/research` refaz a mesma conta para cada questionário enviado e mostra quantos ficaram mais perto de cada candidato, em porcentagem, além de empates, casos sem comparação e a concordância média. Isso descreve concordância com documentos, não intenção de voto.
+
+## Fontes
+
+63 fontes cadastradas, todas com link (`src/data/source-registry.ts`; catálogo pesquisável em `/fontes`).
+
+- **Programas de governo de 2026** registrados no TSE, com a página do PDF de cada citação.
+- **Portal da Legislação do Planalto:** leis, decretos e medidas provisórias.
+- **Dados Abertos do Senado:** projetos de autoria, relatorias e votações.
+- **Dados Abertos da Câmara dos Deputados:** proposições, autoria e votações.
+- **Páginas oficiais do gov.br** sobre programas federais.
+- **Biografia oficial do Planalto e registros de candidatura do TSE:** trajetória, ocupação e escolaridade.
+- **Imprensa profissional:** só como declaração entre aspas e com link; nunca define sozinha a posição de um candidato.
+
+---
+
+## Para desenvolvedores
+
+### Stack
 
 Next.js 16 (App Router, Server Components, Route Handlers, Server Actions) · TypeScript · React 19 · Tailwind CSS 4 · PostgreSQL · Prisma 6 · Zod · Vitest. Fonte: Roboto Mono (next/font).
 
-## Instalação
+### Instalação
 
 ```bash
 npm install            # roda `prisma generate` no postinstall
@@ -43,14 +118,14 @@ cp .env.example .env   # ajuste DATABASE_URL e ADMIN_TOKEN
 npm run dev            # http://localhost:3000
 ```
 
-### Dois modos de execução
+#### Dois modos de execução
 
 | Modo | Quando | O que funciona |
 |------|--------|----------------|
 | `static` | sem `DATABASE_URL` (ou `DATA_SOURCE=static`) | Todo o site e a API de conteúdo, lendo de `src/data`. Posições, evidências e resumos ficam vazios. Envio de estatísticas e painel admin respondem 503. |
 | `prisma` | com `DATABASE_URL` | Conteúdo lido do banco (após seed), estatísticas anônimas, avaliação e painel admin. |
 
-### Banco de dados
+#### Banco de dados
 
 ```bash
 docker compose up -d           # PostgreSQL 16 local
@@ -60,7 +135,7 @@ npm run db:seed                # candidatos, temas, perguntas, fontes, protocolo
 
 O seed **não** insere posições de candidatos, evidências nem resumos de programa. Eles entram com `npm run db:import-drafts` como `DRAFT` e só aparecem no site depois de publicados em `/admin/posicoes` (ver *Rascunhos para revisão*).
 
-### Variáveis de ambiente
+#### Variáveis de ambiente
 
 | Variável | Obrigatória | Descrição |
 |----------|-------------|-----------|
@@ -69,7 +144,7 @@ O seed **não** insere posições de candidatos, evidências nem resumos de prog
 | `ADMIN_TOKEN` | não | Token (≥16 caracteres) dos painéis `/admin/research` (agregados) e `/admin/posicoes` (publicação de posições). Sem ele os painéis ficam desativados. |
 | `NEXT_PUBLIC_SITE_URL` | não | URL pública (ex.: `https://voce-decide-production.up.railway.app`) usada nas tags de compartilhamento. |
 
-### Rascunhos para revisão (levantamentos)
+#### Rascunhos para revisão (levantamentos)
 
 ```bash
 npm run db:import-drafts   # importa prisma/drafts/*.json e docs/levantamentos/*.csv como DRAFT
@@ -84,7 +159,7 @@ no Senado. Tudo entra no banco como `DRAFT` e **não aparece no site** até ser 
 Com `IMPORT_UPDATE_PUBLISHED=1`, a reimportação atualiza posições já publicadas mantendo o status;
 itens já revisados nunca são sobrescritos.
 
-### Testes e qualidade
+#### Testes e qualidade
 
 ```bash
 npm test          # vitest: regras metodológicas e API
@@ -93,7 +168,7 @@ npm run lint
 npm run build
 ```
 
-## Arquitetura
+### Arquitetura
 
 ```
 prisma/
@@ -118,15 +193,15 @@ src/
 tests/                     # domain/ e api/
 ```
 
-### Fluxo do usuário
+#### Fluxo do usuário
 
 Página inicial → Como funciona / Metodologia → Consentimento estatístico ("Sim" pré-marcado, "Continuar sem enviar" a um toque) → 52 perguntas em 12 sessões, uma por tela, sem nomes de candidatos → Importância de cada tema (ao final de cada sessão) → **Relatório**: pizza do seu perfil por área · pizzas do que cada candidato fez por área · **Qual candidato está mais próximo do seu perfil** (cinco áreas com os temas dentro; diálogo por pergunta com a alternativa de cada candidato, o documento, a data e o link; conta aberta) · como você respondeu por tema · trajetória de cada candidato (experiência, cargos, leis e projetos, quadro por área e tema, "Como sabemos disso?") · fontes usadas · avaliação anônima → mensagem final: "Este site não decide seu voto. A decisão é sua." → recomeçar do zero ou baixar em PDF.
 
-### Modelo de dados (resumo)
+#### Modelo de dados (resumo)
 
 `Candidate`, `Topic`, `Question`, `QuestionOption`, `ContextNote`, `ArgumentSet`, `Source`, `Evidence`, `CandidatePosition` (→ N `Evidence` via `CandidatePositionEvidence`), `LegislativeAction`, `PublicPolicy`, `Indicator` (nunca é posição), `ProgramSummary`, `EvidenceReview` (revisão cega), `MethodologyVersion`, `ResearchProtocol`, `ChangeLog`, `AuditLog`, `RawDocument`, `LlmClassification`, `SurveySubmission`, `QuestionAggregate`, `SurveyFeedback`.
 
-### API
+#### API
 
 | Rota | Descrição |
 |------|-----------|
@@ -142,18 +217,7 @@ Página inicial → Como funciona / Metodologia → Consentimento estatístico (
 
 O painel `/admin/posicoes` (Server Actions, token) publica, rejeita, despublica e publica em lote, com `AuditLog`. O modelo prevê `DRAFT → PENDING_REVIEW → APPROVED → PUBLISHED | REJECTED`; só `PUBLISHED` aparece ao público. Hoje a revisão é posição a posição, com o candidato visível; a revisão cega por evidência (`EvidenceReview`) está no modelo e ainda não tem tela.
 
-## Metodologia (resumo)
-
-A versão completa está em `/metodologia` e em `src/data/methodology.ts`.
-
-- **Escala interna** (2, 1, 0, −1, −2) para os gráficos do usuário e para a distância entre a resposta e a posição documentada; nunca multiplicada pela importância.
-- **Importância dos temas** só ordena o relatório.
-- **Indicadores por pergunta**: igual / parecido / diferente / sem posição (conta como diferente para o candidato). Por tema: score = (iguais + 0,5 × parecidas) ÷ perguntas respondidas; empate não indica ninguém. Sem nota, sem ranking.
-- **Hierarquia de evidências** A (primária direta) → D (comentário). Nenhuma posição baseada só em D.
-- **Classificações**: PROPOSTA, POSICAO, ATUACAO, RESULTADO_OBSERVADO. Nunca misturadas.
-- **Notas de contexto legal** (IR 2026 — Lei 15.270/2025; apostas — MP 1.394/2026; jornada; aborto; segurança federativa) ficam em `src/data` e na metodologia; não aparecem durante as perguntas.
-
-## Processo de inclusão de fontes e evidências
+### Processo de inclusão de fontes e evidências
 
 1. Consultar o `ResearchProtocol` da questão (termos, fontes, período, critérios) **antes** de pesquisar.
 2. Localizar na ordem: documento original → base pública → fonte primária do candidato → organismo técnico → imprensa profissional.
@@ -165,15 +229,15 @@ A versão completa está em `/metodologia` e em `src/data/methodology.ts`.
 8. Mudança de posição → cronologia, sem palavras como "mentira" ou "contradição".
 9. Ingestão automática (`src/ingestion`) e classificação por LLM **nunca** publicam: produzem `DRAFT` com prompt, modelo, versão, resposta e confiança registrados.
 
-## Regras de neutralidade verificadas em código
+### Regras de neutralidade verificadas em código
 
 `tests/domain/neutrality-scan.test.ts` varre `src/` em busca de frases e identificadores de ranking/recomendação. `src/domain/publication.ts` rejeita resumos com linguagem proibida. `src/domain/comparison.ts` exporta uma única função, por questão. `src/domain/aggregates.ts` não possui função de intenção de voto. A ordem esquerda/direita dos candidatos é sorteada por sessão e os cards têm o mesmo espaço visual.
 
-## Privacidade e logs
+### Privacidade e logs
 
 A aplicação não lê IP nem user agent. Se a infraestrutura de hospedagem (proxy, CDN, provedor) gerar logs de acesso com IP, eles ficam fora da aplicação; configure a menor retenção possível e documente-a aqui ao implantar.
 
-## Estado atual e TODOs
+### Estado atual e TODOs
 
 - [x] Programas de 2026 obtidos pelos Dados Abertos do TSE (`proposta_governo_2026_BR.zip`); o portal do TSE segue bloqueando acesso automatizado, mas o CDN oficial de dados abertos responde.
 - [x] 104 posições (52 perguntas × 2 candidatos) com evidências importadas e publicadas; painel `/admin/posicoes` com auditoria.
@@ -183,11 +247,11 @@ A aplicação não lê IP nem user agent. Se a infraestrutura de hospedagem (pro
 - [ ] **TODO(conteúdo)** Três perguntas de Lula seguem sem posição documentada (drogas, barrar obras por impacto ambiental, religião na política); declarações sem link oficial (TV, entrevistas) não entram.
 - [ ] Verificação manual pendente: endereços dos documentos no portal do TSE (bloqueia acesso automatizado; links apontam para a página oficial das Eleições 2026), Biblioteca da Presidência, OCDE, atuação de Flávio Bolsonaro na ALERJ (2003–2019) e candidatura de Lula ao Governo de SP em 1982.
 
-## Deploy
+### Deploy
 
 Produção no Railway (serviço `voce-decide` + Postgres). Passo a passo, variáveis e comandos de seed/importação em `DEPLOY.md`.
 
-## Como contribuir
+### Como contribuir
 
 - Toda alteração de pergunta, critério ou classificação exige nova entrada em `METHODOLOGY_VERSIONS` (nunca apague versões anteriores).
 - Nenhum fato político entra no banco sem `Source` consultável. O conhecimento do modelo de linguagem não é fonte.
