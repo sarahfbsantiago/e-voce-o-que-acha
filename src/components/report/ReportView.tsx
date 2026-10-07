@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 import type { Candidate, CandidatePosition, CandidateProfile, Evidence, ProgramSummary, SourceRegistryEntry } from "@/domain/types";
 import { PRIORITY_LEVELS } from "@/domain/types";
 import { QUESTIONS } from "@/data/questions";
@@ -37,7 +37,6 @@ interface Props {
  */
 export function ReportView({ candidates, positions, evidence, summaries, sources, profiles }: Props) {
   const { session, hydrated, update } = useSession();
-  const sourceById = useMemo(() => Object.fromEntries(sources.map((s) => [s.id, s])), [sources]);
   const submitted = useRef(false);
 
   // Sorteia a ordem dos candidatos uma vez por sessão.
@@ -143,7 +142,7 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
       </section>
 
       {/* ---------------- Trajetória dos candidatos ---------------- */}
-      <CandidatesSection ordered={ordered} profiles={profiles} summaries={summaries} sourceById={sourceById} />
+      <CandidatesSection ordered={ordered} profiles={profiles} summaries={summaries} />
 
       {/* ---------------- Fontes ---------------- */}
       <section aria-labelledby="fontes" className="space-y-4">
