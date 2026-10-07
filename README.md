@@ -196,14 +196,14 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 
 **10. Na saúde, o que deveria ser prioridade?**
 
-- Posição documentada de Lula: alternativa mais próxima: “Fortalecer o SUS e também fazer parcerias com empresas privadas”
+- Posição documentada de Lula: alternativa mais próxima: “Fortalecer principalmente o SUS. Melhorar e expandir a sua atuação em todo território nacional”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Fortalecer o SUS e também fazer parcerias com empresas privadas”
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Fortalecer principalmente o SUS. Melhorar e expandir a sua atuação em todo território nacional | — | 0,5 | 0,5 |
-| Fortalecer o SUS e também fazer parcerias com empresas privadas | — | 1 | 1 |
-| Aumentar a participação de empresas privadas, apenas | — | 0,5 | 0,5 |
+| Fortalecer principalmente o SUS. Melhorar e expandir a sua atuação em todo território nacional | — | 1 | 0,5 |
+| Fortalecer o SUS e também fazer parcerias com empresas privadas | — | 0,5 | 1 |
+| Aumentar a participação de empresas privadas, apenas | — | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **11. O Brasil deveria produzir mais remédios, vacinas e equipamentos de saúde dentro do próprio país?**
@@ -262,16 +262,16 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 
 **15. Qual área deveria receber mais dinheiro primeiro?**
 
-- Posição documentada de Lula: alternativa mais próxima: “Educação infantil e ensino fundamental”
+- Posição documentada de Lula: alternativa mais próxima: “Todas são igualmente importantes”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Ensino técnico”
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Educação infantil e ensino fundamental | — | 1 | 0 |
-| Ensino médio | — | 0,5 | 0,5 |
+| Educação infantil e ensino fundamental | — | 0 | 0 |
+| Ensino médio | — | 0 | 0,5 |
 | Ensino técnico | — | 0 | 1 |
-| Universidades | — | 0 | 0,5 |
-| Todas são igualmente importantes | — | 0 | 0 |
+| Universidades | — | 0,5 | 0,5 |
+| Todas são igualmente importantes | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 **Quanto Educação, Ciência e Pesquisa importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
@@ -384,13 +384,13 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 
 **23. Comprar e ter armas deveria ser:**
 
-- Posição documentada de Lula: neutro (0)
+- Posição documentada de Lula: opõe-se (−2)
 - Posição documentada de Flávio Bolsonaro: apoia (+2)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Mais difícil | -2 | 0 | 0 |
-| Como é hoje | 0 | 1 | 0 |
+| Mais difícil | -2 | 1 | 0 |
+| Como é hoje | 0 | 0 | 0 |
 | Mais fácil | +2 | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
@@ -455,13 +455,13 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 
 **28. O governo deveria impedir obras ou negócios quando houver grande risco de destruir uma área ambiental importante?**
 
-- Posição documentada de Lula: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
+- Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 0 | 0,5 |
-| Depende do tamanho do risco | +1 | 0 | 1 |
+| Sim | +2 | 1 | 0,5 |
+| Depende do tamanho do risco | +1 | 0,5 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -568,13 +568,13 @@ _Dependência tecnológica, inteligência artificial, proteção de dados, tecno
 
 > Contexto exibido antes: O que significa autonomia tecnológica.
 
-- Posição documentada de Lula: apoia (+2)
+- Posição documentada de Lula: apoia em parte (+1)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Somente em algumas tecnologias | +1 | 0,5 | 1 |
+| Sim | +2 | 0,5 | 0,5 |
+| Somente em algumas tecnologias | +1 | 1 | 1 |
 | Não é necessário | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
