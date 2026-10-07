@@ -3,7 +3,7 @@ import { BRAZIL_H, BRAZIL_STATES, BRAZIL_W } from "@/components/brand/brazilShap
 import { REGION_COLORS } from "@/components/brand/brazilColors";
 
 export const runtime = "edge";
-export const alt = "Menos Pior. Você decide. Nós organizamos as evidências. Vote com consciência.";
+export const alt = "Menos Pior. Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -20,7 +20,7 @@ export default function OpenGraphImage() {
             Eleições 2026
           </div>
           <div style={{ display: "flex", fontSize: 96, fontWeight: 700, lineHeight: 1, marginTop: 28, letterSpacing: -3 }}>Menos Pior</div>
-          <div style={{ display: "flex", fontSize: 30, lineHeight: 1.35, marginTop: 28, color: "#4a4a46" }}>Você decide. Nós organizamos as evidências. Vote com consciência.</div>
+          <div style={{ display: "flex", fontSize: 30, lineHeight: 1.35, marginTop: 28, color: "#4a4a46" }}>Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.</div>
           <div style={{ display: "flex", fontSize: 22, lineHeight: 1.4, marginTop: 36, color: "#7a7a74" }}>52 perguntas · sem nome de candidato · fontes no final</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flex: 1 }}>

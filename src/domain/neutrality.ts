@@ -45,4 +45,4 @@ export const FINAL_MESSAGE =
   "Você viu o que cada candidato propõe, parte de sua trajetória pública e os documentos utilizados para produzir este resumo. Os links acima permitem conferir as informações diretamente nas fontes originais. Este site não decide seu voto. A decisão é sua.";
 
 /** Princípio central. */
-export const CORE_PRINCIPLE = "Você decide. Nós organizamos as evidências. Vote com consciência.";
+export const CORE_PRINCIPLE = "Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.";

@@ -90,7 +90,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "A avaliação da pesquisa só é enviada por quem aceitou.",
       "Quem revogar o consentimento em Privacidade e dados precisa aceitar de novo para voltar a responder; envios anteriores são anônimos e não podem ser identificados.",
       "As pizzas de atuação dos candidatos saíram do relatório: comparavam uma seleção de 49 atos de Lula com todas as 66 proposições de Flávio Bolsonaro e davam a impressão errada de quantidade. O perfil de Lula passa a mostrar o total oficial de proposições do Poder Executivo nos mandatos dele (1.303 na Câmara, 455 projetos de lei), e o de Flávio, as 66 do Senado (53 projetos de lei).",
-      "O site passa a se chamar Menos Pior. O lema 'Você decide. Nós organizamos as evidências.' continua.",
+      "O site passa a se chamar Menos Pior, com o lema 'Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.'",
     ],
   },
 ];

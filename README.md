@@ -1,6 +1,6 @@
 # Menos Pior
 
-> **Você decide. Nós organizamos as evidências.**
+> **Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.**
 
 **No ar:** https://menos-pior.up.railway.app
 
