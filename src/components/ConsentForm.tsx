@@ -56,7 +56,7 @@ export function ConsentForm() {
         <label className="flex cursor-pointer items-start gap-3">
           <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required className="mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0 accent-accent" />
           <span className="text-sm leading-relaxed">
-            <span className="font-semibold">Li e concordo com a <a href="/privacidade" target="_blank" className="underline underline-offset-4 hover:text-purple-strong">Política de Privacidade</a></span> e autorizo o uso anônimo dos meus dados, em nível de pesquisa, conforme a Lei Geral de Proteção de Dados (LGPD).
+            <span className="font-semibold">Concordo</span> e autorizo o uso anônimo dos dados, em nível de pesquisa, conforme a Lei Geral de Proteção de Dados (LGPD).
           </span>
         </label>
       </div>
@@ -67,7 +67,6 @@ export function ConsentForm() {
           <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
         </Button>
         {hasProgress ? <RestartButton variant="secondary" className="min-h-10! px-4! text-xs" /> : null}
-        <a href="/privacidade" className="ml-auto text-xs text-ink-2 underline underline-offset-4 hover:text-purple-strong">Privacidade e dados</a>
       </div>
       {hasProgress ? <p className="text-xs text-ink-3">Você já tem respostas salvas: ao continuar, retoma de onde parou.</p> : null}
     </section>

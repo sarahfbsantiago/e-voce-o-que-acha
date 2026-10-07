@@ -1170,7 +1170,7 @@ src/
     api/                   # GET públicos; POST anônimos; GET admin protegido
     questionario/          # intro + consentimento → perguntas → prioridades
     relatorio/             # "Seu mapa de prioridades" (sem pontuação)
-    metodologia/ fontes/ privacidade/ como-funciona/
+    metodologia/ fontes/ como-funciona/
     admin/                 # login por token + painel agregado privado
   components/              # UI acessível, cards simétricos, legendas por forma+texto
   data/                    # CONTEÚDO CANÔNICO: temas, perguntas, notas de contexto,

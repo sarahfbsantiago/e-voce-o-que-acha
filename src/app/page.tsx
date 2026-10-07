@@ -2,6 +2,7 @@ import { BrazilMark } from "@/components/brand/BrazilMark";
 import { TypewriterTitle } from "@/components/TypewriterTitle";
 import { CountUp } from "@/components/fx/CountUp";
 import { ButtonLink } from "@/components/ui";
+import { StartButton } from "@/components/StartButton";
 import { QUESTIONS } from "@/data/questions";
 import { TOPICS } from "@/data/topics";
 import { CORE_PRINCIPLE } from "@/domain/neutrality";
@@ -40,13 +41,7 @@ export default function HomePage() {
           />
 
           <div className="animate-fade-up [animation-delay:260ms] mt-8 flex justify-center">
-            <ButtonLink
-              href="/questionario"
-              className="btn-cta w-full max-w-sm min-h-14 rounded-2xl px-8 text-lg font-bold tracking-tight sm:min-h-16 sm:w-auto sm:px-12 sm:text-xl md:min-h-[4.5rem] md:text-2xl"
-            >
-              Começar
-              <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-            </ButtonLink>
+            <StartButton className="btn-cta w-full max-w-sm min-h-14 rounded-2xl px-8 text-lg font-bold tracking-tight sm:min-h-16 sm:w-auto sm:px-12 sm:text-xl md:min-h-[4.5rem] md:text-2xl" />
           </div>
 
           {/* âncora: o mapa em pontilhismo se forma aqui; com movimento reduzido mostra a marca estática */}

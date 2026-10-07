@@ -11,13 +11,14 @@ import { buildPriorityMap } from "@/domain/user-summary";
 import { orderCandidates, randomCandidateOrder } from "@/domain/candidate-order";
 import { FINAL_MESSAGE } from "@/domain/neutrality";
 import { useSession } from "@/store/session";
+import { StartButton } from "@/components/StartButton";
 import { ButtonLink, Eyebrow } from "@/components/ui";
 import { RestartButton } from "@/components/RestartButton";
 import { PrintButton } from "@/components/PrintButton";
 import { FeedbackForm } from "./FeedbackForm";
 import { TopicPie } from "./TopicPie";
 import { ProfileProximity } from "./ProfileProximity";
-import { AREA_GROUPS } from "./areaGroups";
+import { AREA_GROUPS, groupOfTopic } from "./areaGroups";
 import { CandidatesSection } from "./CandidatesSection";
 
 interface Props {
@@ -70,7 +71,7 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
       <div className="container-page py-12 max-w-2xl">
         <h1 className="text-2xl font-bold">Ainda não há respostas neste navegador</h1>
         <p className="mt-2 text-ink-2">Responda ao questionário para ver o seu relatório.</p>
-        <div className="mt-6"><ButtonLink href="/questionario">Começar</ButtonLink></div>
+        <div className="mt-6"><StartButton /></div>
       </div>
     );
   }
@@ -125,9 +126,14 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {sections.map((s, i) => (
             <li key={s.topic.id} className="card p-4">
-              <p className="text-xs text-ink-3">#{i + 1}</p>
-              <h3 className="font-semibold">{s.topic.name}</h3>
-              <p className="text-sm text-ink-2 mt-1">{s.priorityLevel !== null ? PRIORITY_LEVELS[s.priorityLevel].label : "Importância não informada"}</p>
+              <span
+                className="inline-flex h-7 min-w-7 items-center justify-center rounded-full px-2 text-xs font-bold shadow-sm"
+                style={{ background: groupOfTopic(s.topic.id).color, color: groupOfTopic(s.topic.id).id === "seguranca" ? "#1f1a0a" : "#fff" }}
+              >
+                #{i + 1}
+              </span>
+              <h3 className="mt-2 font-semibold">{s.topic.name}</h3>
+              <p className="text-sm font-semibold text-purple mt-1">{s.priorityLevel !== null ? PRIORITY_LEVELS[s.priorityLevel].label : "Importância não informada"}</p>
               <p className="text-xs text-ink-3 mt-2">{s.answered}/{s.total} respondidas · {s.noOpinion} “não sei”</p>
             </li>
           ))}

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { ButtonLink } from "@/components/ui";
+import { StartButton, showStartButton } from "@/components/StartButton";
 
 /**
  * Faixa de chamada antes do rodapé, em todas as páginas: o botão Começar pulsando.
@@ -9,7 +9,7 @@ import { ButtonLink } from "@/components/ui";
  */
 export function StartCta() {
   const pathname = usePathname();
-  if (pathname.startsWith("/questionario/perguntas") || pathname.startsWith("/admin")) return null;
+  if (!showStartButton(pathname)) return null;
   const isHome = pathname === "/";
   return (
     <section aria-label="Começar o questionário" className="relative z-10 container-page pb-10 pt-4 sm:pb-16 sm:pt-6">
@@ -19,10 +19,7 @@ export function StartCta() {
         <p className="relative text-lg font-semibold tracking-tight md:text-xl">{isHome ? "Pronto para ver seu perfil?" : "Ainda não respondeu?"}</p>
         <p className="relative mt-1 text-sm text-ink-2">52 perguntas, sem nome de candidato, com as fontes no final. Você decide.</p>
         <div className="relative mt-6 flex justify-center">
-          <ButtonLink href="/questionario" className="btn-cta min-h-12 rounded-2xl px-8 text-base sm:min-h-14 sm:px-10 sm:text-lg">
-            Começar
-            <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-          </ButtonLink>
+          <StartButton className="btn-cta min-h-12 rounded-2xl px-8 text-base sm:min-h-14 sm:px-10 sm:text-lg" />
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BrazilMark } from "@/components/brand/BrazilMark";
 import { MobileMenu } from "@/components/MobileMenu";
+import { HeaderStart } from "@/components/HeaderStart";
 
 const NAV = [
   { href: "/como-funciona", label: "Como funciona" },
@@ -23,7 +24,10 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <MobileMenu items={NAV} />
+        <div className="flex items-center gap-2">
+          <HeaderStart />
+          <MobileMenu items={NAV} />
+        </div>
       </div>
     </header>
   );

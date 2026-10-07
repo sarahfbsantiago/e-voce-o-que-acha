@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ButtonLink, PageTitle } from "@/components/ui";
+import { PageTitle } from "@/components/ui";
+import { StartButton } from "@/components/StartButton";
 
 export const metadata: Metadata = { title: "Como funciona" };
 
@@ -55,10 +56,7 @@ export default function ComoFuncionaPage() {
       </div>
 
       <div className="mt-12 flex justify-center">
-        <ButtonLink href="/questionario" className="btn-cta min-h-12 rounded-2xl px-8 text-base sm:min-h-14 sm:px-10 sm:text-lg">
-          Começar
-          <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-        </ButtonLink>
+        <StartButton className="btn-cta min-h-12 rounded-2xl px-8 text-base sm:min-h-14 sm:px-10 sm:text-lg" />
       </div>
     </div>
   );
