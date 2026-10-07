@@ -93,6 +93,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "O site passa a se chamar Menos Pior, com o lema 'Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.'",
       "Revisão humana: a página 'Privacidade e dados' foi excluída, e o aceite fica só com o texto 'Concordo e autorizo o uso anônimo dos dados, em nível de pesquisa, conforme a LGPD', sem link para outra página.",
       "Revisão humana: no perfil dos candidatos, o título 'Experiência profissional' passa a ser 'Currículo', e Flávio Bolsonaro aparece na política desde 2003 (cerca de 23 anos até 2026), início do primeiro mandato; a primeira eleição continua 2002.",
+      "Revisão humana: o relatório ganha as caixas 'Visão Flávio' e 'Visão Lula' abaixo da barra de porcentagem, com texto escrito pela responsável e link para as fontes. Entram três fontes jornalísticas (Folha de S.Paulo, duas, e UOL) sobre o plano e as propostas de Flávio Bolsonaro. O texto de Lula será incluído na próxima revisão.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
   },

@@ -20,6 +20,7 @@ import { TopicPie } from "./TopicPie";
 import { ProfileProximity } from "./ProfileProximity";
 import { AREA_GROUPS, groupOfTopic } from "./areaGroups";
 import { CandidatesSection } from "./CandidatesSection";
+import { CandidateViews } from "./CandidateViews";
 
 interface Props {
   candidates: Candidate[];
@@ -113,6 +114,7 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
           </ul>
         </div>
         <ProfileProximity sections={sections} questions={QUESTIONS} answers={session.answers} candidates={ordered} positions={positions} evidence={evidence} sources={sources} />
+        <CandidateViews candidates={ordered} />
       </section>
 
       {/* ---------------- Como você respondeu ---------------- */}
