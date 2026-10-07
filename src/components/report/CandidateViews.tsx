@@ -1,70 +1,65 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import type { Candidate } from "@/domain/types";
 import { CANDIDATE_VIEWS } from "@/data/candidate-views";
+import { Modal } from "@/components/Modal";
 
 /**
- * Duas caixinhas abaixo da barra de porcentagem: "Visão Flávio" e "Visão Lula".
- * Ao clicar, abre o texto revisado pela responsável, com link para a página de fontes.
+ * Dois quadrados fixos abaixo da barra de porcentagem: "Visão Flávio" e "Visão Lula".
+ * Ao clicar, abre uma janela com rolagem e o texto revisado pela responsável; no final, "Veja as fontes".
  * A ordem segue a ordem sorteada dos candidatos nesta sessão.
  */
 export function CandidateViews({ candidates }: { candidates: Candidate[] }) {
-  const [open, setOpen] = useState<string | null>(null);
   const views = candidates
     .map((c, i) => ({ c, i, view: CANDIDATE_VIEWS.find((v) => v.candidateId === c.id) }))
-    .filter((x) => x.view);
+    .filter((x): x is { c: Candidate; i: number; view: NonNullable<typeof x.view> } => Boolean(x.view));
   if (!views.length) return null;
-  const current = views.find((x) => x.c.id === open);
 
   return (
-    <div className="space-y-3">
-      <div className="grid gap-3 sm:grid-cols-2">
-        {views.map(({ c, i, view }) => {
-          const active = open === c.id;
-          return (
-            <button
-              key={c.id}
-              type="button"
-              aria-expanded={active}
-              aria-controls="visao-candidato"
-              onClick={() => setOpen(active ? null : c.id)}
-              className={`card card-lift flex items-center justify-between gap-3 p-4 text-left shadow-sm border-t-4 ${i === 0 ? "border-t-accent" : "border-t-mint"} ${active ? "ring-2 ring-purple/40" : ""}`}
-            >
-              <span className="font-semibold">{view!.label}</span>
-              <span aria-hidden="true" className={`text-ink-3 transition-transform ${active ? "rotate-180" : ""}`}>▾</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {current ? (
-        <div id="visao-candidato" className="card p-5 md:p-6 space-y-4 animate-fade-up">
-          <h3 className="text-lg font-bold">{current.view!.label}</h3>
-          {current.view!.sections.length ? (
-            current.view!.sections.map((s) => (
-              <section key={s.title} className="space-y-1.5">
-                <h4 className="font-semibold">{s.title}</h4>
-                {s.blocks.map((b, k) =>
-                  typeof b === "string" ? (
-                    <p key={k} className="text-sm leading-relaxed text-ink-2">{b}</p>
-                  ) : (
-                    <ul key={k} className="list-disc pl-5 text-sm leading-relaxed text-ink-2">
-                      {b.list.map((li) => <li key={li}>{li}</li>)}
-                    </ul>
-                  ),
-                )}
-              </section>
-            ))
-          ) : (
-            <p className="text-sm text-ink-2">Texto em revisão. Em breve.</p>
-          )}
-          <Link href="/fontes" className="inline-flex items-center gap-1 text-sm font-semibold text-purple underline underline-offset-4 hover:text-purple-strong">
-            Veja as fontes →
-          </Link>
-        </div>
-      ) : null}
+    <div className="grid gap-3 sm:grid-cols-2">
+      {views.map(({ c, i, view }) => (
+        <Modal
+          key={c.id}
+          plainTrigger
+          title={view.label}
+          className={`card card-lift flex min-h-28 w-full flex-col justify-between gap-3 p-5 text-left shadow-sm border-t-4 ${i === 0 ? "border-t-accent" : "border-t-mint"}`}
+          trigger={
+            <>
+              <span className="text-lg font-bold">{view.label}</span>
+              <span className="text-sm font-medium text-purple">
+                {view.sections.length ? "Clique para ler" : "Texto em revisão"} <span aria-hidden="true">→</span>
+              </span>
+            </>
+          }
+        >
+          <div className="space-y-4">
+            {view.sections.length ? (
+              view.sections.map((s) => (
+                <section key={s.title} className="space-y-1.5">
+                  <h4 className="font-semibold">{s.title}</h4>
+                  {s.blocks.map((b, k) =>
+                    typeof b === "string" ? (
+                      <p key={k} className="text-sm leading-relaxed text-ink-2">{b}</p>
+                    ) : (
+                      <ul key={k} className="list-disc pl-5 text-sm leading-relaxed text-ink-2">
+                        {b.list.map((li) => <li key={li}>{li}</li>)}
+                      </ul>
+                    ),
+                  )}
+                </section>
+              ))
+            ) : (
+              <p className="text-sm text-ink-2">Texto em revisão. Em breve.</p>
+            )}
+            <div className="border-t border-line pt-4">
+              <Link href="/fontes" className="inline-flex items-center gap-1 text-sm font-semibold text-purple underline underline-offset-4 hover:text-purple-strong">
+                Veja as fontes →
+              </Link>
+            </div>
+          </div>
+        </Modal>
+      ))}
     </div>
   );
 }

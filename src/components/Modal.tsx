@@ -7,8 +7,10 @@ import { Button } from "@/components/ui";
  * Pop-up acessível com <dialog> nativo: abre por um botão, fecha no X, no Esc e ao clicar fora.
  * No celular sobe como uma folha a partir da base; no desktop fica centralizado.
  */
-export function Modal({ trigger, title, children, variant = "secondary", className = "" }: {
+export function Modal({ trigger, title, children, variant = "secondary", className = "", plainTrigger = false }: {
   trigger: ReactNode;
+  /** Usa um botão sem o estilo padrão (ex.: um quadrado/cartão), com o className informado. */
+  plainTrigger?: boolean;
   title: string;
   children: ReactNode;
   variant?: "primary" | "secondary" | "ghost";
@@ -21,7 +23,11 @@ export function Modal({ trigger, title, children, variant = "secondary", classNa
 
   return (
     <>
-      <Button type="button" variant={variant} className={`print:hidden ${className}`} onClick={open}>{trigger}</Button>
+      {plainTrigger ? (
+        <button type="button" className={`print:hidden ${className}`} onClick={open}>{trigger}</button>
+      ) : (
+        <Button type="button" variant={variant} className={`print:hidden ${className}`} onClick={open}>{trigger}</Button>
+      )}
       <dialog
         ref={ref}
         className="modal"
