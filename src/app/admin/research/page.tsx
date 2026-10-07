@@ -56,6 +56,14 @@ export default async function AdminResearchPage() {
         <div className="card p-4"><p className="text-xs text-ink-3">Taxa de conclusão</p><p className="text-3xl font-bold">{r.overview.completionRate === null ? "—" : `${r.overview.completionRate}%`}</p><p className="text-xs text-ink-3">das respostas</p></div>
       </section>
 
+      <section aria-label="Destaques" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {pp.byCandidate.map((b, i) => (
+          <StatCard key={b.candidateId} tone={i === 0 ? "border-t-accent" : "border-t-mint"} label={`Perfil mais perto de ${candidateName[b.candidateId] ?? b.candidateId}`} value={b.count.toLocaleString("pt-BR")} note={b.share === null ? "sem comparação ainda" : `${b.share.toLocaleString("pt-BR")}% dos questionários comparáveis`} />
+        ))}
+        <StatCard tone="border-t-gold" label="Disseram que ajudou na decisão" value={r.feedback.shareHelpedYes === null ? "—" : `${r.feedback.shareHelpedYes}%`} note={`sim ${r.feedback.helpedYes} · não ${r.feedback.helpedNo}`} />
+        <StatCard tone="border-t-purple" label="Nota média da pesquisa (1–5)" value={r.feedback.averageRating === null ? "—" : String(r.feedback.averageRating)} note={`${r.feedback.total} avaliações`} />
+      </section>
+
       <section id="temas" aria-labelledby="temas-h">
         <h2 id="temas-h" className="text-xl font-bold">Temas e prioridades</h2>
         <table className="mt-3 w-full text-sm card">
@@ -65,7 +73,14 @@ export default async function AdminResearchPage() {
               <tr key={p.topicId} className="border-t border-line">
                 <td className="p-2">{p.topicName}</td>
                 <td className="p-2">{p.totalResponses}</td>
-                <td className="p-2">{p.totalResponses ? formatShare(p.shareHighPriority) : "—"}</td>
+                <td className="p-2 min-w-48">
+                  {p.totalResponses ? (
+                    <div className="flex items-center gap-2">
+                      <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-line" aria-hidden="true"><div className="h-full rounded-full bg-purple" style={{ width: `${p.shareHighPriority}%` }} /></div>
+                      <span className="tabular-nums text-xs">{p.shareHighPriority.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%</span>
+                    </div>
+                  ) : "—"}
+                </td>
                 <td className="p-2 tabular-nums text-ink-2">{p.byLevel.join(" · ")}</td>
               </tr>
             ))}
@@ -75,16 +90,23 @@ export default async function AdminResearchPage() {
 
       <section id="perguntas" aria-labelledby="perguntas-h" className="space-y-3">
         <h2 id="perguntas-h" className="text-xl font-bold">Perguntas</h2>
+        <p className="text-sm text-ink-2">Quantas pessoas escolheram cada alternativa. Clique numa pergunta para ver as barras.</p>
+        <div className="card p-4">
+          <h3 className="text-sm font-semibold">Perguntas com mais “não sei”</h3>
+          <p className="text-xs text-ink-3">Pode indicar pergunta confusa ou tema pouco conhecido.</p>
+          <ul className="mt-3 space-y-2">
+            {[...r.questions].filter((q) => q.totalResponses > 0).sort((a, b) => b.noOpinionCount / b.totalResponses - a.noOpinionCount / a.totalResponses).slice(0, 5).map((q) => (
+              <BarRow key={q.questionId} tone="bg-gold" label={`${q.questionId.toUpperCase()} — ${q.text}`} count={q.noOpinionCount} share={(q.noOpinionCount / q.totalResponses) * 100} />
+            ))}
+            {r.questions.every((q) => q.totalResponses === 0) ? <li className="text-sm text-ink-3">Sem dados.</li> : null}
+          </ul>
+        </div>
         {r.questions.map((q) => (
           <details key={q.questionId} className="card p-4">
             <summary className="text-sm font-medium">{q.questionId.toUpperCase()} — {q.text} <span className="text-ink-3">({q.totalResponses} respostas · {q.noOpinionCount} “não sei”)</span></summary>
-            <ul className="mt-3 space-y-1 text-sm">
+            <ul className="mt-3 space-y-2">
               {q.options.map((o) => (
-                <li key={o.optionId} className="grid grid-cols-[1fr_auto_auto] gap-3 items-center">
-                  <span>{o.label}</span>
-                  <span className="tabular-nums text-ink-2">{o.count}</span>
-                  <span className="tabular-nums w-40 text-right">{q.totalResponses ? formatShare(o.shareOfResponses) : "—"}</span>
-                </li>
+                <BarRow key={o.optionId} label={o.label} count={o.count} share={q.totalResponses ? o.shareOfResponses : null} tone={o.label === "Não sei" ? "bg-ink-3" : "bg-accent"} />
               ))}
             </ul>
           </details>
@@ -130,6 +152,22 @@ export default async function AdminResearchPage() {
 
       <section id="tempo" aria-labelledby="tempo-h">
         <h2 id="tempo-h" className="text-xl font-bold">Evolução temporal</h2>
+        {r.timeline.length ? (
+          <div className="mt-3 card p-4">
+            <div className="flex h-40 items-end gap-1" role="img" aria-label={r.timeline.map((t) => `${t.date}: ${t.count}`).join("; ")}>
+              {r.timeline.map((t) => {
+                const max = Math.max(...r.timeline.map((x) => x.count), 1);
+                return (
+                  <div key={t.date} className="flex min-w-0 flex-1 flex-col items-center justify-end gap-1" title={`${t.date}: ${t.count}`}>
+                    <span className="text-[10px] tabular-nums text-ink-2">{t.count}</span>
+                    <div className="w-full rounded-t bg-mint" style={{ height: `${(t.count / max) * 100}%`, minHeight: 2 }} />
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-1 flex justify-between text-[10px] text-ink-3"><span>{r.timeline[0].date}</span><span>{r.timeline[r.timeline.length - 1].date}</span></div>
+          </div>
+        ) : null}
         <table className="mt-3 w-full max-w-md text-sm card"><thead><tr className="bg-paper text-left"><th className="p-2">Dia</th><th className="p-2">Questionários</th></tr></thead>
           <tbody>{r.timeline.length === 0 ? <tr><td className="p-2 text-ink-3" colSpan={2}>Sem dados.</td></tr> : r.timeline.map((t) => <tr key={t.date} className="border-t border-line"><td className="p-2">{t.date}</td><td className="p-2 tabular-nums">{t.count}</td></tr>)}</tbody>
         </table>
@@ -157,6 +195,25 @@ export default async function AdminResearchPage() {
         </div>
       </section>
 
+      <section aria-label="Gráficos da avaliação" className="grid gap-4 md:grid-cols-2">
+        <div className="card p-4">
+          <h3 className="text-sm font-semibold">Notas da pesquisa</h3>
+          <ul className="mt-3 space-y-2">
+            {r.feedback.byRating.map((n, i) => (
+              <BarRow key={i} tone="bg-purple" label={`Nota ${i + 1}`} count={n} share={r.feedback.total ? (n / r.feedback.total) * 100 : null} />
+            )).reverse()}
+          </ul>
+        </div>
+        <div className="card p-4">
+          <h3 className="text-sm font-semibold">A pesquisa ajudou na decisão?</h3>
+          <ul className="mt-3 space-y-2">
+            <BarRow tone="bg-mint" label="Sim" count={r.feedback.helpedYes} share={r.feedback.total ? (r.feedback.helpedYes / r.feedback.total) * 100 : null} />
+            <BarRow tone="bg-gold" label="Não" count={r.feedback.helpedNo} share={r.feedback.total ? (r.feedback.helpedNo / r.feedback.total) * 100 : null} />
+            <BarRow tone="bg-ink-3" label="Preferiu não dizer" count={r.feedback.helpedUnanswered} share={r.feedback.total ? (r.feedback.helpedUnanswered / r.feedback.total) * 100 : null} />
+          </ul>
+        </div>
+      </section>
+
       <section id="exportacao" aria-labelledby="exp-h">
         <h2 id="exp-h" className="text-xl font-bold">Exportação</h2>
         <p className="text-sm text-ink-2 mt-1">Apenas agregações. Nenhuma exportação contém registros individuais.</p>
@@ -165,6 +222,32 @@ export default async function AdminResearchPage() {
           <a className="rounded-lg border border-line px-4 py-2 min-h-11 inline-flex items-center" href="/api/admin/research?format=csv">CSV por pergunta e alternativa</a>
         </div>
       </section>
+    </div>
+  );
+}
+
+/** Barra horizontal simples: rótulo, contagem e porcentagem. */
+function BarRow({ label, count, share, tone = "bg-accent" }: { label: string; count: number; share: number | null; tone?: string }) {
+  const pct = share ?? 0;
+  return (
+    <li className="space-y-0.5">
+      <div className="flex items-baseline justify-between gap-3 text-sm">
+        <span className="min-w-0">{label}</span>
+        <span className="shrink-0 tabular-nums text-ink-2">{count} · {share === null ? "—" : `${pct.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%`}</span>
+      </div>
+      <div className="h-2.5 w-full overflow-hidden rounded-full bg-line" aria-hidden="true">
+        <div className={`h-full rounded-full ${tone}`} style={{ width: `${Math.min(100, Math.max(0, pct))}%` }} />
+      </div>
+    </li>
+  );
+}
+
+function StatCard({ label, value, note, tone = "border-t-accent" }: { label: string; value: string; note?: string; tone?: string }) {
+  return (
+    <div className={`card border-t-4 p-4 ${tone}`}>
+      <p className="text-xs text-ink-3">{label}</p>
+      <p className="text-3xl font-bold tabular-nums">{value}</p>
+      {note ? <p className="text-xs text-ink-2">{note}</p> : null}
     </div>
   );
 }

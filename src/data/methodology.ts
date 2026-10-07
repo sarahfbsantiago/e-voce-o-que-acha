@@ -100,6 +100,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: o PDF do relatório mostra o currículo de cada candidato com a visão dele logo abaixo, em quadros pequenos, e todos os nomes de projetos. Saem do PDF a lista de temas de 'Como você respondeu' e os botões. Sai do rodapé o link 'Histórico de alterações'.",
       "Revisão humana: entram na página Fontes o comunicado do Ministério da Justiça sobre a proibição das bets, o Redata (MDIC), a Nuvem Brasileira (Serpro) e a Lei nº 15.358/2026 (Marco Legal do Combate ao Crime Organizado). A página dos planos de governo no TSE passa a ter o link direto.",
       "Painel administrativo: menu ligando Dados da pesquisa, Revisão de posições e o site; o endereço /admin passa a abrir o painel no domínio menos-pior.up.railway.app.",
+      "Painel administrativo: destaques no topo (perfis mais perto de cada candidato, ajudou na decisão, nota média), barras por alternativa em cada pergunta, perguntas com mais 'não sei' e gráficos de prioridades, notas, ajuda na decisão e respostas por dia. Só agregações, sem registros individuais.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
   },
