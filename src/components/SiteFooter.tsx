@@ -12,7 +12,7 @@ const LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative z-10 border-t border-line mt-20 bg-surface">
+    <footer className="site-footer relative z-10 border-t border-line mt-20 bg-surface">
       <div className="container-page py-8 md:py-14 text-sm text-ink-2">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr] md:gap-12">
           <div className="max-w-sm">

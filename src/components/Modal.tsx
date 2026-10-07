@@ -21,7 +21,7 @@ export function Modal({ trigger, title, children, variant = "secondary", classNa
 
   return (
     <>
-      <Button type="button" variant={variant} className={className} onClick={open}>{trigger}</Button>
+      <Button type="button" variant={variant} className={`print:hidden ${className}`} onClick={open}>{trigger}</Button>
       <dialog
         ref={ref}
         className="modal"

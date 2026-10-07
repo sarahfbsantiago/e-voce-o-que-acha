@@ -168,11 +168,11 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
       </section>
 
       {/* ---------------- Avaliação e encerramento ---------------- */}
-      <FeedbackForm />
+      <div className="print:hidden"><FeedbackForm /></div>
 
-      <section className="text-center py-8 max-w-3xl mx-auto">
+      <section className="print-keep text-center py-8 max-w-3xl mx-auto">
         <p className="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight leading-snug">{FINAL_MESSAGE}</p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3 print:hidden">
           <ButtonLink href="/questionario/perguntas" variant="secondary">Revisar minhas respostas</ButtonLink>
           <RestartButton label="Refazer do zero" variant="secondary" />
           <PrintButton />

@@ -11,7 +11,7 @@ const NAV = [
 
 export function SiteHeader() {
   return (
-    <header className="relative z-20 border-b border-line bg-surface/90 backdrop-blur supports-[backdrop-filter]:bg-surface/80 sticky top-0">
+    <header className="site-header relative z-20 border-b border-line bg-surface/90 backdrop-blur supports-[backdrop-filter]:bg-surface/80 sticky top-0">
       <div className="container-page flex items-center justify-between gap-4 py-3">
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-ink">
           <BrazilMark size={30} className="shrink-0" />

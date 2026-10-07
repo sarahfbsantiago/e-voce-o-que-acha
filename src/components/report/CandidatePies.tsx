@@ -12,7 +12,7 @@ import { AREA_GROUPS } from "./areaGroups";
  */
 export function CandidatePies({ candidates }: { candidates: Candidate[] }) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
+    <div className="grid gap-3 sm:grid-cols-2 print:block print:space-y-3">
       {candidates.map((c) => {
         const acts = CANDIDATE_ACTS[c.id] ?? [];
         const slices: Slice[] = AREA_GROUPS.map((g) => {

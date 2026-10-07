@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getContentRepository } from "@/lib/repository";
 import { ReportView } from "@/components/report/ReportView";
 
-export const metadata: Metadata = { title: "Seu mapa de prioridades" };
+export const metadata: Metadata = { title: "Seu perfil" };
 export const dynamic = "force-dynamic";
 
 export default async function RelatorioPage() {

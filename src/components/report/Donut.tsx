@@ -34,7 +34,7 @@ export function Donut({ slices, caption, hint, centerUnit = "%", size = 220, com
   return (
     <figure className={compact ? "card p-4" : "card p-5 md:p-6"}>
       <figcaption className={compact ? "text-xs font-semibold" : "text-sm font-semibold"}>{caption}</figcaption>
-      {hint ? <p className="mt-0.5 text-[11px] text-ink-3">{hint}</p> : null}
+      {hint ? <p className="mt-0.5 text-[11px] text-ink-3 print:hidden">{hint}</p> : null}
       <div className={compact ? "mt-3 grid items-center gap-3 grid-cols-[auto_minmax(0,1fr)]" : "mt-5 grid items-center gap-6 md:grid-cols-[auto_minmax(0,1fr)]"}>
         <div className="relative mx-auto max-w-full" style={{ width: size }}>
           <svg viewBox="0 0 100 100" className="block w-full" role="img" aria-label={caption}>
@@ -72,13 +72,16 @@ export function Donut({ slices, caption, hint, centerUnit = "%", size = 220, com
             <li
               key={x.s.id}
               title={`${x.s.label}${x.s.detail ? ` — ${x.s.detail}` : ""}`}
-              className={`grid cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-lg transition-colors ${compact ? "px-1 py-0.5" : "px-2 py-1"} ${active === x.s.id ? "bg-paper" : "hover:bg-paper"}`}
+              className={`grid cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-2 rounded-lg transition-colors ${compact ? "px-1 py-0.5" : "px-2 py-1"} ${active === x.s.id ? "bg-paper" : "hover:bg-paper"}`}
               onMouseEnter={() => setActive(x.s.id)} onMouseLeave={() => setActive(null)}
               onClick={() => setActive(active === x.s.id ? null : x.s.id)}
             >
-              <span aria-hidden="true" className={compact ? "h-2 w-2 rounded-sm" : "h-3 w-3 rounded-sm"} style={{ background: x.s.color }} />
-              <span className="truncate text-ink-2">{x.s.label}</span>
-              <span className={compact ? "whitespace-nowrap text-[10px] text-ink-3" : "whitespace-nowrap text-xs text-ink-3"}><span className="font-semibold text-ink">{Math.round(x.pct)}%</span>{!compact && x.s.detail ? ` · ${x.s.detail}` : ""}</span>
+              <span aria-hidden="true" className={`swatch ${compact ? "mt-1 h-2.5 w-2.5 rounded-sm" : "mt-1 h-3 w-3 rounded-sm"}`} style={{ background: x.s.color }} />
+              <span className="min-w-0 text-ink-2 leading-snug">
+                <span className="block">{x.s.label}</span>
+                {!compact && x.s.detail ? <span className="block text-[11px] text-ink-3">{x.s.detail}</span> : null}
+              </span>
+              <span className={compact ? "whitespace-nowrap text-[11px] font-semibold text-ink" : "whitespace-nowrap text-sm font-semibold text-ink"}>{Math.round(x.pct)}%</span>
             </li>
           ))}
         </ul>

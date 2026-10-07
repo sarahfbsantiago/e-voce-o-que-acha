@@ -107,7 +107,7 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
   const currentArea = areas.find((a) => a.g.id === openId) ?? null;
 
   return (
-    <section className="card p-5 md:p-6" aria-labelledby="proximidade">
+    <section className="card print-splittable p-5 md:p-6" aria-labelledby="proximidade">
       <h3 id="proximidade" className="text-sm font-semibold">Qual candidato está mais próximo do seu perfil</h3>
       <p className="mt-0.5 text-xs text-ink-3">Cinco áreas, com os temas dentro; a conta é feita tema a tema, só com posições publicadas. Toque numa área para ver, pergunta por pergunta, o que cada candidato pensa e por quê.</p>
 
@@ -132,13 +132,13 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
             <button type="button" onClick={() => setOpenId(g.id)} className="card-lift w-full rounded-xl border border-line bg-paper/50 p-3 text-left transition-colors hover:border-accent/40">
               <div className="flex items-center gap-2">
                 <span aria-hidden="true" className="h-3 w-3 shrink-0 rounded-sm" style={{ background: g.color }} />
-                <span className="min-w-0 flex-1 truncate text-sm font-semibold">{g.label}</span>
+                <span className="min-w-0 flex-1 text-sm font-semibold leading-snug">{g.label}</span>
               </div>
               <ul className="mt-2 space-y-1.5">
                 {rs.map((r) => (
                   <li key={r.s.topic.id} className="flex items-center gap-2 text-xs">
                     <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-sm" style={{ background: r.color }} />
-                    <span className="min-w-0 flex-1 truncate text-ink-2">{r.s.topic.name}</span>
+                    <span className="min-w-0 flex-1 text-ink-2 leading-snug">{r.s.topic.name}</span>
                     {r.closest ? (
                       <span className="shrink-0 rounded-md border border-accent/30 bg-accent-soft px-1.5 py-0.5 text-[11px] font-medium text-accent-strong">{first(r.closest)}</span>
                     ) : (
@@ -147,7 +147,7 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 text-[11px] font-medium text-accent">Entender por quê →</p>
+              <p className="mt-2 text-[11px] font-medium text-accent print:hidden">Entender por quê →</p>
             </button>
           </li>
         ))}

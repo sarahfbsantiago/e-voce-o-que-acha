@@ -323,18 +323,32 @@ dialog.modal[open] { animation: modal-in 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
 
 /* ---------- Impressão / Salvar como PDF ---------- */
 @media print {
-  @page { margin: 14mm; }
-  html, body { background: #fff !important; color: #000; }
-  header, footer, nav, canvas, .page-glow, dialog, .btn-cta, [aria-label="Começar o questionário"], .print\:hidden { display: none !important; }
+  @page { size: A4; margin: 12mm; }
+  /* Sem isto o navegador não imprime fundos: somem as cores das legendas, das pizzas e das barras. */
+  *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
+  html { font-size: 12.5px !important; }
+  html, body { background: #fff !important; color: #111; }
+  .site-header, .site-footer, nav, canvas, .page-glow, dialog, .btn-cta, [aria-label="Começar o questionário"], .print\:hidden { display: none !important; }
   main { position: static !important; }
-  .card, figure, section, li { break-inside: avoid; box-shadow: none !important; }
-  .card { border: 1px solid #ccc !important; }
-  details > summary { display: none; }
+  /* Blocos inteiros: nunca partir um card, uma figura ou um item no meio. */
+  .card, figure, li, tr, h2, h3, h4 { break-inside: avoid; page-break-inside: avoid; }
+  h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  /* Card que contém outros cards pode quebrar entre eles (evita página em branco); os de dentro continuam inteiros. */
+  .card:has(.card), .print-splittable { break-inside: auto !important; page-break-inside: auto !important; }
+  .print-splittable > div, .print-splittable > ul, .print-splittable > dl { break-inside: avoid; page-break-inside: avoid; }
+  .print-keep { break-inside: avoid; page-break-inside: avoid; }
+  .card { border: 1px solid #c9c9c9 !important; box-shadow: none !important; }
+  /* Texto inteiro no papel: nada de reticências. */
+  .truncate, .line-clamp-2, .line-clamp-3 { overflow: visible !important; white-space: normal !important; text-overflow: clip !important; -webkit-line-clamp: unset !important; display: block; }
+  /* Texto secundário legível no papel. */
+  .text-ink-3 { color: #555 !important; }
+  .text-ink-2 { color: #333 !important; }
+  details > summary { list-style: none; cursor: default; }
+  details > summary::-webkit-details-marker { display: none; }
   details { display: block; }
   details > *:not(summary) { display: block; }
+  /* Links continuam clicáveis no PDF, sem o endereço por extenso no meio do texto. */
   a { color: inherit; text-decoration: none; }
-  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #666; word-break: break-all; }
   html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 1 !important; transform: none !important; }
   .animate-fade-up { animation: none !important; opacity: 1 !important; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
 }

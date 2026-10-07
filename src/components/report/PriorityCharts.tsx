@@ -17,8 +17,8 @@ export function PriorityCharts({ sections }: { sections: TopicSection[] }) {
             const missing = s.total - s.answered;
             const seg = (n: number) => `${(n / Math.max(1, s.total)) * 100}%`;
             return (
-              <li key={s.topic.id} className="grid grid-cols-[minmax(0,9rem)_1fr] items-center gap-3 text-sm" title={`${s.topic.name}: ${withOpinion} com opinião, ${s.noOpinion} “não sei”, ${missing} sem resposta`}>
-                <span className="truncate text-ink-2">{s.topic.name}</span>
+              <li key={s.topic.id} className="grid grid-cols-[minmax(0,13rem)_1fr] items-center gap-3 text-sm" title={`${s.topic.name}: ${withOpinion} com opinião, ${s.noOpinion} “não sei”, ${missing} sem resposta`}>
+                <span className="text-ink-2 leading-snug">{s.topic.name}</span>
                 <span className="flex items-center gap-2">
                   <span className="flex h-3 flex-1 gap-0.5 overflow-hidden rounded-r bg-line/60" aria-hidden="true">
                     {withOpinion > 0 ? <span className="h-full bg-accent" style={{ width: seg(withOpinion) }} /> : null}

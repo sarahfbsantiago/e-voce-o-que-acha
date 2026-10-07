@@ -82,7 +82,7 @@ export function CandidatesSection({ ordered, profiles, summaries, sourceById }: 
                       </li>
                     ))}
                   </ul>
-                  {p.keyInitiatives.length > 5 ? <p className="mt-1 text-xs text-ink-3">+{p.keyInitiatives.length - 5} no detalhe</p> : null}
+                  {p.keyInitiatives.length > 5 ? <p className="mt-1 text-xs text-ink-3"><span className="print:hidden">+{p.keyInitiatives.length - 5} no detalhe</span><span className="hidden print:inline">+{p.keyInitiatives.length - 5} na versão online do relatório</span></p> : null}
                 </div>
               ) : null}
               <div className="mt-auto">
