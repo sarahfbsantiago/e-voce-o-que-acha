@@ -27,7 +27,7 @@ Alternativa: rode os mesmos comandos pelo shell do serviço no Railway.
 ## 4. Atualizações
 - Conteúdo em arquivo (perguntas, perfis, fontes): editar em `src/data`, rodar `npm run db:seed` contra produção.
 - Posições dos candidatos: `prisma/drafts/positions.draft.json`, depois `IMPORT_UPDATE_PUBLISHED=1 npm run db:import-drafts`.
-- Código: `git push` guarda o histórico, mas o serviço ainda não está ligado ao GitHub; o deploy é feito pela CLI:
+- Código: `git push` guarda o histórico. O serviço registra este repositório como origem, mas o deploy de produção é feito pela CLI, a partir dos arquivos locais:
   `railway up --service voce-decide --detach` e depois `railway deployment list` até SUCCESS.
   Não use `railway redeploy` para publicar código novo: ele reconstrói o commit antigo.
 - Depois do deploy, se `src/data` mudou: `ssh voce-decide-prod 'cd /app && npx tsx prisma/seed.ts'`.

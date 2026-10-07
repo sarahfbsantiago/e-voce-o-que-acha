@@ -9,10 +9,11 @@ import { AREA_GROUPS } from "./areaGroups";
  * Atuação de cada candidato por área, medida pelo que ele FEZ: atos documentados em fontes oficiais
  * (leis, decretos, medidas provisórias e programas; para o parlamentar, projetos de sua autoria),
  * classificados por área. Promessas de programa não entram. Mesmas áreas e cores da pizza da pessoa.
+ * Só no site: no PDF do relatório fica apenas a pizza da pessoa.
  */
 export function CandidatePies({ candidates }: { candidates: Candidate[] }) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2 print:block print:space-y-3">
+    <div className="grid gap-3 sm:grid-cols-2 print:hidden">
       {candidates.map((c) => {
         const acts = CANDIDATE_ACTS[c.id] ?? [];
         const slices: Slice[] = AREA_GROUPS.map((g) => {

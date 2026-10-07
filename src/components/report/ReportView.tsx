@@ -119,7 +119,7 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-[11px] text-ink-3">Na sua pizza, cada fatia soma a importância que você deu aos temas da área. Nas dos candidatos, cada fatia é o que ele fez: para o Lula, as leis, decretos, medidas provisórias e programas conferidos; para o Flávio, todas as proposições de sua autoria no Senado. Cada ato é classificado por área pelo seu objeto. Promessas de programa não entram.</p>
+          <p className="mt-2 text-[11px] text-ink-3">Na sua pizza, cada fatia soma a importância que você deu aos temas da área.<span className="print:hidden"> Nas dos candidatos, cada fatia é o que ele fez: para o Lula, as leis, decretos, medidas provisórias e programas conferidos; para o Flávio, todas as proposições de sua autoria no Senado. Cada ato é classificado por área pelo seu objeto. Promessas de programa não entram.</span></p>
         </div>
         <ProfileProximity sections={sections} questions={QUESTIONS} answers={session.answers} candidates={ordered} positions={positions} evidence={evidence} sources={sources} />
       </section>

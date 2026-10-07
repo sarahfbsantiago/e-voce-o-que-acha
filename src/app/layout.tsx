@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -8,13 +7,7 @@ import { BrazilScene } from "@/components/brand/BrazilScene";
 import { PageGlow } from "@/components/fx/PageGlow";
 import { RevealOnScroll } from "@/components/fx/RevealOnScroll";
 
-/** Fonte do site: Roboto Mono (estilo código), com fallback monoespaçado do sistema. */
-const robotoMono = Roboto_Mono({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-roboto-mono",
-  display: "swap",
-});
+/** Fonte do site: Verdana (fonte do sistema, definida em globals.css). Não há download de fonte externa. */
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : "http://localhost:3000");
 
@@ -39,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={robotoMono.variable}>
+    <html lang="pt-BR">
       <body className="min-h-screen flex flex-col">
         <a
           href="#conteudo"

@@ -15,7 +15,8 @@
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
     "postinstall": "prisma generate",
-    "db:import-drafts": "tsx prisma/import-drafts.ts"
+    "db:import-drafts": "tsx prisma/import-drafts.ts",
+    "docs:questions": "tsx --tsconfig tsconfig.json scripts/update-readme-questions.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",

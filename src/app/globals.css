@@ -29,14 +29,15 @@
   --color-gold-strong: #8f6c0e;
   --color-gold-soft: #fbf1d6;
 
-  --font-sans: var(--font-roboto-mono), "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Verdana: desenhada para tela, letras largas e espaçadas. Fallbacks com métricas parecidas. */
+  --font-sans: Verdana, Tahoma, "DejaVu Sans", "Bitstream Vera Sans", Geneva, sans-serif;
   --radius-card: 14px;
 }
 
 html {
   -webkit-text-size-adjust: 100%;
 }
-/* Celular: a fonte monoespaçada é larga; reduz a escala base para a página caber na proporção */
+/* Celular: a Verdana é larga; reduz um pouco a escala base para a página caber na proporção */
 @media (max-width: 640px) {
   html { font-size: 14.5px; }
 }
@@ -53,7 +54,7 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   line-height: 1.6;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
 }
 
