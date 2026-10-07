@@ -10,15 +10,6 @@ import { useSession } from "@/store/session";
 const BENEFITS: [string, string][] = [
   ["Anônimo de verdade", "Sem nome, email, documento, IP ou cidade. Não existe campo para isso."],
   ["Só para pesquisa", "Os dados viram estatísticas agregadas, nunca registros individuais nem propaganda."],
-  ["Você pode revogar", "Dá para retirar o consentimento a qualquer momento em Privacidade e dados."],
-];
-
-/** O que é compartilhado em nível de pesquisa, de forma anônima. Mostrado junto do aceite. */
-const SHARED_FOR_RESEARCH = [
-  "suas respostas e a importância que você deu a cada tema;",
-  "o resultado do seu relatório: com qual candidato, Lula ou Flávio Bolsonaro, suas respostas ficaram mais próximas;",
-  "a nota que você der à pesquisa e se ela ajudou na sua decisão;",
-  "faixa etária e região, somente se você escolher informar.",
 ];
 
 export function ConsentForm() {
@@ -47,7 +38,7 @@ export function ConsentForm() {
     <section className="animate-fade-up [animation-delay:200ms] mt-6 card p-6 md:p-8 space-y-5 shadow-sm border-t-4 border-t-purple" aria-labelledby="consent-title">
       <h2 id="consent-title" className="text-lg md:text-xl font-bold leading-snug">Ajude a pesquisa, sem contar quem você é</h2>
 
-      <ul className="grid gap-3 sm:grid-cols-3 text-sm">
+      <ul className="grid gap-3 sm:grid-cols-2 text-sm">
         {BENEFITS.map(([t, d], i) => (
           <li key={t} className="rounded-xl border border-line bg-paper/60 p-4">
             <p className="font-semibold flex items-center gap-2">
@@ -85,9 +76,7 @@ export function ConsentForm() {
           </span>
         </label>
         <div id="consent-detail" className="mt-3 pl-8 text-xs text-ink-2 leading-relaxed">
-          <p>Serão compartilhados de forma anônima, apenas em estatísticas agregadas:</p>
-          <ul className="mt-1 list-disc pl-4 space-y-0.5">{SHARED_FOR_RESEARCH.map((t) => <li key={t}>{t}</li>)}</ul>
-          <p className="mt-2 font-medium text-ink">Para participar, é preciso concordar.</p>
+          <p className="font-medium text-ink">Para participar, é preciso concordar.</p>
         </div>
       </div>
 
