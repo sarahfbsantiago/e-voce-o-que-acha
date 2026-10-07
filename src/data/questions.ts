@@ -125,7 +125,6 @@ export const QUESTIONS: Question[] = [
     ["Mais prevenção, educação e oportunidades", null],
     ["As duas coisas juntas", null],
   ]),
-  q("q24", "t06", 4, "Crimes violentos deveriam ter penas maiores?", SIM_NAO("Depende do crime")),
 
   // ---- Sessão 7. Armas, drogas e apostas -------------------------------------
   q("q25", "t07", 1, "Comprar e ter armas deveria ser:", [
@@ -183,21 +182,11 @@ export const QUESTIONS: Question[] = [
     ["Somente em algumas tecnologias", 1],
     ["Não é necessário", -2],
   ], { contextNoteIds: ["ctx-autonomia-tecnologica"], argumentsId: "arg-autonomia-tecnologica" }),
-  q("q39", "t10", 2, "O governo deveria investir no desenvolvimento de inteligência artificial brasileira?", [
-    ["Sim", 2],
-    ["Somente em universidades e pesquisa", 1],
-    ["Deveria deixar principalmente para empresas privadas", -1],
-    ["Não deveria investir", -2],
-  ], { argumentsId: "arg-ia", evidenceDistinctions: ["uso de IA pelo governo", "desenvolvimento de modelos", "infraestrutura computacional", "regulação", "pesquisa científica", "formação profissional", "política industrial"] }),
   q("q40", "t10", 3, "Informações importantes do governo e dos cidadãos deveriam ter regras especiais para ficarem protegidas no Brasil?", [
     ["Sim", 2],
     ["Somente informações muito sensíveis", 1],
     ["Não é necessário", -2],
   ], { contextNoteIds: ["ctx-nuvem-dados"], argumentsId: "arg-dados" }),
-  q("q41", "t10", 4, "O Brasil deveria investir em chips, satélites, internet e outras tecnologias próprias, mesmo que isso custe mais no começo?", SIM_NAO("Somente nas áreas mais importantes"), {
-    argumentsId: "arg-tecnologias-proprias",
-    evidenceDistinctions: ["semicondutores (pesquisa, design, encapsulamento, fabricação)", "satélites e espaço", "telecomunicações", "infraestrutura digital"],
-  }),
   q("q42", "t10", 5, "Sistemas importantes do governo deveriam evitar depender de uma única empresa estrangeira?", [
     ["Sim", 2],
     ["Somente sistemas muito importantes", 1],
@@ -228,12 +217,6 @@ export const QUESTIONS: Question[] = [
   q("q47", "t11", 5, "O Brasil deveria buscar mais independência nas decisões internacionais, mesmo quando isso desagradar países mais poderosos?", SIM_NAO("Depende da situação"), { argumentsId: "arg-autonomia-externa" }),
 
   // ---- Sessão 12. Direitos, democracia e instituições ------------------------
-  q("q48", "t12", 1, "Casais do mesmo sexo deveriam ter os mesmos direitos dos outros casais?", SIM_NAO("Alguns direitos")),
-  q("q49", "t12", 2, "Religiões deveriam influenciar as decisões do governo?", [
-    ["Não", -2],
-    ["Podem participar do debate, mas não decidir políticas", 0],
-    ["Sim, deveriam ter mais influência", 2],
-  ]),
   q("q50", "t12", 3, "Quando o STF toma uma decisão válida, governo e Congresso devem cumprir essa decisão mesmo discordando dela?", SIM_NAO("Depende do caso")),
   q("q51", "t12", 4, "Órgãos como Polícia Federal, Ministério Público e tribunais de contas deveriam poder investigar pessoas do próprio governo sem interferência política?", SIM_NAO("Sim, mas com mais controle sobre essas instituições")),
   q("q52", "t12", 5, "Quando existem suspeitas de corrupção envolvendo políticos, qual deveria ser a regra?", [

@@ -100,6 +100,8 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: o PDF do relatório mostra o currículo de cada candidato com a visão dele logo abaixo, em quadros pequenos, e todos os nomes de projetos. Saem do PDF a lista de temas de 'Como você respondeu' e os botões. Sai do rodapé o link 'Histórico de alterações'.",
       "Revisão humana: entram na página Fontes o comunicado do Ministério da Justiça sobre a proibição das bets, o Redata (MDIC), a Nuvem Brasileira (Serpro) e a Lei nº 15.358/2026 (Marco Legal do Combate ao Crime Organizado). A página dos planos de governo no TSE passa a ter o link direto.",
       "Revisão humana: entra o texto 'Visão Lula' (71 itens em 12 temas), escrito pela responsável, no quadrado abaixo da barra de porcentagem, em 'Entender por quê' e no PDF. As posições de Lula usadas na conta não mudam.",
+      "Revisão humana: saem do questionário as perguntas Q24 (penas maiores para crimes violentos), Q39 (inteligência artificial brasileira), Q41 (chips, satélites e tecnologias próprias), Q48 (direitos de casais do mesmo sexo) e Q49 (religião nas decisões do governo). O questionário passa a ter 47 perguntas. A fórmula não muda; as contas por tema usam só as perguntas que ficaram.",
+      "Revisão humana: o questionário passa a ter 5 seções, uma por área do relatório e com a cor dela no gráfico. Cada seção começa perguntando o quanto aqueles temas importam; a resposta vale para todos os temas da seção e continua servindo só para ordenar o relatório.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
   },

@@ -44,7 +44,6 @@ export const FLAVIO_VIEW_POSITIONS: ViewPosition[] = [
 
   // Segurança pública
   { questionId: "q23", direction: "SUPPORTS", closestOptionId: "q23-o1", basis: "Defende leis duras, penas maiores, mais presídios e mais vigilância." },
-  { questionId: "q24", direction: "SUPPORTS", closestOptionId: "q24-o1", basis: "Quer aumentar penas." },
 
   // Armas, drogas e apostas
   { questionId: "q25", direction: "SUPPORTS", closestOptionId: "q25-o3", basis: "Defende facilitar o acesso a armas para pessoas que querem se proteger." },

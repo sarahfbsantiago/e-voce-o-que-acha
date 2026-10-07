@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     siteName: "Menos Pior",
     title: "Menos Pior",
-    description: "Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação. 52 perguntas, sem nome de candidato, com as fontes no final.",
+    description: "Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação. 47 perguntas, sem nome de candidato, com as fontes no final.",
   },
   twitter: { card: "summary_large_image", title: "Menos Pior", description: "Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação." },
 };
