@@ -3,6 +3,7 @@ import type { Candidate, CandidateProfile, ProgramSummary } from "@/domain/types
 import { NO_SPECIFIC_PROPOSAL_MESSAGE } from "@/domain/types";
 import { EXPERIENCE_ROWS, PROGRAM_2026_THEMES } from "@/data/candidate-profiles";
 import { Modal } from "@/components/Modal";
+import { CandidateViewPrint } from "./CandidateViews";
 import { formatDate } from "@/lib/format";
 
 interface Props {
@@ -29,7 +30,7 @@ export function CandidatesSection({ ordered, profiles, summaries }: Props) {
         <p className="text-sm text-ink-2 mt-1 max-w-3xl">Mesmos critérios para os dois. Abra a trajetória completa para ver datas e cargos.</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 print:grid-cols-1">
         {ordered.map((c) => {
           const p = profiles.find((x) => x.candidateId === c.id);
           if (!p) return <div key={c.id} className="card p-5"><h3 className="font-semibold text-lg">{c.name}</h3><p className="text-sm text-ink-2 mt-2">Perfil ainda não cadastrado.</p></div>;
@@ -72,16 +73,17 @@ export function CandidatesSection({ ordered, profiles, summaries }: Props) {
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wide text-ink-3">Projetos e programas</p>
                   <ul className="mt-1.5 space-y-1 text-sm">
-                    {p.keyInitiatives.slice(0, 5).map((k) => (
-                      <li key={k.url} className="flex items-baseline gap-2">
+                    {p.keyInitiatives.map((k, idx) => (
+                      <li key={k.url} className={`items-baseline gap-2 ${idx < 5 ? "flex" : "hidden print:flex"}`}>
                         <span className="shrink-0 text-xs text-ink-3 tabular-nums">{k.year}</span>
                         <span className="min-w-0 text-[13px] leading-snug">{k.title}</span>
                       </li>
                     ))}
                   </ul>
-                  {p.keyInitiatives.length > 5 ? <p className="mt-1 text-xs text-ink-3"><span className="print:hidden">+{p.keyInitiatives.length - 5} no detalhe</span><span className="hidden print:inline">+{p.keyInitiatives.length - 5} na versão online do relatório</span></p> : null}
+                  {p.keyInitiatives.length > 5 ? <p className="mt-1 text-xs text-ink-3 print:hidden">+{p.keyInitiatives.length - 5} no detalhe</p> : null}
                 </div>
               ) : null}
+              <CandidateViewPrint candidateId={c.id} />
               <div className="mt-auto">
                 <Modal trigger={`Ver trajetória completa de ${c.name.split(" ")[0]}`} title={`Trajetória de ${c.name}`} variant="primary" className="w-full">
                   <CandidateDetails c={c} p={p} program={program} />
@@ -92,7 +94,7 @@ export function CandidatesSection({ ordered, profiles, summaries }: Props) {
         })}
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3 print:hidden">
         <Modal trigger="Comparar experiência" title="Comparação de experiência">
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">

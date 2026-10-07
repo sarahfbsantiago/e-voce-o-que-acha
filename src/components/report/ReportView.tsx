@@ -124,7 +124,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
           <p className="mt-1 text-3xl font-bold tabular-nums">{sections.reduce((n, s) => n + s.noOpinion, 0)}</p>
           <p className="text-xs text-ink-3">de {sections.reduce((n, s) => n + s.total, 0)} perguntas</p>
         </div>
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 print:hidden">
           {sections.map((s, i) => (
             <li key={s.topic.id} className="card p-4">
               <span
@@ -147,11 +147,12 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
       {/* ---------------- Fontes ---------------- */}
       <section aria-labelledby="fontes" className="space-y-4">
         <h2 id="fontes" className="text-xl font-bold border-l-4 border-gold pl-3">Fontes</h2>
-        <Link href="/fontes" className="card card-lift block max-w-md p-5 shadow-sm">
+        <Link href="/fontes" className="card card-lift block max-w-md p-5 shadow-sm print:hidden">
           <p className="font-semibold">Ver todas as fontes</p>
           <p className="mt-1 text-sm text-ink-2">Catálogo completo dos documentos oficiais usados no site, com link para cada um.</p>
           <p className="mt-2 text-sm font-medium text-accent">Abrir fontes →</p>
         </Link>
+        <p className="hidden print:block text-sm">Todas as fontes estão em menos-pior.up.railway.app/fontes</p>
       </section>
 
       {/* ---------------- Avaliação e encerramento ---------------- */}

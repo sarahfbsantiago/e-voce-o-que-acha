@@ -63,3 +63,28 @@ export function CandidateViews({ candidates }: { candidates: Candidate[] }) {
     </div>
   );
 }
+
+/** Versão para o PDF: a visão do candidato em quadros pequenos, duas colunas, só na impressão. */
+export function CandidateViewPrint({ candidateId }: { candidateId: string }) {
+  const view = CANDIDATE_VIEWS.find((v) => v.candidateId === candidateId);
+  if (!view) return null;
+  return (
+    <div className="hidden print:block">
+      <p className="text-xs font-semibold uppercase tracking-wide text-ink-3">{view.label}</p>
+      {view.sections.length ? (
+        <ul className="mt-1.5 grid grid-cols-2 gap-2">
+          {view.sections.map((s) => (
+            <li key={s.title} className="rounded-md border border-line p-2 text-[10.5px] leading-snug">
+              <p className="font-semibold text-ink">{s.title}</p>
+              {s.blocks.map((b, k) => (
+                <p key={k} className="mt-0.5 text-ink-2">{typeof b === "string" ? b : b.list.join(" · ")}</p>
+              ))}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-1 text-xs text-ink-3">Texto em revisão.</p>
+      )}
+    </div>
+  );
+}

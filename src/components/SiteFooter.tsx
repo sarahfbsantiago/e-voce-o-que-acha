@@ -6,7 +6,6 @@ import { formatDate } from "@/lib/format";
 const LINKS = [
   { href: "/fontes", label: "Fontes utilizadas" },
   { href: "/metodologia", label: "Metodologia" },
-  { href: "/metodologia#historico", label: "Histórico de alterações" },
 ];
 
 export function SiteFooter() {

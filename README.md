@@ -63,7 +63,7 @@ Como ler as tabelas:
 - **Escala** é o valor da alternativa na etapa 1 do algoritmo. "—" indica alternativa sem escala, comparada pela posição na lista.
 - **Peso Lula** e **Peso Flávio Bolsonaro** é quanto a alternativa soma no numerador do score do tema para aquele candidato: 1 = igual, 0,5 = parecida, 0 = diferente ou candidato sem posição publicada. Toda pergunta respondida conta 1 no denominador.
 - "Não sei" fica fora da conta: não soma no numerador nem no denominador.
-- Os pesos refletem as posições publicadas em 06/10/2026 (104 posições). Quando uma posição é revisada, os pesos mudam e esta lista é regenerada.
+- Os pesos refletem as posições publicadas em 07/10/2026 (104 posições). Quando uma posição é revisada, os pesos mudam e esta lista é regenerada.
 
 ### 1. Economia e impostos
 
@@ -131,25 +131,25 @@ _Jornada semanal, escala 6x1, trabalhadores de aplicativos e salário mínimo._
 > Contexto exibido antes: Situação atual: jornada de trabalho.
 
 - Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: opõe-se em parte (−1)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0 |
-| Depende da profissão | +1 | 0,5 | 0 |
-| Não | -2 | 0 | 0,5 |
+| Sim | +2 | 1 | 0,5 |
+| Depende da profissão | +1 | 0,5 | 1 |
+| Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 **6. A escala em que a pessoa trabalha seis dias e folga um deveria continuar existindo?**
 
 - Posição documentada de Lula: opõe-se (−2)
-- Posição documentada de Flávio Bolsonaro: neutro (0)
+- Posição documentada de Flávio Bolsonaro: apoia (+2)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Não deveria continuar | -2 | 1 | 0 |
-| Deveria existir apenas em alguns trabalhos | 0 | 0 | 1 |
-| Deveria continuar como hoje | +2 | 0 | 0 |
+| Deveria existir apenas em alguns trabalhos | 0 | 0 | 0 |
+| Deveria continuar como hoje | +2 | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
 **7. Motoristas e entregadores de aplicativos deveriam ter direitos como aposentadoria, férias ou proteção em caso de acidente?**
@@ -185,12 +185,12 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 **9. O SUS deveria continuar atendendo qualquer pessoa gratuitamente?**
 
 - Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0 |
-| Sim, mas deveria mudar algumas regras | +1 | 0,5 | 0 |
+| Sim | +2 | 1 | 0,5 |
+| Sim, mas deveria mudar algumas regras | +1 | 0,5 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -263,26 +263,26 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 **15. O Brasil deveria investir mais dinheiro em pesquisas científicas?**
 
 - Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0 |
-| Somente em pesquisas que tragam resultados mais rápidos | +1 | 0,5 | 0 |
+| Sim | +2 | 1 | 0,5 |
+| Somente em pesquisas que tragam resultados mais rápidos | +1 | 0,5 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 **16. Qual área deveria receber mais dinheiro primeiro?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Educação infantil e ensino fundamental”
-- Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Educação infantil e ensino fundamental”
+- Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Ensino técnico”
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Educação infantil e ensino fundamental | — | 1 | 1 |
+| Educação infantil e ensino fundamental | — | 1 | 0 |
 | Ensino médio | — | 0,5 | 0,5 |
-| Ensino técnico | — | 0 | 0 |
-| Universidades | — | 0 | 0 |
+| Ensino técnico | — | 0 | 1 |
+| Universidades | — | 0 | 0,5 |
 | Todas são igualmente importantes | — | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -409,24 +409,24 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 **25. Comprar e ter armas deveria ser:**
 
 - Posição documentada de Lula: neutro (0)
-- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
+- Posição documentada de Flávio Bolsonaro: apoia (+2)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Mais difícil | -2 | 0 | 0 |
-| Como é hoje | 0 | 1 | 0,5 |
-| Mais fácil | +2 | 0 | 0,5 |
+| Como é hoje | 0 | 1 | 0 |
+| Mais fácil | +2 | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
 **26. Pessoas registradas como colecionadores, atiradores e caçadores deveriam ter regras diferentes para comprar armas?**
 
 - Posição documentada de Lula: apoia em parte (+1)
-- Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 0,5 | 0 |
-| Somente em alguns casos | +1 | 1 | 0 |
+| Sim | +2 | 0,5 | 0,5 |
+| Somente em alguns casos | +1 | 1 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -448,14 +448,14 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 > Contexto exibido antes: Situação atual: apostas de quota fixa em 2026.
 
 - Posição documentada de Lula: alternativa mais próxima: “Deveriam ser proibidas”
-- Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Deveriam existir com regras muito rígidas”
+- Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Deveriam existir com regras semelhantes às de outros negócios”
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Deveriam ser proibidas | — | 1 | 0,5 |
-| Deveriam existir com regras muito rígidas | — | 0,5 | 1 |
-| Deveriam existir com regras semelhantes às de outros negócios | — | 0 | 0,5 |
-| Deveriam ter poucas restrições | — | 0 | 0 |
+| Deveriam ser proibidas | — | 1 | 0 |
+| Deveriam existir com regras muito rígidas | — | 0,5 | 0,5 |
+| Deveriam existir com regras semelhantes às de outros negócios | — | 0 | 1 |
+| Deveriam ter poucas restrições | — | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **29. Propagandas de bets deveriam ser permitidas?**
@@ -480,13 +480,13 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 **30. O governo deveria impedir obras ou negócios quando houver grande risco de destruir uma área ambiental importante?**
 
 - Posição documentada de Lula: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
-- Posição documentada de Flávio Bolsonaro: opõe-se em parte (−1)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 0 | 0 |
-| Depende do tamanho do risco | +1 | 0 | 0 |
-| Não | -2 | 0 | 0,5 |
+| Sim | +2 | 0 | 0,5 |
+| Depende do tamanho do risco | +1 | 0 | 1 |
+| Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 **31. Reduzir o desmatamento da Amazônia deveria ser uma prioridade do governo?**
@@ -504,12 +504,12 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 **32. O Brasil deveria ter metas para reduzir a poluição que contribui para mudanças no clima?**
 
 - Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: neutro (0)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0 |
-| Sim, mas sem prejudicar demais a economia | +1 | 0,5 | 0,5 |
+| Sim | +2 | 1 | 0,5 |
+| Sim, mas sem prejudicar demais a economia | +1 | 0,5 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -689,12 +689,12 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 > Contexto exibido antes: ONU, Mercosul e BRICS não são instituições equivalentes.
 
 - Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0 |
-| Em alguns deles | +1 | 0,5 | 0 |
+| Sim | +2 | 1 | 0,5 |
+| Em alguns deles | +1 | 0,5 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -755,12 +755,12 @@ _Direitos civis, religião e Estado, decisões do STF, independência dos órgã
 **50. Quando o STF toma uma decisão válida, governo e Congresso devem cumprir essa decisão mesmo discordando dela?**
 
 - Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0 |
-| Depende do caso | +1 | 0,5 | 0 |
+| Sim | +2 | 1 | 0,5 |
+| Depende do caso | +1 | 0,5 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
