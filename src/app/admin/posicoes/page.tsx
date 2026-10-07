@@ -11,6 +11,7 @@ import { sourceHref } from "@/components/SourceBits";
 import { EVIDENCE_CLASSIFICATION_LABELS } from "@/domain/types";
 import { logoutAction } from "../login/actions";
 import { AdminNav } from "@/components/AdminNav";
+import { PrintButton } from "@/components/PrintButton";
 import { publishAllDraftsAction, publishPositionAction, rejectPositionAction, unpublishPositionAction } from "./actions";
 
 export const metadata: Metadata = { title: "Revisão de posições", robots: { index: false, follow: false } };
@@ -39,12 +40,12 @@ export default async function AdminPositionsPage() {
         <PageTitle eyebrow="Admin" tone="gold" lead="Cada posição mostra a direção, a alternativa mais próxima, o resumo e as evidências com trecho e link. Publique uma a uma ou todas de uma vez. Só o que está publicado entra no relatório.">
           Revisão de posições por pergunta
         </PageTitle>
-        <form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form>
+        <div className="flex flex-wrap items-center gap-2 print:hidden"><PrintButton label="Exportar PDF" fileTitle="Revisão de posições" /><form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form></div>
       </div>
 
       <section className="card p-5 flex flex-wrap items-center gap-4 text-sm">
         <p><strong>{positions.length}</strong> posições · rascunho {counts.DRAFT ?? 0} · publicadas {counts.PUBLISHED ?? 0} · rejeitadas {counts.REJECTED ?? 0}</p>
-        <form action={publishAllDraftsAction} className="ml-auto flex flex-wrap items-center gap-2">
+        <form action={publishAllDraftsAction} className="ml-auto flex flex-wrap items-center gap-2 print:hidden">
           <label className="text-xs text-ink-3">Digite PUBLICAR para publicar todos os rascunhos
             <input name="confirm" className="field ml-2 w-36" placeholder="PUBLICAR" />
           </label>
@@ -86,7 +87,7 @@ export default async function AdminPositionsPage() {
                           );
                         })}
                       </ul>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2 print:hidden">
                         {p.reviewStatus !== "PUBLISHED" ? (
                           <form action={publishPositionAction}><input type="hidden" name="id" value={p.id} /><button className="rounded-lg bg-mint px-3 py-1.5 text-xs font-semibold text-white min-h-9">Publicar</button></form>
                         ) : (

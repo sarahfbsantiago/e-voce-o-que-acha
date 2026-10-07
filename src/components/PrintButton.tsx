@@ -3,11 +3,11 @@
 import { Button } from "@/components/ui";
 
 /** Abre a impressão do navegador, onde a pessoa escolhe "Salvar como PDF". Sem dependência externa. */
-export function PrintButton({ label = "Baixar em PDF", className = "" }: { label?: string; className?: string }) {
+export function PrintButton({ label = "Baixar em PDF", className = "", fileTitle = "Meu relatório" }: { label?: string; className?: string; fileTitle?: string }) {
   return (
     <Button type="button" variant="secondary" className={`print:hidden ${className}`} onClick={() => {
       const prev = document.title;
-      document.title = `Menos Pior · Meu relatório · ${new Date().toLocaleDateString("pt-BR").replaceAll("/", "-")}`;
+      document.title = `Menos Pior · ${fileTitle} · ${new Date().toLocaleDateString("pt-BR").replaceAll("/", "-")}`;
       window.print();
       setTimeout(() => { document.title = prev; }, 500);
     }}>

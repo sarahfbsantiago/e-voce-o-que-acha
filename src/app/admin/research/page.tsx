@@ -11,6 +11,7 @@ import { AGE_RANGES, REGIONS } from "@/domain/types";
 import { formatShare } from "@/domain/aggregates";
 import { logoutAction } from "../login/actions";
 import { AdminNav } from "@/components/AdminNav";
+import { PrintButton } from "@/components/PrintButton";
 
 export const metadata: Metadata = { title: "Dados da pesquisa", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -41,9 +42,10 @@ export default async function AdminResearchPage() {
       <AdminNav current="/admin/research" />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <PageTitle lead="Somente agregações. Nenhum registro individual é exibido.">Dados da pesquisa</PageTitle>
-        <form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form>
+        <div className="flex flex-wrap items-center gap-2 print:hidden"><PrintButton label="Exportar PDF" fileTitle="Dados da pesquisa" /><form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form></div>
       </div>
 
+      <p className="hidden print:block text-xs text-ink-3">Gerado em {new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })} · Menos Pior · somente agregações</p>
       <p className="rounded-xl border border-note-line bg-note px-4 py-3 text-sm font-medium">{r.disclaimer}</p>
 
       <nav aria-label="Seções" className="card p-3 text-sm flex flex-wrap gap-x-4 gap-y-1">
@@ -214,12 +216,13 @@ export default async function AdminResearchPage() {
         </div>
       </section>
 
-      <section id="exportacao" aria-labelledby="exp-h">
+      <section id="exportacao" aria-labelledby="exp-h" className="print:hidden">
         <h2 id="exp-h" className="text-xl font-bold">Exportação</h2>
         <p className="text-sm text-ink-2 mt-1">Apenas agregações. Nenhuma exportação contém registros individuais.</p>
         <div className="mt-3 flex flex-wrap gap-3 text-sm">
           <a className="rounded-lg border border-line px-4 py-2 min-h-11 inline-flex items-center" href="/api/admin/research">JSON agregado</a>
           <a className="rounded-lg border border-line px-4 py-2 min-h-11 inline-flex items-center" href="/api/admin/research?format=csv">CSV por pergunta e alternativa</a>
+          <PrintButton label="PDF do painel" fileTitle="Dados da pesquisa" />
         </div>
       </section>
     </div>

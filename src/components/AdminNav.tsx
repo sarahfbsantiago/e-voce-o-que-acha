@@ -9,7 +9,7 @@ const LINKS = [
 /** Menu do painel administrativo: liga as páginas do admin entre si e ao site Menos Pior. */
 export function AdminNav({ current }: { current: string }) {
   return (
-    <nav aria-label="Painel administrativo" className="card flex flex-wrap items-center gap-2 p-2 text-sm">
+    <nav aria-label="Painel administrativo" className="card flex flex-wrap items-center gap-2 p-2 text-sm print:hidden">
       <span className="px-2 text-xs font-semibold uppercase tracking-wide text-ink-3">Admin · Menos Pior</span>
       {LINKS.map((l) => (
         <Link
