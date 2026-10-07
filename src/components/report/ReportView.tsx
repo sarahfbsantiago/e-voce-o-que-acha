@@ -130,7 +130,7 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
                 className="inline-flex h-7 min-w-7 items-center justify-center rounded-full px-2 text-xs font-bold shadow-sm"
                 style={{ background: groupOfTopic(s.topic.id).color, color: groupOfTopic(s.topic.id).id === "seguranca" ? "#1f1a0a" : "#fff" }}
               >
-                #{i + 1}
+                {i + 1}
               </span>
               <h3 className="mt-2 font-semibold">{s.topic.name}</h3>
               <p className="text-sm font-semibold text-purple mt-1">{s.priorityLevel !== null ? PRIORITY_LEVELS[s.priorityLevel].label : "Importância não informada"}</p>
