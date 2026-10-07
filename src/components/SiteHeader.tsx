@@ -6,7 +6,6 @@ const NAV = [
   { href: "/como-funciona", label: "Como funciona" },
   { href: "/metodologia", label: "Metodologia" },
   { href: "/fontes", label: "Fontes" },
-  { href: "/privacidade", label: "Privacidade e dados" },
 ];
 
 export function SiteHeader() {

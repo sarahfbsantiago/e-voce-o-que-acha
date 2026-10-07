@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ButtonLink, PageTitle } from "@/components/ui";
-import { COMPARISON_LABELS } from "@/domain/types";
 
 export const metadata: Metadata = { title: "Como funciona" };
 
@@ -38,11 +37,6 @@ export default function ComoFuncionaPage() {
         <section className="card p-6 border-t-4 border-t-accent shadow-sm">
           <h2 className="font-semibold text-lg">O que os indicadores significam</h2>
           <p className="mt-2 text-sm text-ink-2">No relatório, ao abrir uma das cinco áreas, cada pergunta que você respondeu mostra, para cada candidato, um destes indicadores. No fim, o relatório mostra a proporção de iguais e parecidas por candidato e em quantos temas cada um ficou mais perto, com a fórmula à vista. Nada vira nota.</p>
-          <ul className="mt-3 space-y-2 text-sm">
-            {Object.values(COMPARISON_LABELS).map((l) => (
-              <li key={l} className="flex gap-2"><span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />{l}</li>
-            ))}
-          </ul>
         </section>
         <section className="card p-6 border-t-4 border-t-purple shadow-sm">
           <h2 className="font-semibold text-lg">O que o site nunca faz</h2>

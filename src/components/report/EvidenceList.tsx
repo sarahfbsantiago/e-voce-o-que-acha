@@ -1,6 +1,6 @@
 import type { Evidence, Question, SourceRegistryEntry } from "@/domain/types";
 import { EVIDENCE_CLASSIFICATION_LABELS, EVIDENCE_STRENGTH_LABELS } from "@/domain/types";
-import { SourceLegendBadge, SourceLink } from "@/components/SourceBits";
+import { SourceLegendBadge, SourceLink, sourceHref } from "@/components/SourceBits";
 import { formatDate } from "@/lib/format";
 
 /**
@@ -42,7 +42,7 @@ export function EvidenceList({ evidence, question, answerLabels, sourceById }: {
                       <dt className="font-semibold">Data de consulta</dt><dd>{formatDate(e.retrievedAt)}</dd>
                       <dt className="font-semibold">Classificação</dt><dd>{EVIDENCE_STRENGTH_LABELS[e.evidenceStrength].label}</dd>
                       <dt className="font-semibold">Critério da classificação</dt><dd>{e.classificationCriterion ?? "—"}</dd>
-                      <dt className="font-semibold">Link original</dt><dd>{src ? <a className="underline" href={src.documentUrl ?? src.url} target="_blank" rel="noopener noreferrer">{src.documentUrl ?? src.url}</a> : "—"}</dd>
+                      <dt className="font-semibold">Link original</dt><dd>{src ? <a className="underline" href={sourceHref(src)} target="_blank" rel="noopener noreferrer">{src.documentUrl ?? src.url}</a> : "—"}</dd>
                     </dl>
                   </details>
                 </li>

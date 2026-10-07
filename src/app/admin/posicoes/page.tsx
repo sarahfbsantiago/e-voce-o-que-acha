@@ -7,6 +7,7 @@ import { QUESTIONS } from "@/data/questions";
 import { TOPICS } from "@/data/topics";
 import { CANDIDATES } from "@/data/candidates";
 import { SOURCE_BY_ID } from "@/data/source-registry";
+import { sourceHref } from "@/components/SourceBits";
 import { EVIDENCE_CLASSIFICATION_LABELS } from "@/domain/types";
 import { logoutAction } from "../login/actions";
 import { publishAllDraftsAction, publishPositionAction, rejectPositionAction, unpublishPositionAction } from "./actions";
@@ -72,7 +73,7 @@ export default async function AdminPositionsPage() {
                       <ul className="space-y-2">
                         {p.evidences.map(({ evidence: e }) => {
                           const src = SOURCE_BY_ID[e.sourceId];
-                          const link = e.summary.match(/Documento: (\S+)/)?.[1] ?? src?.documentUrl ?? src?.url;
+                          const link = e.summary.match(/Documento: (\S+)/)?.[1] ?? (src ? sourceHref(src) : undefined);
                           return (
                             <li key={e.id} className="rounded-lg border border-line bg-paper/60 p-3 text-xs">
                               <p className="font-semibold">{EVIDENCE_CLASSIFICATION_LABELS[e.classification].label} · nível {e.evidenceStrength} · {e.title}</p>

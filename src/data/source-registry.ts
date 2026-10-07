@@ -558,7 +558,7 @@ export const SOURCE_REGISTRY: SourceRegistryEntry[] = [
     id: "senado-dados-abertos-flavio-bolsonaro",
     name: "Dados Abertos do Senado — senador 5894 (mandatos, autorias, relatorias, votações, comissões)",
     institution: "Senado Federal",
-    url: "https://legis.senado.leg.br/dadosabertos/senador/5894",
+    url: "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5894",
     documentUrl: "https://legis.senado.leg.br/dadosabertos/senador/5894/autorias",
     type: "government_database",
     legend: "PRIMARIA",

@@ -30,8 +30,17 @@ export function SourceLegendBadge({ legend }: { legend: SourceLegend }) {
   );
 }
 
+/** Arquivos e dados brutos (ZIP, CSV, XML, JSON, APIs) baixam ou mostram código no navegador: não servem como link para pessoas. */
+const RAW_DATA = /\.(zip|csv|json|xml)(\?|#|$)|\/api\/v\d|\/dadosabertos\/(senador|materia)\//i;
+
+/** Endereço que uma pessoa consegue abrir e ler: o documento, se for página; senão, a página oficial da fonte. */
+export function sourceHref(source: Pick<SourceRegistryEntry, "documentUrl" | "url">): string {
+  if (source.documentUrl && !RAW_DATA.test(source.documentUrl)) return source.documentUrl;
+  return source.url;
+}
+
 export function SourceLink({ source, label = "Ver fonte original" }: { source: SourceRegistryEntry; label?: string }) {
-  const href = source.documentUrl ?? source.url;
+  const href = sourceHref(source);
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-accent underline underline-offset-4 transition-colors hover:text-purple-strong">
       {label} <span aria-hidden="true">↗</span>

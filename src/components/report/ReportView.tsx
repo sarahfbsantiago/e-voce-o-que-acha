@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef } from "react";
 import type { Candidate, CandidatePosition, CandidateProfile, Evidence, ProgramSummary, SourceRegistryEntry } from "@/domain/types";
-import { PRIORITY_LEVELS, SOURCE_LEGEND_LABELS, type SourceLegend } from "@/domain/types";
+import { PRIORITY_LEVELS } from "@/domain/types";
 import { QUESTIONS } from "@/data/questions";
 import { TOPICS } from "@/data/topics";
 import { CURRENT_METHODOLOGY_VERSION } from "@/data/methodology";
@@ -12,11 +12,9 @@ import { orderCandidates, randomCandidateOrder } from "@/domain/candidate-order"
 import { FINAL_MESSAGE } from "@/domain/neutrality";
 import { useSession } from "@/store/session";
 import { ButtonLink, Eyebrow } from "@/components/ui";
-import { SourceLegendBadge, SourceLink } from "@/components/SourceBits";
 import { RestartButton } from "@/components/RestartButton";
 import { PrintButton } from "@/components/PrintButton";
 import { FeedbackForm } from "./FeedbackForm";
-import { PriorityCharts } from "./PriorityCharts";
 import { TopicPie } from "./TopicPie";
 import { ProfileProximity } from "./ProfileProximity";
 import { AREA_GROUPS } from "./areaGroups";
@@ -80,11 +78,6 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
   const ordered = orderCandidates(candidates, session.candidateOrder);
   const sections = buildPriorityMap(TOPICS, QUESTIONS, session.answers, session.priorities);
 
-  // Fontes usadas: as citadas por evidências publicadas (posições apontam para evidências); se ainda não houver, o catálogo inteiro.
-  const usedIds = new Set<string>(evidence.map((e) => e.sourceId).filter(Boolean));
-  const usedSources = (usedIds.size ? sources.filter((s) => usedIds.has(s.id)) : sources).slice().sort((a, b) => a.name.localeCompare(b.name));
-  const byLegend = (Object.keys(SOURCE_LEGEND_LABELS) as SourceLegend[]).map((k) => ({ legend: k, items: usedSources.filter((s) => s.legend === k) })).filter((g) => g.items.length);
-
   return (
     <div className="container-page py-7 md:py-14 space-y-9 sm:space-y-12">
       {/* ---------------- Cabeçalho ---------------- */}
@@ -124,7 +117,11 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
       {/* ---------------- Como você respondeu ---------------- */}
       <section aria-labelledby="respostas" className="space-y-4">
         <h2 id="respostas" className="text-xl font-bold border-l-4 border-mint pl-3">Como você respondeu</h2>
-        <PriorityCharts sections={sections} />
+        <div className="card p-5 max-w-xs">
+          <p className="text-xs font-semibold uppercase tracking-wide text-ink-3">Respostas “não sei”</p>
+          <p className="mt-1 text-3xl font-bold tabular-nums">{sections.reduce((n, s) => n + s.noOpinion, 0)}</p>
+          <p className="text-xs text-ink-3">de {sections.reduce((n, s) => n + s.total, 0)} perguntas</p>
+        </div>
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {sections.map((s, i) => (
             <li key={s.topic.id} className="card p-4">
@@ -143,25 +140,11 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
       {/* ---------------- Fontes ---------------- */}
       <section aria-labelledby="fontes" className="space-y-4">
         <h2 id="fontes" className="text-xl font-bold border-l-4 border-gold pl-3">Fontes</h2>
-        <p className="text-sm text-ink-2 max-w-3xl">Documentos usados para registrar posições e evidências. Cada um abre na origem.</p>
-        {byLegend.map((g) => (
-          <div key={g.legend} className="card p-5">
-            <div className="flex flex-wrap items-center gap-2"><SourceLegendBadge legend={g.legend} /><span className="text-xs text-ink-3">{g.items.length} fonte(s)</span></div>
-            <ul className="mt-3 grid gap-2 sm:grid-cols-2 text-sm">
-              {g.items.map((s) => (
-                <li key={s.id} className="flex flex-col gap-0.5 rounded-lg border border-line p-3">
-                  <SourceLink source={s} label={s.name} />
-                  <span className="text-xs text-ink-3">{s.institution}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-        <p className="text-sm text-ink-2">
-          <Link href="/fontes" className="text-accent underline underline-offset-4">Catálogo completo de fontes</Link>
-          {" · "}
-          <Link href="/metodologia" className="text-accent underline underline-offset-4">Metodologia (versão {CURRENT_METHODOLOGY_VERSION})</Link>
-        </p>
+        <Link href="/fontes" className="card card-lift block max-w-md p-5 shadow-sm">
+          <p className="font-semibold">Ver todas as fontes</p>
+          <p className="mt-1 text-sm text-ink-2">Catálogo completo dos documentos oficiais usados no site, com link para cada um.</p>
+          <p className="mt-2 text-sm font-medium text-accent">Abrir fontes →</p>
+        </Link>
       </section>
 
       {/* ---------------- Avaliação e encerramento ---------------- */}

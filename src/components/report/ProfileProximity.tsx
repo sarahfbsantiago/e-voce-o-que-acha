@@ -7,6 +7,7 @@ import { themeProximity } from "@/domain/theme-proximity";
 import { compareAnswerToPosition } from "@/domain/comparison";
 import { TOPIC_COLORS } from "./TopicPie";
 import { AREA_GROUPS } from "./areaGroups";
+import { sourceHref } from "@/components/SourceBits";
 
 const DIRECTION_TEXT: Record<string, string> = {
   SUPPORTS: "é a favor",
@@ -60,7 +61,7 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
   const answerByQ = new Map(answers.map((a) => [a.questionId, a]));
   const evidenceById = new Map(evidence.map((e) => [e.id, e]));
   const sourceById = new Map(sources.map((s) => [s.id, s]));
-  const linkOf = (e: Evidence) => { const s = sourceById.get(e.sourceId); return s?.documentUrl ?? s?.url ?? null; };
+  const linkOf = (e: Evidence) => { const s = sourceById.get(e.sourceId); return s ? sourceHref(s) : null; };
   const name = (id: string) => candidates.find((c) => c.id === id)?.name ?? id;
   const first = (id: string) => name(id).split(" ")[0];
 
