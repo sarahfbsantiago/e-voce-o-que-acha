@@ -35,7 +35,7 @@ interface Props {
  * Relatório final, enxuto: perfil por área (pizza), proximidade por tema, cobertura das respostas
  * trajetória de cada candidato e, ao final, as fontes. Comparações pergunta a pergunta ficam fora, por enquanto.
  */
-export function ReportView({ candidates, positions, evidence, summaries, sources, profiles }: Props) {
+export function ReportView({ candidates, positions, summaries, profiles }: Props) {
   const { session, hydrated, update } = useSession();
   const submitted = useRef(false);
 
@@ -112,7 +112,7 @@ export function ReportView({ candidates, positions, evidence, summaries, sources
             ))}
           </ul>
         </div>
-        <ProfileProximity sections={sections} questions={QUESTIONS} answers={session.answers} candidates={ordered} positions={positions} evidence={evidence} sources={sources} />
+        <ProfileProximity sections={sections} questions={QUESTIONS} answers={session.answers} candidates={ordered} positions={positions} />
         <CandidateViews candidates={ordered} />
       </section>
 

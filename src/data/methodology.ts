@@ -95,6 +95,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: no perfil dos candidatos, o título 'Experiência profissional' passa a ser 'Currículo', e Flávio Bolsonaro aparece na política desde 2003 (cerca de 23 anos até 2026), início do primeiro mandato; a primeira eleição continua 2002.",
       "Revisão humana: o relatório ganha os quadrados fixos 'Visão Flávio' e 'Visão Lula' abaixo da barra de porcentagem; ao clicar, abre uma janela com rolagem, o texto escrito pela responsável e, no final, 'Veja as fontes'. Entram três fontes jornalísticas (Folha de S.Paulo, duas, e UOL) sobre o plano e as propostas de Flávio Bolsonaro. O texto de Lula será incluído na próxima revisão.",
       "Revisão humana: na trajetória completa dos candidatos saem os links de fonte de cada item ('Como sabemos disso?', páginas do programa, links de leis e projetos e o bloco 'Links oficiais'). No final fica um único 'Veja as fontes', que leva à página Fontes do site, onde estão todos os documentos.",
+      "Revisão humana: 'Entender por quê', em cada área do relatório, passa a mostrar só o texto escrito pela responsável sobre o que cada candidato defende em cada tema, no lugar da lista pergunta a pergunta. No final fica 'Veja as fontes', que leva à página Fontes. A conta da proximidade não muda.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
   },
