@@ -17,11 +17,6 @@ const IconInfo = () => (
     <circle cx="10" cy="10" r="7.5" /><path d="M10 9v5M10 6.5v.2" strokeLinecap="round" />
   </svg>
 );
-const IconBook = () => (
-  <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 text-gold-strong" fill="none" stroke="currentColor" strokeWidth="1.8">
-    <path d="M3 4.5h5.5a2 2 0 0 1 2 2V16a1.5 1.5 0 0 0-1.5-1.5H3zM17 4.5h-5.5a2 2 0 0 0-2 2V16a1.5 1.5 0 0 1 1.5-1.5H17z" strokeLinejoin="round" />
-  </svg>
-);
 const IconLink = () => (
   <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 text-mint" fill="none" stroke="currentColor" strokeWidth="1.8">
     <path d="M8.5 11.5l3-3M7 13l-1.2 1.2a2.5 2.5 0 0 1-3.5-3.5L5 8M13 7l1.2-1.2a2.5 2.5 0 0 1 3.5 3.5L15 12" strokeLinecap="round" />
@@ -67,17 +62,11 @@ export default function HomePage() {
             </p>
             <div className="mt-5 space-y-3 border-t border-line pt-5 text-base sm:text-lg text-ink-2 leading-relaxed">
               <p className="font-semibold text-ink">Este site não diz em quem você deve votar.</p>
-              <p>
-                Você responde a perguntas sobre temas concretos e, em seguida, pode consultar propostas, posicionamentos,
-                atos políticos e dados públicos relacionados aos mesmos assuntos.
-              </p>
-              <p>Todas as fontes utilizadas são apresentadas para consulta.</p>
             </div>
           </div>
 
           <div className="animate-fade-up [animation-delay:640ms] mt-8 flex flex-wrap justify-center gap-3">
             <ButtonLink href="/como-funciona" variant="secondary"><IconInfo />Como funciona</ButtonLink>
-            <ButtonLink href="/metodologia" variant="secondary"><IconBook />Ver metodologia</ButtonLink>
             <ButtonLink href="/fontes" variant="secondary"><IconLink />Consultar fontes</ButtonLink>
           </div>
         </section>
@@ -101,7 +90,7 @@ export default function HomePage() {
           <ul>
             <li><strong className="text-accent">Seu perfil por área:</strong> a pizza com a importância que você deu a cada uma das cinco áreas e, tema a tema, como você respondeu.</li>
             <li><strong className="text-purple-strong">Comparação por pergunta:</strong> em cada área, pergunta por pergunta, o que cada candidato defende ou fez, com o documento, a data e o link.</li>
-            <li><strong className="text-mint-strong">Trajetória e atos:</strong> o que cada candidato fez e promete, por área e tema, com a pizza do que fez e link para a lei, o projeto ou o programa registrado no TSE.</li>
+            <li><strong className="text-mint-strong">Trajetória e atos:</strong> o que cada candidato fez e promete, por área e tema, com link para a lei, o projeto ou o programa registrado no TSE.</li>
             <li><strong className="text-gold-strong">A conta aberta:</strong> quanto suas respostas concordam com cada candidato e em quantos temas cada um ficou mais perto, com a fórmula à vista. Sem nota, sem ranking, sem recomendação.</li>
           </ul>
         </section>
