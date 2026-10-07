@@ -9,6 +9,7 @@ import { TOPIC_COLORS } from "./TopicPie";
 import { AREA_GROUPS } from "./areaGroups";
 import Link from "next/link";
 import { CANDIDATE_VIEWS } from "@/data/candidate-views";
+import { ViewBlocks } from "./CandidateViews";
 
 /**
  * Qual candidato está mais próximo do seu perfil, tema a tema, só com posições publicadas.
@@ -138,15 +139,7 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
                             {parts.map((part) => (
                               <div key={part.title} className="space-y-1">
                                 {parts.length > 1 ? <p className="text-sm font-semibold">{part.title.replace(/^\d+\.\s*/, "")}</p> : null}
-                                {part.blocks.map((b, k) =>
-                                  typeof b === "string" ? (
-                                    <p key={k} className="text-sm leading-relaxed text-ink-2">{b}</p>
-                                  ) : (
-                                    <ul key={k} className="list-disc pl-5 text-sm leading-relaxed text-ink-2">
-                                      {b.list.map((li) => <li key={li}>{li}</li>)}
-                                    </ul>
-                                  ),
-                                )}
+                                <ViewBlocks blocks={part.blocks} />
                               </div>
                             ))}
                           </div>

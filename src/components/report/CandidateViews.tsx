@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { Candidate } from "@/domain/types";
-import { CANDIDATE_VIEWS } from "@/data/candidate-views";
+import { CANDIDATE_VIEWS, type ViewBlock } from "@/data/candidate-views";
 import { Modal } from "@/components/Modal";
 
 /**
@@ -38,15 +38,7 @@ export function CandidateViews({ candidates }: { candidates: Candidate[] }) {
               view.sections.map((s) => (
                 <section key={s.title} className="space-y-1.5">
                   <h4 className="font-semibold">{s.title}</h4>
-                  {s.blocks.map((b, k) =>
-                    typeof b === "string" ? (
-                      <p key={k} className="text-sm leading-relaxed text-ink-2">{b}</p>
-                    ) : (
-                      <ul key={k} className="list-disc pl-5 text-sm leading-relaxed text-ink-2">
-                        {b.list.map((li) => <li key={li}>{li}</li>)}
-                      </ul>
-                    ),
-                  )}
+                  <ViewBlocks blocks={s.blocks} />
                 </section>
               ))
             ) : (
@@ -77,7 +69,9 @@ export function CandidateViewPrint({ candidateId }: { candidateId: string }) {
             <li key={s.title} className="rounded-md border border-line p-2 text-[10.5px] leading-snug">
               <p className="font-semibold text-ink">{s.title}</p>
               {s.blocks.map((b, k) => (
-                <p key={k} className="mt-0.5 text-ink-2">{typeof b === "string" ? b : b.list.join(" · ")}</p>
+                <p key={k} className="mt-0.5 text-ink-2">
+                  {typeof b === "string" ? b : "list" in b ? b.list.join(" · ") : <><strong className="text-ink">{b.title}:</strong> {b.text}</>}
+                </p>
               ))}
             </li>
           ))}
@@ -86,5 +80,27 @@ export function CandidateViewPrint({ candidateId }: { candidateId: string }) {
         <p className="mt-1 text-xs text-ink-3">Texto em revisão.</p>
       )}
     </div>
+  );
+}
+
+/** Texto de uma visão: parágrafos, listas e itens com título em negrito. */
+export function ViewBlocks({ blocks }: { blocks: ViewBlock[] }) {
+  return (
+    <>
+      {blocks.map((b, k) =>
+        typeof b === "string" ? (
+          <p key={k} className="text-sm leading-relaxed text-ink-2">{b}</p>
+        ) : "list" in b ? (
+          <ul key={k} className="list-disc pl-5 text-sm leading-relaxed text-ink-2">
+            {b.list.map((li) => <li key={li}>{li}</li>)}
+          </ul>
+        ) : (
+          <div key={k} className="rounded-lg border border-line bg-paper/60 p-2.5">
+            <p className="text-sm font-semibold text-ink">{b.title}</p>
+            <p className="mt-0.5 text-sm leading-relaxed text-ink-2">{b.text}</p>
+          </div>
+        ),
+      )}
+    </>
   );
 }

@@ -99,6 +99,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: 24 posições de Flávio Bolsonaro passam a seguir o texto 'Visão Flávio' (tabela em src/data/flavio-view-positions.ts), com evidência ligada às matérias da Folha de S.Paulo e do UOL. Mudaram 13: jornada 5x2, escala 6x1, SUS, pesquisa, prioridade na educação, armas, CACs, bets, licenciamento ambiental, metas de clima, Mercosul/BRICS/ONU e decisões do STF. O valor anterior de cada posição fica no registro de auditoria. A fórmula não muda.",
       "Revisão humana: o PDF do relatório mostra o currículo de cada candidato com a visão dele logo abaixo, em quadros pequenos, e todos os nomes de projetos. Saem do PDF a lista de temas de 'Como você respondeu' e os botões. Sai do rodapé o link 'Histórico de alterações'.",
       "Revisão humana: entram na página Fontes o comunicado do Ministério da Justiça sobre a proibição das bets, o Redata (MDIC), a Nuvem Brasileira (Serpro) e a Lei nº 15.358/2026 (Marco Legal do Combate ao Crime Organizado). A página dos planos de governo no TSE passa a ter o link direto.",
+      "Revisão humana: entra o texto 'Visão Lula' (71 itens em 12 temas), escrito pela responsável, no quadrado abaixo da barra de porcentagem, em 'Entender por quê' e no PDF. As posições de Lula usadas na conta não mudam.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
   },
