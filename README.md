@@ -554,10 +554,10 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Solar e eólica | — | 0,5 | 0 |
+| Solar e eólica | — | 1 | 0 |
 | Petróleo e gás | — | 0,5 | 1 |
-| Energia nuclear | — | 0 | 0 |
-| Todas de forma equilibrada | — | 1 | 0,5 |
+| Energia nuclear | — | 0,5 | 0 |
+| Todas de forma equilibrada | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 #### Tecnologia e autonomia do Brasil

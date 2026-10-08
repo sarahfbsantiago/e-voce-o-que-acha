@@ -21,8 +21,7 @@ export const OPTION_SCORES: Record<string, [score: number, reason: string]> = {
   "q16|flavio-bolsonaro|o5": [0.5, "Combinação inclui a escolha dele"],
   "q20|lula|o1": [0.5, "Bolsa Família"], "q20|lula|o2": [0.5, "Qualificação profissional"], "q20|lula|o3": [0.5, "Valorização do salário mínimo"],
   "q23|lula|o1": [0.5, "Lei Antifacção e presídios"],
-  "q33|lula|o1": [0.5, "Ampliar renováveis"], "q33|lula|o2": [0.5, "Mantém petróleo e gás na transição"], "q33|lula|o3": [0, "Nuclear não aparece no texto"],
-  "q33|flavio-bolsonaro|o1": [0, "Renováveis não aparecem no texto"], "q33|flavio-bolsonaro|o3": [0, "Nuclear não aparece no texto"], "q33|flavio-bolsonaro|o4": [0.5, "Combinação inclui a escolha dele"],
+  "q33|flavio-bolsonaro|o1": [0, "Renováveis não aparecem no texto"], "q33|flavio-bolsonaro|o3": [0, "Nuclear não aparece no texto"],
   "q44|lula|o2": [0, "Sem alinhamento com um bloco"], "q44|lula|o3": [0.5, "BRICS e países emergentes"], "q44|lula|o4": [0.5, "Sem alinhamento exclusivo"],
   "q44|flavio-bolsonaro|o3": [0, "Critica posições do Brasil no BRICS"],
   "q46|lula|o1": [0.5, "Acordo Mercosul–União Europeia"], "q46|lula|o2": [0.5, "Nova Indústria Brasil"],
@@ -57,4 +56,6 @@ export const OPTION_SCORES: Record<string, [score: number, reason: string]> = {
   "q44|flavio-bolsonaro|o1": [0, "Revisão humana"],
   "q45|flavio-bolsonaro|o1": [0, "Revisão humana"], "q45|flavio-bolsonaro|o2": [0, "Revisão humana"], "q45|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
   "q46|flavio-bolsonaro|o3": [0, "Revisão humana"],
+  "q33|lula|o1": [1, "Revisão humana"], "q33|lula|o2": [0.5, "Revisão humana"], "q33|lula|o3": [0.5, "Revisão humana"], "q33|lula|o4": [1, "Revisão humana"],
+  "q33|flavio-bolsonaro|o4": [0, "Revisão humana"],
 };
