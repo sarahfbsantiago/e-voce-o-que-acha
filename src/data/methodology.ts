@@ -108,6 +108,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: sai da página Metodologia a seção 'Revisão'.",
       "Revisão humana: a conta passa a usar notas por alternativa revisadas (src/data/option-scores.ts). Para cada pergunta e candidato, a alternativa marcada vale de 0 a 1 conforme o quanto o candidato a defende; sem nota revisada, segue a regra anterior (1 na alternativa do candidato, 0,5 na vizinha, 0 nas demais). A fórmula por tema não muda: soma das notas ÷ perguntas respondidas.",
       "Revisão humana: o questionário passa a ter 25 perguntas, 5 por seção. Saem 22 perguntas e entra uma nova sobre reforma do STF (no lugar da pergunta sobre cumprir decisões do STF). Mudam os textos das perguntas sobre educação e pesquisa e sobre depender menos de outros países. Todas as 25 perguntas têm notas por alternativa revisadas para os dois candidatos; a fórmula por tema não muda.",
+      "Revisão humana: na pergunta 'O SUS deveria continuar atendendo qualquer pessoa gratuitamente?', Flávio Bolsonaro passa a ter 0,5 em 'Não' e 0 nas demais alternativas.",
       "O site passa a se chamar 'E Você, O Que Acha?', no endereço e-voce-o-que-acha.up.railway.app. Nada muda nas perguntas, nas notas ou na conta.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],

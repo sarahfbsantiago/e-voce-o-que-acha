@@ -160,8 +160,8 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
-| Sim, mas deveria privatizar uma parte | +1 | 0,5 | 0,5 |
-| Não | -2 | 0 | 0 |
+| Sim, mas deveria privatizar uma parte | +1 | 0,5 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **7. Na saúde, o que deveria ser prioridade?**
