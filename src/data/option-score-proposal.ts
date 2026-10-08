@@ -6,7 +6,10 @@
  */
 export const OPTION_SCORE_PROPOSAL: Record<string, [score: number, reason: string]> = {
   "q03|lula|o1": [0.5, "Mantém as principais políticas sociais"], "q03|lula|o2": [0.5, "Mantém o arcabouço fiscal"],
-  "q01|flavio-bolsonaro|o3": [0, "Revisão humana"], "q01|flavio-bolsonaro|o4": [0.5, "Revisão humana: defende 'Discordo' em parte"],
+  "q01|flavio-bolsonaro|o3": [0, "Revisão humana"],
+  "q02|flavio-bolsonaro|o1": [0, "Revisão humana"], "q02|flavio-bolsonaro|o2": [0, "Revisão humana"], "q02|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
+  "q04|flavio-bolsonaro|o1": [0.5, "Revisão humana"], "q04|flavio-bolsonaro|o2": [0.5, "Revisão humana"],
+  "q05|flavio-bolsonaro|o1": [0, "Revisão humana"], "q05|flavio-bolsonaro|o2": [0, "Revisão humana"], "q05|flavio-bolsonaro|o3": [1, "Revisão humana"], "q01|flavio-bolsonaro|o4": [0.5, "Revisão humana: defende 'Discordo' em parte"],
   "q03|flavio-bolsonaro|o1": [0, "Revisão humana, pelas fontes: defende gastar menos"], "q03|flavio-bolsonaro|o3": [0, "Revisão humana, pelas fontes: protege primeiro as contas públicas"],
   "q16|lula|o1": [0.5, "Alfabetização e Escola em Tempo Integral"], "q16|lula|o2": [0.5, "Pé-de-Meia no ensino médio"], "q16|lula|o3": [0.5, "Institutos Federais"], "q16|lula|o4": [0.5, "Expansão das universidades"],
   "q16|flavio-bolsonaro|o5": [0.5, "Combinação inclui a escolha dele"],

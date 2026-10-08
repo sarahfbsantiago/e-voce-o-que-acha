@@ -46,14 +46,16 @@ export default async function AdminScoresPage() {
                 <tr key={o.id} className="border-t border-line align-top">
                   <th scope="row" className="p-2 text-left font-medium">{o.label}</th>
                   {CANDS.map((c) => {
-                    const now = currentOptionScore(q, o, positions.find((p) => p.candidateId === c.id && p.questionId === q.id));
-                    if (now === null) return <td key={c.id} className="p-2 italic text-ink-3">sem posição</td>;
+                    const raw = currentOptionScore(q, o, positions.find((p) => p.candidateId === c.id && p.questionId === q.id));
+                    const hasProposal = q.options.some((x) => proposedOptionScore(q.id, c.id, x.id));
+                    if (raw === null && !hasProposal) return <td key={c.id} className="p-2 italic text-ink-3">sem posição</td>;
+                    const now = raw ?? 0;
                     cells++;
                     const prop = proposedOptionScore(q.id, c.id, o.id);
                     if (prop && prop.score !== now) {
                       changed++;
                       return (
-                        <td key={c.id} title={`Hoje: ${fmt(now)}. ${prop.reason}`} className={`p-2 outline-2 -outline-offset-2 outline-purple ${tone(prop.score)}`}>
+                        <td key={c.id} title={`Hoje: ${raw === null ? "sem posição" : fmt(now)}. ${prop.reason}`} className={`p-2 outline-2 -outline-offset-2 outline-purple ${tone(prop.score)}`}>
                           {fmt(prop.score)}
                         </td>
                       );
