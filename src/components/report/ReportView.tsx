@@ -88,7 +88,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
           <PrintButton />
         </div>
         <h1 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Seu perfil</h1>
-        <p className="hidden print:block text-xs text-ink-3 mt-1">Gerado em {new Date().toLocaleDateString("pt-BR")} · Menos Pior · nada aqui é nota ou ranking</p>
+        <p className="hidden print:block text-xs text-ink-3 mt-1">Gerado em {new Date().toLocaleDateString("pt-BR")} · E Você, O Que Acha? · nada aqui é nota ou ranking</p>
         <p className="mt-3 text-ink-2">
           O que você disse que importa, tema a tema, e com quem suas respostas ficaram mais próximas nos temas em que há posições publicadas. Nada aqui vira nota ou ranking.
         </p>
@@ -152,7 +152,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
           <p className="mt-1 text-sm text-ink-2">Catálogo completo dos documentos oficiais usados no site, com link para cada um.</p>
           <p className="mt-2 text-sm font-medium text-accent">Abrir fontes →</p>
         </Link>
-        <p className="hidden print:block text-sm">Todas as fontes estão em menos-pior.up.railway.app/fontes</p>
+        <p className="hidden print:block text-sm">Todas as fontes estão em e-voce-o-que-acha.up.railway.app/fontes</p>
       </section>
 
       {/* ---------------- Avaliação e encerramento ---------------- */}

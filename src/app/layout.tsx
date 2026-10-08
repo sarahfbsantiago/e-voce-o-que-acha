@@ -14,20 +14,20 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.RAILWAY_PUBLIC
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Menos Pior",
-    template: "%s · Menos Pior",
+    default: "E Você, O Que Acha?",
+    template: "%s · E Você, O Que Acha?",
   },
   description:
     "Compare suas prioridades com propostas e registros públicos dos candidatos. Este site não diz em quem você deve votar.",
-  applicationName: "Menos Pior",
+  applicationName: "E Você, O Que Acha?",
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    siteName: "Menos Pior",
-    title: "Menos Pior",
+    siteName: "E Você, O Que Acha?",
+    title: "E Você, O Que Acha?",
     description: "Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação. 25 perguntas, sem nome de candidato, com as fontes no final.",
   },
-  twitter: { card: "summary_large_image", title: "Menos Pior", description: "Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação." },
+  twitter: { card: "summary_large_image", title: "E Você, O Que Acha?", description: "Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação." },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

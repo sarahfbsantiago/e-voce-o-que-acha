@@ -46,7 +46,7 @@ export default async function AdminResearchPage() {
         <div className="flex flex-wrap items-center gap-2 print:hidden"><PrintButton label="Exportar PDF" fileTitle="Dados da pesquisa" /><form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form></div>
       </div>
 
-      <p className="hidden print:block text-xs text-ink-3">Gerado em {new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })} · Menos Pior · somente agregações</p>
+      <p className="hidden print:block text-xs text-ink-3">Gerado em {new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })} · E Você, O Que Acha? · somente agregações</p>
       <p className="rounded-xl border border-note-line bg-note px-4 py-3 text-sm font-medium">{r.disclaimer}</p>
 
       <nav aria-label="Seções" className="card p-3 text-sm flex flex-wrap gap-x-4 gap-y-1">

@@ -1,12 +1,12 @@
-# Menos Pior
+# E Você, O Que Acha?
 
 > **Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.**
 
-**No ar:** https://menos-pior.up.railway.app
+**No ar:** https://e-voce-o-que-acha.up.railway.app
 
 ## Sobre o quiz
 
-O **Menos Pior** é um questionário sobre políticas públicas para o segundo turno presidencial de 2026, entre **Lula** e **Flávio Bolsonaro**. A pessoa responde sem ver os nomes dos candidatos. No fim, o relatório mostra com quem as respostas mais concordam, tema a tema, com a fonte de cada afirmação e a conta aberta.
+O **E Você, O Que Acha?** é um questionário sobre políticas públicas para o segundo turno presidencial de 2026, entre **Lula** e **Flávio Bolsonaro**. A pessoa responde sem ver os nomes dos candidatos. No fim, o relatório mostra com quem as respostas mais concordam, tema a tema, com a fonte de cada afirmação e a conta aberta.
 
 O site não recomenda voto, não monta ranking e não usa algoritmo secreto.
 
@@ -796,7 +796,7 @@ O seed **não** insere posições de candidatos, evidências nem resumos de prog
 | `DATABASE_URL` | não | Conexão PostgreSQL. Sem ela, modo estático. |
 | `DATA_SOURCE` | não | Força `static` ou `prisma`. |
 | `ADMIN_TOKEN` | não | Token (≥16 caracteres) dos painéis `/admin/research` (agregados) e `/admin/posicoes` (publicação de posições). Sem ele os painéis ficam desativados. |
-| `NEXT_PUBLIC_SITE_URL` | não | URL pública (ex.: `https://menos-pior.up.railway.app`) usada nas tags de compartilhamento. |
+| `NEXT_PUBLIC_SITE_URL` | não | URL pública (ex.: `https://e-voce-o-que-acha.up.railway.app`) usada nas tags de compartilhamento. |
 
 #### Rascunhos para revisão (levantamentos)
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Verificação rápida do projeto Menos Pior: git, ganchos, cópias do iCloud, deploy, site no ar e banco local.
+# Verificação rápida do projeto E Você, O Que Acha?: git, ganchos, cópias do iCloud, deploy, site no ar e banco local.
 # Uso: bash scripts/verificar-projeto.sh
 set -u
 cd "$(dirname "$0")/.."
-URL="${SITE_URL:-https://menos-pior.up.railway.app}"
+URL="${SITE_URL:-https://e-voce-o-que-acha.up.railway.app}"
 
 echo "== Git"
 if git fetch -q origin 2>/dev/null; then
