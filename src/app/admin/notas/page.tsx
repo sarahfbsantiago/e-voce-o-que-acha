@@ -53,9 +53,8 @@ export default async function AdminScoresPage() {
                     if (prop && prop.score !== now) {
                       changed++;
                       return (
-                        <td key={c.id} className={`p-2 outline-2 -outline-offset-2 outline-purple ${tone(prop.score)}`}>
-                          <span className="font-bold">{fmt(prop.score)}</span> <span className="text-[11px] text-ink-3">hoje {fmt(now)}</span>
-                          <span className="block text-[11px] text-ink-2">{prop.reason}</span>
+                        <td key={c.id} title={`Hoje: ${fmt(now)}. ${prop.reason}`} className={`p-2 outline-2 -outline-offset-2 outline-purple ${tone(prop.score)}`}>
+                          {fmt(prop.score)}
                         </td>
                       );
                     }
@@ -81,7 +80,7 @@ export default async function AdminScoresPage() {
       </div>
       <div className="card p-4 text-sm space-y-2">
         <p className="flex flex-wrap gap-2"><span className="rounded-md bg-mint-soft px-2 font-semibold">1 = ele defende isso</span><span className="rounded-md bg-gold-soft px-2">0,5 = defende em parte</span><span className="px-2 text-ink-3">0 = não defende</span></p>
-        <p>Células com borda roxa mudariam em relação à regra de hoje e mostram a nota atual e o motivo, tirado dos textos de visão. As demais seguem a regra atual: 1 na alternativa do candidato, 0,5 na vizinha. &quot;Sem posição&quot; conta como 0. &quot;Não sei&quot; nunca entra na conta.</p>
+        <p>Células com borda roxa mudariam em relação à regra de hoje. Passe o mouse sobre elas para ver a nota atual e o motivo. As demais seguem a regra atual: 1 na alternativa do candidato, 0,5 na vizinha. &quot;Sem posição&quot; conta como 0. &quot;Não sei&quot; nunca entra na conta.</p>
         <p>Resultado de cada tema = soma do que o candidato ganhou ÷ perguntas respondidas. Ganha o tema quem tiver a porcentagem maior.</p>
         <p className="font-semibold">{changed} das {cells} notas mudariam.</p>
       </div>
