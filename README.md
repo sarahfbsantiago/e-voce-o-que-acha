@@ -485,7 +485,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Deveriam ser proibidas | — | 1 | 0 |
-| Deveriam existir com regras muito rígidas | — | 0,5 | 0,5 |
+| Deveriam existir com regras muito rígidas | — | 0 | 0 |
 | Deveriam existir com regras semelhantes às de outros negócios | — | 0 | 1 |
 | Deveriam ter poucas restrições | — | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
@@ -498,9 +498,9 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Não | — | 1 | 0 |
-| Sim, mas com regras muito rígidas | — | 0,5 | 0 |
-| Sim, com avisos e limites | — | 0 | 0 |
-| Sim, sem grandes restrições | — | 0 | 0 |
+| Sim, mas com regras muito rígidas | — | 0 | 0,5 |
+| Sim, com avisos e limites | — | 0 | 0,5 |
+| Sim, sem grandes restrições | — | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 ### Seção 4. Ambiente e tecnologia
