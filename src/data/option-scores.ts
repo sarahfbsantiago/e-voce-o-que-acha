@@ -26,7 +26,7 @@ export const OPTION_SCORES: Record<string, [score: number, reason: string]> = {
   "q44|lula|o2": [0, "Sem alinhamento com um bloco"], "q44|lula|o3": [0.5, "BRICS e países emergentes"], "q44|lula|o4": [0.5, "Sem alinhamento exclusivo"],
   "q44|flavio-bolsonaro|o3": [0, "Critica posições do Brasil no BRICS"],
   "q46|lula|o1": [0.5, "Acordo Mercosul–União Europeia"], "q46|lula|o2": [0.5, "Nova Indústria Brasil"],
-  "q46|flavio-bolsonaro|o2": [0, "Proteção não aparece no texto"], "q46|flavio-bolsonaro|o3": [0.5, "Combinação inclui a escolha dele"],
+  "q46|flavio-bolsonaro|o2": [0, "Proteção não aparece no texto"],
   "q37|flavio-bolsonaro|o1": [0, "Revisão humana"], "q37|flavio-bolsonaro|o2": [0, "Revisão humana"], "q37|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
   "q09|flavio-bolsonaro|o1": [0, "Revisão humana"], "q09|flavio-bolsonaro|o2": [0.5, "Revisão humana"], "q09|flavio-bolsonaro|o3": [0, "Revisão humana"],
   "q10|flavio-bolsonaro|o1": [0, "Revisão humana"], "q10|flavio-bolsonaro|o2": [0, "Revisão humana"], "q10|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
@@ -54,4 +54,7 @@ export const OPTION_SCORES: Record<string, [score: number, reason: string]> = {
   "q42|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
   "q43|flavio-bolsonaro|o1": [0, "Revisão humana"], "q43|flavio-bolsonaro|o2": [1, "Revisão humana"], "q43|flavio-bolsonaro|o3": [0, "Revisão humana"],
   "q43|lula|o1": [0.5, "Revisão humana"], "q43|lula|o2": [0, "Revisão humana"], "q43|lula|o3": [0, "Revisão humana"],
+  "q44|flavio-bolsonaro|o1": [0, "Revisão humana"],
+  "q45|flavio-bolsonaro|o1": [0, "Revisão humana"], "q45|flavio-bolsonaro|o2": [0, "Revisão humana"], "q45|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
+  "q46|flavio-bolsonaro|o3": [0, "Revisão humana"],
 };

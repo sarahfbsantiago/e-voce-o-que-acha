@@ -631,7 +631,7 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Tomar sua própria decisão em cada caso | — | 1 | 0,5 |
+| Tomar sua própria decisão em cada caso | — | 1 | 0 |
 | Ficar mais próximo dos Estados Unidos e da Europa | — | 0 | 1 |
 | Ficar mais próximo da China e de países emergentes | — | 0,5 | 0 |
 | Evitar tomar lado sempre que possível | — | 0,5 | 0 |
@@ -646,9 +646,9 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Em alguns deles | +1 | 0,5 | 1 |
-| Não | -2 | 0 | 0 |
+| Sim | +2 | 1 | 0 |
+| Em alguns deles | +1 | 0,5 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **42. Ao fazer acordos com outros países, o Brasil deveria priorizar:**
@@ -660,7 +660,7 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 |---|---|---|---|
 | Comprar e vender com mais liberdade | — | 0,5 | 1 |
 | Proteger empresas e empregos brasileiros | — | 0,5 | 0 |
-| Equilibrar as duas coisas | — | 1 | 0,5 |
+| Equilibrar as duas coisas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 **43. O Brasil deveria buscar mais independência nas decisões internacionais, mesmo quando isso desagradar países mais poderosos?**
