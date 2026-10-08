@@ -49,4 +49,5 @@ export const OPTION_SCORES: Record<string, [score: number, reason: string]> = {
   "q29|lula|o1": [1, "Revisão humana"], "q29|lula|o2": [0, "Revisão humana"], "q29|lula|o3": [0, "Revisão humana"], "q29|lula|o4": [0, "Revisão humana"],
   "q28|flavio-bolsonaro|o1": [0, "Revisão humana"], "q28|flavio-bolsonaro|o2": [0, "Revisão humana"], "q28|flavio-bolsonaro|o3": [1, "Revisão humana"], "q28|flavio-bolsonaro|o4": [0.5, "Revisão humana"],
   "q29|flavio-bolsonaro|o1": [0, "Revisão humana"], "q29|flavio-bolsonaro|o2": [0.5, "Revisão humana"], "q29|flavio-bolsonaro|o3": [0.5, "Revisão humana"], "q29|flavio-bolsonaro|o4": [0.5, "Revisão humana"],
+  "q30|flavio-bolsonaro|o1": [0, "Revisão humana"], "q30|flavio-bolsonaro|o2": [1, "Revisão humana"], "q30|flavio-bolsonaro|o3": [0, "Revisão humana"],
 };

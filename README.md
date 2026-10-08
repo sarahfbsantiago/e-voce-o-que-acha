@@ -518,7 +518,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
+| Sim | +2 | 1 | 0 |
 | Depende do tamanho do risco | +1 | 0,5 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
