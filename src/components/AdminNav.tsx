@@ -3,6 +3,7 @@ import Link from "next/link";
 const LINKS = [
   { href: "/admin/research", label: "Dados da pesquisa" },
   { href: "/admin/posicoes", label: "Revisão de posições" },
+  { href: "/admin/notas", label: "Notas por alternativa" },
   { href: "/", label: "Ver o site" },
 ];
 
