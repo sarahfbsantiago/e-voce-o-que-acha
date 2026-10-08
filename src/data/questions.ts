@@ -42,57 +42,29 @@ const SIM_NAO = (meio: string): Opt[] => [["Sim", 2], [meio, 1], ["Não", -2]];
 export const QUESTIONS: Question[] = [
   // ---- Sessão 1. Economia e impostos --------------------------------------
   q("q01", "t01", 1, "Quem ganha muito dinheiro deveria pagar uma porcentagem maior de imposto (milionários e bilionários)?", CONCORDA),
-  q("q02", "t01", 2, "Pessoas que ganham menos deveriam pagar menos Imposto de Renda em relação a quem ganha muito (milionários e bilionários)?", SIM_NAO("Concordo em parte"), {
-    contextNoteIds: ["ctx-ir-2026"],
-  }),
   q("q03", "t01", 3, "Quando o governo precisa economizar dinheiro, o que deveria proteger primeiro?", [
     ["Saúde, educação e programas sociais", null],
     ["As contas públicas e a dívida", null],
     ["Tentar equilibrar os dois", null],
   ]),
-  q("q04", "t01", 4, "O governo deveria ajudar empresas brasileiras consideradas importantes para o país?", [
-    ["Sim, com investimentos e crédito", 2],
-    ["Sim, mas só em alguns setores", 1],
-    ["Não, empresas deveriam competir sem ajuda", -2],
-  ], { argumentsId: "arg-politica-industrial", evidenceDistinctions: ["crédito", "subsídio", "incentivo fiscal", "compras públicas", "investimento estatal", "parceria privada"] }),
 
   // ---- Sessão 2. Trabalho, emprego e jornada --------------------------------
   q("q05", "t02", 1, "Você é a favor de trabalhar 5 dias e folgar 2 por semana, sem redução do salário?", SIM_NAO("Depende da profissão"), {
     contextNoteIds: ["ctx-jornada"],
     evidenceDistinctions: ["proposta constitucional", "projeto legislativo", "apoio público", "posição em programa de governo", "medida efetivamente aprovada"],
   }),
-  q("q06", "t02", 2, "A escala em que a pessoa trabalha seis dias e folga um deveria continuar existindo?", [
-    ["Não deveria continuar", -2],
-    ["Deveria existir apenas em alguns trabalhos", 0],
-    ["Deveria continuar como hoje", 2],
-  ], { evidenceDistinctions: ["proposta constitucional", "projeto legislativo", "apoio público", "posição em programa de governo", "medida efetivamente aprovada"] }),
   q("q08", "t02", 4, "O salário mínimo deveria aumentar acima da inflação quando a economia estiver crescendo?", SIM_NAO("Depende da situação econômica")),
 
   // ---- Sessão 3. Saúde -------------------------------------------------------
   q("q09", "t03", 1, "O SUS deveria continuar atendendo qualquer pessoa gratuitamente?", SIM_NAO("Sim, mas deveria privatizar uma parte")),
-  q("q10", "t03", 2, "O governo deveria gastar mais dinheiro com saúde pública?", SIM_NAO("Sim, mas apenas se reduzir gastos em outras áreas")),
   q("q11", "t03", 3, "Na saúde, o que deveria ser prioridade?", [
     ["Fortalecer principalmente o SUS. Melhorar e expandir a sua atuação em todo território nacional", null],
     ["Fortalecer o SUS e também fazer parcerias com empresas privadas", null],
     ["Aumentar a participação de empresas privadas, apenas", null],
   ]),
-  q("q12", "t03", 4, "O Brasil deveria produzir mais remédios, vacinas e equipamentos de saúde dentro do próprio país?", [
-    ["Sim", 2],
-    ["Apenas os produtos mais importantes", 1],
-    ["Não, importar pode ser melhor", -2],
-  ], { argumentsId: "arg-capacidade-nacional" }),
 
   // ---- Sessão 4. Educação, ciência e pesquisa --------------------------------
-  q("q13", "t04", 1, "O governo deveria criar mais universidades e institutos federais?", SIM_NAO("Somente onde houver necessidade")),
-  q("q14", "t04", 2, "O governo deveria ajudar estudantes de baixa renda a pagar faculdade particular?", SIM_NAO("Sim, mas com regras mais rígidas")),
-  q("q15", "t04", 3, "O Brasil deveria investir mais dinheiro em pesquisas científicas?", SIM_NAO("Somente em pesquisas que tragam resultados mais rápidos"), { argumentsId: "arg-ciencia" }),
-  q("q16", "t04", 4, "Qual área deveria receber mais dinheiro primeiro?", [
-    ["Educação infantil e ensino fundamental", null],
-    ["Ensino médio", null],
-    ["Ensino técnico", null],
-    ["Universidades", null],
-    ["Todas são igualmente importantes", null],
-  ]),
+  q("q13", "t04", 1, "O governo deveria investir mais em educação e pesquisas científicas?", SIM_NAO("Somente onde houver necessidade")),
 
   // ---- Sessão 5. Programas sociais, pobreza e desigualdade -------------------
   q("q17", "t05", 1, "O governo deveria manter programas que dão dinheiro para famílias de baixa renda?", [
@@ -101,8 +73,6 @@ export const QUESTIONS: Question[] = [
     ["Deveriam ser reduzidos", -1],
     ["Não deveriam existir", -2],
   ]),
-  q("q18", "t05", 2, "Para receber alguns benefícios, famílias deveriam manter as crianças na escola e fazer acompanhamento de saúde?", SIM_NAO("Depende do benefício")),
-  q("q19", "t05", 3, "O governo deveria cobrar mais impostos de pessoas muito ricas?", SIM_NAO("Em alguns casos")),
   q("q20", "t05", 4, "Para combater a pobreza, qual deveria ser a maior prioridade?", [
     ["Dar auxílio financeiro", null],
     ["Criar empregos", null],
@@ -117,9 +87,6 @@ export const QUESTIONS: Question[] = [
     contextNoteIds: ["ctx-pf-federativa"],
     evidenceDistinctions: ["competência constitucional da Polícia Federal", "competências das polícias estaduais", "cooperação federativa", "integração de inteligência", "investigações interestaduais", "política nacional de segurança", "propostas de alteração constitucional ou legislativa"],
   }),
-  q("q22", "t06", 2, "A Polícia Federal deveria ter mais recursos para combater facções, corrupção, tráfico e crimes que acontecem em vários estados?", SIM_NAO("Sim, mas apenas em crimes mais graves"), {
-    evidenceDistinctions: ["orçamento", "efetivo", "competência legal", "cooperação com estados"],
-  }),
   q("q23", "t06", 3, "O que ajuda mais a reduzir a violência?", [
     ["Mais polícia e punição", null],
     ["Mais prevenção, educação e oportunidades", null],
@@ -132,7 +99,6 @@ export const QUESTIONS: Question[] = [
     ["Como é hoje", 0],
     ["Mais fácil", 2],
   ]),
-  q("q26", "t07", 2, "Pessoas registradas como colecionadores, atiradores e caçadores deveriam ter regras diferentes para comprar armas?", SIM_NAO("Somente em alguns casos")),
   q("q27", "t07", 3, "Qual deveria ser a principal forma de lidar com drogas?", [
     ["Mais repressão policial", null],
     ["Mais tratamento de saúde", null],
@@ -145,12 +111,6 @@ export const QUESTIONS: Question[] = [
     ["Deveriam existir com regras semelhantes às de outros negócios", null],
     ["Deveriam ter poucas restrições", null],
   ], { contextNoteIds: ["ctx-apostas-2026"] }),
-  q("q29", "t07", 5, "Propagandas de bets deveriam ser permitidas?", [
-    ["Não", null],
-    ["Sim, mas com regras muito rígidas", null],
-    ["Sim, com avisos e limites", null],
-    ["Sim, sem grandes restrições", null],
-  ]),
 
   // ---- Sessão 8. Meio ambiente e energia -------------------------------------
   q("q30", "t08", 1, "O governo deveria impedir obras ou negócios quando houver grande risco de destruir uma área ambiental importante?", SIM_NAO("Depende do tamanho do risco")),
@@ -164,60 +124,28 @@ export const QUESTIONS: Question[] = [
   ]),
 
   // ---- Sessão 9. Infraestrutura, indústria e desenvolvimento -----------------
-  q("q34", "t09", 1, "O governo deveria ajudar a indústria brasileira a crescer?", [
-    ["Sim, bastante", 2],
-    ["Sim, em setores importantes", 1],
-    ["Não, empresas deveriam competir sem ajuda", -2],
-  ], { argumentsId: "arg-politica-industrial" }),
-  q("q35", "t09", 2, "O Brasil deveria produzir dentro do país alguns produtos importantes?", SIM_NAO("Somente produtos essenciais"), {
-    contextNoteIds: ["ctx-cadeias-suprimento"],
-    argumentsId: "arg-capacidade-nacional",
-  }),
   q("q36", "t09", 3, "O governo deveria investir mais em estradas, transporte público, saneamento e habitação?", SIM_NAO("Sim, mas sem aumentar muito os gastos")),
-  q("q37", "t09", 4, "Quando preço e qualidade forem parecidos, o governo deveria dar preferência a produtos feitos no Brasil?", SIM_NAO("Somente em áreas importantes"), { argumentsId: "arg-compras-publicas" }),
 
   // ---- Sessão 10. Tecnologia e autonomia do Brasil ---------------------------
-  q("q38", "t10", 1, "O Brasil deveria depender menos de outros países para tecnologias importantes?", [
+  q("q38", "t10", 1, "O Brasil deveria depender menos de outros países?", [
     ["Sim", 2],
     ["Somente em algumas tecnologias", 1],
     ["Não é necessário", -2],
   ], { contextNoteIds: ["ctx-autonomia-tecnologica"], argumentsId: "arg-autonomia-tecnologica" }),
-  q("q40", "t10", 3, "Informações importantes do governo e dos cidadãos deveriam ter regras especiais para ficarem protegidas no Brasil?", [
-    ["Sim", 2],
-    ["Somente informações muito sensíveis", 1],
-    ["Não é necessário", -2],
-  ], { contextNoteIds: ["ctx-nuvem-dados"], argumentsId: "arg-dados" }),
-  q("q42", "t10", 5, "Sistemas importantes do governo deveriam evitar depender de uma única empresa estrangeira?", [
-    ["Sim", 2],
-    ["Somente sistemas muito importantes", 1],
-    ["Não é necessário", -2],
-  ], { argumentsId: "arg-fornecedor-unico" }),
 
   // ---- Sessão 11. Relações internacionais ------------------------------------
   q("q43", "t11", 1, "O Brasil deveria manter boas relações com países mesmo quando discordar de seus governos?", SIM_NAO("Depende do país"), {
     argumentsId: "arg-orientacao-externa",
     evidenceDistinctions: ["Estados Unidos", "China", "União Europeia", "América Latina", "Mercosul", "BRICS"],
   }),
-  q("q44", "t11", 2, "Quando Estados Unidos, China ou outras grandes potências entram em disputa, o Brasil deveria:", [
-    ["Tomar sua própria decisão em cada caso", null],
-    ["Ficar mais próximo dos Estados Unidos e da Europa", null],
-    ["Ficar mais próximo da China e de países emergentes", null],
-    ["Evitar tomar lado sempre que possível", null],
-  ], { argumentsId: "arg-disputas" }),
   q("q45", "t11", 3, "O Brasil deveria fortalecer sua participação em grupos como Mercosul, BRICS e ONU?", SIM_NAO("Em alguns deles"), {
     contextNoteIds: ["ctx-organizacoes-multilaterais"],
     argumentsId: "arg-multilaterais",
     evidenceDistinctions: ["ONU", "Mercosul", "BRICS"],
   }),
-  q("q46", "t11", 4, "Ao fazer acordos com outros países, o Brasil deveria priorizar:", [
-    ["Comprar e vender com mais liberdade", null],
-    ["Proteger empresas e empregos brasileiros", null],
-    ["Equilibrar as duas coisas", null],
-  ], { argumentsId: "arg-comercio" }),
-  q("q47", "t11", 5, "O Brasil deveria buscar mais independência nas decisões internacionais, mesmo quando isso desagradar países mais poderosos?", SIM_NAO("Depende da situação"), { argumentsId: "arg-autonomia-externa" }),
 
   // ---- Sessão 12. Direitos, democracia e instituições ------------------------
-  q("q50", "t12", 3, "Quando o STF toma uma decisão válida, governo e Congresso devem cumprir essa decisão mesmo discordando dela?", SIM_NAO("Depende do caso")),
+  q("q53", "t12", 3, "O modelo do STF ainda segue uma lógica de indicação. Você é a favor de uma reforma rígida do STF?", SIM_NAO("Sim, porém definir novas regras junto com a população")),
   q("q51", "t12", 4, "Órgãos como Polícia Federal, Ministério Público e tribunais de contas deveriam poder investigar pessoas do próprio governo sem interferência política?", SIM_NAO("Sim, mas com mais controle sobre essas instituições")),
   q("q52", "t12", 5, "Quando existem suspeitas de corrupção envolvendo políticos, qual deveria ser a regra?", [
     ["Investigar independentemente do partido", null],

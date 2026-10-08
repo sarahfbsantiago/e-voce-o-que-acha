@@ -6,7 +6,7 @@ import { buildResearchReport } from "@/lib/research-report";
 import { ORDERED_QUESTIONS, QUESTION_NUMBER } from "@/lib/question-order";
 import type { CandidatePosition, UserAnswer } from "@/domain/types";
 
-const REMOVED = ["q07", "q24", "q39", "q41", "q48", "q49"];
+const REMOVED = ["q07", "q24", "q39", "q41", "q48", "q49", "q02", "q04", "q06", "q34", "q35", "q37", "q10", "q12", "q14", "q15", "q16", "q18", "q19", "q22", "q26", "q29", "q40", "q42", "q44", "q46", "q47", "q50"];
 
 /** Posição publicada fictícia: cada candidato escolhe a primeira alternativa de toda pergunta. */
 const positions: CandidatePosition[] = CANDIDATES.flatMap((c) =>
@@ -19,11 +19,11 @@ const positions: CandidatePosition[] = CANDIDATES.flatMap((c) =>
 describe("perguntas removidas", () => {
   it("não existem mais no questionário", () => {
     for (const id of REMOVED) expect(QUESTIONS.find((q) => q.id === id)).toBeUndefined();
-    expect(QUESTIONS).toHaveLength(46);
+    expect(QUESTIONS).toHaveLength(25);
   });
 
-  it("numeração mostrada vai de 1 a 46, sem buracos", () => {
-    expect(ORDERED_QUESTIONS.map((q) => QUESTION_NUMBER[q.id])).toEqual(Array.from({ length: 46 }, (_, i) => i + 1));
+  it("numeração mostrada vai de 1 a 25, sem buracos", () => {
+    expect(ORDERED_QUESTIONS.map((q) => QUESTION_NUMBER[q.id])).toEqual(Array.from({ length: 25 }, (_, i) => i + 1));
   });
 
   it("respostas antigas a perguntas removidas não mudam a conta", () => {
@@ -33,7 +33,7 @@ describe("perguntas removidas", () => {
   });
 
   it("questionário antigo não conta como completo só por ter respostas de perguntas removidas", () => {
-    const partial = QUESTIONS.slice(0, 40).map((q) => ({ questionId: q.id, optionIds: [q.options[0].id] }));
+    const partial = QUESTIONS.slice(0, 20).map((q) => ({ questionId: q.id, optionIds: [q.options[0].id] }));
     const old = { answers: [...partial, ...REMOVED.map((id) => ({ questionId: id, optionIds: [`${id}-o1`] }))], topicPriorities: [], submittedAt: "2026-10-07T12:00:00.000Z" };
     const full = { answers: QUESTIONS.map((q) => ({ questionId: q.id, optionIds: [q.options[0].id] })), topicPriorities: [], submittedAt: "2026-10-07T12:00:00.000Z" };
     const r = buildResearchReport([old, full] as never, []);

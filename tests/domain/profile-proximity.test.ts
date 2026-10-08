@@ -10,8 +10,8 @@ import type { CandidatePosition } from "@/domain/types";
 const pos = (candidateId: string, questionId: string, direction: CandidatePosition["direction"]): CandidatePosition => ({
   id: `${candidateId}-${questionId}`, candidateId, questionId, direction, closestOptionId: null, summary: "", evidenceIds: ["e"], reviewStatus: "PUBLISHED", updatedAt: "x",
 });
-// q01 e q02 são do tema t01; q05 é de outro tema.
-const answers = [{ questionId: "q01", optionIds: ["q01-o1"] }, { questionId: "q02", optionIds: ["q02-o1"] }, { questionId: "q05", optionIds: ["q05-o1"] }];
+// q01 e q03 são do tema t01; q05 é de outro tema.
+const answers = [{ questionId: "q01", optionIds: ["q01-o1"] }, { questionId: "q03", optionIds: ["q03-o1"] }, { questionId: "q05", optionIds: ["q05-o1"] }];
 
 describe("perfil mais próximo (conta aberta do relatório, em forma pura)", () => {
   it("sem posições publicadas → sem comparação", () => {

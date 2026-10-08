@@ -43,15 +43,15 @@ describe("indicador por questão", () => {
 
 describe("notas revisadas por alternativa (mesma tabela do admin)", () => {
   const q05 = QUESTION_BY_ID.q05;
-  const q02 = QUESTION_BY_ID.q02;
+  const q53 = QUESTION_BY_ID.q53;
   it("valem antes da regra padrão", () => {
     const p = pos({ candidateId: "flavio-bolsonaro", questionId: "q05", direction: "PARTIALLY_SUPPORTS", closestOptionId: "q05-o2" });
     expect(comparison.compareAnswerToPosition(q05, { questionId: "q05", optionIds: ["q05-o3"] }, p)).toBe("SIMILAR");
     expect(comparison.compareAnswerToPosition(q05, { questionId: "q05", optionIds: ["q05-o2"] }, p)).toBe("DIFFERENT");
   });
   it("funcionam mesmo sem posição publicada", () => {
-    expect(comparison.compareAnswerToPosition(q02, { questionId: "q02", optionIds: ["q02-o3"] }, null, "flavio-bolsonaro")).toBe("PARTIALLY_SIMILAR");
-    expect(comparison.compareAnswerToPosition(q02, { questionId: "q02", optionIds: ["q02-o1"] }, null, "flavio-bolsonaro")).toBe("DIFFERENT");
+    expect(comparison.compareAnswerToPosition(q53, { questionId: "q53", optionIds: ["q53-o1"] }, null, "flavio-bolsonaro")).toBe("PARTIALLY_SIMILAR");
+    expect(comparison.compareAnswerToPosition(q53, { questionId: "q53", optionIds: ["q53-o2"] }, null, "flavio-bolsonaro")).toBe("DIFFERENT");
   });
   it("\"Não sei\" continua fora da conta", () => {
     expect(comparison.compareAnswerToPosition(q05, { questionId: "q05", optionIds: ["q05-o4"] }, null, "flavio-bolsonaro")).toBeNull();

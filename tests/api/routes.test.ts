@@ -19,7 +19,7 @@ const params = (id: string) => ({ params: Promise.resolve({ id }) });
 describe("API pública (modo estático)", () => {
   it("GET /api/questions", async () => {
     const body = await (await getQuestions()).json();
-    expect(body.questions).toHaveLength(46);
+    expect(body.questions).toHaveLength(25);
     expect(body.topics).toHaveLength(12);
   });
   it("GET /api/questions/[id] inclui contexto, argumentos e protocolo", async () => {
@@ -49,7 +49,7 @@ describe("API pública (modo estático)", () => {
   });
   it("GET /api/candidates/[id]/positions não calcula nada: só itens por pergunta", async () => {
     const body = await (await getPositions(req("/x"), params("flavio-bolsonaro"))).json();
-    expect(body.items).toHaveLength(46);
+    expect(body.items).toHaveLength(25);
     expect(body.items.every((i: { status: string }) => i.status === "INSUFFICIENT_EVIDENCE")).toBe(true);
     expect(Object.keys(body)).toEqual(["candidateId", "items"]);
   });
@@ -70,8 +70,8 @@ describe("API pública (modo estático)", () => {
     expect(h.versions.find((v: { version: string }) => v.version === "1.0.0")).toBeDefined();
   });
   it("GET /api/research/protocols filtra por pergunta", async () => {
-    const p = await (await getProtocols(req("/api/research/protocols?questionId=q26"))).json();
+    const p = await (await getProtocols(req("/api/research/protocols?questionId=q25"))).json();
     expect(p.protocols).toHaveLength(1);
-    expect(p.protocols[0].searchTerms).toContain("CAC");
+    expect(p.protocols[0].searchTerms).toContain("Estatuto do Desarmamento");
   });
 });

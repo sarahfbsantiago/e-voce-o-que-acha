@@ -28,15 +28,12 @@ export const FLAVIO_VIEW_POSITIONS: ViewPosition[] = [
 
   // Trabalho, emprego e jornada
   { questionId: "q05", direction: "PARTIALLY_SUPPORTS", closestOptionId: "q05-o2", basis: "Empresas e trabalhadores devem ter mais liberdade para combinar salário, horário e jornada." },
-  { questionId: "q06", direction: "SUPPORTS", closestOptionId: "q06-o3", basis: "Defende regras de trabalho mais flexíveis, com liberdade para combinar a jornada." },
 
   // Saúde
   { questionId: "q09", direction: "PARTIALLY_SUPPORTS", closestOptionId: "q09-o2", basis: "Diz que pretende ajustar o SUS." },
   { questionId: "q11", direction: "SUPPORTS", closestOptionId: "q11-o2", basis: "Pretende ajustar o SUS e defende parceria com o setor privado." },
 
   // Educação, ciência e pesquisa
-  { questionId: "q15", direction: "PARTIALLY_SUPPORTS", closestOptionId: "q15-o2", basis: "Quer que pesquisas das universidades tenham mais ligação com empresas, tecnologia e produção." },
-  { questionId: "q16", direction: "SUPPORTS", closestOptionId: "q16-o3", basis: "Educação mais focada em aprendizado, profissão e mercado de trabalho." },
 
   // Programas sociais
   { questionId: "q17", direction: "PARTIALLY_SUPPORTS", closestOptionId: "q17-o2", basis: "O benefício deve ser uma ajuda até a pessoa conseguir emprego, com maior fiscalização." },
@@ -47,7 +44,6 @@ export const FLAVIO_VIEW_POSITIONS: ViewPosition[] = [
 
   // Armas, drogas e apostas
   { questionId: "q25", direction: "SUPPORTS", closestOptionId: "q25-o3", basis: "Defende facilitar o acesso a armas para pessoas que querem se proteger." },
-  { questionId: "q26", direction: "PARTIALLY_SUPPORTS", closestOptionId: "q26-o2", basis: "Tende a defender regras mais favoráveis para quem possui armas legalmente." },
   { questionId: "q27", direction: "SUPPORTS", closestOptionId: "q27-o1", basis: "É contra a descriminalização; o porte de drogas deve continuar sendo crime." },
   { questionId: "q28", direction: "SUPPORTS", closestOptionId: "q28-o3", basis: "É contra proibir as apostas; elas podem continuar funcionando dentro de regras." },
 
@@ -63,10 +59,7 @@ export const FLAVIO_VIEW_POSITIONS: ViewPosition[] = [
   { questionId: "q38", direction: "PARTIALLY_SUPPORTS", closestOptionId: "q38-o2", basis: "Defende mais autonomia, porém sem deixar de importar do exterior." },
 
   // Relações internacionais
-  { questionId: "q44", direction: "SUPPORTS", closestOptionId: "q44-o2", basis: "Defende aproximação maior com os Estados Unidos e Israel." },
   { questionId: "q45", direction: "PARTIALLY_SUPPORTS", closestOptionId: "q45-o2", basis: "Critica algumas posições do Brasil dentro do Brics." },
-  { questionId: "q46", direction: "SUPPORTS", closestOptionId: "q46-o1", basis: "Quer mais liberdade para o Brasil fazer acordos comerciais." },
 
   // Direitos, democracia e instituições
-  { questionId: "q50", direction: "PARTIALLY_SUPPORTS", closestOptionId: "q50-o2", basis: "Quer diminuir a capacidade do STF de controlar outros Poderes." },
 ];

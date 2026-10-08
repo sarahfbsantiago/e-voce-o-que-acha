@@ -107,6 +107,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: 5 posições de Lula passam a seguir o texto 'Visão Lula' (tabela em src/data/lula-view-positions.ts): prioridade na saúde (fortalecer principalmente o SUS), prioridade na educação (todas igualmente), compra de armas (mais difícil), impedir obras com grande risco ambiental (sim) e depender menos de outros países em tecnologia (só em algumas). As demais já batiam com o texto. O valor anterior fica no registro de auditoria.",
       "Revisão humana: sai da página Metodologia a seção 'Revisão'.",
       "Revisão humana: a conta passa a usar notas por alternativa revisadas (src/data/option-scores.ts). Para cada pergunta e candidato, a alternativa marcada vale de 0 a 1 conforme o quanto o candidato a defende; sem nota revisada, segue a regra anterior (1 na alternativa do candidato, 0,5 na vizinha, 0 nas demais). A fórmula por tema não muda: soma das notas ÷ perguntas respondidas.",
+      "Revisão humana: o questionário passa a ter 25 perguntas, 5 por seção. Saem 22 perguntas e entra uma nova sobre reforma do STF (no lugar da pergunta sobre cumprir decisões do STF). Mudam os textos das perguntas sobre educação e pesquisa e sobre depender menos de outros países. Todas as 25 perguntas têm notas por alternativa revisadas para os dois candidatos; a fórmula por tema não muda.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
   },
