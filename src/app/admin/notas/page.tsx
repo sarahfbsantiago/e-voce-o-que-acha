@@ -7,6 +7,7 @@ import { QUESTIONS } from "@/data/questions";
 import { TOPICS } from "@/data/topics";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { currentOptionScore, proposedOptionScore } from "@/lib/option-scores";
+import { QUESTION_NUMBER } from "@/lib/question-order";
 import { logoutAction } from "../login/actions";
 import { AdminNav } from "@/components/AdminNav";
 import { PrintButton } from "@/components/PrintButton";
@@ -36,7 +37,7 @@ export default async function AdminScoresPage() {
       </h2>
       {questions.map(({ q, t }) => (
         <div key={q.id} className="card p-4">
-          <p className="font-semibold"><span className="mr-1 text-xs text-ink-3">{q.id.toUpperCase()}</span>{q.text}</p>
+          <p className="font-semibold"><span className="mr-1 text-xs text-ink-3" title={`código interno ${q.id}`}>Pergunta {QUESTION_NUMBER[q.id]}</span>{q.text}</p>
           <p className="text-xs text-ink-3">{t.name}</p>
           <table className="mt-3 w-full text-sm">
             <thead><tr className="text-left text-xs text-ink-3"><th className="p-2">Alternativa que a pessoa marca</th>{CANDS.map((c) => <th key={c.id} className="w-1/4 p-2">{c.name} ganha</th>)}</tr></thead>

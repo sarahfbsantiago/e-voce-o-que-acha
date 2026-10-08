@@ -5,6 +5,7 @@ import { isAdminSession } from "@/lib/admin-auth";
 import { getContentRepository, getStatsRepository } from "@/lib/repository";
 import { aggregateProfileProximity } from "@/domain/profile-proximity";
 import { QUESTIONS } from "@/data/questions";
+import { QUESTION_NUMBER } from "@/lib/question-order";
 import { buildResearchReport } from "@/lib/research-report";
 import { INSUFFICIENT_DATA_MESSAGE } from "@/domain/aggregates";
 import { AGE_RANGES, REGIONS } from "@/domain/types";
@@ -98,14 +99,14 @@ export default async function AdminResearchPage() {
           <p className="text-xs text-ink-3">Pode indicar pergunta confusa ou tema pouco conhecido.</p>
           <ul className="mt-3 space-y-2">
             {[...r.questions].filter((q) => q.totalResponses > 0).sort((a, b) => b.noOpinionCount / b.totalResponses - a.noOpinionCount / a.totalResponses).slice(0, 5).map((q) => (
-              <BarRow key={q.questionId} tone="bg-gold" label={`${q.questionId.toUpperCase()} — ${q.text}`} count={q.noOpinionCount} share={(q.noOpinionCount / q.totalResponses) * 100} />
+              <BarRow key={q.questionId} tone="bg-gold" label={`Pergunta ${QUESTION_NUMBER[q.questionId]} — ${q.text}`} count={q.noOpinionCount} share={(q.noOpinionCount / q.totalResponses) * 100} />
             ))}
             {r.questions.every((q) => q.totalResponses === 0) ? <li className="text-sm text-ink-3">Sem dados.</li> : null}
           </ul>
         </div>
-        {r.questions.map((q) => (
+        {[...r.questions].sort((a, b) => QUESTION_NUMBER[a.questionId] - QUESTION_NUMBER[b.questionId]).map((q) => (
           <details key={q.questionId} className="card p-4">
-            <summary className="text-sm font-medium">{q.questionId.toUpperCase()} — {q.text} <span className="text-ink-3">({q.totalResponses} respostas · {q.noOpinionCount} “não sei”)</span></summary>
+            <summary className="text-sm font-medium" title={`código interno ${q.questionId}`}>Pergunta {QUESTION_NUMBER[q.questionId]} — {q.text} <span className="text-ink-3">({q.totalResponses} respostas · {q.noOpinionCount} “não sei”)</span></summary>
             {q.example ? <p className="mt-2 text-xs leading-relaxed text-ink-2">{q.example}</p> : null}
             <ul className="mt-3 space-y-2">
               {q.options.map((o) => (

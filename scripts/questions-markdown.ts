@@ -1,5 +1,6 @@
 import { QUESTIONS } from "../src/data/questions";
 import { TOPICS } from "../src/data/topics";
+import { AREA_GROUPS } from "../src/components/report/areaGroups";
 import { CANDIDATES } from "../src/data/candidates";
 import { CONTEXT_NOTE_BY_ID } from "../src/data/context-notes";
 import { PRIORITY_LEVELS, type CandidatePosition, type PositionDirection, type Question } from "../src/domain/types";
@@ -56,23 +57,26 @@ export function questionsMarkdown(positions: CandidatePosition[], snapshot: stri
     "",
   );
   let n = 0;
-  for (const t of [...TOPICS].sort((a, b) => a.order - b.order)) {
-    out.push(`### ${t.order}. ${t.name}`, "", `_${t.description}_`, "");
-    for (const q of QUESTIONS.filter((x) => x.topicId === t.id).sort((a, b) => a.order - b.order)) {
-      n++;
-      out.push(`**${n}. ${q.text}**${q.kind === "MULTI_CHOICE" ? " _(permite mais de uma)_" : ""}`, "");
-      for (const note of (q.contextNoteIds ?? []).map((id) => CONTEXT_NOTE_BY_ID[id]).filter(Boolean)) out.push(`> Contexto exibido antes: ${note.title}.`, "");
-      for (const c of CANDIDATES) out.push(`- Posição documentada de ${c.name}: ${describePosition(q, pos(c.id, q.id))}`);
-      out.push("");
-      out.push(`| Alternativa | Escala | ${CANDIDATES.map((c) => `Peso ${c.name}`).join(" | ")} |`, `|---|---|${CANDIDATES.map(() => "---").join("|")}|`);
-      for (const o of q.options) {
-        const w = CANDIDATES.map((c) => (o.isNoOpinion ? "fora" : optionWeight(q, o.id, pos(c.id, q.id))));
-        out.push(`| ${o.label} | ${o.isNoOpinion ? "fora da conta" : fmt(o.normalizedValue)} | ${w.join(" | ")} |`);
+  AREA_GROUPS.forEach((g, gi) => {
+    out.push(`### Seção ${gi + 1}. ${g.label}`, "", `**Quanto esses temas importam para você?** ${[...PRIORITY_LEVELS].reverse().map((l) => l.label).join(" · ")} _(só ordena o relatório)_`, "");
+    for (const t of TOPICS.filter((x) => g.topicIds.includes(x.id)).sort((a, b) => a.order - b.order)) {
+      out.push(`#### ${t.name}`, "", `_${t.description}_`, "");
+      for (const q of QUESTIONS.filter((x) => x.topicId === t.id).sort((a, b) => a.order - b.order)) {
+        n++;
+        out.push(`**${n}. ${q.text}**${q.kind === "MULTI_CHOICE" ? " _(permite mais de uma)_" : ""}`, "");
+        if (q.example) out.push(`> ${q.example}`, "");
+        for (const note of (q.contextNoteIds ?? []).map((id) => CONTEXT_NOTE_BY_ID[id]).filter(Boolean)) out.push(`> Contexto exibido antes: ${note.title}.`, "");
+        for (const c of CANDIDATES) out.push(`- Posição documentada de ${c.name}: ${describePosition(q, pos(c.id, q.id))}`);
+        out.push("");
+        out.push(`| Alternativa | Escala | ${CANDIDATES.map((c) => `Peso ${c.name}`).join(" | ")} |`, `|---|---|${CANDIDATES.map(() => "---").join("|")}|`);
+        for (const o of q.options) {
+          const w = CANDIDATES.map((c) => (o.isNoOpinion ? "fora" : optionWeight(q, o.id, pos(c.id, q.id))));
+          out.push(`| ${o.label} | ${o.isNoOpinion ? "fora da conta" : fmt(o.normalizedValue)} | ${w.join(" | ")} |`);
+        }
+        out.push("");
       }
-      out.push("");
     }
-    if (t.priorityQuestion) out.push(`**${t.priorityQuestion}** ${PRIORITY_LEVELS.map((l) => l.label).join(" · ")}`, "");
-  }
+  });
   out.push(END);
   return out.join("\n");
 }

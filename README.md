@@ -65,7 +65,11 @@ Como ler as tabelas:
 - "Não sei" fica fora da conta: não soma no numerador nem no denominador.
 - Os pesos refletem as posições publicadas em 07/10/2026 (92 posições). Quando uma posição é revisada, os pesos mudam e esta lista é regenerada.
 
-### 1. Economia e impostos
+### Seção 1. Economia e trabalho
+
+**Quanto esses temas importam para você?** É uma das coisas mais importantes para mim · Importa muito · Importa · Importa pouco · Não importa _(só ordena o relatório)_
+
+#### Economia e impostos
 
 _Impostos, contas públicas e apoio a empresas consideradas importantes._
 
@@ -120,9 +124,7 @@ _Impostos, contas públicas e apoio a empresas consideradas importantes._
 | Não, empresas deveriam competir sem ajuda | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Economia e Impostos importam para você na escolha de um candidato?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
-
-### 2. Trabalho, emprego e jornada
+#### Trabalho, emprego e jornada
 
 _Jornada semanal, escala 6x1, trabalhadores de aplicativos e salário mínimo._
 
@@ -164,13 +166,69 @@ _Jornada semanal, escala 6x1, trabalhadores de aplicativos e salário mínimo._
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Trabalho e Jornada importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
+#### Infraestrutura, indústria e desenvolvimento
 
-### 3. Saúde
+_Apoio à indústria, produção nacional, obras e preferência a produtos brasileiros._
+
+**8. O governo deveria ajudar a indústria brasileira a crescer?**
+
+- Posição documentada de Lula: apoia (+2)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
+
+| Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
+|---|---|---|---|
+| Sim, bastante | +2 | 1 | 0,5 |
+| Sim, em setores importantes | +1 | 0,5 | 1 |
+| Não, empresas deveriam competir sem ajuda | -2 | 0 | 0 |
+| Não sei | fora da conta | fora | fora |
+
+**9. O Brasil deveria produzir dentro do país alguns produtos importantes?**
+
+> Contexto exibido antes: Exemplos apenas como contexto.
+
+- Posição documentada de Lula: apoia (+2)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
+
+| Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
+|---|---|---|---|
+| Sim | +2 | 1 | 0,5 |
+| Somente produtos essenciais | +1 | 0,5 | 1 |
+| Não | -2 | 0 | 0 |
+| Não sei | fora da conta | fora | fora |
+
+**10. O governo deveria investir mais em estradas, transporte público, saneamento e habitação?**
+
+- Posição documentada de Lula: apoia (+2)
+- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
+
+| Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
+|---|---|---|---|
+| Sim | +2 | 1 | 0,5 |
+| Sim, mas sem aumentar muito os gastos | +1 | 0,5 | 1 |
+| Não | -2 | 0 | 0 |
+| Não sei | fora da conta | fora | fora |
+
+**11. Quando preço e qualidade forem parecidos, o governo deveria dar preferência a produtos feitos no Brasil?**
+
+- Posição documentada de Lula: apoia (+2)
+- Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
+
+| Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
+|---|---|---|---|
+| Sim | +2 | 1 | 0 |
+| Somente em áreas importantes | +1 | 0,5 | 0 |
+| Não | -2 | 0 | 0 |
+| Não sei | fora da conta | fora | fora |
+
+### Seção 2. Social: saúde, educação e renda
+
+**Quanto esses temas importam para você?** É uma das coisas mais importantes para mim · Importa muito · Importa · Importa pouco · Não importa _(só ordena o relatório)_
+
+#### Saúde
 
 _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 
-**8. O SUS deveria continuar atendendo qualquer pessoa gratuitamente?**
+**12. O SUS deveria continuar atendendo qualquer pessoa gratuitamente?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -182,7 +240,7 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**9. O governo deveria gastar mais dinheiro com saúde pública?**
+**13. O governo deveria gastar mais dinheiro com saúde pública?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -194,7 +252,7 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**10. Na saúde, o que deveria ser prioridade?**
+**14. Na saúde, o que deveria ser prioridade?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Fortalecer principalmente o SUS. Melhorar e expandir a sua atuação em todo território nacional”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Fortalecer o SUS e também fazer parcerias com empresas privadas”
@@ -206,7 +264,7 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 | Aumentar a participação de empresas privadas, apenas | — | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
-**11. O Brasil deveria produzir mais remédios, vacinas e equipamentos de saúde dentro do próprio país?**
+**15. O Brasil deveria produzir mais remédios, vacinas e equipamentos de saúde dentro do próprio país?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -218,13 +276,11 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 | Não, importar pode ser melhor | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Saúde importa para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
-
-### 4. Educação, ciência e pesquisa
+#### Educação, ciência e pesquisa
 
 _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapas._
 
-**12. O governo deveria criar mais universidades e institutos federais?**
+**16. O governo deveria criar mais universidades e institutos federais?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -236,7 +292,7 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**13. O governo deveria ajudar estudantes de baixa renda a pagar faculdade particular?**
+**17. O governo deveria ajudar estudantes de baixa renda a pagar faculdade particular?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -248,7 +304,7 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**14. O Brasil deveria investir mais dinheiro em pesquisas científicas?**
+**18. O Brasil deveria investir mais dinheiro em pesquisas científicas?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -260,7 +316,7 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**15. Qual área deveria receber mais dinheiro primeiro?**
+**19. Qual área deveria receber mais dinheiro primeiro?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Todas são igualmente importantes”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Ensino técnico”
@@ -274,13 +330,11 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 | Todas são igualmente importantes | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Educação, Ciência e Pesquisa importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
-
-### 5. Programas sociais, pobreza e desigualdade
+#### Programas sociais, pobreza e desigualdade
 
 _Transferência de renda, condicionalidades, financiamento e prioridades contra a pobreza._
 
-**16. O governo deveria manter programas que dão dinheiro para famílias de baixa renda?**
+**20. O governo deveria manter programas que dão dinheiro para famílias de baixa renda?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -293,7 +347,7 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Não deveriam existir | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**17. Para receber alguns benefícios, famílias deveriam manter as crianças na escola e fazer acompanhamento de saúde?**
+**21. Para receber alguns benefícios, famílias deveriam manter as crianças na escola e fazer acompanhamento de saúde?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -305,7 +359,7 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**18. O governo deveria cobrar mais impostos de pessoas muito ricas?**
+**22. O governo deveria cobrar mais impostos de pessoas muito ricas?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: opõe-se em parte (−1)
@@ -317,7 +371,7 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
-**19. Para combater a pobreza, qual deveria ser a maior prioridade?**
+**23. Para combater a pobreza, qual deveria ser a maior prioridade?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Usar todas essas medidas”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Criar empregos”
@@ -331,13 +385,17 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Usar todas essas medidas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Programas Sociais e Combate à Pobreza importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
+### Seção 3. Segurança
 
-### 6. Segurança pública e crime organizado
+**Quanto esses temas importam para você?** É uma das coisas mais importantes para mim · Importa muito · Importa · Importa pouco · Não importa _(só ordena o relatório)_
+
+#### Segurança pública e crime organizado
 
 _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenção, punição e penas._
 
-**20. Quando crimes graves envolvem vários estados ao mesmo tempo, como grandes facções criminosas, tráfico de drogas e armas, lavagem de dinheiro e organizações que atuam em diferentes regiões do país, você acha que o governo federal e a Polícia Federal deveriam ter uma participação maior nas investigações?**
+**24. Quando crimes graves envolvem vários estados ao mesmo tempo, como grandes facções criminosas, tráfico de drogas e armas, lavagem de dinheiro e organizações que atuam em diferentes regiões do país, você acha que o governo federal e a Polícia Federal deveriam ter uma participação maior nas investigações?**
+
+> Por exemplo, se uma facção compra armas em um estado, envia drogas para outros estados e lava o dinheiro em empresas espalhadas pelo país, a Polícia Federal poderia reunir essas informações, investigar toda a rede e coordenar operações junto com as polícias estaduais, em vez de cada estado investigar apenas uma parte do crime.
 
 > Contexto exibido antes: Como a segurança pública se divide entre União e estados.
 
@@ -352,7 +410,7 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 | Discordo | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**21. A Polícia Federal deveria ter mais recursos para combater facções, corrupção, tráfico e crimes que acontecem em vários estados?**
+**25. A Polícia Federal deveria ter mais recursos para combater facções, corrupção, tráfico e crimes que acontecem em vários estados?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -364,7 +422,7 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**22. O que ajuda mais a reduzir a violência?**
+**26. O que ajuda mais a reduzir a violência?**
 
 - Posição documentada de Lula: alternativa mais próxima: “As duas coisas juntas”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Mais polícia e punição”
@@ -376,13 +434,11 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 | As duas coisas juntas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Segurança Pública importa para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
-
-### 7. Armas, drogas e apostas
+#### Armas, drogas e apostas
 
 _Acesso a armas, regime de CACs, política de drogas e apostas online._
 
-**23. Comprar e ter armas deveria ser:**
+**27. Comprar e ter armas deveria ser:**
 
 - Posição documentada de Lula: opõe-se (−2)
 - Posição documentada de Flávio Bolsonaro: apoia (+2)
@@ -394,7 +450,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Mais fácil | +2 | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
-**24. Pessoas registradas como colecionadores, atiradores e caçadores deveriam ter regras diferentes para comprar armas?**
+**28. Pessoas registradas como colecionadores, atiradores e caçadores deveriam ter regras diferentes para comprar armas?**
 
 - Posição documentada de Lula: apoia em parte (+1)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -406,7 +462,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**25. Qual deveria ser a principal forma de lidar com drogas?**
+**29. Qual deveria ser a principal forma de lidar com drogas?**
 
 - Posição documentada de Lula: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Mais repressão policial”
@@ -419,7 +475,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Uma combinação dessas medidas | — | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**26. O que deveria acontecer com bets e apostas online?**
+**30. O que deveria acontecer com bets e apostas online?**
 
 > Contexto exibido antes: Situação atual: apostas de quota fixa em 2026.
 
@@ -434,7 +490,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Deveriam ter poucas restrições | — | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
-**27. Propagandas de bets deveriam ser permitidas?**
+**31. Propagandas de bets deveriam ser permitidas?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Não”
 - Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
@@ -447,13 +503,15 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Sim, sem grandes restrições | — | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Armas, Drogas e Apostas importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
+### Seção 4. Ambiente e tecnologia
 
-### 8. Meio ambiente e energia
+**Quanto esses temas importam para você?** É uma das coisas mais importantes para mim · Importa muito · Importa · Importa pouco · Não importa _(só ordena o relatório)_
+
+#### Meio ambiente e energia
 
 _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de energia._
 
-**28. O governo deveria impedir obras ou negócios quando houver grande risco de destruir uma área ambiental importante?**
+**32. O governo deveria impedir obras ou negócios quando houver grande risco de destruir uma área ambiental importante?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -465,7 +523,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**29. Reduzir o desmatamento da Amazônia deveria ser uma prioridade do governo?**
+**33. Reduzir o desmatamento da Amazônia deveria ser uma prioridade do governo?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia (+2)
@@ -477,7 +535,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**30. O Brasil deveria ter metas para reduzir a poluição que contribui para mudanças no clima?**
+**34. O Brasil deveria ter metas para reduzir a poluição que contribui para mudanças no clima?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
@@ -489,7 +547,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**31. Qual fonte de energia deveria receber mais investimentos?**
+**35. Qual fonte de energia deveria receber mais investimentos?**
 
 - Posição documentada de Lula: alternativa mais próxima: “Todas de forma equilibrada”
 - Posição documentada de Flávio Bolsonaro: alternativa mais próxima: “Petróleo e gás”
@@ -502,65 +560,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Todas de forma equilibrada | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Meio Ambiente e Energia importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
-
-### 9. Infraestrutura, indústria e desenvolvimento
-
-_Apoio à indústria, produção nacional, obras e preferência a produtos brasileiros._
-
-**32. O governo deveria ajudar a indústria brasileira a crescer?**
-
-- Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
-
-| Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
-|---|---|---|---|
-| Sim, bastante | +2 | 1 | 0,5 |
-| Sim, em setores importantes | +1 | 0,5 | 1 |
-| Não, empresas deveriam competir sem ajuda | -2 | 0 | 0 |
-| Não sei | fora da conta | fora | fora |
-
-**33. O Brasil deveria produzir dentro do país alguns produtos importantes?**
-
-> Contexto exibido antes: Exemplos apenas como contexto.
-
-- Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
-
-| Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
-|---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Somente produtos essenciais | +1 | 0,5 | 1 |
-| Não | -2 | 0 | 0 |
-| Não sei | fora da conta | fora | fora |
-
-**34. O governo deveria investir mais em estradas, transporte público, saneamento e habitação?**
-
-- Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: apoia em parte (+1)
-
-| Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
-|---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Sim, mas sem aumentar muito os gastos | +1 | 0,5 | 1 |
-| Não | -2 | 0 | 0 |
-| Não sei | fora da conta | fora | fora |
-
-**35. Quando preço e qualidade forem parecidos, o governo deveria dar preferência a produtos feitos no Brasil?**
-
-- Posição documentada de Lula: apoia (+2)
-- Posição documentada de Flávio Bolsonaro: posição publicada como pouco clara, tratada como silêncio (0 em todas as alternativas)
-
-| Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
-|---|---|---|---|
-| Sim | +2 | 1 | 0 |
-| Somente em áreas importantes | +1 | 0,5 | 0 |
-| Não | -2 | 0 | 0 |
-| Não sei | fora da conta | fora | fora |
-
-**Quanto Infraestrutura e Indústria importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
-
-### 10. Tecnologia e autonomia do Brasil
+#### Tecnologia e autonomia do Brasil
 
 _Dependência tecnológica, inteligência artificial, proteção de dados, tecnologias próprias e fornecedores._
 
@@ -604,9 +604,11 @@ _Dependência tecnológica, inteligência artificial, proteção de dados, tecno
 | Não é necessário | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Tecnologia e Autonomia Nacional importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
+### Seção 5. Instituições e mundo
 
-### 11. Relações internacionais
+**Quanto esses temas importam para você?** É uma das coisas mais importantes para mim · Importa muito · Importa · Importa pouco · Não importa _(só ordena o relatório)_
+
+#### Relações internacionais
 
 _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU, acordos e independência._
 
@@ -673,9 +675,7 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
-**Quanto Relações Internacionais importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
-
-### 12. Direitos, democracia e instituições
+#### Direitos, democracia e instituições
 
 _Direitos civis, religião e Estado, decisões do STF, independência dos órgãos de controle e corrupção._
 
@@ -714,8 +714,6 @@ _Direitos civis, religião e Estado, decisões do STF, independência dos órgã
 | Investigar, mas com regras mais rígidas para evitar abusos | — | 0,5 | 0 |
 | Somente investigar quando houver provas fortes desde o início | — | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
-
-**Quanto Direitos, Democracia e Instituições importam para você?** Não importa · Importa pouco · Importa · Importa muito · É uma das coisas mais importantes para mim
 
 <!-- perguntas:fim -->
 

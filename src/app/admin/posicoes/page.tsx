@@ -4,6 +4,7 @@ import { PageTitle } from "@/components/ui";
 import { isAdminSession } from "@/lib/admin-auth";
 import { getPrisma } from "@/lib/prisma";
 import { QUESTIONS } from "@/data/questions";
+import { QUESTION_NUMBER } from "@/lib/question-order";
 import { TOPICS } from "@/data/topics";
 import { CANDIDATES } from "@/data/candidates";
 import { SOURCE_BY_ID } from "@/data/source-registry";
@@ -58,7 +59,7 @@ export default async function AdminPositionsPage() {
           <h2 id={`t-${t.id}`} className="text-xl font-bold border-l-4 border-purple pl-3">{t.name}</h2>
           {QUESTIONS.filter((q) => q.topicId === t.id).sort((a, b) => a.order - b.order).map((q) => (
             <div key={q.id} className="card p-5 space-y-4">
-              <p className="font-semibold"><span className="text-xs text-ink-3 mr-2">{q.id.toUpperCase()}</span>{q.text}</p>
+              <p className="font-semibold"><span className="text-xs text-ink-3 mr-2" title={`código interno ${q.id}`}>Pergunta {QUESTION_NUMBER[q.id]}</span>{q.text}</p>
               <div className="grid gap-4 md:grid-cols-2">
                 {CANDIDATES.map((c) => {
                   const p = byKey.get(`${q.id}|${c.id}`);
