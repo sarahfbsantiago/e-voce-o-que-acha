@@ -217,7 +217,7 @@ _Apoio à indústria, produção nacional, obras e preferência a produtos brasi
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
 | Somente em áreas importantes | +1 | 0,5 | 0 |
-| Não | -2 | 0 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 ### Seção 2. Social: saúde, educação e renda
@@ -235,8 +235,8 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Sim, mas deveria privatizar uma parte | +1 | 0,5 | 1 |
+| Sim | +2 | 1 | 0 |
+| Sim, mas deveria privatizar uma parte | +1 | 0,5 | 0,5 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -249,7 +249,7 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
 | Sim, mas apenas se reduzir gastos em outras áreas | +1 | 0,5 | 0 |
-| Não | -2 | 0 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **14. Na saúde, o que deveria ser prioridade?**
@@ -259,8 +259,8 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Fortalecer principalmente o SUS. Melhorar e expandir a sua atuação em todo território nacional | — | 1 | 0,5 |
-| Fortalecer o SUS e também fazer parcerias com empresas privadas | — | 0,5 | 1 |
+| Fortalecer principalmente o SUS. Melhorar e expandir a sua atuação em todo território nacional | — | 1 | 0 |
+| Fortalecer o SUS e também fazer parcerias com empresas privadas | — | 0,5 | 0,5 |
 | Aumentar a participação de empresas privadas, apenas | — | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
@@ -271,8 +271,8 @@ _SUS, gasto público em saúde, parcerias e produção nacional de insumos._
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Apenas os produtos mais importantes | +1 | 0,5 | 1 |
+| Sim | +2 | 1 | 0 |
+| Apenas os produtos mais importantes | +1 | 0,5 | 0,5 |
 | Não, importar pode ser melhor | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -289,7 +289,7 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
 | Somente onde houver necessidade | +1 | 0,5 | 0 |
-| Não | -2 | 0 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **17. O governo deveria ajudar estudantes de baixa renda a pagar faculdade particular?**
@@ -299,9 +299,9 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Sim, mas com regras mais rígidas | +1 | 0,5 | 1 |
-| Não | -2 | 0 | 0 |
+| Sim | +2 | 1 | 0 |
+| Sim, mas com regras mais rígidas | +1 | 0,5 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **18. O Brasil deveria investir mais dinheiro em pesquisas científicas?**
@@ -311,9 +311,9 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Somente em pesquisas que tragam resultados mais rápidos | +1 | 0,5 | 1 |
-| Não | -2 | 0 | 0 |
+| Sim | +2 | 1 | 0 |
+| Somente em pesquisas que tragam resultados mais rápidos | +1 | 0,5 | 0 |
+| Não | -2 | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
 **19. Qual área deveria receber mais dinheiro primeiro?**
@@ -341,10 +341,10 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Sim, mas com mais regras | +1 | 0,5 | 1 |
+| Sim | +2 | 1 | 0 |
+| Sim, mas com mais regras | +1 | 0,5 | 0 |
 | Deveriam ser reduzidos | -1 | 0 | 0 |
-| Não deveriam existir | -2 | 0 | 0 |
+| Não deveriam existir | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **21. Para receber alguns benefícios, famílias deveriam manter as crianças na escola e fazer acompanhamento de saúde?**
@@ -378,11 +378,11 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Dar auxílio financeiro | — | 0,5 | 0,5 |
-| Criar empregos | — | 0,5 | 1 |
+| Dar auxílio financeiro | — | 0,5 | 0 |
+| Criar empregos | — | 0,5 | 0,5 |
 | Aumentar salários | — | 0,5 | 0 |
 | Investir em educação | — | 0,5 | 0 |
-| Usar todas essas medidas | — | 1 | 0,5 |
+| Usar todas essas medidas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 ### Seção 3. Segurança
