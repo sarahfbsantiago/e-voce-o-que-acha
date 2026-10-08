@@ -573,9 +573,9 @@ _Dependência tecnológica, inteligência artificial, proteção de dados, tecno
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 0,5 | 0,5 |
-| Somente em algumas tecnologias | +1 | 1 | 1 |
-| Não é necessário | -2 | 0 | 0 |
+| Sim | +2 | 0,5 | 0 |
+| Somente em algumas tecnologias | +1 | 1 | 0 |
+| Não é necessário | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **37. Informações importantes do governo e dos cidadãos deveriam ter regras especiais para ficarem protegidas no Brasil?**
@@ -601,7 +601,7 @@ _Dependência tecnológica, inteligência artificial, proteção de dados, tecno
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
 | Somente sistemas muito importantes | +1 | 0,5 | 0 |
-| Não é necessário | -2 | 0 | 0 |
+| Não é necessário | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 ### Seção 5. Instituições e mundo
@@ -619,8 +619,8 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Depende do país | +1 | 0,5 | 1 |
+| Sim | +2 | 0,5 | 0 |
+| Depende do país | +1 | 0 | 1 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 

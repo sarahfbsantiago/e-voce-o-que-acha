@@ -50,4 +50,8 @@ export const OPTION_SCORES: Record<string, [score: number, reason: string]> = {
   "q28|flavio-bolsonaro|o1": [0, "Revisão humana"], "q28|flavio-bolsonaro|o2": [0, "Revisão humana"], "q28|flavio-bolsonaro|o3": [1, "Revisão humana"], "q28|flavio-bolsonaro|o4": [0.5, "Revisão humana"],
   "q29|flavio-bolsonaro|o1": [0, "Revisão humana"], "q29|flavio-bolsonaro|o2": [0.5, "Revisão humana"], "q29|flavio-bolsonaro|o3": [0.5, "Revisão humana"], "q29|flavio-bolsonaro|o4": [0.5, "Revisão humana"],
   "q30|flavio-bolsonaro|o1": [0, "Revisão humana"], "q30|flavio-bolsonaro|o2": [1, "Revisão humana"], "q30|flavio-bolsonaro|o3": [0, "Revisão humana"],
+  "q38|flavio-bolsonaro|o1": [0, "Revisão humana"], "q38|flavio-bolsonaro|o2": [0, "Revisão humana"], "q38|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
+  "q42|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
+  "q43|flavio-bolsonaro|o1": [0, "Revisão humana"], "q43|flavio-bolsonaro|o2": [1, "Revisão humana"], "q43|flavio-bolsonaro|o3": [0, "Revisão humana"],
+  "q43|lula|o1": [0.5, "Revisão humana"], "q43|lula|o2": [0, "Revisão humana"], "q43|lula|o3": [0, "Revisão humana"],
 };
