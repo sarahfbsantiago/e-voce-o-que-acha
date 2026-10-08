@@ -405,7 +405,7 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Concordo | +2 | 1 | 1 |
-| Concordo em parte | +1 | 0,5 | 0,5 |
+| Concordo em parte | +1 | 0,5 | 0 |
 | Discordo em parte | -1 | 0 | 0 |
 | Discordo | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
@@ -418,7 +418,7 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Sim | +2 | 1 | 0,5 |
-| Sim, mas apenas em crimes mais graves | +1 | 0,5 | 1 |
+| Sim, mas apenas em crimes mais graves | +1 | 0,5 | 0 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -431,7 +431,7 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 |---|---|---|---|
 | Mais polícia e punição | — | 0,5 | 1 |
 | Mais prevenção, educação e oportunidades | — | 0,5 | 0 |
-| As duas coisas juntas | — | 1 | 0,5 |
+| As duas coisas juntas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 #### Armas, drogas e apostas
@@ -457,8 +457,8 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 0,5 | 0,5 |
-| Somente em alguns casos | +1 | 1 | 1 |
+| Sim | +2 | 0 | 1 |
+| Somente em alguns casos | +1 | 0,5 | 0 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
