@@ -105,6 +105,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: sai a pergunta Q07 (direitos de motoristas e entregadores de aplicativos); o questionário passa a ter 46 perguntas. Mudam os textos de Q01 e Q02 (milionários e bilionários), a alternativa do meio de Q02 ('Concordo em parte') e de Q09 ('Sim, mas deveria privatizar uma parte'), as alternativas de Q11 e o texto de Q21, que ganha um exemplo. Os valores das alternativas e a fórmula não mudam.",
       "Revisão humana: a página Fontes passa a mostrar só a lista de fontes, sem busca, filtros e quadro de legendas.",
       "Revisão humana: 5 posições de Lula passam a seguir o texto 'Visão Lula' (tabela em src/data/lula-view-positions.ts): prioridade na saúde (fortalecer principalmente o SUS), prioridade na educação (todas igualmente), compra de armas (mais difícil), impedir obras com grande risco ambiental (sim) e depender menos de outros países em tecnologia (só em algumas). As demais já batiam com o texto. O valor anterior fica no registro de auditoria.",
+      "Revisão humana: sai da página Metodologia a seção 'Revisão'.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
   },

@@ -115,10 +115,6 @@ export default function MetodologiaPage() {
       <p>Se um candidato mudou de posição ao longo do tempo, o site mostra a sequência dos acontecimentos.</p>
       <p>A posição mais recente é usada na comparação, mas as anteriores continuam disponíveis para consulta.</p>
 
-      <h2 id="revisao">Revisão</h2>
-      <p>As posições e evidências passam por revisão humana antes de aparecerem no site.</p>
-      <p>Importações automáticas e classificações feitas por inteligência artificial não são publicadas sozinhas.</p>
-
       <h2 id="privacidade">Privacidade</h2>
       <p>Para participar da pesquisa, é necessário aceitar a Política de Privacidade e o uso anônimo das respostas para fins de pesquisa.</p>
       <p>Podem ser usados de forma anônima:</p>
