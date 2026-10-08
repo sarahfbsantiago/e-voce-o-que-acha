@@ -55,7 +55,7 @@ export default async function AdminScoresPage() {
                     if (prop && prop.score !== now) {
                       changed++;
                       return (
-                        <td key={c.id} title={`Hoje: ${raw === null ? "sem posição" : fmt(now)}. ${prop.reason}`} className={`p-2 outline-2 -outline-offset-2 outline-purple ${tone(prop.score)}`}>
+                        <td key={c.id} title={`Regra padrão: ${raw === null ? "sem posição" : fmt(now)}. ${prop.reason}`} className={`p-2 outline-2 -outline-offset-2 outline-purple ${tone(prop.score)}`}>
                           {fmt(prop.score)}
                         </td>
                       );
@@ -75,16 +75,16 @@ export default async function AdminScoresPage() {
     <div className="container-page py-12 space-y-8">
       <AdminNav current="/admin/notas" />
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <PageTitle eyebrow="Admin" tone="gold" lead="Proposta para revisão: nada aqui mudou a conta do site ainda. Para cada pergunta, quanto cada candidato ganharia se a pessoa marcasse cada alternativa.">
+        <PageTitle eyebrow="Admin" tone="gold" lead="Estas são as notas usadas na conta do site. Para cada pergunta, quanto cada candidato ganha se a pessoa marcar cada alternativa. Mudou aqui, mudou na calculadora.">
           Notas por alternativa
         </PageTitle>
         <div className="flex flex-wrap items-center gap-2 print:hidden"><PrintButton label="Exportar PDF" fileTitle="Notas por alternativa" /><form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form></div>
       </div>
       <div className="card p-4 text-sm space-y-2">
         <p className="flex flex-wrap gap-2"><span className="rounded-md bg-mint-soft px-2 font-semibold">1 = ele defende isso</span><span className="rounded-md bg-gold-soft px-2">0,5 = defende em parte</span><span className="px-2 text-ink-3">0 = não defende</span></p>
-        <p>Células com borda roxa mudariam em relação à regra de hoje. Passe o mouse sobre elas para ver a nota atual e o motivo. As demais seguem a regra atual: 1 na alternativa do candidato, 0,5 na vizinha. &quot;Sem posição&quot; conta como 0. &quot;Não sei&quot; nunca entra na conta.</p>
+        <p>Células com borda roxa são notas revisadas, diferentes da regra padrão. Passe o mouse para ver a nota da regra padrão. As demais seguem a regra atual: 1 na alternativa do candidato, 0,5 na vizinha. &quot;Sem posição&quot; conta como 0. &quot;Não sei&quot; nunca entra na conta.</p>
         <p>Resultado de cada tema = soma do que o candidato ganhou ÷ perguntas respondidas. Ganha o tema quem tiver a porcentagem maior.</p>
-        <p className="font-semibold">{changed} das {cells} notas mudariam.</p>
+        <p className="font-semibold">{changed} das {cells} notas foram revisadas e diferem da regra padrão.</p>
       </div>
       {body}
     </div>

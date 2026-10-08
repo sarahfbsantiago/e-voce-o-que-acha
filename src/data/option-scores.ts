@@ -1,15 +1,21 @@
 /**
- * PROPOSTA (ainda não aplicada na conta): nota de cada candidato em cada alternativa, de 0 a 1.
- * Hoje a regra é: 1 na alternativa do candidato, 0,5 na vizinha, 0 nas demais.
- * Aqui ficam só as notas que mudariam, com o motivo tirado dos textos "Visão Lula" e "Visão Flávio".
- * Chave: "pergunta|candidato|alternativa" (ex.: "q23|lula|o1"). Exibida só no painel admin (/admin/notas).
+ * Notas por alternativa USADAS NA CONTA do site (revisão humana; tabela visível só em /admin/notas).
+ * Nota de 0 a 1 que o candidato ganha quando a pessoa marca aquela alternativa.
+ * Regra padrão (quando a pergunta não está aqui): 1 na alternativa do candidato, 0,5 na vizinha, 0 nas demais.
+ * Quando uma pergunta tem notas aqui para um candidato, as alternativas listadas usam estas notas;
+ * as não listadas seguem a regra padrão (ou 0, se o candidato não tiver posição publicada).
+ * Chave: "pergunta|candidato|alternativa" (ex.: "q23|lula|o1"). Admin e calculadora sempre juntos.
  */
-export const OPTION_SCORE_PROPOSAL: Record<string, [score: number, reason: string]> = {
+export const OPTION_SCORES: Record<string, [score: number, reason: string]> = {
   "q03|lula|o1": [0.5, "Mantém as principais políticas sociais"], "q03|lula|o2": [0.5, "Mantém o arcabouço fiscal"],
   "q01|flavio-bolsonaro|o3": [0, "Revisão humana"],
   "q02|flavio-bolsonaro|o1": [0, "Revisão humana"], "q02|flavio-bolsonaro|o2": [0, "Revisão humana"], "q02|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
   "q04|flavio-bolsonaro|o1": [0.5, "Revisão humana"], "q04|flavio-bolsonaro|o2": [0.5, "Revisão humana"],
-  "q05|flavio-bolsonaro|o1": [0, "Revisão humana"], "q05|flavio-bolsonaro|o2": [0, "Revisão humana"], "q05|flavio-bolsonaro|o3": [1, "Revisão humana"], "q01|flavio-bolsonaro|o4": [0.5, "Revisão humana: defende 'Discordo' em parte"],
+  "q05|flavio-bolsonaro|o1": [0, "Revisão humana"], "q05|flavio-bolsonaro|o2": [0, "Revisão humana"], "q05|flavio-bolsonaro|o3": [1, "Revisão humana"],
+  "q08|flavio-bolsonaro|o1": [0, "Revisão humana"], "q08|flavio-bolsonaro|o2": [0, "Revisão humana"], "q08|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
+  "q34|flavio-bolsonaro|o1": [0, "Revisão humana"], "q34|flavio-bolsonaro|o2": [0.5, "Revisão humana"], "q34|flavio-bolsonaro|o3": [0, "Revisão humana"],
+  "q35|flavio-bolsonaro|o1": [0, "Revisão humana"], "q35|flavio-bolsonaro|o2": [0.5, "Revisão humana"], "q35|flavio-bolsonaro|o3": [0, "Revisão humana"],
+  "q36|flavio-bolsonaro|o1": [0, "Revisão humana"], "q36|flavio-bolsonaro|o2": [0.5, "Revisão humana"], "q36|flavio-bolsonaro|o3": [0, "Revisão humana"], "q01|flavio-bolsonaro|o4": [0.5, "Revisão humana: defende 'Discordo' em parte"],
   "q03|flavio-bolsonaro|o1": [0, "Revisão humana, pelas fontes: defende gastar menos"], "q03|flavio-bolsonaro|o3": [0, "Revisão humana, pelas fontes: protege primeiro as contas públicas"],
   "q16|lula|o1": [0.5, "Alfabetização e Escola em Tempo Integral"], "q16|lula|o2": [0.5, "Pé-de-Meia no ensino médio"], "q16|lula|o3": [0.5, "Institutos Federais"], "q16|lula|o4": [0.5, "Expansão das universidades"],
   "q16|flavio-bolsonaro|o5": [0.5, "Combinação inclui a escolha dele"],

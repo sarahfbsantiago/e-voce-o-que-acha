@@ -26,8 +26,8 @@ const DIRECTION_LABEL: Record<PositionDirection, string> = {
 };
 
 /** Peso que a alternativa soma no score do candidato: 1 igual, 0,5 parecida, 0 diferente ou silêncio. */
-export function optionWeight(q: Question, optionId: string, position: CandidatePosition | null): string {
-  const r = compareAnswerToPosition(q, { questionId: q.id, optionIds: [optionId] }, position);
+export function optionWeight(q: Question, optionId: string, position: CandidatePosition | null, candidateId?: string): string {
+  const r = compareAnswerToPosition(q, { questionId: q.id, optionIds: [optionId] }, position, candidateId);
   if (r === null) return "fora da conta";
   if (r === "SIMILAR") return "1";
   if (r === "PARTIALLY_SIMILAR") return "0,5";
@@ -70,7 +70,7 @@ export function questionsMarkdown(positions: CandidatePosition[], snapshot: stri
         out.push("");
         out.push(`| Alternativa | Escala | ${CANDIDATES.map((c) => `Peso ${c.name}`).join(" | ")} |`, `|---|---|${CANDIDATES.map(() => "---").join("|")}|`);
         for (const o of q.options) {
-          const w = CANDIDATES.map((c) => (o.isNoOpinion ? "fora" : optionWeight(q, o.id, pos(c.id, q.id))));
+          const w = CANDIDATES.map((c) => (o.isNoOpinion ? "fora" : optionWeight(q, o.id, pos(c.id, q.id), c.id)));
           out.push(`| ${o.label} | ${o.isNoOpinion ? "fora da conta" : fmt(o.normalizedValue)} | ${w.join(" | ")} |`);
         }
         out.push("");

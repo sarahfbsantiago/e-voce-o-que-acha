@@ -50,7 +50,7 @@ export function themeProximity(
     const count: CandidateThemeCount = { candidateId: c.id, documented: 0, silent: 0, similar: 0, partiallySimilar: 0, different: 0 };
     for (const q of questions) {
       const pos = positions.find((p) => p.candidateId === c.id && p.questionId === q.id) ?? null;
-      const ind: ComparisonIndicator | null = compareAnswerToPosition(q, answerByQ.get(q.id), pos);
+      const ind: ComparisonIndicator | null = compareAnswerToPosition(q, answerByQ.get(q.id), pos, c.id);
       if (ind === null) continue; // sem resposta ou "Não sei": não entra
       if (ind === "INSUFFICIENT_EVIDENCE") { count.silent += 1; continue; }
       count.documented += 1;

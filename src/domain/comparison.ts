@@ -5,6 +5,8 @@ import type {
   Question,
   UserAnswer,
 } from "@/domain/types";
+import type { QuestionOption } from "@/domain/types";
+import { OPTION_SCORES } from "@/data/option-scores";
 
 /**
  * Indicador visual POR QUESTÃO entre a resposta do usuário e a posição
@@ -27,16 +29,60 @@ const DIRECTION_VALUE: Record<Exclude<PositionDirection, "UNCLEAR">, number> = {
   OPPOSES: -2,
 };
 
+/** Nota pela regra padrão: 1 na alternativa do candidato, 0,5 na vizinha, 0 nas demais. null = sem posição publicada. */
+export function ruleOptionScore(question: Question, option: QuestionOption, position: CandidatePosition | null | undefined): number | null {
+  if (!position || position.reviewStatus !== "PUBLISHED" || position.direction === "UNCLEAR") return null;
+  const scaled = question.options.filter((o) => !o.isNoOpinion).every((o) => o.normalizedValue !== null);
+  if (scaled) {
+    const d = Math.abs((option.normalizedValue ?? 0) - DIRECTION_VALUE[position.direction]);
+    return d === 0 ? 1 : d === 1 ? 0.5 : 0;
+  }
+  const closest = question.options.find((o) => o.id === position.closestOptionId);
+  if (!closest || closest.isNoOpinion) return null;
+  if (closest.id === option.id) return 1;
+  return Math.abs(closest.order - option.order) === 1 ? 0.5 : 0;
+}
+
+const optionKey = (questionId: string, candidateId: string, optionId: string) => `${questionId}|${candidateId}|${optionId.split("-").pop()}`;
+
+/** A pergunta tem notas revisadas (src/data/option-scores.ts) para este candidato? */
+export function hasOptionScores(question: Question, candidateId: string): boolean {
+  return question.options.some((o) => OPTION_SCORES[optionKey(question.id, candidateId, o.id)] !== undefined);
+}
+
+/** Nota revisada da alternativa, se houver. */
+export function reviewedOptionScore(questionId: string, candidateId: string, optionId: string): { score: number; reason: string } | null {
+  const v = OPTION_SCORES[optionKey(questionId, candidateId, optionId)];
+  return v ? { score: v[0], reason: v[1] } : null;
+}
+
+/** Nota final da alternativa na conta: a revisada, se houver; senão a regra padrão (0 sem posição, quando há notas revisadas). */
+export function optionScore(question: Question, option: QuestionOption, candidateId: string, position: CandidatePosition | null | undefined): number | null {
+  const reviewed = reviewedOptionScore(question.id, candidateId, option.id);
+  if (reviewed) return reviewed.score;
+  const rule = ruleOptionScore(question, option, position);
+  if (rule === null && hasOptionScores(question, candidateId)) return 0;
+  return rule;
+}
+
 export function compareAnswerToPosition(
   question: Question,
   answer: UserAnswer | undefined,
   position: CandidatePosition | null | undefined,
+  candidateId?: string,
 ): ComparisonIndicator | null {
   if (!answer || answer.optionIds.length === 0) return null;
 
   const selected = question.options.filter((o) => answer.optionIds.includes(o.id));
   if (selected.length === 0) return null;
   if (selected.every((o) => o.isNoOpinion)) return null;
+
+  // Notas revisadas por alternativa (mesma tabela do admin): valem antes da regra padrão.
+  const cid = candidateId ?? position?.candidateId;
+  if (cid && hasOptionScores(question, cid)) {
+    const best = Math.max(...selected.filter((o) => !o.isNoOpinion).map((o) => optionScore(question, o, cid, position) ?? 0));
+    return best >= 1 ? "SIMILAR" : best >= 0.5 ? "PARTIALLY_SIMILAR" : "DIFFERENT";
+  }
 
   if (!position || position.reviewStatus !== "PUBLISHED" || position.direction === "UNCLEAR") {
     return "INSUFFICIENT_EVIDENCE";

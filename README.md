@@ -82,7 +82,7 @@ _Impostos, contas públicas e apoio a empresas consideradas importantes._
 |---|---|---|---|
 | Concordo | +2 | 1 | 0 |
 | Concordo em parte | +1 | 0,5 | 0 |
-| Discordo em parte | -1 | 0 | 1 |
+| Discordo em parte | -1 | 0 | 0 |
 | Discordo | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
@@ -97,7 +97,7 @@ _Impostos, contas públicas e apoio a empresas consideradas importantes._
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
 | Concordo em parte | +1 | 0,5 | 0 |
-| Não | -2 | 0 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **3. Quando o governo precisa economizar dinheiro, o que deveria proteger primeiro?**
@@ -107,9 +107,9 @@ _Impostos, contas públicas e apoio a empresas consideradas importantes._
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Saúde, educação e programas sociais | — | 0 | 0,5 |
+| Saúde, educação e programas sociais | — | 0,5 | 0 |
 | As contas públicas e a dívida | — | 0,5 | 1 |
-| Tentar equilibrar os dois | — | 1 | 0,5 |
+| Tentar equilibrar os dois | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 **4. O governo deveria ajudar empresas brasileiras consideradas importantes para o país?**
@@ -120,7 +120,7 @@ _Impostos, contas públicas e apoio a empresas consideradas importantes._
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Sim, com investimentos e crédito | +2 | 1 | 0,5 |
-| Sim, mas só em alguns setores | +1 | 0,5 | 1 |
+| Sim, mas só em alguns setores | +1 | 0,5 | 0,5 |
 | Não, empresas deveriam competir sem ajuda | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -137,9 +137,9 @@ _Jornada semanal, escala 6x1, trabalhadores de aplicativos e salário mínimo._
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Depende da profissão | +1 | 0,5 | 1 |
-| Não | -2 | 0 | 0 |
+| Sim | +2 | 1 | 0 |
+| Depende da profissão | +1 | 0,5 | 0 |
+| Não | -2 | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
 **6. A escala em que a pessoa trabalha seis dias e folga um deveria continuar existindo?**
@@ -163,7 +163,7 @@ _Jornada semanal, escala 6x1, trabalhadores de aplicativos e salário mínimo._
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
 | Depende da situação econômica | +1 | 0,5 | 0 |
-| Não | -2 | 0 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 #### Infraestrutura, indústria e desenvolvimento
@@ -177,8 +177,8 @@ _Apoio à indústria, produção nacional, obras e preferência a produtos brasi
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim, bastante | +2 | 1 | 0,5 |
-| Sim, em setores importantes | +1 | 0,5 | 1 |
+| Sim, bastante | +2 | 1 | 0 |
+| Sim, em setores importantes | +1 | 0,5 | 0,5 |
 | Não, empresas deveriam competir sem ajuda | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -191,8 +191,8 @@ _Apoio à indústria, produção nacional, obras e preferência a produtos brasi
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Somente produtos essenciais | +1 | 0,5 | 1 |
+| Sim | +2 | 1 | 0 |
+| Somente produtos essenciais | +1 | 0,5 | 0,5 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -203,8 +203,8 @@ _Apoio à indústria, produção nacional, obras e preferência a produtos brasi
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Sim, mas sem aumentar muito os gastos | +1 | 0,5 | 1 |
+| Sim | +2 | 1 | 0 |
+| Sim, mas sem aumentar muito os gastos | +1 | 0,5 | 0,5 |
 | Não | -2 | 0 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -323,11 +323,11 @@ _Rede federal, apoio a estudantes, pesquisa científica e prioridade entre etapa
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Educação infantil e ensino fundamental | — | 0 | 0 |
-| Ensino médio | — | 0 | 0,5 |
-| Ensino técnico | — | 0 | 1 |
+| Educação infantil e ensino fundamental | — | 0,5 | 0 |
+| Ensino médio | — | 0,5 | 0,5 |
+| Ensino técnico | — | 0,5 | 1 |
 | Universidades | — | 0,5 | 0,5 |
-| Todas são igualmente importantes | — | 1 | 0 |
+| Todas são igualmente importantes | — | 1 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 #### Programas sociais, pobreza e desigualdade
@@ -378,11 +378,11 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Dar auxílio financeiro | — | 0 | 0,5 |
-| Criar empregos | — | 0 | 1 |
-| Aumentar salários | — | 0 | 0,5 |
+| Dar auxílio financeiro | — | 0,5 | 0,5 |
+| Criar empregos | — | 0,5 | 1 |
+| Aumentar salários | — | 0,5 | 0 |
 | Investir em educação | — | 0,5 | 0 |
-| Usar todas essas medidas | — | 1 | 0 |
+| Usar todas essas medidas | — | 1 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 ### Seção 3. Segurança
@@ -429,9 +429,9 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Mais polícia e punição | — | 0 | 1 |
-| Mais prevenção, educação e oportunidades | — | 0,5 | 0,5 |
-| As duas coisas juntas | — | 1 | 0 |
+| Mais polícia e punição | — | 0,5 | 1 |
+| Mais prevenção, educação e oportunidades | — | 0,5 | 0 |
+| As duas coisas juntas | — | 1 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 #### Armas, drogas e apostas
@@ -470,9 +470,9 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Mais repressão policial | — | 0 | 1 |
-| Mais tratamento de saúde | — | 0 | 0,5 |
+| Mais tratamento de saúde | — | 0 | 0 |
 | Mais prevenção e educação | — | 0 | 0 |
-| Uma combinação dessas medidas | — | 0 | 0 |
+| Uma combinação dessas medidas | — | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **30. O que deveria acontecer com bets e apostas online?**
@@ -554,10 +554,10 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Solar e eólica | — | 0 | 0,5 |
-| Petróleo e gás | — | 0 | 1 |
-| Energia nuclear | — | 0,5 | 0,5 |
-| Todas de forma equilibrada | — | 1 | 0 |
+| Solar e eólica | — | 0,5 | 0 |
+| Petróleo e gás | — | 0,5 | 1 |
+| Energia nuclear | — | 0 | 0 |
+| Todas de forma equilibrada | — | 1 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 #### Tecnologia e autonomia do Brasil
@@ -632,9 +632,9 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Tomar sua própria decisão em cada caso | — | 1 | 0,5 |
-| Ficar mais próximo dos Estados Unidos e da Europa | — | 0,5 | 1 |
-| Ficar mais próximo da China e de países emergentes | — | 0 | 0,5 |
-| Evitar tomar lado sempre que possível | — | 0 | 0 |
+| Ficar mais próximo dos Estados Unidos e da Europa | — | 0 | 1 |
+| Ficar mais próximo da China e de países emergentes | — | 0,5 | 0 |
+| Evitar tomar lado sempre que possível | — | 0,5 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 **41. O Brasil deveria fortalecer sua participação em grupos como Mercosul, BRICS e ONU?**
@@ -658,9 +658,9 @@ _Relações com outros governos, disputas entre potências, Mercosul, BRICS, ONU
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Comprar e vender com mais liberdade | — | 0 | 1 |
-| Proteger empresas e empregos brasileiros | — | 0,5 | 0,5 |
-| Equilibrar as duas coisas | — | 1 | 0 |
+| Comprar e vender com mais liberdade | — | 0,5 | 1 |
+| Proteger empresas e empregos brasileiros | — | 0,5 | 0 |
+| Equilibrar as duas coisas | — | 1 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **43. O Brasil deveria buscar mais independência nas decisões internacionais, mesmo quando isso desagradar países mais poderosos?**

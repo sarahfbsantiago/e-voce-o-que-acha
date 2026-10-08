@@ -49,7 +49,7 @@ export function profileProximity(
     let documented = 0, silent = 0, similar = 0, partiallySimilar = 0, different = 0;
     for (const q of questions) {
       const pos = positions.find((x) => x.candidateId === c.id && x.questionId === q.id) ?? null;
-      const r = compareAnswerToPosition(q, answerByQ.get(q.id), pos);
+      const r = compareAnswerToPosition(q, answerByQ.get(q.id), pos, c.id);
       if (!r) continue;
       if (r === "INSUFFICIENT_EVIDENCE") { silent++; continue; }
       documented++;

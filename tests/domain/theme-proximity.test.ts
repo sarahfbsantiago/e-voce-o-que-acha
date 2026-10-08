@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 import * as mod from "@/domain/theme-proximity";
 import { QUESTIONS } from "@/data/questions";
-import { CANDIDATES } from "@/data/candidates";
+import type { Candidate } from "@/domain/types";
+
+/** Candidatos fictícios: estes testes verificam a regra padrão, sem a tabela de notas revisadas dos candidatos reais. */
+const CANDIDATES = [{ id: "cand-a", name: "Candidato A" }, { id: "cand-b", name: "Candidato B" }] as unknown as Candidate[];
 import type { CandidatePosition } from "@/domain/types";
 
 const qs = QUESTIONS.filter((q) => q.topicId === "t01");
@@ -17,28 +20,28 @@ describe("proximidade documentada por tema", () => {
     expect(r.reason).toBe("INSUFFICIENT_EVIDENCE");
   });
   it("só um candidato documentado → o silêncio do outro conta como diferente, e o documentado fica mais próximo", () => {
-    const r = mod.themeProximity(qs, answers, CANDIDATES, [pos("lula", "q01", "SUPPORTS")]);
-    expect(r.closestCandidateId).toBe("lula");
-    expect(r.counts.find((c) => c.candidateId === "lula")).toMatchObject({ documented: 1, silent: 1, similar: 1 });
-    expect(r.counts.find((c) => c.candidateId === "flavio-bolsonaro")).toMatchObject({ documented: 0, silent: 2 });
+    const r = mod.themeProximity(qs, answers, CANDIDATES, [pos("cand-a", "q01", "SUPPORTS")]);
+    expect(r.closestCandidateId).toBe("cand-a");
+    expect(r.counts.find((c) => c.candidateId === "cand-a")).toMatchObject({ documented: 1, silent: 1, similar: 1 });
+    expect(r.counts.find((c) => c.candidateId === "cand-b")).toMatchObject({ documented: 0, silent: 2 });
   });
   it("silêncio nunca vira posição: só rebaixa a proporção de quem não se posicionou", () => {
     // Lula concorda em q01 e se cala em q02; Flávio concorda nas duas → Flávio fica mais próximo.
-    const r = mod.themeProximity(qs, answers, CANDIDATES, [pos("lula", "q01", "SUPPORTS"), pos("flavio-bolsonaro", "q01", "SUPPORTS"), pos("flavio-bolsonaro", "q02", "SUPPORTS")]);
-    expect(r.closestCandidateId).toBe("flavio-bolsonaro");
+    const r = mod.themeProximity(qs, answers, CANDIDATES, [pos("cand-a", "q01", "SUPPORTS"), pos("cand-b", "q01", "SUPPORTS"), pos("cand-b", "q02", "SUPPORTS")]);
+    expect(r.closestCandidateId).toBe("cand-b");
   });
   it("ambos documentados → indica o mais próximo, com contagem transparente", () => {
-    const r = mod.themeProximity(qs, answers, CANDIDATES, [pos("lula", "q01", "SUPPORTS"), pos("flavio-bolsonaro", "q01", "OPPOSES")]);
-    expect(r.closestCandidateId).toBe("lula");
-    expect(r.counts.find((c) => c.candidateId === "lula")).toMatchObject({ documented: 1, similar: 1 });
+    const r = mod.themeProximity(qs, answers, CANDIDATES, [pos("cand-a", "q01", "SUPPORTS"), pos("cand-b", "q01", "OPPOSES")]);
+    expect(r.closestCandidateId).toBe("cand-a");
+    expect(r.counts.find((c) => c.candidateId === "cand-a")).toMatchObject({ documented: 1, similar: 1 });
   });
   it("empate → nenhum indicado", () => {
-    const r = mod.themeProximity(qs, answers, CANDIDATES, [pos("lula", "q01", "SUPPORTS"), pos("flavio-bolsonaro", "q01", "SUPPORTS")]);
+    const r = mod.themeProximity(qs, answers, CANDIDATES, [pos("cand-a", "q01", "SUPPORTS"), pos("cand-b", "q01", "SUPPORTS")]);
     expect(r.closestCandidateId).toBeNull();
     expect(r.reason).toBe("TIE");
   });
   it("posições não publicadas são ignoradas", () => {
-    const draft = { ...pos("lula", "q01", "SUPPORTS"), reviewStatus: "APPROVED" as const };
+    const draft = { ...pos("cand-a", "q01", "SUPPORTS"), reviewStatus: "APPROVED" as const };
     expect(mod.themeProximity(qs, answers, CANDIDATES, [draft]).reason).toBe("INSUFFICIENT_EVIDENCE");
   });
   it("o módulo não exporta nenhuma função que some temas em resultado geral", () => {
