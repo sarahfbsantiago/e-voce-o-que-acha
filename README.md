@@ -216,11 +216,11 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Dar auxílio financeiro | — | 0,5 | 0 |
-| Criar empregos | — | 0,5 | 0,5 |
-| Aumentar salários | — | 0,5 | 0 |
+| Dar auxílio financeiro | — | 1 | 0 |
+| Criar empregos | — | 1 | 0,5 |
+| Aumentar salários | — | 1 | 0 |
 | Investir em educação | — | 1 | 0 |
-| Reduzir a inflação | — | 1 | 0 |
+| Reduzir a inflação | — | 0,5 | 0 |
 | Usar todas essas medidas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
