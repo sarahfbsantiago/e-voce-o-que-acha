@@ -470,9 +470,9 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Mais repressão policial | — | 0 | 1 |
-| Mais tratamento de saúde | — | 0 | 0 |
-| Mais prevenção e educação | — | 0 | 0 |
-| Uma combinação dessas medidas | — | 0 | 0,5 |
+| Mais tratamento de saúde | — | 0,5 | 0 |
+| Mais prevenção e educação | — | 0,5 | 0 |
+| Uma combinação dessas medidas | — | 0,5 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 **30. O que deveria acontecer com bets e apostas online?**
