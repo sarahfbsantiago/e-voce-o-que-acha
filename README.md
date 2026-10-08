@@ -320,8 +320,8 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
-| Depende do tamanho do risco | +1 | 0,5 | 1 |
-| Não | -2 | 0 | 0 |
+| Depende do tamanho do risco | +1 | 0,5 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **17. Reduzir o desmatamento da Amazônia deveria ser uma prioridade do governo?**
@@ -331,9 +331,9 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 1 |
-| É importante, mas não deveria ser prioridade | +1 | 0,5 | 0,5 |
-| Não | -2 | 0 | 0 |
+| Sim | +2 | 1 | 0 |
+| É importante, mas não deveria ser prioridade | +1 | 0,5 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **18. O Brasil deveria ter metas para reduzir a poluição que contribui para mudanças no clima?**
@@ -343,9 +343,9 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
-| Sim, mas sem prejudicar demais a economia | +1 | 0,5 | 1 |
-| Não | -2 | 0 | 0 |
+| Sim | +2 | 1 | 0 |
+| Sim, mas sem prejudicar demais a economia | +1 | 0,5 | 0,5 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **19. Qual fonte de energia deveria receber mais investimentos?**
