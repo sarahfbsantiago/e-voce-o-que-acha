@@ -31,6 +31,17 @@ function q(id: string, topicId: string, order: number, text: string, opts: Opt[]
   return { id, topicId, order, text, kind: "SINGLE_CHOICE", options: options(id, opts), ...extra };
 }
 
+/**
+ * Acrescenta uma alternativa nova sem mudar os ids das existentes (respostas já salvas continuam valendo).
+ * A nova entra antes de `beforeId`; as ordens são renumeradas, "Não sei" continua por último.
+ */
+function withOption(question: Question, id: string, label: string, beforeId: string): Question {
+  const list = [...question.options];
+  const at = list.findIndex((o) => o.id === beforeId);
+  list.splice(at, 0, { id, label, order: 0, normalizedValue: null, isNoOpinion: false });
+  return { ...question, options: list.map((o, i) => ({ ...o, order: i + 1 })) };
+}
+
 // Escalas reutilizadas
 const CONCORDA: Opt[] = [["Concordo", 2], ["Concordo em parte", 1], ["Discordo em parte", -1], ["Discordo", -2]];
 const SIM_NAO = (meio: string): Opt[] => [["Sim", 2], [meio, 1], ["Não", -2]];
@@ -73,13 +84,13 @@ export const QUESTIONS: Question[] = [
     ["Deveriam ser reduzidos", -1],
     ["Não deveriam existir", -2],
   ]),
-  q("q20", "t05", 4, "Para combater a pobreza, qual deveria ser a maior prioridade?", [
+  withOption(q("q20", "t05", 4, "Para combater a pobreza, qual deveria ser a maior prioridade?", [
     ["Dar auxílio financeiro", null],
     ["Criar empregos", null],
     ["Aumentar salários", null],
     ["Investir em educação", null],
     ["Usar todas essas medidas", null],
-  ]),
+  ]), "q20-o7", "Reduzir a inflação", "q20-o5"),
 
   // ---- Sessão 6. Segurança pública e crime organizado ------------------------
   q("q21", "t06", 1, "Quando crimes graves envolvem vários estados ao mesmo tempo, como grandes facções criminosas, tráfico de drogas e armas, lavagem de dinheiro e organizações que atuam em diferentes regiões do país, você acha que o governo federal e a Polícia Federal deveriam ter uma participação maior nas investigações?", CONCORDA, {

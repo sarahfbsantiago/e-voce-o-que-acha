@@ -25,7 +25,7 @@ export const OPTION_SCORES: Record<string, [score: number, reason: string]> = {
   "q13|flavio-bolsonaro|o1": [0, "Revisão humana"], "q13|flavio-bolsonaro|o2": [0, "Revisão humana"], "q13|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
   "q17|lula|o1": [1, "Revisão humana"], "q17|lula|o2": [0.5, "Revisão humana"], "q17|lula|o3": [0, "Revisão humana"], "q17|lula|o4": [0, "Revisão humana"],
   "q17|flavio-bolsonaro|o1": [0, "Revisão humana"], "q17|flavio-bolsonaro|o2": [0, "Revisão humana"], "q17|flavio-bolsonaro|o3": [0, "Revisão humana"], "q17|flavio-bolsonaro|o4": [0.5, "Revisão humana"],
-  "q20|lula|o1": [0.5, "Revisão humana"], "q20|lula|o2": [0.5, "Revisão humana"], "q20|lula|o3": [0.5, "Revisão humana"], "q20|lula|o4": [0.5, "Revisão humana"], "q20|lula|o5": [1, "Revisão humana"],
+  "q20|lula|o1": [0.5, "Revisão humana"], "q20|lula|o2": [0.5, "Revisão humana"], "q20|lula|o3": [0.5, "Revisão humana"], "q20|lula|o5": [1, "Revisão humana"],
   "q20|flavio-bolsonaro|o1": [0, "Revisão humana"], "q20|flavio-bolsonaro|o2": [0.5, "Revisão humana"], "q20|flavio-bolsonaro|o3": [0, "Revisão humana"], "q20|flavio-bolsonaro|o4": [0, "Revisão humana"], "q20|flavio-bolsonaro|o5": [0, "Revisão humana"],
   "q21|lula|o1": [1, "Revisão humana"], "q21|lula|o2": [0.5, "Revisão humana"], "q21|lula|o3": [0, "Revisão humana"], "q21|lula|o4": [0, "Revisão humana"],
   "q21|flavio-bolsonaro|o1": [0.5, "Revisão humana"], "q21|flavio-bolsonaro|o2": [0, "Revisão humana"], "q21|flavio-bolsonaro|o3": [0, "Revisão humana"], "q21|flavio-bolsonaro|o4": [0, "Revisão humana"],
@@ -57,4 +57,6 @@ export const OPTION_SCORES: Record<string, [score: number, reason: string]> = {
   "q31|flavio-bolsonaro|o1": [0, "Revisão humana"], "q31|flavio-bolsonaro|o2": [0, "Revisão humana"], "q31|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
   "q30|flavio-bolsonaro|o1": [0, "Revisão humana"], "q30|flavio-bolsonaro|o2": [0, "Revisão humana"], "q30|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
   "q32|flavio-bolsonaro|o1": [0, "Revisão humana"], "q32|flavio-bolsonaro|o2": [0.5, "Revisão humana"], "q32|flavio-bolsonaro|o3": [0.5, "Revisão humana"],
+  "q20|lula|o4": [1, "Revisão humana"], "q20|lula|o7": [1, "Revisão humana"],
+  "q20|flavio-bolsonaro|o7": [0, "Revisão humana"],
 };

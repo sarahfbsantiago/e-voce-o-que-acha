@@ -219,7 +219,8 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Dar auxílio financeiro | — | 0,5 | 0 |
 | Criar empregos | — | 0,5 | 0,5 |
 | Aumentar salários | — | 0,5 | 0 |
-| Investir em educação | — | 0,5 | 0 |
+| Investir em educação | — | 1 | 0 |
+| Reduzir a inflação | — | 1 | 0 |
 | Usar todas essas medidas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
