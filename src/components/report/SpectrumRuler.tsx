@@ -146,13 +146,13 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         <div className="relative h-[160px]">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 160" preserveAspectRatio="none">
             {SPECTRUM_TERMS.filter((t) => t.side === "above").map((t) => (
-              <line key={t.label} x1={t.chip} y1={98} x2={pct(t.at)} y2={153} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
+              <line key={t.label} x1={t.chip} y1={98} x2={pct(t.at)} y2={156} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
             ))}
           </svg>
           {SPECTRUM_TERMS.filter((t) => t.side === "above").map((t) => (
             <span key={t.label}>
               <div className="absolute bottom-[62px]" style={{ left: `${t.chip}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
-              <span aria-hidden="true" className="absolute bottom-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-t-[7px] border-x-transparent border-t-ink-3" style={{ left: `${pct(t.at)}%` }} />
+              <span aria-hidden="true" className="absolute -bottom-0.5 h-2.5 w-2.5 -translate-x-1/2 rounded-full border-2 border-surface bg-ink-3" style={{ left: `${pct(t.at)}%` }} />
             </span>
           ))}
           {candidates.map((t) => (
@@ -173,12 +173,12 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         <div className="relative h-[144px]">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 144" preserveAspectRatio="none">
             {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t) => (
-              <line key={t.label} x1={t.chip} y1={96} x2={pct(t.at)} y2={8} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
+              <line key={t.label} x1={t.chip} y1={96} x2={pct(t.at)} y2={4} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
             ))}
           </svg>
           {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t) => (
             <span key={t.label}>
-              <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-b-[7px] border-x-transparent border-b-ink-3" style={{ left: `${pct(t.at)}%` }} />
+              <span aria-hidden="true" className="absolute -top-0.5 h-2.5 w-2.5 -translate-x-1/2 rounded-full border-2 border-surface bg-ink-3" style={{ left: `${pct(t.at)}%` }} />
               <div className="absolute top-[96px]" style={{ left: `${t.chip}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
             </span>
           ))}
@@ -229,11 +229,11 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
             {/* setas pontilhadas: de cada item até o ponto exato da régua */}
             <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible">
               {items.map((it, i) => (
-                <line key={it.key} x1={BAR_X + 34} y1={(i + 0.5) * ROW} x2={BAR_X + 20} y2={yOf(it.at)} className="stroke-ink-3" strokeWidth={1.5} strokeDasharray="3 3" strokeLinecap="round" />
+                <line key={it.key} x1={BAR_X + 34} y1={(i + 0.5) * ROW} x2={BAR_X + 14} y2={yOf(it.at)} className="stroke-ink-3" strokeWidth={1.5} strokeDasharray="3 3" strokeLinecap="round" />
               ))}
             </svg>
             {items.map((it) => (
-              <span key={`p-${it.key}`} aria-hidden="true" className="absolute h-0 w-0 -translate-y-1/2 border-y-[4px] border-r-[6px] border-y-transparent border-r-ink-3" style={{ left: BAR_X + 14, top: yOf(it.at) }} />
+              <span key={`p-${it.key}`} aria-hidden="true" className="absolute h-2.5 w-2.5 -translate-y-1/2 rounded-full border-2 border-surface bg-ink-3" style={{ left: BAR_X + 7, top: yOf(it.at) }} />
             ))}
             {items.map((it, i) => (
               <div key={`c-${it.key}`} className={`${anim("spectrum-pop")} absolute -translate-y-1/2`} style={{ left: BAR_X + 38, top: (i + 0.5) * ROW, ...delay(0.2 + i * 0.05) }}>{it.node}</div>
