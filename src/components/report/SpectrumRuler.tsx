@@ -93,7 +93,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
 
   return (
     <div ref={rootRef} className="mt-6 print-keep" aria-labelledby="espectro">
-      <h4 id="espectro" className="text-sm font-semibold">Onde você fica no espectro político</h4>
+      <h4 id="espectro" className="text-sm font-semibold">Onde você fica no espectro ideológico político</h4>
       <button type="button" onClick={() => setOpenId("intro")} className="mt-0.5 text-xs font-medium text-purple underline underline-offset-4 print:hidden">Entenda o espectro político →</button>
 
       {/* computador: régua deitada */}
