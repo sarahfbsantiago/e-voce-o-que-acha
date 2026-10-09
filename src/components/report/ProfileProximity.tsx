@@ -15,7 +15,7 @@ import { SpectrumRuler } from "./SpectrumRuler";
 /**
  * Qual candidato está mais próximo do seu perfil, tema a tema, só com posições publicadas.
  * Cada área abre uma janela com o texto revisado pela responsável sobre o que cada candidato defende
- * em cada tema e, no final, "Veja as fontes". Abaixo, a barra de porcentagem dos temas.
+ * em cada tema e, no final, "Veja as fontes". Abaixo, a régua do espectro político.
  */
 export function ProfileProximity({ sections, questions, answers, candidates, positions }: {
   sections: TopicSection[];
@@ -160,20 +160,8 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
         ) : null}
       </dialog>
 
-      {/* barra de porcentagem: divisão dos temas em que cada candidato ficou mais perto */}
-      {decided > 0 ? (
-        <div className="mt-6">
-          <div className="flex h-4 w-full overflow-hidden rounded-full bg-line" role="img" aria-label={totals.map((t) => `${t.c.name}: ${t.themes} temas`).join("; ")}>
-            {totals.map((t, i) => t.themes > 0 ? (
-              <span key={t.c.id} className={`flex items-center justify-center text-[10px] font-semibold text-white ${i === 0 ? "bg-accent" : "bg-mint"}`} style={{ width: `${(t.themes / decided) * 100}%` }}>{Math.round((t.themes / decided) * 100)}%</span>
-            ) : null)}
-          </div>
-          <p className="mt-1 flex flex-wrap gap-x-4 text-[11px] text-ink-2">
-            {totals.map((t, i) => <span key={t.c.id} className="flex items-center gap-1"><span aria-hidden="true" className={`inline-block h-2.5 w-2.5 rounded-sm ${i === 0 ? "bg-accent" : "bg-mint"}`} />{t.c.name}</span>)}
-          </p>
-          <SpectrumRuler totals={totals} />
-        </div>
-      ) : null}
+      {/* régua do espectro político (no lugar da barra de porcentagem) */}
+      {decided > 0 ? <SpectrumRuler totals={totals} /> : null}
     </section>
   );
 }

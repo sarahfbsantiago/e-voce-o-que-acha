@@ -353,3 +353,26 @@ dialog.modal[open] { animation: modal-in 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
   html.reveal-ready [data-reveal]:not(.is-visible) { opacity: 1 !important; transform: none !important; }
   .animate-fade-up { animation: none !important; opacity: 1 !important; }
 }
+
+/* Régua do espectro político: entra em movimento quando aparece na tela. */
+@keyframes spectrum-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes spectrum-pop { from { opacity: 0; transform: translateY(8px) scale(0.92); } to { opacity: 1; transform: none; } }
+@keyframes spectrum-drop { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+@keyframes spectrum-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgb(109 63 196 / 0.45); } 50% { box-shadow: 0 0 0 7px rgb(109 63 196 / 0); } }
+@keyframes spectrum-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.spectrum-wait { opacity: 0; }
+.spectrum-grow { transform-origin: left; animation: spectrum-grow 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.spectrum-pop { animation: spectrum-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.spectrum-drop { animation: spectrum-drop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.spectrum-pulse { animation: spectrum-pulse 2.2s ease-in-out 1.6s infinite; }
+.spectrum-nudge { animation: spectrum-nudge 1.6s ease-in-out 1.6s infinite; }
+.spectrum-slide { transition: left 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.6s; }
+@media (prefers-reduced-motion: reduce) {
+  .spectrum-wait { opacity: 1; }
+  .spectrum-grow, .spectrum-pop, .spectrum-drop, .spectrum-pulse, .spectrum-nudge { animation: none !important; }
+  .spectrum-slide { transition: none; }
+}
+@media print {
+  .spectrum-wait { opacity: 1 !important; }
+  .spectrum-grow, .spectrum-pop, .spectrum-drop, .spectrum-pulse, .spectrum-nudge { animation: none !important; }
+}

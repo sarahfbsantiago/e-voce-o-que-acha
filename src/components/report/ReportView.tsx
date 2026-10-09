@@ -21,6 +21,8 @@ import { ProfileProximity } from "./ProfileProximity";
 import { AREA_GROUPS, groupOfTopic } from "./areaGroups";
 import { CandidatesSection } from "./CandidatesSection";
 import { CandidateViews } from "./CandidateViews";
+import { profileProximity } from "@/domain/profile-proximity";
+import { personSpectrum } from "@/data/political-spectrum";
 
 interface Props {
   candidates: Candidate[];
@@ -78,6 +80,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
 
   const ordered = orderCandidates(candidates, session.candidateOrder);
   const sections = buildPriorityMap(TOPICS, QUESTIONS, session.answers, session.priorities);
+  const ideology = personSpectrum(profileProximity(QUESTIONS, session.answers, ordered, positions).totals);
 
   return (
     <div className="container-page py-7 md:py-14 space-y-9 sm:space-y-12">
@@ -88,6 +91,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
           <PrintButton />
         </div>
         <h1 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Seu perfil</h1>
+        {ideology ? <p className="mt-2 inline-flex rounded-lg bg-purple-soft px-3 py-1.5 text-base font-semibold text-purple-strong">Sua ideologia: {ideology.ideology}</p> : null}
         <p className="hidden print:block text-xs text-ink-3 mt-1">Gerado em {new Date().toLocaleDateString("pt-BR")} · E Você, O Que Acha? · nada aqui é nota ou ranking</p>
         <p className="mt-3 text-ink-2">
           O que você disse que importa, tema a tema, e com quem suas respostas ficaram mais próximas nos temas em que há posições publicadas. Nada aqui vira nota ou ranking.
