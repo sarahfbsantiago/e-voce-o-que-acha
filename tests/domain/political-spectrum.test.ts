@@ -11,17 +11,16 @@ describe("régua do espectro político (posição pelas respostas)", () => {
     const missing = QUESTIONS.flatMap((q) => q.options.filter((o) => !o.isNoOpinion && !spectrumPositionOf(q.id, o.id)).map((o) => o.id));
     expect(missing).toEqual([]);
   });
-  it("respostas todas à esquerda → esquerda; todas à direita → direita radical (sem chegar aos extremos)", () => {
+  it("a pessoa fica na média do meio das faixas das alternativas", () => {
     expect(personSpectrum([a("q01", "o1"), a("q05", "o1")])).toMatchObject({ at: 1.5, ideology: "Socialismo" });
-    expect(personSpectrum([a("q01", "o4"), a("q05", "o3")])).toMatchObject({ at: 6.5, ideology: "Nacionalismo radical" });
+    expect(personSpectrum([a("q01", "o4"), a("q05", "o3")])).toMatchObject({ at: 5.5, ideology: "Liberalismo econômico e conservadorismo" });
   });
-  it("respostas equilibradas → centro político, independente dos candidatos", () => {
-    expect(personSpectrum([a("q01", "o1"), a("q05", "o3")])).toMatchObject({ at: 4, ideology: "Centro político" });
+  it("centro é centro (não centro-direita)", () => {
+    expect(personSpectrum([a("q01", "o1"), a("q05", "o3")])).toMatchObject({ at: 3.5, ideology: "Centro político" });
+    expect(personSpectrum([a("q03", "o3")])).toMatchObject({ at: 3.5, ideology: "Centro político" });
   });
-  it("concordar muito com um lado não leva a pessoa ao extremo", () => {
-    const p = personSpectrum([a("q01", "o1"), a("q05", "o1"), a("q09", "o1"), a("q25", "o3")])!;
-    expect(p.at).toBeCloseTo(4 + (-1) * 1.25 * 1);
-    expect(p.ideology).toBe("Social-democracia");
+  it("revisão humana: investir em educação (pobreza) é centro-esquerda", () => {
+    expect(personSpectrum([a("q20", "o4")])).toMatchObject({ at: 2.5, ideology: "Social-democracia" });
   });
   it("'Não sei' e respostas sem posição não entram; sem nada, sem posição", () => {
     const noOpinion = QUESTIONS[0].options.find((o) => o.isNoOpinion)!;

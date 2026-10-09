@@ -16,42 +16,47 @@ export const SPECTRUM_BANDS = [
   { label: "Extrema direita", color: "#ef4444" },
 ] as const;
 
+export type SpectrumBandLabel = (typeof SPECTRUM_BANDS)[number]["label"];
+
+/** Meio da faixa na régua (0 a 8): Extrema esquerda 0,5 … Centro 3,5 … Extrema direita 7,5. */
+export function bandCenter(label: SpectrumBandLabel): number {
+  return SPECTRUM_BANDS.findIndex((b) => b.label === label) + 0.5;
+}
+
 /** Onde cada candidato fica na régua, com a descrição definida pela responsável e o nome curto da ideologia. */
 export const CANDIDATE_SPECTRUM: Record<string, { at: number; label: string; ideology: string }> = {
   lula: { at: 3, label: "Progressista, entre centro-esquerda e centro", ideology: "Progressismo" },
   "flavio-bolsonaro": { at: 7.5, label: "Extrema direita", ideology: "Extrema direita" },
 };
 
-/**
- * Ideologia mostrada para a pessoa, por trecho da régua (0 a 8). O ponto neutro (média 0) cai em 4, na divisa entre centro e centro-direita, e conta como centro político.
- * A régua da pessoa vai de 1,5 (esquerda) a 6,5 (direita radical): as 25 perguntas não medem os extremos.
- */
+/** Ideologia mostrada para a pessoa, pelo trecho da régua (0 a 8) onde ela cai; acompanha as faixas. */
 export const IDEOLOGY_RANGES: { upTo: number; label: string }[] = [
+  { upTo: 1, label: "Comunismo" },
   { upTo: 2, label: "Socialismo" },
   { upTo: 2.75, label: "Social-democracia" },
   { upTo: 3.25, label: "Progressismo" },
   { upTo: 4, label: "Centro político" },
   { upTo: 5, label: "Liberalismo social" },
   { upTo: 6, label: "Liberalismo econômico e conservadorismo" },
-  { upTo: Infinity, label: "Nacionalismo radical" },
+  { upTo: 7, label: "Nacionalismo radical" },
+  { upTo: Infinity, label: "Fascismo" },
 ];
 
-export interface PersonSpectrum { at: number; ideology: string; mean: number; counted: number }
+export interface PersonSpectrum { at: number; ideology: string; counted: number }
 
 /**
- * Posição da pessoa: média das posições (−2 a +2) das alternativas que ela marcou, sem "Não sei",
- * levada para a régua: 4 + média × 1,25 (de 1,5 a 6,5). Sem nenhuma resposta com posição, sem posição.
+ * Posição da pessoa: média do meio das faixas para onde apontam as alternativas que ela marcou, sem "Não sei".
+ * Sem nenhuma resposta com faixa, sem posição.
  */
 export function personSpectrum(answers: { questionId: string; optionIds: string[] }[]): PersonSpectrum | null {
   const values: number[] = [];
   for (const a of answers) {
-    const vs = a.optionIds.map((o) => spectrumPositionOf(a.questionId, o)?.position).filter((v): v is number => v !== undefined);
+    const vs = a.optionIds.map((o) => spectrumPositionOf(a.questionId, o)).filter((v) => v !== null).map((v) => bandCenter(v.band));
     if (vs.length) values.push(vs.reduce((n, v) => n + v, 0) / vs.length);
   }
   if (!values.length) return null;
-  const mean = values.reduce((n, v) => n + v, 0) / values.length;
-  const at = 4 + mean * 1.25;
-  return { at, mean, counted: values.length, ideology: IDEOLOGY_RANGES.find((r) => at <= r.upTo)!.label };
+  const at = values.reduce((n, v) => n + v, 0) / values.length;
+  return { at, counted: values.length, ideology: IDEOLOGY_RANGES.find((r) => at <= r.upTo)!.label };
 }
 
 /** Nome da faixa; numa divisa, "entre X e Y". */

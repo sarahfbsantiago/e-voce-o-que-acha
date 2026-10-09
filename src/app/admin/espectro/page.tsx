@@ -7,7 +7,7 @@ import { TOPICS } from "@/data/topics";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { QUESTION_NUMBER } from "@/lib/question-order";
 import { spectrumPositionOf } from "@/data/spectrum-positions";
-import { IDEOLOGY_RANGES, SPECTRUM_BANDS, bandAt } from "@/data/political-spectrum";
+import { IDEOLOGY_RANGES, SPECTRUM_BANDS } from "@/data/political-spectrum";
 import { logoutAction } from "../login/actions";
 import { AdminNav } from "@/components/AdminNav";
 import { PrintButton } from "@/components/PrintButton";
@@ -15,10 +15,7 @@ import { PrintButton } from "@/components/PrintButton";
 export const metadata: Metadata = { title: "Espectro político", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
-const fmt = (n: number) => (n > 0 ? `+${n}` : `${n}`).replace(".", ",");
-const SIDE = (n: number) => (n < 0 ? "esquerda" : n > 0 ? "direita" : "centro");
-/** Cor da faixa onde a alternativa sozinha levaria a pessoa (mesma conta da régua: 4 + posição × 1,25). */
-const bandColor = (n: number) => SPECTRUM_BANDS[Math.min(SPECTRUM_BANDS.length - 1, Math.floor(4 + n * 1.25))].color;
+const bandIndex = (label: string) => SPECTRUM_BANDS.findIndex((b) => b.label === label);
 
 export default async function AdminSpectrumPage() {
   if (!(await isAdminSession())) redirect("/admin/login");
@@ -40,7 +37,7 @@ export default async function AdminSpectrumPage() {
           <p className="font-semibold"><span className="mr-1 text-xs text-ink-3" title={`código interno ${q.id}`}>Pergunta {QUESTION_NUMBER[q.id]}</span>{q.text}</p>
           <p className="text-xs text-ink-3">{t.name}</p>
           <table className="mt-3 w-full text-sm">
-            <thead><tr className="text-left text-xs text-ink-3"><th className="p-2">Alternativa que a pessoa marca</th><th className="w-28 p-2">Posição</th><th className="p-2">Na régua</th></tr></thead>
+            <thead><tr className="text-left text-xs text-ink-3"><th className="p-2">Alternativa que a pessoa marca</th><th className="p-2">Faixa da régua</th></tr></thead>
             <tbody>
               {q.options.filter((o) => !o.isNoOpinion).map((o) => {
                 const v = spectrumPositionOf(q.id, o.id);
@@ -49,18 +46,15 @@ export default async function AdminSpectrumPage() {
                   <tr key={o.id} className="border-t border-line align-top">
                     <th scope="row" className="p-2 text-left font-medium">{o.label}</th>
                     {v ? (
-                      <>
-                        <td className={`p-2 font-semibold tabular-nums ${v.reason !== "Proposta" ? "outline-2 -outline-offset-2 outline-purple" : ""}`} title={v.reason}>{fmt(v.position)}</td>
-                        <td className="p-2">
-                          <span className="inline-flex items-center gap-2 text-xs">
-                            <span aria-hidden="true" className="relative inline-block h-2 w-24 rounded-full bg-line">
-                              <span className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-surface" style={{ left: `${((v.position + 2) / 4) * 100}%`, background: bandColor(v.position) }} />
-                            </span>
-                            {SIDE(v.position)} · {bandAt(4 + v.position * 1.25)}
+                      <td className={`p-2 ${v.reason !== "Proposta" ? "outline-2 -outline-offset-2 outline-purple" : ""}`} title={v.reason}>
+                        <span className="inline-flex items-center gap-2 text-xs font-semibold">
+                          <span aria-hidden="true" className="flex h-2 w-32 overflow-hidden rounded-full">
+                            {SPECTRUM_BANDS.map((b, i) => <span key={b.label} className="h-full flex-1" style={{ background: i === bandIndex(v.band) ? b.color : "var(--color-line)" }} />)}
                           </span>
-                        </td>
-                      </>
-                    ) : <td colSpan={2} className="p-2 italic text-ink-3">sem posição (não entra na régua)</td>}
+                          <span className="rounded-md px-1.5 py-0.5" style={{ background: `${SPECTRUM_BANDS[bandIndex(v.band)].color}26` }}>{v.band}</span>
+                        </span>
+                      </td>
+                    ) : <td className="p-2 italic text-ink-3">sem faixa (não entra na régua)</td>}
                   </tr>
                 );
               })}
@@ -75,17 +69,17 @@ export default async function AdminSpectrumPage() {
     <div className="container-page py-12 space-y-8">
       <AdminNav current="/admin/espectro" />
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <PageTitle eyebrow="Admin" tone="gold" lead="Onde cada alternativa coloca a pessoa na régua do espectro político do relatório. Não depende dos candidatos. Mudou aqui, mudou na régua.">
+        <PageTitle eyebrow="Admin" tone="gold" lead="Para qual faixa da régua cada alternativa leva a pessoa do espectro político do relatório. Não depende dos candidatos. Mudou aqui, mudou na régua.">
           Espectro político
         </PageTitle>
         <div className="flex flex-wrap items-center gap-2 print:hidden"><PrintButton label="Exportar PDF" fileTitle="Espectro político" /><form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form></div>
       </div>
       <div className="card p-4 text-sm space-y-2">
-        <p>Posição de −2 (esquerda) a +2 (direita); 0 é centro. &quot;Não sei&quot; nunca entra.</p>
-        <p>Posição da pessoa = média das posições das alternativas que ela marcou. Na régua: 4 + média × 1,25, de 1,5 (esquerda) a 6,5 (direita radical). As 25 perguntas não medem os extremos, por isso a pessoa nunca cai em comunismo ou fascismo.</p>
+        <p>Cada alternativa aponta para uma faixa da régua. &quot;Não sei&quot; nunca entra.</p>
+        <p>Posição da pessoa = média do meio das faixas das alternativas que ela marcou (Extrema esquerda 0,5 · Esquerda 1,5 · Centro-esquerda 2,5 · Centro 3,5 · Centro-direita 4,5 · Direita 5,5 · Direita radical 6,5 · Extrema direita 7,5).</p>
         <p>Ideologia mostrada: {IDEOLOGY_RANGES.map((r, i) => `${r.label} ${i === 0 ? `até ${String(r.upTo).replace(".", ",")}` : r.upTo === Infinity ? `acima de ${String(IDEOLOGY_RANGES[i - 1].upTo).replace(".", ",")}` : `até ${String(r.upTo).replace(".", ",")}`}`).join(" · ")}.</p>
         <p>O resultado por tema (Lula, Flávio ou equivalente) continua vindo da tabela Notas por alternativa.</p>
-        <p className="font-semibold">{reviewed === 0 ? `Todas as ${cells} posições são a proposta inicial, aguardando sua revisão.` : `${reviewed} das ${cells} posições já foram revisadas por você (borda roxa).`}</p>
+        <p className="font-semibold">{reviewed === 0 ? `Todas as ${cells} faixas são a proposta inicial, aguardando sua revisão.` : `${reviewed} das ${cells} faixas já foram revisadas por você (borda roxa); as demais são proposta.`}</p>
       </div>
       {body}
     </div>
