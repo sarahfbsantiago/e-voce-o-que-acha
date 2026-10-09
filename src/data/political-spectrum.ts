@@ -23,14 +23,14 @@ export const CANDIDATE_SPECTRUM: Record<string, { at: number; label: string; ide
 };
 
 /**
- * Ideologia mostrada para a pessoa, por trecho da régua (0 a 8). O ponto neutro (média 0) cai em 4, no centro político.
+ * Ideologia mostrada para a pessoa, por trecho da régua (0 a 8). O ponto neutro (média 0) cai em 4, na divisa entre centro e centro-direita, e conta como centro político.
  * A régua da pessoa vai de 1,5 (esquerda) a 6,5 (direita radical): as 25 perguntas não medem os extremos.
  */
 export const IDEOLOGY_RANGES: { upTo: number; label: string }[] = [
   { upTo: 2, label: "Socialismo" },
   { upTo: 2.75, label: "Social-democracia" },
   { upTo: 3.25, label: "Progressismo" },
-  { upTo: 4.25, label: "Centro político" },
+  { upTo: 4, label: "Centro político" },
   { upTo: 5, label: "Liberalismo social" },
   { upTo: 6, label: "Liberalismo econômico e conservadorismo" },
   { upTo: Infinity, label: "Nacionalismo radical" },

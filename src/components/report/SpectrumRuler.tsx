@@ -79,7 +79,8 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
   const section = openId === "intro" ? null : SPECTRUM_SECTIONS.find((s) => s.id === openId) ?? null;
 
   const termButton = (label: string, sectionId: string, at: number) => (
-    <button key={label} type="button" onClick={() => setOpenId(sectionId)} style={delay(0.25 + at * 0.08)} className={`${anim("spectrum-pop")} rounded-md border border-line-strong bg-surface px-1.5 py-0.5 text-center text-[11px] font-medium leading-tight text-ink shadow-sm transition-colors hover:-translate-y-0.5 hover:border-purple hover:text-purple print:shadow-none`}>
+    <button key={label} type="button" onClick={() => setOpenId(sectionId)} title={`Ler sobre ${label.toLowerCase()}`} style={delay(0.25 + at * 0.08)} className={`${anim("spectrum-pop")} group inline-flex items-center gap-1 rounded-full border border-purple/50 bg-purple-soft px-2 py-1 text-center text-[11px] font-semibold leading-tight text-purple-strong shadow-sm transition-all hover:-translate-y-0.5 hover:border-purple hover:bg-purple hover:text-white hover:shadow-md focus-visible:outline-2 focus-visible:outline-purple print:shadow-none`}>
+      <span aria-hidden="true" className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full bg-purple text-[9px] font-bold text-white group-hover:bg-white group-hover:text-purple">i</span>
       {label}
     </button>
   );
@@ -94,7 +95,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
   return (
     <div ref={rootRef} className="mt-6 print-keep" aria-labelledby="espectro">
       <h4 id="espectro" className="text-sm font-semibold">Onde você fica no espectro ideológico político</h4>
-      <button type="button" onClick={() => setOpenId("intro")} className="mt-0.5 text-xs font-medium text-purple underline underline-offset-4 print:hidden">Entenda o espectro político →</button>
+      <p className="mt-0.5 text-xs text-ink-3 print:hidden">Toque em uma ideologia para ler sobre ela. <button type="button" onClick={() => setOpenId("intro")} className="font-medium text-purple underline underline-offset-4">Entenda o espectro político →</button></p>
 
       {/* computador: régua deitada */}
       <div className="mt-4 hidden px-1 md:block" role="img" aria-label={`${candidates.map((t) => `${t.c.name}: ${t.spot.label}`).join("; ")}; você: ${person.ideology}`}>

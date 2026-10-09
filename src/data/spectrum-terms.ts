@@ -16,7 +16,6 @@ export interface SpectrumSection { id: string; title: string; blocks: SpectrumBl
 export const SPECTRUM_TERMS: { label: string; at: number; side: "above" | "below"; section: string }[] = [
   { label: "Comunismo", at: 0.5, side: "above", section: "comunismo" },
   { label: "Socialismo", at: 1.5, side: "above", section: "socialismo" },
-  { label: "Socialismo democrático", at: 2.5, side: "above", section: "centro-esquerda" },
   { label: "Social-democracia", at: 2.5, side: "above", section: "centro-esquerda" },
   { label: "Progressismo", at: 3, side: "below", section: "progressismo" },
   { label: "Centro político", at: 3.5, side: "above", section: "centro" },
