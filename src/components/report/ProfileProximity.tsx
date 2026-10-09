@@ -10,6 +10,7 @@ import { AREA_GROUPS } from "./areaGroups";
 import Link from "next/link";
 import { CANDIDATE_VIEWS } from "@/data/candidate-views";
 import { ViewBlocks } from "./CandidateViews";
+import { SpectrumRuler } from "./SpectrumRuler";
 
 /**
  * Qual candidato está mais próximo do seu perfil, tema a tema, só com posições publicadas.
@@ -170,6 +171,7 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
           <p className="mt-1 flex flex-wrap gap-x-4 text-[11px] text-ink-2">
             {totals.map((t, i) => <span key={t.c.id} className="flex items-center gap-1"><span aria-hidden="true" className={`inline-block h-2.5 w-2.5 rounded-sm ${i === 0 ? "bg-accent" : "bg-mint"}`} />{t.c.name}</span>)}
           </p>
+          <SpectrumRuler totals={totals} />
         </div>
       ) : null}
     </section>
