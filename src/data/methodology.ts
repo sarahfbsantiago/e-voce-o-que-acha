@@ -120,6 +120,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: na régua do espectro, 'Deveriam ser proibidas' (bets e apostas online) aponta para a centro-esquerda e 'Petróleo e gás' (fonte de energia) para a direita.",
       "Revisão humana: na régua do espectro, comunismo fica na ponta esquerda e fascismo na ponta direita; progressismo e Lula ficam logo depois da divisa entre centro-esquerda e centro. Os botões das ideologias ficam maiores e com relevo.",
       "Revisão humana: as setas da régua do espectro passam a apontar para o ponto exato de cada corrente, conforme desenho da responsável: comunismo e fascismo nas pontas; progressismo (e Lula) logo depois da divisa centro-esquerda/centro; liberalismo social no começo da centro-direita; conservadorismo no começo da direita radical; nacionalismo radical no fim da direita radical.",
+      "Revisão humana: a seta 'Você' fica no mesmo ponto da régua da ideologia da pessoa (ex.: progressismo, no ponto do progressismo). As setas das correntes ficam cinza e pontilhadas.",
       "O site passa a se chamar 'E Você, O Que Acha?', no endereço e-voce-o-que-acha.up.railway.app. Nada muda nas perguntas, nas notas ou na conta.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],

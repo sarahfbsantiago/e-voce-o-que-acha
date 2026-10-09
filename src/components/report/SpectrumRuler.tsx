@@ -105,7 +105,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         <div className="relative h-40">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 160" preserveAspectRatio="none">
             {SPECTRUM_TERMS.filter((t) => t.side === "above").map((t) => (
-              <line key={t.label} x1={pct(t.chip)} y1={98} x2={pct(t.at)} y2={153} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.25} vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
+              <line key={t.label} x1={pct(t.chip)} y1={98} x2={pct(t.at)} y2={153} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
             ))}
           </svg>
           {SPECTRUM_TERMS.filter((t) => t.side === "above").map((t) => (
@@ -132,7 +132,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         <div className="relative h-44">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 176" preserveAspectRatio="none">
             {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t, i) => (
-              <line key={t.label} x1={pct(t.chip)} y1={i % 2 ? 128 : 96} x2={pct(t.at)} y2={8} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.25} vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
+              <line key={t.label} x1={pct(t.chip)} y1={i % 2 ? 128 : 96} x2={pct(t.at)} y2={8} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
             ))}
           </svg>
           {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t, i) => (

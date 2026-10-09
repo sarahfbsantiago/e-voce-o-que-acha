@@ -1,4 +1,5 @@
 import { spectrumPositionOf } from "./spectrum-positions";
+import { SPECTRUM_TERMS } from "./spectrum-terms";
 
 /**
  * Régua do espectro político do relatório (revisão humana da responsável, 09/10/2026).
@@ -42,10 +43,17 @@ export const IDEOLOGY_RANGES: { upTo: number; label: string }[] = [
   { upTo: Infinity, label: "Fascismo" },
 ];
 
-export interface PersonSpectrum { at: number; ideology: string; counted: number }
+export interface PersonSpectrum { at: number; mean: number; ideology: string; counted: number }
+
+/** Ponto da régua de cada ideologia mostrada: o mesmo ponto para onde a seta do termo aponta. */
+const IDEOLOGY_SPOT: Record<string, string> = { "Liberalismo econômico e conservadorismo": "Liberalismo econômico" };
+export function ideologySpot(ideology: string): number | null {
+  return SPECTRUM_TERMS.find((t) => t.label === (IDEOLOGY_SPOT[ideology] ?? ideology))?.at ?? null;
+}
 
 /**
  * Posição da pessoa: média do meio das faixas para onde apontam as alternativas que ela marcou, sem "Não sei".
+ * A média define a ideologia; a seta fica no ponto dessa ideologia na régua.
  * Sem nenhuma resposta com faixa, sem posição.
  */
 export function personSpectrum(answers: { questionId: string; optionIds: string[] }[]): PersonSpectrum | null {
@@ -55,8 +63,10 @@ export function personSpectrum(answers: { questionId: string; optionIds: string[
     if (vs.length) values.push(vs.reduce((n, v) => n + v, 0) / vs.length);
   }
   if (!values.length) return null;
-  const at = values.reduce((n, v) => n + v, 0) / values.length;
-  return { at, counted: values.length, ideology: IDEOLOGY_RANGES.find((r) => at <= r.upTo)!.label };
+  const mean = values.reduce((n, v) => n + v, 0) / values.length;
+  const ideology = IDEOLOGY_RANGES.find((r) => mean <= r.upTo)!.label;
+  // a seta "Você" vai para o mesmo ponto da ideologia na régua
+  return { at: ideologySpot(ideology) ?? mean, mean, counted: values.length, ideology };
 }
 
 /** Nome da faixa; numa divisa, "entre X e Y". */

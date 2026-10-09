@@ -27,6 +27,11 @@ describe("régua do espectro político (posição pelas respostas)", () => {
     expect(personSpectrum([{ questionId: QUESTIONS[0].id, optionIds: [noOpinion.id] }])).toBeNull();
     expect(personSpectrum([])).toBeNull();
   });
+  it("a seta 'Você' fica no mesmo ponto da ideologia na régua", () => {
+    const p = personSpectrum([a("q20", "o4"), a("q03", "o3"), a("q03", "o3")])!; // média 3,17 → progressismo
+    expect(p.ideology).toBe("Progressismo");
+    expect(p.at).toBe(3.15);
+  });
   it("faixas e divisas", () => {
     expect(bandAt(7.5)).toBe("Extrema direita");
     expect(bandAt(3)).toBe("entre centro-esquerda e centro");
