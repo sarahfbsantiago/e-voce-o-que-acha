@@ -376,3 +376,14 @@ dialog.modal[open] { animation: modal-in 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
   .spectrum-wait { opacity: 1 !important; }
   .spectrum-grow, .spectrum-pop, .spectrum-drop, .spectrum-pulse, .spectrum-nudge { animation: none !important; }
 }
+
+/* Botões das ideologias na régua: com profundidade, afundam ao clicar. */
+.spectrum-btn {
+  background: linear-gradient(180deg, #ffffff 0%, var(--color-purple-soft) 100%);
+  border: 1px solid rgb(109 63 196 / 0.45);
+  box-shadow: 0 3px 0 rgb(86 47 159 / 0.55), 0 8px 16px -6px rgb(86 47 159 / 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.spectrum-btn:hover { transform: translateY(-2px); background: linear-gradient(180deg, #ffffff 0%, #e2d6fa 100%); box-shadow: 0 5px 0 rgb(86 47 159 / 0.6), 0 12px 22px -6px rgb(86 47 159 / 0.5); }
+.spectrum-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgb(86 47 159 / 0.55), 0 3px 8px -3px rgb(86 47 159 / 0.4); }
+@media print { .spectrum-btn { box-shadow: none; background: #fff; } }

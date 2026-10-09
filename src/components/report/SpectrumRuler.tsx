@@ -7,6 +7,11 @@ import { SPECTRUM_COMPARISON, SPECTRUM_CORRECTIONS, SPECTRUM_INTRO, SPECTRUM_SEC
 const N = SPECTRUM_BANDS.length;
 const pct = (at: number) => (at / N) * 100;
 /** Rótulo centrado na seta, mas encostado na borda quando a seta está perto das pontas. */
+/** No celular: perto de uma divisa (até 0,35) vai para a linha "entre X e Y"; senão, para o meio da faixa. */
+const slotOf = (at: number) => {
+  const r = Math.round(at);
+  return r > 0 && r < N && Math.abs(at - r) <= 0.35 ? r : Math.min(N - 1, Math.max(0, Math.floor(at))) + 0.5;
+};
 const anchor = (n: number) => (n < 10 ? "translateX(-12px)" : n > 90 ? "translateX(calc(-100% + 12px))" : "translateX(-50%)");
 
 type Totals = { c: { id: string; name: string }; themes: number }[];
@@ -79,10 +84,12 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
   const section = openId === "intro" ? null : SPECTRUM_SECTIONS.find((s) => s.id === openId) ?? null;
 
   const termButton = (label: string, sectionId: string, at: number) => (
-    <button key={label} type="button" onClick={() => setOpenId(sectionId)} title={`Ler sobre ${label.toLowerCase()}`} style={delay(0.25 + at * 0.08)} className={`${anim("spectrum-pop")} group inline-flex items-center gap-1 rounded-full border border-purple/50 bg-purple-soft px-2 py-1 text-center text-[11px] font-semibold leading-tight text-purple-strong shadow-sm transition-all hover:-translate-y-0.5 hover:border-purple hover:bg-purple hover:text-white hover:shadow-md focus-visible:outline-2 focus-visible:outline-purple print:shadow-none`}>
-      <span aria-hidden="true" className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full bg-purple text-[9px] font-bold text-white group-hover:bg-white group-hover:text-purple">i</span>
-      {label}
-    </button>
+    <span key={label} className={`${anim("spectrum-pop")} inline-block`} style={delay(0.25 + at * 0.08)}>
+      <button type="button" onClick={() => setOpenId(sectionId)} title={`Ler sobre ${label.toLowerCase()}`} className="spectrum-btn inline-flex items-center gap-1 rounded-xl px-1.5 py-1.5 lg:gap-1.5 lg:px-2.5 text-left text-[11px] font-semibold leading-tight text-purple-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple">
+        <span aria-hidden="true" className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full bg-purple text-[9px] lg:h-4 lg:w-4 lg:text-[10px] font-bold text-white shadow-sm">i</span>
+        <span className="w-min min-w-0">{label}</span>
+      </button>
+    </span>
   );
 
   // celular: linhas de cima para baixo; meio de faixa = n,5 e divisas = inteiros
@@ -99,12 +106,14 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
 
       {/* computador: régua deitada */}
       <div className="mt-4 hidden px-1 md:block" role="img" aria-label={`${candidates.map((t) => `${t.c.name}: ${t.spot.label}`).join("; ")}; você: ${person.ideology}`}>
-        <div className="relative h-24">
+        <div className="relative h-28">
           {groupTerms("above").map(([at, ts]) => (
-            <div key={at} className="absolute bottom-0 flex w-[11%] flex-col items-center gap-1" style={{ left: `${pct(at)}%`, transform: "translateX(-50%)" }}>
-              {ts.map((t) => termButton(t.label, t.section, t.at))}
-              <span aria-hidden="true" className="h-3 w-px bg-ink-3" />
-              <span aria-hidden="true" className="h-0 w-0 border-x-[4px] border-t-[5px] border-x-transparent border-t-ink-3" />
+            <div key={at} className="absolute bottom-0" style={{ left: `${pct(at)}%` }}>
+              <div className="absolute bottom-6 flex flex-col items-center gap-1.5" style={{ transform: anchor(pct(at)) }}>
+                {ts.map((t) => termButton(t.label, t.section, t.at))}
+              </div>
+              <span aria-hidden="true" className="absolute bottom-1.5 h-4 w-px -translate-x-1/2 bg-ink-3" />
+              <span aria-hidden="true" className="absolute bottom-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-t-[6px] border-x-transparent border-t-ink-3" />
             </div>
           ))}
         </div>
@@ -133,12 +142,14 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
             <span className="spectrum-pulse absolute top-5 whitespace-nowrap rounded-md bg-purple px-2 py-0.5 text-xs font-bold text-white shadow-sm" style={{ transform: anchor(pct(person.at)) }}>{youLabel}</span>
           </div>
         </div>
-        <div className="relative h-16">
-          {groupTerms("below").map(([at, ts]) => (
-            <div key={at} className="absolute top-0 flex w-[11%] flex-col items-center gap-1" style={{ left: `${pct(at)}%`, transform: "translateX(-50%)" }}>
-              <span aria-hidden="true" className="h-0 w-0 border-x-[4px] border-b-[5px] border-x-transparent border-b-ink-3" />
-              <span aria-hidden="true" className="h-3 w-px bg-ink-3" />
-              {ts.map((t) => termButton(t.label, t.section, t.at))}
+        <div className="relative h-24">
+          {groupTerms("below").map(([at, ts], i) => (
+            <div key={at} className="absolute top-0" style={{ left: `${pct(at)}%` }}>
+              <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-b-[6px] border-x-transparent border-b-ink-3" />
+              <span aria-hidden="true" className={`absolute top-1.5 w-px -translate-x-1/2 bg-ink-3 ${i % 2 ? "h-11" : "h-4"}`} />
+              <div className={`absolute flex flex-col items-center gap-1.5 ${i % 2 ? "top-12" : "top-5"}`} style={{ transform: anchor(pct(at)) }}>
+                {ts.map((t) => termButton(t.label, t.section, t.at))}
+              </div>
             </div>
           ))}
         </div>
@@ -147,9 +158,9 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
       {/* celular: régua em pé */}
       <ol className="mt-4 md:hidden">
         {slots.map(({ at, band }) => {
-          const terms = SPECTRUM_TERMS.filter((t) => t.at === at);
-          const cands = candidates.filter((t) => t.spot.at === at);
-          const you = band === null ? person.at === at : !Number.isInteger(person.at) && Math.floor(person.at) === band;
+          const terms = SPECTRUM_TERMS.filter((t) => slotOf(t.at) === at);
+          const cands = candidates.filter((t) => slotOf(t.spot.at) === at);
+          const you = slotOf(person.at) === at;
           if (band === null && !terms.length && !cands.length && !you) return null;
           return (
             <li key={at} className={`${anim("spectrum-pop")} flex gap-3`} style={delay(at * 0.07)}>

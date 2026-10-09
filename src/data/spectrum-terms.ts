@@ -14,17 +14,17 @@ export interface SpectrumSection { id: string; title: string; blocks: SpectrumBl
 
 /** Termos na régua: posição de 0 a 8 (meio da faixa = n,5), lado (acima/abaixo) e a seção que explicam. */
 export const SPECTRUM_TERMS: { label: string; at: number; side: "above" | "below"; section: string }[] = [
-  { label: "Comunismo", at: 0.5, side: "above", section: "comunismo" },
+  { label: "Comunismo", at: 0.08, side: "above", section: "comunismo" },
   { label: "Socialismo", at: 1.5, side: "above", section: "socialismo" },
   { label: "Social-democracia", at: 2.5, side: "above", section: "centro-esquerda" },
-  { label: "Progressismo", at: 3, side: "below", section: "progressismo" },
+  { label: "Progressismo", at: 3.3, side: "below", section: "progressismo" },
   { label: "Centro político", at: 3.5, side: "above", section: "centro" },
   { label: "Liberalismo social", at: 4.5, side: "above", section: "centro-direita" },
   { label: "Libertarianismo", at: 4.5, side: "below", section: "centro-direita" },
   { label: "Liberalismo econômico", at: 5.5, side: "above", section: "direita" },
   { label: "Conservadorismo", at: 5.5, side: "below", section: "direita" },
   { label: "Nacionalismo radical", at: 6.5, side: "above", section: "direita-radical" },
-  { label: "Fascismo", at: 7.5, side: "above", section: "fascismo" },
+  { label: "Fascismo", at: 7.92, side: "above", section: "fascismo" },
 ];
 
 export const SPECTRUM_INTRO: SpectrumBlock[] = [

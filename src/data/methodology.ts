@@ -118,6 +118,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: a posição da pessoa na régua do espectro político passa a vir das próprias respostas, sem depender dos candidatos. Cada alternativa tem uma posição de −2 (esquerda) a +2 (direita); a pessoa fica na média das alternativas que marcou ('Não sei' não entra), entre esquerda e direita radical, porque as perguntas não medem os extremos. O resultado por tema (Lula, Flávio ou equivalente) continua igual.",
       "Revisão humana: na régua do espectro, cada alternativa passa a apontar para uma faixa (esquerda, centro-esquerda, centro, centro-direita, direita…), e a pessoa fica na média do meio dessas faixas. Centro fica no centro, não na centro-direita. 'Investir em educação', na pergunta sobre combater a pobreza, aponta para a centro-esquerda.",
       "Revisão humana: na régua do espectro, 'Deveriam ser proibidas' (bets e apostas online) aponta para a centro-esquerda e 'Petróleo e gás' (fonte de energia) para a direita.",
+      "Revisão humana: na régua do espectro, comunismo fica na ponta esquerda e fascismo na ponta direita; progressismo e Lula ficam logo depois da divisa entre centro-esquerda e centro. Os botões das ideologias ficam maiores e com relevo.",
       "O site passa a se chamar 'E Você, O Que Acha?', no endereço e-voce-o-que-acha.up.railway.app. Nada muda nas perguntas, nas notas ou na conta.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
