@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { SPECTRUM_HISTORY, type SectionHistory } from "@/data/spectrum-history";
 import { SPECTRUM_BANDS, CANDIDATE_SPECTRUM, personSpectrum, bandAt } from "@/data/political-spectrum";
-import { SPECTRUM_COMPARISON, SPECTRUM_CORRECTIONS, SPECTRUM_INTRO, SPECTRUM_SECTIONS, SPECTRUM_TERMS, type SpectrumBlock } from "@/data/spectrum-terms";
+import { SPECTRUM_COMPARISON, SPECTRUM_INTRO, SPECTRUM_SECTIONS, SPECTRUM_TERMS, type SpectrumBlock } from "@/data/spectrum-terms";
 
 const N = SPECTRUM_BANDS.length;
 const pct = (at: number) => (at / N) * 100;
@@ -17,6 +19,48 @@ const anchor = (n: number) => (n < 10 ? "translateX(-12px)" : n > 90 ? "translat
 
 type Totals = { c: { id: string; name: string }; themes: number }[];
 
+
+/** "Na história": personagens com foto, a história em poucas linhas e a linha do tempo, com cara de livro de história. */
+function HistoryBook({ h }: { h: SectionHistory }) {
+  return (
+    <section className="space-y-4 rounded-xl border border-note-line bg-note p-4 shadow-inner" aria-label="Na história">
+      <p className="font-serif text-xs font-bold uppercase tracking-[0.2em] text-gold-strong">Na história</p>
+      <div className={`grid gap-4 ${h.figures.length > 1 ? "sm:grid-cols-2" : ""}`}>
+        {h.figures.map((f) => (
+          <figure key={f.slug} className="flex gap-3 rounded-lg bg-surface/70 p-2.5 shadow-sm ring-1 ring-note-line">
+            <div className="shrink-0 self-start rotate-[-1.5deg] rounded-sm bg-white p-1 pb-3 shadow-md ring-1 ring-black/5">
+              <Image src={`/historia/${f.slug}.jpg`} alt={`Retrato de ${f.name}`} width={96} height={124} className="h-[124px] w-24 object-cover grayscale-[35%] sepia-[25%]" />
+            </div>
+            <figcaption className="min-w-0 text-xs leading-relaxed text-ink-2">
+              <span className="block font-serif text-sm font-bold text-ink">{f.name}</span>
+              <span className="block text-[11px] text-ink-3">{f.years}</span>
+              <span className="mt-1 block">{f.caption}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <div className="space-y-2 font-serif text-[15px] leading-relaxed text-ink">
+        {h.story.map((p) => <p key={p}>{p}</p>)}
+      </div>
+      <div>
+        <p className="font-serif text-sm font-bold text-ink">Linha do tempo</p>
+        <ol className="mt-2 space-y-2 border-l-2 border-gold/60 pl-4">
+          {h.timeline.map(([year, event]) => (
+            <li key={year + event} className="relative text-sm text-ink-2">
+              <span aria-hidden="true" className="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-note bg-gold" />
+              <span className="mr-2 font-serif font-bold text-ink">{year}</span>{event}
+            </li>
+          ))}
+        </ol>
+      </div>
+      <p className="text-[10px] leading-snug text-ink-3">
+        Fotos: {h.figures.map((f, i) => (
+          <span key={f.slug}>{i ? " · " : ""}{f.name}, {f.credit.author}, {f.credit.license}, <a href={f.credit.page} target="_blank" rel="noreferrer" className="underline">Wikimedia Commons</a></span>
+        ))}.
+      </p>
+    </section>
+  );
+}
 
 export function SpectrumBlocks({ blocks }: { blocks: SpectrumBlock[] }) {
   return (
@@ -198,13 +242,14 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
             <div className="modal-body space-y-6 px-5 py-4">
               {section ? (
                 <>
+                  {SPECTRUM_HISTORY[section.id] ? <HistoryBook h={SPECTRUM_HISTORY[section.id]} /> : null}
                   <SpectrumBlocks blocks={section.blocks} />
                   <button type="button" onClick={() => setOpenId("intro")} className="text-sm font-semibold text-purple underline underline-offset-4">Entenda o espectro político →</button>
                 </>
               ) : (
                 <>
                   <SpectrumBlocks blocks={SPECTRUM_INTRO} />
-                  {[SPECTRUM_COMPARISON, SPECTRUM_CORRECTIONS].map((s) => (
+                  {[SPECTRUM_COMPARISON].map((s) => (
                     <section key={s.id} className="space-y-2">
                       <h5 className="text-base font-bold">{s.title}</h5>
                       <SpectrumBlocks blocks={s.blocks} />

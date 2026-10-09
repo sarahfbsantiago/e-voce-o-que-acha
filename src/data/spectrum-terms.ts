@@ -203,17 +203,3 @@ export const SPECTRUM_COMPARISON: SpectrumSection = { id: "comparacao", title: "
   ] },
   { t: "p", text: "Esses são exemplos hipotéticos de propostas compatíveis com cada ideologia, não posições que todos os seus seguidores necessariamente defenderiam." },
 ] };
-
-export const SPECTRUM_CORRECTIONS: SpectrumSection = { id: "correcoes", title: "O que precisa ser corrigido no nosso espectro?", blocks: [
-  { t: "p", text: "A imagem original é útil para ensinar, mas contém algumas simplificações que podem induzir ao erro." },
-  { t: "ul", items: [
-    "Progressismo: pode existir na esquerda, no centro e até em setores da direita.",
-    "Socialismo democrático: muitas vezes está mais próximo da esquerda do que da centro esquerda.",
-    "Liberalismo social: pode ocupar o centro ou a centro esquerda, não apenas a centro direita.",
-    "Libertarianismo: possui vertentes de esquerda e de direita.",
-    "Nacionalismo: existe em diferentes posições, não apenas na direita radical.",
-    "Fascismo: é uma ideologia específica da extrema direita, não sinônimo de toda a extrema direita.",
-  ] },
-  { t: "p", text: "Outra correção importante: não é adequado representar toda a esquerda como mais Estado e toda a direita como menos Estado. Regimes fascistas, por exemplo, exerceram forte controle estatal, embora não tivessem como objetivo a igualdade econômica socialista." },
-  { t: "p", text: "Para compreender melhor qualquer posição política, vale separar três perguntas: quem controla os recursos econômicos, quais direitos e valores sociais devem ser protegidos e como o poder político deve ser exercido. Uma pessoa pode ter respostas diferentes em cada dimensão, sem que isso seja necessariamente uma contradição." },
-] };
