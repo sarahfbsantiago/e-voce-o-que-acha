@@ -117,12 +117,6 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
           </div>
         ) : null}
         <p className="hidden print:block text-xs text-ink-3 mt-1">Gerado em {new Date().toLocaleDateString("pt-BR")} · E Você, O Que Acha? · nada aqui é nota ou ranking</p>
-        <p className="mt-3 text-ink-2">
-          O que você disse que importa, tema a tema, e com quem suas respostas ficaram mais próximas nos temas em que há posições publicadas. Nada aqui vira nota ou ranking.
-        </p>
-        <p className="mt-2 text-sm text-ink-3">
-          Ordem dos candidatos sorteada nesta sessão. Consentimento: {session.consent === "accepted" ? (session.submittedAt ? "respostas enviadas anonimamente" : "envio anônimo pendente") : "respostas apenas neste navegador"}.
-        </p>
       </header>
 
       {/* ---------------- Perfil por área ---------------- */}
@@ -194,6 +188,14 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
           <PrintButton />
         </div>
       </section>
+
+      {/* rodapé do relatório */}
+      <footer className="mx-auto max-w-3xl border-t border-line pt-5 text-center text-xs leading-relaxed text-ink-3">
+        <p>O que você disse que importa, tema a tema, e com quem suas respostas ficaram mais próximas nos temas em que há posições publicadas. Nada aqui vira nota ou ranking.</p>
+        <p className="mt-1.5">
+          Ordem dos candidatos sorteada nesta sessão. Consentimento: {session.consent === "accepted" ? (session.submittedAt ? "respostas enviadas anonimamente" : "envio anônimo pendente") : "respostas apenas neste navegador"}.
+        </p>
+      </footer>
     </div>
   );
 }

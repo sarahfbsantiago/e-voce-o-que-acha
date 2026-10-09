@@ -47,8 +47,13 @@ function HistoryBook({ h }: { h: SectionHistory }) {
           </figure>
         ))}
       </div>
-      <div className="space-y-2 font-serif text-[15px] leading-relaxed text-ink">
-        {h.story.map((p) => <p key={p}>{p}</p>)}
+      <div className="space-y-4 font-serif text-[15px] leading-relaxed text-ink">
+        {h.chapters.map((c, i) => (
+          <section key={c.title}>
+            <h6 className="flex items-baseline gap-2 font-serif text-base font-bold text-ink"><span className="text-xs font-bold text-gold-strong">{String(i + 1).padStart(2, "0")}</span>{c.title}</h6>
+            <p className={`mt-1 ${i === 0 ? "first-letter:float-left first-letter:mr-1.5 first-letter:font-serif first-letter:text-4xl first-letter:font-bold first-letter:leading-none first-letter:text-gold-strong" : ""}`}>{c.text}</p>
+          </section>
+        ))}
       </div>
       <div>
         <p className="font-serif text-sm font-bold text-ink">Linha do tempo</p>
