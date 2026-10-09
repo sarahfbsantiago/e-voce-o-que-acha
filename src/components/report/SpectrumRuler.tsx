@@ -41,11 +41,12 @@ export function SpectrumBlocks({ blocks }: { blocks: SpectrumBlock[] }) {
 }
 
 /**
- * Régua do espectro político: termos com setas (cada um abre a explicação), candidatos por cima,
- * a pessoa por baixo e, no fim, de qual candidato a ideologia dela está mais próxima.
+ * Régua do espectro político: termos com setas (cada um abre a explicação), candidatos por cima e
+ * a pessoa por baixo, na posição que as respostas dela apontam (independente dos candidatos).
+ * No fim, de qual candidato ela ficou mais próxima nos temas.
  * No celular, a régua fica em pé.
  */
-export function SpectrumRuler({ totals }: { totals: Totals }) {
+export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { questionId: string; optionIds: string[] }[] }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [shown, setShown] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -67,10 +68,13 @@ export function SpectrumRuler({ totals }: { totals: Totals }) {
     if (!openId && el.open) el.close();
   }, [openId]);
 
-  const person = personSpectrum(totals.map((t) => ({ candidateId: t.c.id, themes: t.themes })));
+  const person = personSpectrum(answers);
   const candidates = totals.map((t, i) => ({ ...t, spot: CANDIDATE_SPECTRUM[t.c.id], tone: i === 0 ? "bg-accent" : "bg-mint", border: i === 0 ? "border-t-accent" : "border-t-mint" })).filter((t) => t.spot);
   if (!person || candidates.length === 0) return null;
-  const closest = candidates.find((t) => t.c.id === person.closestCandidateId);
+  // "mais próxima de": continua sendo quem ganhou mais temas (tabela de notas dos candidatos)
+  const top = Math.max(...candidates.map((t) => t.themes));
+  const leaders = candidates.filter((t) => t.themes === top);
+  const closest = top > 0 && leaders.length === 1 ? leaders[0] : null;
   const youLabel = `Você · ${person.ideology}`;
   const section = openId === "intro" ? null : SPECTRUM_SECTIONS.find((s) => s.id === openId) ?? null;
 
@@ -144,7 +148,7 @@ export function SpectrumRuler({ totals }: { totals: Totals }) {
         {slots.map(({ at, band }) => {
           const terms = SPECTRUM_TERMS.filter((t) => t.at === at);
           const cands = candidates.filter((t) => t.spot.at === at);
-          const you = person.at === at;
+          const you = band === null ? person.at === at : !Number.isInteger(person.at) && Math.floor(person.at) === band;
           if (band === null && !terms.length && !cands.length && !you) return null;
           return (
             <li key={at} className={`${anim("spectrum-pop")} flex gap-3`} style={delay(at * 0.07)}>

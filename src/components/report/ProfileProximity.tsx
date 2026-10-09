@@ -161,7 +161,7 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
       </dialog>
 
       {/* régua do espectro político (no lugar da barra de porcentagem) */}
-      {decided > 0 ? <SpectrumRuler totals={totals} /> : null}
+      {decided > 0 ? <SpectrumRuler totals={totals} answers={answers} /> : null}
     </section>
   );
 }

@@ -21,7 +21,6 @@ import { ProfileProximity } from "./ProfileProximity";
 import { AREA_GROUPS, groupOfTopic } from "./areaGroups";
 import { CandidatesSection } from "./CandidatesSection";
 import { CandidateViews } from "./CandidateViews";
-import { profileProximity } from "@/domain/profile-proximity";
 import { personSpectrum } from "@/data/political-spectrum";
 
 interface Props {
@@ -80,7 +79,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
 
   const ordered = orderCandidates(candidates, session.candidateOrder);
   const sections = buildPriorityMap(TOPICS, QUESTIONS, session.answers, session.priorities);
-  const ideology = personSpectrum(profileProximity(QUESTIONS, session.answers, ordered, positions).totals);
+  const ideology = personSpectrum(session.answers);
 
   return (
     <div className="container-page py-7 md:py-14 space-y-9 sm:space-y-12">

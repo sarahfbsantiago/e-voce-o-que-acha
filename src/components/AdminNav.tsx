@@ -4,6 +4,7 @@ const LINKS = [
   { href: "/admin/research", label: "Dados da pesquisa" },
   { href: "/admin/posicoes", label: "Revisão de posições" },
   { href: "/admin/notas", label: "Notas por alternativa" },
+  { href: "/admin/espectro", label: "Espectro político" },
   { href: "/", label: "Ver o site" },
 ];
 
