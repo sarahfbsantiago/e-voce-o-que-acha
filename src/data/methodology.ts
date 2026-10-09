@@ -131,6 +131,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: o quadro 'Sua ideologia' passa a ter a cor da faixa da régua onde a ideologia fica (ex.: progressismo em azul, comunismo em rosa). Sai o botão 'Comparar experiência' da seção dos candidatos.",
       "Revisão humana: liberalismo social, libertarianismo, liberalismo econômico e conservadorismo passam a ter histórias e personagens próprios. Flávio Bolsonaro fica mais perto da ponta da extrema direita na régua. 'Sua ideologia está mais próxima de' passa a usar a distância no desenho da régua: só quem fica de nacionalismo radical para a direita fica mais perto de Flávio; os demais, de Lula.",
       "Revisão humana: o PDF do relatório passa a ir só até 'Como você respondeu', com a régua completa e sem sombras; a régua no celular fica em lista com os nomes inteiros.",
+      "Revisão humana: na régua do celular, cada faixa ganha uma setinha até os itens, e o trecho entre centro-esquerda e centro passa a ter a cor das duas faixas. O PDF do relatório passa a trazer os quadrados de 'Como você respondeu' (sem o currículo dos candidatos).",
       "O site passa a se chamar 'E Você, O Que Acha?', no endereço e-voce-o-que-acha.up.railway.app. Nada muda nas perguntas, nas notas ou na conta.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],

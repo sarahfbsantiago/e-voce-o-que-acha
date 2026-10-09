@@ -226,11 +226,16 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
           if (band === null && !terms.length && !cands.length && !you) return null;
           return (
             <li key={at} className={`${anim("spectrum-pop")} flex gap-3`} style={delay(at * 0.07)}>
-              <span aria-hidden="true" className={`w-2.5 shrink-0 ${band === null ? "bg-line-strong" : ""} ${band === 0 ? "rounded-t-full" : ""} ${band === N - 1 ? "rounded-b-full" : ""}`} style={band !== null ? { background: SPECTRUM_BANDS[band].color } : undefined} />
+              <span aria-hidden="true" className={`w-2.5 shrink-0 ${band === 0 ? "rounded-t-full" : ""} ${band === N - 1 ? "rounded-b-full" : ""}`} style={{ background: band !== null ? SPECTRUM_BANDS[band].color : `linear-gradient(to bottom, ${SPECTRUM_BANDS[at - 1].color}, ${SPECTRUM_BANDS[at].color})` }} />
               <div className={`min-w-0 flex-1 ${band === null ? "py-1.5" : "py-2"}`}>
                 <p className={band === null ? "text-[11px] italic text-ink-3" : "text-xs font-semibold text-ink"}>{bandAt(at)}</p>
                 {terms.length || cands.length || you ? (
-                  <div className="mt-1 flex flex-wrap items-center gap-1.5">
+                  <div className="relative mt-1 flex flex-wrap items-center gap-1.5">
+                    {/* setinha pontilhada da régua até os itens desta faixa */}
+                    <span aria-hidden="true" className="absolute -left-3 top-3 flex -translate-y-1/2 items-center">
+                      <span className="h-0 w-0 border-y-[4px] border-r-[6px] border-y-transparent border-r-ink-3" />
+                      <span className="w-2 border-t-[1.5px] border-dashed border-ink-3" />
+                    </span>
                     {terms.map((t) => termButton(t.label, t.section, t.at, true))}
                     {cands.map((t) => <span key={t.c.id} className={`rounded-md px-1.5 py-0.5 text-[11px] font-semibold text-white ${t.tone}`}>◀ {t.c.name.split(" ")[0]}</span>)}
                     {you ? <span className="spectrum-pulse rounded-md bg-purple px-2 py-0.5 text-[11px] font-bold text-white">◀ {youLabel}</span> : null}

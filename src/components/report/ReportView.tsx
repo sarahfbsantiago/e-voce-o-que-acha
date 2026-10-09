@@ -146,7 +146,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
           <p className="mt-1 text-3xl font-bold tabular-nums">{sections.reduce((n, s) => n + s.noOpinion, 0)}</p>
           <p className="text-xs text-ink-3">de {sections.reduce((n, s) => n + s.total, 0)} perguntas</p>
         </div>
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 print:hidden">
+        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-2">
           {sections.map((s, i) => (
             <li key={s.topic.id} className="card p-4">
               <span
