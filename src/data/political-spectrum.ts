@@ -27,7 +27,7 @@ export function bandCenter(label: SpectrumBandLabel): number {
 /** Onde cada candidato fica na régua, com a descrição definida pela responsável e o nome curto da ideologia. */
 export const CANDIDATE_SPECTRUM: Record<string, { at: number; label: string; ideology: string }> = {
   lula: { at: 3.15, label: "Progressista, entre centro-esquerda e centro", ideology: "Progressismo" },
-  "flavio-bolsonaro": { at: 7.5, label: "Extrema direita", ideology: "Extrema direita" },
+  "flavio-bolsonaro": { at: 7.8, label: "Extrema direita", ideology: "Extrema direita" },
 };
 
 /** Ideologia mostrada para a pessoa, pelo trecho da régua (0 a 8) onde ela cai; acompanha as faixas. */
@@ -42,6 +42,28 @@ export const IDEOLOGY_RANGES: { upTo: number; label: string }[] = [
   { upTo: 7, label: "Nacionalismo radical" },
   { upTo: Infinity, label: "Fascismo" },
 ];
+
+/** Largura de cada faixa no desenho da régua: extremos bem mais largos, centro-esquerda e centro-direita mais estreitas. */
+export const RULER_WIDTHS = [2.4, 1, 0.7, 1, 0.7, 1, 1, 2.4];
+const RULER_TOTAL = RULER_WIDTHS.reduce((n, w) => n + w, 0);
+/** Ponto da régua (0 a 8, em faixas) → posição no desenho, em % da largura. */
+export function rulerPct(at: number): number {
+  const n = SPECTRUM_BANDS.length;
+  const i = Math.min(n - 1, Math.max(0, Math.floor(at)));
+  const before = RULER_WIDTHS.slice(0, i).reduce((s, w) => s + w, 0);
+  return ((before + (at - i) * RULER_WIDTHS[i]) / RULER_TOTAL) * 100;
+}
+
+/**
+ * De qual candidato a ideologia da pessoa está mais próxima: a menor distância no desenho da régua.
+ * Assim, só quem fica de nacionalismo radical para a direita fica mais perto de Flávio; os demais, de Lula.
+ */
+export function closestCandidateOnRuler(at: number, candidateIds: string[]): string | null {
+  const known = candidateIds.filter((id) => CANDIDATE_SPECTRUM[id]);
+  if (!known.length) return null;
+  const d = known.map((id) => ({ id, d: Math.abs(rulerPct(CANDIDATE_SPECTRUM[id].at) - rulerPct(at)) })).sort((a, b) => a.d - b.d);
+  return d.length > 1 && d[0].d === d[1].d ? null : d[0].id;
+}
 
 export interface PersonSpectrum { at: number; mean: number; ideology: string; counted: number }
 

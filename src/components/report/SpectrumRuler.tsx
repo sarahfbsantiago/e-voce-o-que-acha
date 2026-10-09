@@ -3,19 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { SPECTRUM_HISTORY, type SectionHistory } from "@/data/spectrum-history";
-import { SPECTRUM_BANDS, CANDIDATE_SPECTRUM, personSpectrum, bandAt } from "@/data/political-spectrum";
+import { SPECTRUM_BANDS, CANDIDATE_SPECTRUM, RULER_WIDTHS, bandAt, closestCandidateOnRuler, personSpectrum, rulerPct } from "@/data/political-spectrum";
 import { SPECTRUM_COMPARISON, SPECTRUM_INTRO, SPECTRUM_SECTIONS, SPECTRUM_TERMS, type SpectrumBlock } from "@/data/spectrum-terms";
 
 const N = SPECTRUM_BANDS.length;
-/** Largura de cada faixa no desenho: extremos bem mais largos e centro-esquerda/centro-direita mais estreitas (só visual). */
-const WIDTHS = [2.4, 1, 0.7, 1, 0.7, 1, 1, 2.4];
-const TOTAL = WIDTHS.reduce((n, w) => n + w, 0);
-/** Ponto da régua (0 a 8, em faixas) → posição horizontal em %, respeitando a largura de cada faixa. */
-const pct = (at: number) => {
-  const i = Math.min(N - 1, Math.max(0, Math.floor(at)));
-  const before = WIDTHS.slice(0, i).reduce((n, w) => n + w, 0);
-  return ((before + (at - i) * WIDTHS[i]) / TOTAL) * 100;
-};
+const pct = rulerPct;
+const WIDTHS = RULER_WIDTHS;
 /** Rótulo centrado na seta, mas encostado na borda quando a seta está perto das pontas. */
 /** No celular: o que fica "entre" duas faixas vai para a linha da divisa mais próxima; o resto, para o meio da faixa. */
 const slotOf = (at: number, between = false) => {
@@ -105,6 +98,7 @@ export function SpectrumBlocks({ blocks }: { blocks: SpectrumBlock[] }) {
  */
 export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { questionId: string; optionIds: string[] }[] }) {
   const [openId, setOpenId] = useState<string | null>(null);
+  const [openTerm, setOpenTerm] = useState<string | null>(null);
   const [shown, setShown] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -129,16 +123,15 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
   const person = personSpectrum(answers);
   const candidates = totals.map((t, i) => ({ ...t, spot: CANDIDATE_SPECTRUM[t.c.id], tone: i === 0 ? "bg-accent" : "bg-mint", border: i === 0 ? "border-t-accent" : "border-t-mint" })).filter((t) => t.spot);
   if (!person || candidates.length === 0) return null;
-  // "mais próxima de": continua sendo quem ganhou mais temas (tabela de notas dos candidatos)
-  const top = Math.max(...candidates.map((t) => t.themes));
-  const leaders = candidates.filter((t) => t.themes === top);
-  const closest = top > 0 && leaders.length === 1 ? leaders[0] : null;
+  // "mais próxima de": o candidato mais perto da pessoa no desenho da régua
+  const closestId = closestCandidateOnRuler(person.at, candidates.map((t) => t.c.id));
+  const closest = candidates.find((t) => t.c.id === closestId) ?? null;
   const youLabel = `Você · ${person.ideology}`;
   const section = openId === "intro" ? null : SPECTRUM_SECTIONS.find((s) => s.id === openId) ?? null;
 
   const termButton = (label: string, sectionId: string, at: number) => (
     <span key={label} className={`${anim("spectrum-pop")} inline-block`} style={delay(0.25 + at * 0.08)}>
-      <button type="button" onClick={() => setOpenId(sectionId)} title={`Ler sobre ${label.toLowerCase()}`} className="spectrum-btn inline-flex items-center gap-1 rounded-xl px-1.5 py-1.5 lg:gap-1.5 lg:px-2.5 text-left text-[11px] font-semibold leading-tight text-purple-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple">
+      <button type="button" onClick={() => { setOpenTerm(label); setOpenId(sectionId); }} title={`Ler sobre ${label.toLowerCase()}`} className="spectrum-btn inline-flex items-center gap-1 rounded-xl px-1.5 py-1.5 lg:gap-1.5 lg:px-2.5 text-left text-[11px] font-semibold leading-tight text-purple-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple">
         <span aria-hidden="true" className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full bg-purple text-[9px] lg:h-4 lg:w-4 lg:text-[10px] font-bold text-white shadow-sm">i</span>
         <span className="w-min min-w-0">{label}</span>
       </button>
@@ -246,19 +239,19 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         {closest ? <>Sua ideologia está mais próxima de: <span className="font-bold text-purple-strong">{closest.c.name}</span></> : <>Sua ideologia ficou equivalente entre os dois candidatos.</>}
       </p>
 
-      <dialog ref={dialogRef} className="modal" aria-labelledby="espectro-detalhe" onClose={() => setOpenId(null)} onClick={(e) => { if (e.target === dialogRef.current) setOpenId(null); }}>
+      <dialog ref={dialogRef} className="modal" aria-labelledby="espectro-detalhe" onClose={() => { setOpenId(null); setOpenTerm(null); }} onClick={(e) => { if (e.target === dialogRef.current) setOpenId(null); }}>
         {openId ? (
           <div className="modal-panel">
             <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-line bg-surface/95 px-5 py-4 backdrop-blur">
-              <h4 id="espectro-detalhe" className="min-w-0 flex-1 text-base font-bold">{section ? section.title : "Espectro político"}</h4>
+              <h4 id="espectro-detalhe" className="min-w-0 flex-1 text-base font-bold">{section ? (openTerm && SPECTRUM_HISTORY[openTerm] ? `${section.title.split(":")[0]}: ${openTerm}` : section.title) : "Espectro político"}</h4>
               <button type="button" onClick={() => setOpenId(null)} aria-label="Fechar" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line text-ink-2 hover:bg-paper"><span aria-hidden="true" className="text-xl leading-none">×</span></button>
             </header>
             <div className="modal-body space-y-6 px-5 py-4">
               {section ? (
                 <>
-                  {SPECTRUM_HISTORY[section.id] ? <HistoryBook h={SPECTRUM_HISTORY[section.id]} /> : null}
+                  {(() => { const h = (openTerm ? SPECTRUM_HISTORY[openTerm] : undefined) ?? SPECTRUM_HISTORY[section.id]; return h ? <HistoryBook h={h} /> : null; })()}
                   <SpectrumBlocks blocks={section.blocks} />
-                  <button type="button" onClick={() => setOpenId("intro")} className="text-sm font-semibold text-purple underline underline-offset-4">Entenda o espectro político →</button>
+                  <button type="button" onClick={() => { setOpenTerm(null); setOpenId("intro"); }} className="text-sm font-semibold text-purple underline underline-offset-4">Entenda o espectro político →</button>
                 </>
               ) : (
                 <>

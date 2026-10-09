@@ -8,6 +8,7 @@ export interface SectionHistory { figures: HistoryFigure[]; chapters: { title: s
 
 const PD = "Domínio público";
 
+/** Chave: nome do termo da régua (quando ele tem história própria) ou id da seção. */
 export const SPECTRUM_HISTORY: Record<string, SectionHistory> = {
   comunismo: {
     figures: [
@@ -73,34 +74,60 @@ export const SPECTRUM_HISTORY: Record<string, SectionHistory> = {
     ],
     timeline: [["1956", "JK assume a presidência com uma aliança entre PSD e PTB."], ["1985", "Fim da ditadura militar; transição negociada para um governo civil."], ["1988", "Promulgação da Constituição, a \"Constituição Cidadã\"."], ["1997", "Tony Blair chega ao governo britânico com a proposta da Terceira Via."]],
   },
-  "centro-direita": {
+  "Liberalismo social": {
     figures: [
-      { slug: "mill", name: "John Stuart Mill", years: "1806–1873", caption: "Filósofo inglês, autor de Sobre a Liberdade (1859). Defendia a liberdade individual, a liberdade de expressão e o voto das mulheres.", credit: { author: "London Stereoscopic Company, c. 1870", license: PD, page: "https://commons.wikimedia.org/wiki/File:John_Stuart_Mill_by_London_Stereoscopic_Company,_c1870.jpg" } },
-      { slug: "hayek", name: "Friedrich Hayek", years: "1899–1992", caption: "Economista austríaco, autor de O Caminho da Servidão (1944), crítico do planejamento estatal da economia. Ganhou o Nobel de Economia em 1974 e é referência para liberais e libertários.", credit: { author: "DickClarkMises (Wikipedia)", license: "CC BY-SA 3.0", page: "https://commons.wikimedia.org/wiki/File:Friedrich_Hayek_portrait.jpg" } },
+      { slug: "mill", name: "John Stuart Mill", years: "1806–1873", caption: "Filósofo inglês, autor de Sobre a Liberdade (1859). Defendia a liberdade individual, a liberdade de expressão e o voto das mulheres, e aceitava que o Estado ajudasse a garantir educação para todos.", credit: { author: "London Stereoscopic Company, c. 1870", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:John_Stuart_Mill_by_London_Stereoscopic_Company,_c1870.jpg" } },
+      { slug: "lloydgeorge", name: "David Lloyd George", years: "1863–1945", caption: "Ministro das Finanças e depois primeiro-ministro britânico pelo Partido Liberal. Seu \"Orçamento do Povo\" (1909) cobrou mais impostos dos ricos para pagar aposentadorias e seguro-saúde.", credit: { author: "Harris & Ewing", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:David_Lloyd_George.jpg" } },
     ],
     chapters: [
       { title: "Contra o poder absoluto dos reis", text: "O liberalismo nasceu quando reis governavam sem limites. A Revolução Gloriosa (1688) submeteu o rei inglês ao Parlamento, e John Locke escreveu que todos têm direito à vida, à liberdade e à propriedade. Essas ideias inspiraram a Independência dos EUA (1776) e a Revolução Francesa (1789)." },
-      { title: "O liberalismo social", text: "No fim do século XIX, alguns liberais perceberam que a pobreza extrema também tirava a liberdade das pessoas. O governo liberal britânico de 1906 a 1914 criou aposentadorias e seguro-saúde para trabalhadores, sem abrir mão do mercado. É a origem do liberalismo social." },
-      { title: "O libertarianismo", text: "No século XX, diante do crescimento do Estado e dos regimes totalitários, pensadores como Hayek e Ludwig von Mises alertaram contra o planejamento central da economia. Em 1974, Robert Nozick defendeu um Estado mínimo, limitado a proteger as pessoas, os contratos e a propriedade." },
+      { title: "Liberdade de verdade exige oportunidades", text: "No fim do século XIX, parte dos liberais percebeu que a pobreza extrema também tirava a liberdade das pessoas: quem passa fome ou não sabe ler não escolhe de verdade o próprio caminho. O governo liberal britânico de 1906 a 1914 criou aposentadorias (1908) e o seguro nacional de saúde e desemprego (1911), sem abrir mão do mercado." },
+      { title: "No século XX", text: "Economistas liberais como Keynes e William Beveridge ajudaram a desenhar o Estado de bem-estar britânico do pós-guerra. Hoje, partidos liberais sociais defendem economia de mercado e liberdades civis, com uma rede de proteção mínima garantida pelo Estado." },
     ],
-    timeline: [["1689", "John Locke defende os direitos à vida, à liberdade e à propriedade."], ["1859", "Mill publica Sobre a Liberdade."], ["1944", "Hayek publica O Caminho da Servidão."], ["1974", "Robert Nozick publica Anarquia, Estado e Utopia, clássico libertário."]],
+    timeline: [["1689", "John Locke defende os direitos à vida, à liberdade e à propriedade."], ["1859", "Mill publica Sobre a Liberdade."], ["1909", "O \"Orçamento do Povo\" de Lloyd George taxa mais os ricos para financiar benefícios sociais."], ["1911", "Reino Unido cria o seguro nacional de saúde e desemprego."], ["1942", "O liberal William Beveridge propõe proteger as pessoas \"do berço ao túmulo\"."]],
   },
-  direita: {
+  "Libertarianismo": {
     figures: [
-      { slug: "smith", name: "Adam Smith", years: "1723–1790", caption: "Economista escocês, autor de A Riqueza das Nações (1776). Considerado o pai da economia moderna, descreveu como a concorrência e a divisão do trabalho geram riqueza.", credit: { author: "autor desconhecido", license: PD, page: "https://commons.wikimedia.org/wiki/File:Adam_Smith_The_Muir_portrait.jpg" } },
-      { slug: "burke", name: "Edmund Burke", years: "1729–1797", caption: "Político irlandês no Parlamento britânico. Em Reflexões sobre a Revolução na França (1790), defendeu mudanças graduais e o respeito às tradições, base do conservadorismo moderno.", credit: { author: "Joshua Reynolds (pintura)", license: PD, page: "https://commons.wikimedia.org/wiki/File:Sir_Joshua_Reynolds_-_Edmund_Burke,_1729_-_1797._Statesman,_orator_and_author_-_PG_2362_-_National_Galleries_of_Scotland_(cropped).jpg" } },
+      { slug: "rand", name: "Ayn Rand", years: "1905–1982", caption: "Escritora russo-americana, autora de A Revolta de Atlas (1957). Defendia o individualismo e um capitalismo sem intervenção do governo, e popularizou essas ideias em romances.", credit: { author: "Talbot, 1943", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:Ayn_Rand_(1943_Talbot_portrait).jpg" } },
+      { slug: "nozick", name: "Robert Nozick", years: "1938–2002", caption: "Filósofo da Universidade Harvard, autor de Anarquia, Estado e Utopia (1974), uma das defesas mais conhecidas do Estado mínimo.", credit: { author: "Libertarian Review, 1977", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:Robert_Nozick_1977_Libertarian_Review_cover_(4x5_cropped).jpg" } },
+    ],
+    chapters: [
+      { title: "Reação ao Estado grande", text: "No século XX, guerras, crises e regimes totalitários fizeram os governos crescerem muito. Economistas da chamada Escola Austríaca, como Ludwig von Mises e Friedrich Hayek, alertaram que planejar a economia a partir do governo levaria à perda de liberdade; Hayek resumiu a ideia em O Caminho da Servidão (1944)." },
+      { title: "O Estado mínimo", text: "Em 1974, Robert Nozick argumentou que o Estado só se justifica para proteger as pessoas contra violência, roubo e fraude e para garantir contratos; cobrar impostos para redistribuir renda seria injusto. Ayn Rand levou ideias parecidas para romances que venderam milhões de exemplares." },
+      { title: "Na prática", text: "O Partido Libertário dos EUA foi fundado em 1971, defendendo menos impostos, menos regras para empresas e liberdade nas escolhas pessoais, como o que cada um consome. Também existem correntes libertárias de esquerda, que defendem a liberdade individual mas desconfiam da concentração de propriedade." },
+    ],
+    timeline: [["1944", "Hayek publica O Caminho da Servidão."], ["1957", "Ayn Rand publica A Revolta de Atlas."], ["1971", "Fundação do Partido Libertário dos EUA."], ["1974", "Robert Nozick publica Anarquia, Estado e Utopia."]],
+  },
+  "Liberalismo econômico": {
+    figures: [
+      { slug: "smith", name: "Adam Smith", years: "1723–1790", caption: "Economista escocês, autor de A Riqueza das Nações (1776). Considerado o pai da economia moderna, descreveu como a concorrência e a divisão do trabalho geram riqueza.", credit: { author: "autor desconhecido", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:Adam_Smith_The_Muir_portrait.jpg" } },
+      { slug: "friedman", name: "Milton Friedman", years: "1912–2006", caption: "Economista da Universidade de Chicago, Nobel de 1976. Defendeu controlar a inflação, reduzir o papel do governo e deixar o mercado funcionar; influenciou governos nos anos 1980.", credit: { author: "Bachrach Studios", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:Portrait_of_Milton_Friedman_(4x5_cropped).jpg" } },
     ],
     chapters: [
       { title: "Mercado contra o mercantilismo", text: "Em 1776, Adam Smith criticou os monopólios e as barreiras comerciais que os reis usavam para enriquecer o Estado. Para ele, a riqueza das nações vinha do trabalho, da concorrência e da troca livre, como se uma \"mão invisível\" coordenasse os interesses individuais." },
-      { title: "A reação à Revolução Francesa", text: "Edmund Burke viu na Revolução Francesa o risco de destruir de uma vez instituições construídas ao longo de séculos. Quando a revolução chegou ao período do Terror (1793–1794), com milhares de execuções, muitos passaram a concordar com ele. Nascia o conservadorismo moderno: mudar, sim, mas com prudência." },
-      { title: "A virada dos anos 1980", text: "Nos anos 1970, inflação alta, desemprego e greves abalaram países ricos. Margaret Thatcher (1979) e Ronald Reagan (1981) venceram eleições prometendo controlar a inflação, cortar impostos, reduzir o poder dos sindicatos e defender valores tradicionais. Os defensores apontam a retomada do crescimento; os críticos, o aumento da desigualdade." },
-      { title: "No Brasil", text: "O Plano Real (1994) controlou a hiperinflação. Nos anos 1990, empresas estatais foram privatizadas, e a Lei de Responsabilidade Fiscal (2000) passou a limitar os gastos dos governos." },
+      { title: "O livre comércio", text: "Em 1846, o Reino Unido revogou as Leis dos Cereais, que protegiam os grandes proprietários de terra contra o trigo importado, e abriu a economia ao comércio. O país viveu décadas de expansão e virou o centro da economia mundial." },
+      { title: "A virada dos anos 1980", text: "Nos anos 1970, inflação alta e desemprego abalaram os países ricos. Inspirados por economistas como Milton Friedman, Margaret Thatcher (1979) e Ronald Reagan (1981) controlaram a inflação, cortaram impostos e privatizaram empresas estatais. Os defensores apontam a retomada do crescimento; os críticos, o aumento da desigualdade." },
+      { title: "No Brasil", text: "O Plano Real (1994) controlou a hiperinflação. Nos anos 1990, empresas estatais como a Vale (1997) e o sistema Telebras (1998) foram privatizadas, e a Lei de Responsabilidade Fiscal (2000) passou a limitar os gastos dos governos." },
     ],
-    timeline: [["1776", "Adam Smith publica A Riqueza das Nações."], ["1790", "Burke publica Reflexões sobre a Revolução na França."], ["1979–1990", "Margaret Thatcher governa o Reino Unido."], ["1990s", "Onda de privatizações no Brasil, como a Vale (1997) e o sistema Telebras (1998)."]],
+    timeline: [["1776", "Adam Smith publica A Riqueza das Nações."], ["1846", "O Reino Unido revoga as Leis dos Cereais e adota o livre comércio."], ["1962", "Milton Friedman publica Capitalismo e Liberdade."], ["1979", "Margaret Thatcher chega ao governo britânico."], ["1994", "Plano Real."], ["2000", "Lei de Responsabilidade Fiscal."]],
+  },
+  "Conservadorismo": {
+    figures: [
+      { slug: "burke", name: "Edmund Burke", years: "1729–1797", caption: "Político irlandês no Parlamento britânico. Em Reflexões sobre a Revolução na França (1790), defendeu mudanças graduais e o respeito às tradições, base do conservadorismo moderno.", credit: { author: "Joshua Reynolds (pintura)", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:Sir_Joshua_Reynolds_-_Edmund_Burke,_1729_-_1797._Statesman,_orator_and_author_-_PG_2362_-_National_Galleries_of_Scotland_(cropped).jpg" } },
+      { slug: "disraeli", name: "Benjamin Disraeli", years: "1804–1881", caption: "Primeiro-ministro britânico pelo Partido Conservador. Defendia a monarquia, a Igreja e as tradições, mas também reformas sociais para unir ricos e pobres em \"uma só nação\".", credit: { author: "Cornelius Jabez Hughes", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:Benjamin_Disraeli,_Earl_of_Beaconsfield_(3x4_cropped).jpg" } },
+      { slug: "vasconcelos", name: "Bernardo Pereira de Vasconcelos", years: "1795–1850", caption: "Político mineiro, um dos fundadores do Partido Conservador do Império. Liderou o \"Regresso\", que reforçou a autoridade do governo central depois das revoltas do período regencial.", credit: { author: "Sébastien Auguste Sisson (litografia)", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:Bernardo_Pereira_de_Vasconcellos_-_Litografia_(cropped).jpg" } },
+    ],
+    chapters: [
+      { title: "A reação à Revolução Francesa", text: "Edmund Burke viu na Revolução Francesa o risco de destruir de uma vez instituições construídas ao longo de séculos. Quando a revolução chegou ao período do Terror (1793–1794), com milhares de execuções, muitos passaram a concordar com ele. Nascia o conservadorismo moderno: mudar, sim, mas com prudência." },
+      { title: "Conservar reformando", text: "No século XIX, o conservador Benjamin Disraeli ampliou o direito de voto (1867) e aprovou leis de moradia e saúde pública. A ideia era que reformas graduais, feitas por quem respeita as tradições, preservam as instituições melhor do que revoluções." },
+      { title: "No Brasil", text: "No Império, o Partido Conservador, cujos membros eram chamados de saquaremas, defendia a ordem, a monarquia e um governo central forte, e se alternava no poder com o Partido Liberal. Hoje, o conservadorismo brasileiro aparece sobretudo nos costumes: família, religião e educação." },
+    ],
+    timeline: [["1790", "Burke publica Reflexões sobre a Revolução na França."], ["1837", "No Brasil, o \"Regresso\" conservador reforça a autoridade do governo central."], ["1867", "Disraeli amplia o direito de voto no Reino Unido."], ["1874–1880", "Disraeli governa o Reino Unido."]],
   },
   "direita-radical": {
     figures: [
       { slug: "maurras", name: "Charles Maurras", years: "1868–1952", caption: "Escritor francês, líder da Action Française. Pregava um \"nacionalismo integral\", monarquista e antissemita; apoiou o regime colaboracionista de Vichy e foi condenado em 1945.", credit: { author: "Studio Harcourt, 1937", license: PD, page: "https://commons.wikimedia.org/wiki/File:Portrait_of_Charles_Maurras_by_Studio_Harcourt_1937_(3x4_cropped).jpg" } },
+      { slug: "salgado", name: "Plínio Salgado", years: "1895–1975", caption: "Escritor e político paulista, fundador da Ação Integralista Brasileira (1932), movimento nacionalista inspirado no fascismo europeu. Depois do Estado Novo, voltou à política como deputado.", credit: { author: "autor desconhecido, 1959", license: "Domínio público", page: "https://commons.wikimedia.org/wiki/File:Pl%C3%ADnio_Salgado,_1959.tif" } },
     ],
     chapters: [
       { title: "O caso Dreyfus", text: "Em 1894, o capitão judeu Alfred Dreyfus foi condenado injustamente por traição na França. O caso dividiu o país. Contra os defensores de Dreyfus, nasceu a Action Française, de Charles Maurras: nacionalista, monarquista, antissemita e contrária à República." },

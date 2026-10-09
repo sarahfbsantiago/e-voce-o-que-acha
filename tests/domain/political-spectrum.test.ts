@@ -49,3 +49,12 @@ describe("descrição da ideologia (estilo signo)", () => {
     for (const r of IDEOLOGY_RANGES) expect(IDEOLOGY_PROFILES[r.label], r.label).toBeTruthy();
   });
 });
+
+describe("mais próxima de (distância na régua)", () => {
+  it("só de nacionalismo radical para a direita fica mais perto de Flávio", async () => {
+    const { closestCandidateOnRuler, ideologySpot } = await import("@/data/political-spectrum");
+    const ids = ["lula", "flavio-bolsonaro"];
+    for (const i of ["Socialismo", "Social-democracia", "Progressismo", "Centro político", "Liberalismo social", "Liberalismo econômico e conservadorismo"]) expect(closestCandidateOnRuler(ideologySpot(i)!, ids), i).toBe("lula");
+    for (const i of ["Nacionalismo radical", "Fascismo"]) expect(closestCandidateOnRuler(ideologySpot(i)!, ids), i).toBe("flavio-bolsonaro");
+  });
+});
