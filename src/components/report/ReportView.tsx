@@ -20,7 +20,6 @@ import { TopicPie } from "./TopicPie";
 import { ProfileProximity } from "./ProfileProximity";
 import { AREA_GROUPS, groupOfTopic } from "./areaGroups";
 import { CandidatesSection } from "./CandidatesSection";
-import { CandidateViews } from "./CandidateViews";
 import { personSpectrum } from "@/data/political-spectrum";
 import { IDEOLOGY_PROFILES } from "@/data/ideology-profiles";
 
@@ -135,7 +134,6 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
           </ul>
         </div>
         <ProfileProximity sections={sections} questions={QUESTIONS} answers={session.answers} candidates={ordered} positions={positions} />
-        <CandidateViews candidates={ordered} />
       </section>
 
       {/* ---------------- Como você respondeu ---------------- */}

@@ -3,7 +3,6 @@ import type { Candidate, CandidateProfile, ProgramSummary } from "@/domain/types
 import { NO_SPECIFIC_PROPOSAL_MESSAGE } from "@/domain/types";
 import { EXPERIENCE_ROWS, PROGRAM_2026_THEMES } from "@/data/candidate-profiles";
 import { Modal } from "@/components/Modal";
-import { CandidateViewPrint } from "./CandidateViews";
 import { formatDate } from "@/lib/format";
 
 interface Props {
@@ -27,7 +26,7 @@ export function CandidatesSection({ ordered, profiles, summaries }: Props) {
     <section aria-labelledby="candidatos" className="space-y-5">
       <div>
         <h2 id="candidatos" className="text-xl font-bold border-l-4 border-purple pl-3">Trajetória de cada candidato</h2>
-        <p className="text-sm text-ink-2 mt-1 max-w-3xl">Mesmos critérios para os dois. Abra a trajetória completa para ver datas e cargos.</p>
+        <p className="text-sm text-ink-2 mt-1 max-w-3xl">Mesmos critérios para os dois. Toque no candidato para abrir o currículo completo.</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 print:grid-cols-1">
@@ -37,7 +36,28 @@ export function CandidatesSection({ ordered, profiles, summaries }: Props) {
           const program = summaries.filter((s) => s.candidateId === c.id);
           const cargo2026 = EXPERIENCE_ROWS.find((r) => r.label === "Cargo em 2026")?.byCandidate[c.id];
           return (
-            <article key={c.id} className="card card-lift p-5 md:p-6 flex flex-col gap-4" aria-labelledby={`cand-${c.id}`}>
+            <div key={c.id} className="contents">
+              <Modal plainTrigger title={`Currículo de ${c.name}`} className="group spectrum-btn flex w-full flex-col justify-start rounded-2xl p-5 text-left md:p-6" trigger={
+                <span className="flex flex-col gap-3">
+                  <span className="flex items-start justify-between gap-3">
+                    <span>
+                      <span className="block text-lg font-bold text-ink">{c.name}</span>
+                      {cargo2026 ? <span className="mt-0.5 block text-xs uppercase tracking-wide text-ink-3">{cargo2026}</span> : null}
+                    </span>
+                    <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-purple text-sm font-bold text-white shadow-sm transition-transform group-hover:translate-x-0.5">→</span>
+                  </span>
+                  <span className="block text-sm leading-relaxed text-ink-2">{firstSentences(p.shortBio.text, 2)}</span>
+                  <span className="grid grid-cols-3 gap-2 text-center">
+                    {[["Na política desde", String(p.trajectoryStart.year)], ["Primeira eleição", String(p.firstElection.year)], [`Anos até ${p.approxYearsOfExperience.until}`, `~${p.approxYearsOfExperience.years}`]].map(([l, v]) => (
+                      <span key={l} className="rounded-xl bg-surface/80 px-1.5 py-2 ring-1 ring-purple/15"><span className="block text-[10px] leading-tight text-ink-3 sm:text-[11px]">{l}</span><span className="mt-1 block text-base font-bold text-accent sm:text-lg">{v}</span></span>
+                    ))}
+                  </span>
+                  <span className="text-sm font-semibold text-purple-strong">Abrir currículo completo →</span>
+                </span>
+              }>
+                <CandidateDetails c={c} p={p} program={program} />
+              </Modal>
+              <article key={c.id} className="card hidden p-5 md:p-6 flex-col gap-4 print:flex" aria-labelledby={`cand-${c.id}`}>
               <div>
                 <h3 id={`cand-${c.id}`} className="text-lg font-bold">{c.name}</h3>
                 {cargo2026 ? <p className="text-xs uppercase tracking-wide text-ink-3 mt-0.5">{cargo2026}</p> : null}
@@ -83,13 +103,8 @@ export function CandidatesSection({ ordered, profiles, summaries }: Props) {
                   {p.keyInitiatives.length > 5 ? <p className="mt-1 text-xs text-ink-3 print:hidden">+{p.keyInitiatives.length - 5} no detalhe</p> : null}
                 </div>
               ) : null}
-              <CandidateViewPrint candidateId={c.id} />
-              <div className="mt-auto">
-                <Modal trigger={`Ver trajetória completa de ${c.name.split(" ")[0]}`} title={`Trajetória de ${c.name}`} variant="primary" className="w-full">
-                  <CandidateDetails c={c} p={p} program={program} />
-                </Modal>
-              </div>
-            </article>
+              </article>
+            </div>
           );
         })}
       </div>
