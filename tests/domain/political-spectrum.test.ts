@@ -41,3 +41,11 @@ describe("régua do espectro político (posição pelas respostas)", () => {
     for (const t of SPECTRUM_TERMS) expect(ids.has(t.section)).toBe(true);
   });
 });
+
+describe("descrição da ideologia (estilo signo)", () => {
+  it("toda ideologia que a régua pode mostrar tem descrição", async () => {
+    const { IDEOLOGY_RANGES } = await import("@/data/political-spectrum");
+    const { IDEOLOGY_PROFILES } = await import("@/data/ideology-profiles");
+    for (const r of IDEOLOGY_RANGES) expect(IDEOLOGY_PROFILES[r.label], r.label).toBeTruthy();
+  });
+});

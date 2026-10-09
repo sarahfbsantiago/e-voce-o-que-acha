@@ -22,6 +22,7 @@ import { AREA_GROUPS, groupOfTopic } from "./areaGroups";
 import { CandidatesSection } from "./CandidatesSection";
 import { CandidateViews } from "./CandidateViews";
 import { personSpectrum } from "@/data/political-spectrum";
+import { IDEOLOGY_PROFILES } from "@/data/ideology-profiles";
 
 interface Props {
   candidates: Candidate[];
@@ -90,7 +91,19 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
           <PrintButton />
         </div>
         <h1 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Seu perfil</h1>
-        {ideology ? <p className="mt-2 inline-flex rounded-lg bg-purple-soft px-3 py-1.5 text-base font-semibold text-purple-strong">Sua ideologia: {ideology.ideology}</p> : null}
+        {ideology ? (
+          <div className="mt-3 max-w-2xl rounded-2xl border border-purple/25 bg-gradient-to-br from-purple-soft to-surface p-4 shadow-sm">
+            <p className="text-base font-semibold text-purple-strong">Sua ideologia: {ideology.ideology}</p>
+            {IDEOLOGY_PROFILES[ideology.ideology] ? (
+              <>
+                <p className="mt-2 text-sm leading-relaxed text-ink-2">{IDEOLOGY_PROFILES[ideology.ideology].text}</p>
+                <p className="mt-3 flex flex-wrap gap-1.5">
+                  {IDEOLOGY_PROFILES[ideology.ideology].keywords.map((k) => <span key={k} className="rounded-full bg-surface px-2.5 py-0.5 text-xs font-semibold text-purple-strong ring-1 ring-purple/25">{k}</span>)}
+                </p>
+              </>
+            ) : null}
+          </div>
+        ) : null}
         <p className="hidden print:block text-xs text-ink-3 mt-1">Gerado em {new Date().toLocaleDateString("pt-BR")} · E Você, O Que Acha? · nada aqui é nota ou ranking</p>
         <p className="mt-3 text-ink-2">
           O que você disse que importa, tema a tema, e com quem suas respostas ficaram mais próximas nos temas em que há posições publicadas. Nada aqui vira nota ou ranking.

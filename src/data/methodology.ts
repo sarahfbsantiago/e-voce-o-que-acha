@@ -123,6 +123,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: a seta 'Você' fica no mesmo ponto da régua da ideologia da pessoa (ex.: progressismo, no ponto do progressismo). As setas das correntes ficam cinza e pontilhadas.",
       "Os cards de cada corrente do espectro ganham 'Na história': personagens com foto (Wikimedia Commons, domínio público ou Creative Commons, com crédito), um resumo histórico e uma linha do tempo. Sai do espectro a seção 'O que precisa ser corrigido no nosso espectro?' (revisão humana).",
       "Revisão humana: os botões das correntes na régua do espectro passam a alternar acima e abaixo da régua, distribuídos de forma mais equilibrada; as setas continuam apontando para o mesmo ponto de cada corrente.",
+      "Abaixo de 'Sua ideologia', o relatório passa a mostrar uma descrição curta, em segunda pessoa, de como pensa e que futuro quer quem tem aquela ideologia, com três palavras-chave (pedido da responsável).",
       "O site passa a se chamar 'E Você, O Que Acha?', no endereço e-voce-o-que-acha.up.railway.app. Nada muda nas perguntas, nas notas ou na conta.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
