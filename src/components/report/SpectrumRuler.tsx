@@ -7,8 +7,8 @@ import { SPECTRUM_BANDS, CANDIDATE_SPECTRUM, personSpectrum, bandAt } from "@/da
 import { SPECTRUM_COMPARISON, SPECTRUM_INTRO, SPECTRUM_SECTIONS, SPECTRUM_TERMS, type SpectrumBlock } from "@/data/spectrum-terms";
 
 const N = SPECTRUM_BANDS.length;
-/** Largura de cada faixa no desenho: os extremos ficam mais largos, para parecerem mais distantes do centro (só visual). */
-const WIDTHS = SPECTRUM_BANDS.map((_, i) => (i === 0 || i === N - 1 ? 1.8 : 1));
+/** Largura de cada faixa no desenho: extremos bem mais largos e centro-esquerda/centro-direita mais estreitas (só visual). */
+const WIDTHS = [2.4, 1, 0.7, 1, 0.7, 1, 1, 2.4];
 const TOTAL = WIDTHS.reduce((n, w) => n + w, 0);
 /** Ponto da régua (0 a 8, em faixas) → posição horizontal em %, respeitando a largura de cada faixa. */
 const pct = (at: number) => {
@@ -110,7 +110,8 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
   useEffect(() => {
     const el = rootRef.current;
     if (!el || typeof IntersectionObserver === "undefined") { setShown(true); return; }
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShown(true); io.disconnect(); } }, { threshold: 0.25 });
+    // anima de novo toda vez que a régua volta a aparecer na tela
+    const io = new IntersectionObserver(([e]) => setShown(e.isIntersecting), { threshold: 0.2 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -162,12 +163,12 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         <div className="relative h-40">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 160" preserveAspectRatio="none">
             {SPECTRUM_TERMS.filter((t) => t.side === "above").map((t) => (
-              <line key={t.label} x1={pct(t.chip)} y1={98} x2={pct(t.at)} y2={153} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
+              <line key={t.label} x1={t.chip} y1={98} x2={pct(t.at)} y2={153} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
             ))}
           </svg>
           {SPECTRUM_TERMS.filter((t) => t.side === "above").map((t) => (
             <span key={t.label}>
-              <div className="absolute bottom-[62px]" style={{ left: `${pct(t.chip)}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
+              <div className="absolute bottom-[62px]" style={{ left: `${t.chip}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
               <span aria-hidden="true" className="absolute bottom-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-t-[7px] border-x-transparent border-t-ink-3" style={{ left: `${pct(t.at)}%` }} />
             </span>
           ))}
@@ -189,13 +190,13 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         <div className="relative h-36">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 144" preserveAspectRatio="none">
             {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t) => (
-              <line key={t.label} x1={pct(t.chip)} y1={96} x2={pct(t.at)} y2={8} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
+              <line key={t.label} x1={t.chip} y1={96} x2={pct(t.at)} y2={8} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
             ))}
           </svg>
           {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t) => (
             <span key={t.label}>
               <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-b-[7px] border-x-transparent border-b-ink-3" style={{ left: `${pct(t.at)}%` }} />
-              <div className="absolute top-[96px]" style={{ left: `${pct(t.chip)}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
+              <div className="absolute top-[96px]" style={{ left: `${t.chip}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
             </span>
           ))}
           <div className="relative mt-1.5 grid gap-0.5" style={{ gridTemplateColumns: WIDTHS.map((w) => `${w}fr`).join(" ") }}>

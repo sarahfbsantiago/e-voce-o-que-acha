@@ -14,20 +14,20 @@ export interface SpectrumSection { id: string; title: string; blocks: SpectrumBl
 
 /**
  * Termos na régua (0 a 8): `at` = ponto exato para onde a seta aponta (desenho da responsável, 09/10/2026);
- * `chip` = onde o botão fica, espaçado para não encostar (alternando acima e abaixo da régua); `between` = no celular, aparece na linha da divisa.
+ * `chip` = onde o botão fica, em % da largura da régua, espaçado por igual (alternando acima e abaixo); `between` = no celular, aparece na linha da divisa.
  */
 export const SPECTRUM_TERMS: { label: string; at: number; chip: number; side: "above" | "below"; section: string; between?: boolean }[] = [
-  { label: "Comunismo", at: 0.02, chip: 0.55, side: "above", section: "comunismo" },
-  { label: "Socialismo", at: 1.5, chip: 1.45, side: "below", section: "socialismo" },
-  { label: "Social-democracia", at: 2.5, chip: 2.0, side: "above", section: "centro-esquerda" },
-  { label: "Progressismo", at: 3.15, chip: 3.0, side: "below", section: "progressismo", between: true },
-  { label: "Centro político", at: 3.5, chip: 3.3, side: "above", section: "centro" },
-  { label: "Liberalismo social", at: 4.15, chip: 4.3, side: "below", section: "centro-direita" },
-  { label: "Libertarianismo", at: 4.5, chip: 4.55, side: "above", section: "centro-direita" },
-  { label: "Liberalismo econômico", at: 5.5, chip: 5.6, side: "below", section: "direita" },
-  { label: "Conservadorismo", at: 6.1, chip: 6.05, side: "above", section: "direita" },
-  { label: "Nacionalismo radical", at: 6.85, chip: 6.9, side: "below", section: "direita-radical" },
-  { label: "Fascismo", at: 7.98, chip: 7.45, side: "above", section: "fascismo" },
+  { label: "Comunismo", at: 0.02, chip: 8.3, side: "above", section: "comunismo" },
+  { label: "Socialismo", at: 1.5, chip: 20, side: "below", section: "socialismo" },
+  { label: "Social-democracia", at: 2.5, chip: 25, side: "above", section: "centro-esquerda" },
+  { label: "Progressismo", at: 3.15, chip: 35, side: "below", section: "progressismo", between: true },
+  { label: "Centro político", at: 3.5, chip: 41.7, side: "above", section: "centro" },
+  { label: "Liberalismo social", at: 4.15, chip: 50, side: "below", section: "centro-direita" },
+  { label: "Libertarianismo", at: 4.5, chip: 58.3, side: "above", section: "centro-direita" },
+  { label: "Liberalismo econômico", at: 5.5, chip: 65, side: "below", section: "direita" },
+  { label: "Conservadorismo", at: 6.1, chip: 75, side: "above", section: "direita" },
+  { label: "Nacionalismo radical", at: 6.85, chip: 80, side: "below", section: "direita-radical" },
+  { label: "Fascismo", at: 7.98, chip: 91.7, side: "above", section: "fascismo" },
 ];
 
 export const SPECTRUM_INTRO: SpectrumBlock[] = [
