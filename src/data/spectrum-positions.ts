@@ -24,12 +24,12 @@ export const SPECTRUM_POSITIONS: Record<string, [band: SpectrumBandLabel, reason
   "q23|o1": ["Direita", "Proposta"], "q23|o2": ["Esquerda", "Proposta"], "q23|o3": ["Centro", "Proposta"],
   "q25|o1": ["Esquerda", "Proposta"], "q25|o2": ["Centro", "Proposta"], "q25|o3": ["Direita", "Proposta"],
   "q27|o1": ["Direita", "Proposta"], "q27|o2": ["Esquerda", "Proposta"], "q27|o3": ["Centro-esquerda", "Proposta"], "q27|o4": ["Centro", "Proposta"],
-  "q28|o1": ["Centro", "Proposta"], "q28|o2": ["Centro-esquerda", "Proposta"], "q28|o3": ["Centro-direita", "Proposta"], "q28|o4": ["Direita", "Proposta"],
+  "q28|o1": ["Centro-esquerda", "Revisão humana"], "q28|o2": ["Centro-esquerda", "Proposta"], "q28|o3": ["Centro-direita", "Proposta"], "q28|o4": ["Direita", "Proposta"],
   // Ambiente e tecnologia
   "q30|o1": ["Esquerda", "Proposta"], "q30|o2": ["Centro", "Proposta"], "q30|o3": ["Direita", "Proposta"],
   "q31|o1": ["Esquerda", "Proposta"], "q31|o2": ["Centro-direita", "Proposta"], "q31|o3": ["Direita", "Proposta"],
   "q32|o1": ["Esquerda", "Proposta"], "q32|o2": ["Centro", "Proposta"], "q32|o3": ["Direita", "Proposta"],
-  "q33|o1": ["Centro-esquerda", "Proposta"], "q33|o2": ["Direita", "Proposta"], "q33|o3": ["Centro", "Proposta"], "q33|o4": ["Centro", "Proposta"],
+  "q33|o1": ["Centro-esquerda", "Proposta"], "q33|o2": ["Direita", "Revisão humana"], "q33|o3": ["Centro", "Proposta"], "q33|o4": ["Centro", "Proposta"],
   "q38|o1": ["Centro", "Proposta"], "q38|o2": ["Centro", "Proposta"], "q38|o3": ["Centro-direita", "Proposta"],
   // Instituições e mundo
   "q43|o1": ["Centro-esquerda", "Proposta"], "q43|o2": ["Centro-direita", "Proposta"], "q43|o3": ["Centro-direita", "Proposta"],
