@@ -173,16 +173,16 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         </div>
 
         {/* abaixo: nomes das faixas, você e os botões de baixo, com setas até o ponto exato */}
-        <div className="relative h-44">
-          <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 176" preserveAspectRatio="none">
-            {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t, i) => (
-              <line key={t.label} x1={pct(t.chip)} y1={i % 2 ? 128 : 96} x2={pct(t.at)} y2={8} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
+        <div className="relative h-36">
+          <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 144" preserveAspectRatio="none">
+            {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t) => (
+              <line key={t.label} x1={pct(t.chip)} y1={96} x2={pct(t.at)} y2={8} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
             ))}
           </svg>
-          {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t, i) => (
+          {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t) => (
             <span key={t.label}>
               <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-b-[7px] border-x-transparent border-b-ink-3" style={{ left: `${pct(t.at)}%` }} />
-              <div className={`absolute ${i % 2 ? "top-[128px]" : "top-[96px]"}`} style={{ left: `${pct(t.chip)}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
+              <div className="absolute top-[96px]" style={{ left: `${pct(t.chip)}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
             </span>
           ))}
           <div className="relative mt-1.5 grid grid-cols-8 gap-0.5">
