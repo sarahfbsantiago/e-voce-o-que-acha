@@ -167,7 +167,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
       <CandidatesSection ordered={ordered} profiles={profiles} summaries={summaries} />
 
       {/* ---------------- Fontes ---------------- */}
-      <section aria-labelledby="fontes" className="space-y-4">
+      <section aria-labelledby="fontes" className="space-y-4 print:hidden">
         <h2 id="fontes" className="text-xl font-bold border-l-4 border-gold pl-3">Fontes</h2>
         <Link href="/fontes" className="card card-lift block max-w-md p-5 shadow-sm print:hidden">
           <p className="font-semibold">Ver todas as fontes</p>
@@ -180,7 +180,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
       {/* ---------------- Avaliação e encerramento ---------------- */}
       <div className="print:hidden"><FeedbackForm /></div>
 
-      <section className="print-keep text-center py-8 max-w-3xl mx-auto">
+      <section className="print-keep text-center py-8 max-w-3xl mx-auto print:hidden">
         <p className="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight leading-snug">{FINAL_MESSAGE}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-3 print:hidden">
           <ButtonLink href="/questionario/perguntas" variant="secondary">Revisar minhas respostas</ButtonLink>
@@ -190,7 +190,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
       </section>
 
       {/* rodapé do relatório */}
-      <footer className="mx-auto max-w-3xl border-t border-line pt-5 text-center text-xs leading-relaxed text-ink-3">
+      <footer className="mx-auto max-w-3xl border-t border-line pt-5 text-center text-xs leading-relaxed text-ink-3 print:hidden">
         <p>O que você disse que importa, tema a tema, e com quem suas respostas ficaram mais próximas nos temas em que há posições publicadas. Nada aqui vira nota ou ranking.</p>
         <p className="mt-1.5">
           Ordem dos candidatos sorteada nesta sessão. Consentimento: {session.consent === "accepted" ? (session.submittedAt ? "respostas enviadas anonimamente" : "envio anônimo pendente") : "respostas apenas neste navegador"}.

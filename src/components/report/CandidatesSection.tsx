@@ -23,7 +23,7 @@ function firstSentences(text: string, n: number) {
  */
 export function CandidatesSection({ ordered, profiles, summaries }: Props) {
   return (
-    <section aria-labelledby="candidatos" className="space-y-5">
+    <section aria-labelledby="candidatos" className="space-y-5 print:hidden">
       <div>
         <h2 id="candidatos" className="text-xl font-bold border-l-4 border-purple pl-3">Trajetória de cada candidato</h2>
         <p className="text-sm text-ink-2 mt-1 max-w-3xl">Mesmos critérios para os dois. Toque no candidato para abrir o currículo completo.</p>
@@ -57,7 +57,7 @@ export function CandidatesSection({ ordered, profiles, summaries }: Props) {
               }>
                 <CandidateDetails c={c} p={p} program={program} />
               </Modal>
-              <article key={c.id} className="card hidden p-5 md:p-6 flex-col gap-4 print:flex" aria-labelledby={`cand-${c.id}`}>
+              <article key={c.id} className="card print-flow hidden p-5 md:p-6 flex-col gap-4 print:flex" aria-labelledby={`cand-${c.id}`}>
               <div>
                 <h3 id={`cand-${c.id}`} className="text-lg font-bold">{c.name}</h3>
                 {cargo2026 ? <p className="text-xs uppercase tracking-wide text-ink-3 mt-0.5">{cargo2026}</p> : null}

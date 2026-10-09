@@ -87,7 +87,7 @@ export function ProfileProximity({ sections, questions, answers, candidates, pos
       )}
 
       {/* cinco cartões, um por área; os temas ficam dentro; o detalhe abre numa caixa com rolagem */}
-      <ul className="mt-5 grid gap-3 md:grid-cols-2">
+      <ul className="print-flow mt-5 grid gap-3 md:grid-cols-2 print:grid-cols-2">
         {areas.map(({ g, rows: rs }) => (
           <li key={g.id}>
             <button type="button" onClick={() => setOpenId(g.id)} className="card-lift w-full rounded-xl border border-line bg-paper/50 p-3 text-left transition-colors hover:border-accent/40">

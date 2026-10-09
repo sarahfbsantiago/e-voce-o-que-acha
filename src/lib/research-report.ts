@@ -13,6 +13,7 @@ import {
 } from "@/domain/aggregates";
 import { STATISTICS_DISCLAIMER } from "@/domain/neutrality";
 import type { ProfileProximityAggregate } from "@/domain/profile-proximity";
+import { CANDIDATE_SPECTRUM, IDEOLOGY_RANGES, SPECTRUM_BANDS, closestCandidateOnRuler, personSpectrum } from "@/data/political-spectrum";
 
 /**
  * Relatório agregado para o painel administrativo privado.
@@ -59,6 +60,35 @@ export function buildResearchReport(submissions: SubmissionLike[], feedback: Fee
     feedback: aggregateFeedback(feedback),
     /** Perfil mais próximo por questionário, agregado com as posições publicadas no momento da consulta. */
     profileProximity,
+    /** Ideologia de cada questionário na régua do espectro (mesma conta do relatório), só em contagens. */
+    ideology: aggregateIdeology(submissions),
+  };
+}
+
+/** Quantos questionários caíram em cada ideologia e de qual candidato ficaram mais perto na régua. */
+export function aggregateIdeology(submissions: SubmissionLike[]) {
+  const counts = new Map<string, number>(IDEOLOGY_RANGES.map((r) => [r.label, 0]));
+  const byBand = SPECTRUM_BANDS.map(() => 0);
+  const closer = new Map<string, number>(Object.keys(CANDIDATE_SPECTRUM).map((id) => [id, 0]));
+  let total = 0;
+  for (const s of submissions) {
+    const p = personSpectrum(s.answers);
+    if (!p) continue;
+    total++;
+    counts.set(p.ideology, (counts.get(p.ideology) ?? 0) + 1);
+    byBand[Math.min(SPECTRUM_BANDS.length - 1, Math.max(0, Math.floor(p.at)))]++;
+    const c = closestCandidateOnRuler(p.at, [...closer.keys()]);
+    if (c) closer.set(c, (closer.get(c) ?? 0) + 1);
+  }
+  const share = (n: number) => (total ? Math.round((n / total) * 1000) / 10 : null);
+  return {
+    total,
+    byIdeology: IDEOLOGY_RANGES.map((r) => {
+      const n = counts.get(r.label) ?? 0;
+      return { label: r.label, count: n, share: share(n) };
+    }),
+    byBand: SPECTRUM_BANDS.map((b, i) => ({ label: b.label, color: b.color, count: byBand[i], share: share(byBand[i]) })),
+    closerOnRuler: [...closer.entries()].map(([candidateId, n]) => ({ candidateId, count: n, share: share(n) })),
   };
 }
 

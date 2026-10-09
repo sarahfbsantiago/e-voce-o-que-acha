@@ -107,7 +107,10 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
     // anima de novo toda vez que a régua volta a aparecer na tela
     const io = new IntersectionObserver(([e]) => setShown(e.isIntersecting), { threshold: 0.2 });
     io.observe(el);
-    return () => io.disconnect();
+    // no PDF (impressão), a régua aparece completa, sem depender da rolagem
+    const onPrint = () => setShown(true);
+    window.addEventListener("beforeprint", onPrint);
+    return () => { io.disconnect(); window.removeEventListener("beforeprint", onPrint); };
   }, []);
   /** Classe de entrada: espera invisível até a régua aparecer na tela. */
   const anim = (cls: string) => (shown ? cls : "spectrum-wait");
@@ -129,11 +132,11 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
   const youLabel = `Você · ${person.ideology}`;
   const section = openId === "intro" ? null : SPECTRUM_SECTIONS.find((s) => s.id === openId) ?? null;
 
-  const termButton = (label: string, sectionId: string, at: number) => (
+  const termButton = (label: string, sectionId: string, at: number, inline = false) => (
     <span key={label} className={`${anim("spectrum-pop")} inline-block`} style={delay(0.25 + at * 0.08)}>
-      <button type="button" onClick={() => { setOpenTerm(label); setOpenId(sectionId); }} title={`Ler sobre ${label.toLowerCase()}`} className="spectrum-btn inline-flex items-center gap-1 rounded-xl px-1.5 py-1.5 lg:gap-1.5 lg:px-2.5 text-left text-[11px] font-semibold leading-tight text-purple-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple">
+      <button type="button" onClick={() => { setOpenTerm(label); setOpenId(sectionId); }} title={`Ler sobre ${label.toLowerCase()}`} className="spectrum-btn inline-flex items-center gap-1 rounded-xl px-1.5 py-1.5 lg:gap-1.5 lg:px-2.5 print:gap-0.5 print:px-1 print:py-1 print:text-[8.5px] text-left text-[11px] font-semibold leading-tight text-purple-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple">
         <span aria-hidden="true" className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full bg-purple text-[9px] lg:h-4 lg:w-4 lg:text-[10px] font-bold text-white shadow-sm">i</span>
-        <span className="w-min min-w-0">{label}</span>
+        <span className={inline ? "whitespace-nowrap" : "w-min"}>{label}</span>
       </button>
     </span>
   );
@@ -151,9 +154,9 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
       <p className="mt-0.5 text-xs text-ink-3 print:hidden">Toque em uma ideologia para ler sobre ela. <button type="button" onClick={() => setOpenId("intro")} className="font-medium text-purple underline underline-offset-4">Entenda o espectro político →</button></p>
 
       {/* computador: régua deitada */}
-      <div className="mt-4 hidden px-1 lg:block" role="img" aria-label={`${candidates.map((t) => `${t.c.name}: ${t.spot.label}`).join("; ")}; você: ${person.ideology}`}>
+      <div className="mt-4 hidden px-1 lg:block print:block" role="img" aria-label={`${candidates.map((t) => `${t.c.name}: ${t.spot.label}`).join("; ")}; você: ${person.ideology}`}>
         {/* acima: botões espaçados, setas (retas ou inclinadas) até o ponto exato; candidatos logo acima da régua */}
-        <div className="relative h-40">
+        <div className="relative h-[160px]">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 160" preserveAspectRatio="none">
             {SPECTRUM_TERMS.filter((t) => t.side === "above").map((t) => (
               <line key={t.label} x1={t.chip} y1={98} x2={pct(t.at)} y2={153} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
@@ -180,7 +183,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         </div>
 
         {/* abaixo: nomes das faixas, você e os botões de baixo, com setas até o ponto exato */}
-        <div className="relative h-36">
+        <div className="relative h-[144px]">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 144" preserveAspectRatio="none">
             {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t) => (
               <line key={t.label} x1={t.chip} y1={96} x2={pct(t.at)} y2={8} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.5} strokeDasharray="3 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
@@ -195,7 +198,14 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
           <div className="relative mt-1.5 grid gap-0.5" style={{ gridTemplateColumns: WIDTHS.map((w) => `${w}fr`).join(" ") }}>
             {SPECTRUM_BANDS.map((b) => <span key={b.label} className="text-center text-[11px] leading-tight text-ink-3"><span className="rounded bg-surface/85 px-0.5">{b.label}</span></span>)}
           </div>
-          <div className="absolute inset-x-0 top-9 z-10 h-12">
+          <div className="absolute inset-x-0 top-9 z-10 hidden h-12 print:block">
+            <div className="absolute top-0" style={{ left: `${pct(person.at)}%` }}>
+              <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[6px] border-b-[8px] border-x-transparent border-b-purple" />
+              <span aria-hidden="true" className="absolute top-2 h-3 w-0.5 -translate-x-1/2 bg-purple" />
+              <span className="absolute top-5 whitespace-nowrap rounded-md bg-purple px-2 py-0.5 text-xs font-bold text-white" style={{ transform: anchor(pct(person.at)) }}>{youLabel}</span>
+            </div>
+          </div>
+          <div className="absolute inset-x-0 top-9 z-10 h-12 print:hidden">
             <div className={`spectrum-slide absolute top-0 ${shown ? "" : "opacity-0"}`} style={{ left: `${shown ? pct(person.at) : 0}%` }}>
               <div className="spectrum-nudge">
                 <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[6px] border-b-[8px] border-x-transparent border-b-purple" />
@@ -208,7 +218,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
       </div>
 
       {/* celular: régua em pé */}
-      <ol className="mt-4 lg:hidden">
+      <ol className="mt-4 lg:hidden print:hidden">
         {slots.map(({ at, band }) => {
           const terms = SPECTRUM_TERMS.filter((t) => slotOf(t.at, t.between) === at);
           const cands = candidates.filter((t) => slotOf(t.spot.at, t.spot.label.startsWith("Progressista")) === at);
@@ -221,7 +231,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
                 <p className={band === null ? "text-[11px] italic text-ink-3" : "text-xs font-semibold text-ink"}>{bandAt(at)}</p>
                 {terms.length || cands.length || you ? (
                   <div className="mt-1 flex flex-wrap items-center gap-1.5">
-                    {terms.map((t) => termButton(t.label, t.section, t.at))}
+                    {terms.map((t) => termButton(t.label, t.section, t.at, true))}
                     {cands.map((t) => <span key={t.c.id} className={`rounded-md px-1.5 py-0.5 text-[11px] font-semibold text-white ${t.tone}`}>◀ {t.c.name.split(" ")[0]}</span>)}
                     {you ? <span className="spectrum-pulse rounded-md bg-purple px-2 py-0.5 text-[11px] font-bold text-white">◀ {youLabel}</span> : null}
                   </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { PageTitle } from "@/components/ui";
+import type { ReactNode } from "react";
 import { isAdminSession } from "@/lib/admin-auth";
 import { getContentRepository, getStatsRepository } from "@/lib/repository";
 import { aggregateProfileProximity } from "@/domain/profile-proximity";
@@ -9,7 +9,7 @@ import { QUESTION_NUMBER } from "@/lib/question-order";
 import { buildResearchReport } from "@/lib/research-report";
 import { INSUFFICIENT_DATA_MESSAGE } from "@/domain/aggregates";
 import { AGE_RANGES, REGIONS } from "@/domain/types";
-import { formatShare } from "@/domain/aggregates";
+import { SPECTRUM_BANDS, ideologySpot } from "@/data/political-spectrum";
 import { logoutAction } from "../login/actions";
 import { AdminNav } from "@/components/AdminNav";
 import { PrintButton } from "@/components/PrintButton";
@@ -17,6 +17,21 @@ import { PrintButton } from "@/components/PrintButton";
 export const metadata: Metadata = { title: "Dados da pesquisa", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
+const BRL = (n: number) => n.toLocaleString("pt-BR");
+const PCT = (n: number | null) => (n === null ? "—" : `${n.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%`);
+const CAND_COLORS = ["#6d3fc4", "#2f9a5d"];
+/** Cor fixa por candidato, igual em todos os gráficos. */
+const candColor = (id: string) => (id === "lula" ? CAND_COLORS[0] : CAND_COLORS[1]);
+/** Cor da ideologia = cor da faixa da régua onde ela fica. */
+const ideologyColor = (label: string) => {
+  const at = ideologySpot(label);
+  return at === null ? "#9ca3af" : SPECTRUM_BANDS[Math.min(SPECTRUM_BANDS.length - 1, Math.floor(at))].color;
+};
+
+/**
+ * Painel da pesquisa em uma página só, no estilo dashboard: números no topo, gráficos em quadros.
+ * Só agregações; nenhum registro individual. Visível apenas no admin.
+ */
 export default async function AdminResearchPage() {
   if (!(await isAdminSession())) redirect("/admin/login");
   const stats = await getStatsRepository();
@@ -24,8 +39,8 @@ export default async function AdminResearchPage() {
   if (!stats.enabled) {
     return (
       <div className="container-page py-12 max-w-3xl">
-        <PageTitle>Dados da pesquisa</PageTitle>
-        <p className="card p-4 text-sm">Estatísticas indisponíveis: banco de dados não configurado (modo estático). Defina <code>DATABASE_URL</code>, rode as migrações e o seed.</p>
+        <h1 className="text-2xl font-bold">Dados da pesquisa</h1>
+        <p className="card mt-4 p-4 text-sm">Estatísticas indisponíveis: banco de dados não configurado (modo estático). Defina <code>DATABASE_URL</code>, rode as migrações e o seed.</p>
       </div>
     );
   }
@@ -34,225 +49,221 @@ export default async function AdminResearchPage() {
   const [submissions, feedback, candidates, positions] = await Promise.all([stats.listSubmissions(), stats.listFeedback(), content.getCandidates(), content.getPublishedPositions()]);
   const pp = aggregateProfileProximity(submissions, QUESTIONS, candidates, positions);
   const r = buildResearchReport(submissions, feedback, pp);
-  const candidateName = Object.fromEntries(candidates.map((c) => [c.id, c.name]));
+  const name = (id: string) => candidates.find((c) => c.id === id)?.name ?? id;
+  const first = (id: string) => name(id).split(" ")[0];
   const ageLabel = Object.fromEntries(AGE_RANGES.map((a) => [a.value, a.label]));
   const regionLabel = Object.fromEntries(REGIONS.map((a) => [a.value, a.label]));
+  const ideo = r.ideology;
+  const topIdeology = [...ideo.byIdeology].sort((a, b) => b.count - a.count)[0];
+  const lulaRuler = ideo.closerOnRuler.find((c) => c.candidateId === "lula");
+  const noOpinionTop = [...r.questions].filter((q) => q.totalResponses > 0).sort((a, b) => b.noOpinionCount / b.totalResponses - a.noOpinionCount / a.totalResponses).slice(0, 5);
+  const prioTop = [...r.priorities].sort((a, b) => b.shareHighPriority - a.shareHighPriority);
+  const maxDay = Math.max(...r.timeline.map((x) => x.count), 1);
 
   return (
-    <div className="container-page py-12 space-y-10">
-      <AdminNav current="/admin/research" />
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <PageTitle lead="Somente agregações. Nenhum registro individual é exibido.">Dados da pesquisa</PageTitle>
-        <div className="flex flex-wrap items-center gap-2 print:hidden"><PrintButton label="Exportar PDF" fileTitle="Dados da pesquisa" /><form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form></div>
-      </div>
+    <div className="min-h-screen bg-[#f3f2ef]">
+      <div className="container-page space-y-5 py-8">
+        <AdminNav current="/admin/research" />
 
-      <p className="hidden print:block text-xs text-ink-3">Gerado em {new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })} · E Você, O Que Acha? · somente agregações</p>
-      <p className="rounded-xl border border-note-line bg-note px-4 py-3 text-sm font-medium">{r.disclaimer}</p>
+        {/* cabeçalho */}
+        <header className="flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-5 text-white shadow-md">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">Painel da pesquisa</p>
+            <h1 className="mt-1 text-2xl font-bold md:text-3xl">Dados da pesquisa</h1>
+            <p className="mt-1 text-sm text-white/80">Somente agregações · atualizado em {new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 print:hidden">
+            <a className="rounded-lg bg-white/15 px-3 py-2 text-sm font-medium ring-1 ring-white/30 hover:bg-white/25" href="/api/admin/research?format=csv">CSV</a>
+            <a className="rounded-lg bg-white/15 px-3 py-2 text-sm font-medium ring-1 ring-white/30 hover:bg-white/25" href="/api/admin/research">JSON</a>
+            <PrintButton label="PDF" fileTitle="Dados da pesquisa" />
+            <form action={logoutAction}><button className="min-h-10 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-purple-strong">Sair</button></form>
+          </div>
+        </header>
 
-      <nav aria-label="Seções" className="card p-3 text-sm flex flex-wrap gap-x-4 gap-y-1">
-        {[["#visao", "Visão geral"], ["#temas", "Temas"], ["#perguntas", "Perguntas"], ["#prioridades", "Prioridades"], ["#perfil", "Perfil mais próximo"], ["#tempo", "Evolução temporal"], ["#demografia", "Demografia opcional"], ["#avaliacao", "Avaliação da pesquisa"], ["#exportacao", "Exportação"]].map(([h, l]) => <a key={h} href={h} className="underline underline-offset-4">{l}</a>)}
-      </nav>
+        {/* números principais */}
+        <section aria-label="Números principais" className="grid gap-3 sm:grid-cols-3 xl:grid-cols-6">
+          <Kpi label="Questionários" value={BRL(r.overview.totalSubmissions)} note="recebidos" color="#6d3fc4" />
+          <Kpi label="Conclusão" value={PCT(r.overview.completionRate)} note={`${BRL(r.overview.completedAllQuestions)} com as 25 perguntas`} color="#2563eb" />
+          <Kpi label="Ideologia mais comum" value={topIdeology && topIdeology.count ? topIdeology.label : "—"} note={topIdeology && topIdeology.count ? `${PCT(topIdeology.share)} dos perfis` : "sem dados"} color={topIdeology ? ideologyColor(topIdeology.label) : "#9ca3af"} small />
+          <Kpi label="Perto de Lula na régua" value={PCT(lulaRuler?.share ?? null)} note={`${BRL(lulaRuler?.count ?? 0)} perfis`} color={CAND_COLORS[0]} />
+          <Kpi label="Ajudou na decisão" value={PCT(r.feedback.shareHelpedYes)} note={`sim ${r.feedback.helpedYes} · não ${r.feedback.helpedNo}`} color="#d4a017" />
+          <Kpi label="Nota da pesquisa" value={r.feedback.averageRating === null ? "—" : String(r.feedback.averageRating).replace(".", ",")} note={`${BRL(r.feedback.total)} avaliações · 1 a 5`} color="#ec4899" />
+        </section>
 
-      <section id="visao" className="grid gap-3 sm:grid-cols-3">
-        <div className="card p-4"><p className="text-xs text-ink-3">Questionários recebidos</p><p className="text-3xl font-bold">{r.overview.totalSubmissions.toLocaleString("pt-BR")}</p><p className="text-xs text-ink-3">respostas</p></div>
-        <div className="card p-4"><p className="text-xs text-ink-3">Com todas as perguntas respondidas</p><p className="text-3xl font-bold">{r.overview.completedAllQuestions.toLocaleString("pt-BR")}</p></div>
-        <div className="card p-4"><p className="text-xs text-ink-3">Taxa de conclusão</p><p className="text-3xl font-bold">{r.overview.completionRate === null ? "—" : `${r.overview.completionRate}%`}</p><p className="text-xs text-ink-3">das respostas</p></div>
-      </section>
-
-      <section aria-label="Destaques" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {pp.byCandidate.map((b, i) => (
-          <StatCard key={b.candidateId} tone={i === 0 ? "border-t-accent" : "border-t-mint"} label={`Perfil mais perto de ${candidateName[b.candidateId] ?? b.candidateId}`} value={b.count.toLocaleString("pt-BR")} note={b.share === null ? "sem comparação ainda" : `${b.share.toLocaleString("pt-BR")}% dos questionários comparáveis`} />
-        ))}
-        <StatCard tone="border-t-gold" label="Disseram que ajudou na decisão" value={r.feedback.shareHelpedYes === null ? "—" : `${r.feedback.shareHelpedYes}%`} note={`sim ${r.feedback.helpedYes} · não ${r.feedback.helpedNo}`} />
-        <StatCard tone="border-t-purple" label="Nota média da pesquisa (1–5)" value={r.feedback.averageRating === null ? "—" : String(r.feedback.averageRating)} note={`${r.feedback.total} avaliações`} />
-      </section>
-
-      <section id="temas" aria-labelledby="temas-h">
-        <h2 id="temas-h" className="text-xl font-bold">Temas e prioridades</h2>
-        <table className="mt-3 w-full text-sm card">
-          <thead><tr className="bg-paper text-left"><th className="p-2">Tema</th><th className="p-2">Respostas</th><th className="p-2">Muito importante ou prioridade máxima</th><th className="p-2">Distribuição (0→4)</th></tr></thead>
-          <tbody>
-            {r.priorities.map((p) => (
-              <tr key={p.topicId} className="border-t border-line">
-                <td className="p-2">{p.topicName}</td>
-                <td className="p-2">{p.totalResponses}</td>
-                <td className="p-2 min-w-48">
-                  {p.totalResponses ? (
-                    <div className="flex items-center gap-2">
-                      <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-line" aria-hidden="true"><div className="h-full rounded-full bg-purple" style={{ width: `${p.shareHighPriority}%` }} /></div>
-                      <span className="tabular-nums text-xs">{p.shareHighPriority.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%</span>
-                    </div>
-                  ) : "—"}
-                </td>
-                <td className="p-2 tabular-nums text-ink-2">{p.byLevel.join(" · ")}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-
-      <section id="perguntas" aria-labelledby="perguntas-h" className="space-y-3">
-        <h2 id="perguntas-h" className="text-xl font-bold">Perguntas</h2>
-        <p className="text-sm text-ink-2">Quantas pessoas escolheram cada alternativa. Clique numa pergunta para ver as barras.</p>
-        <div className="card p-4">
-          <h3 className="text-sm font-semibold">Perguntas com mais “não sei”</h3>
-          <p className="text-xs text-ink-3">Pode indicar pergunta confusa ou tema pouco conhecido.</p>
-          <ul className="mt-3 space-y-2">
-            {[...r.questions].filter((q) => q.totalResponses > 0).sort((a, b) => b.noOpinionCount / b.totalResponses - a.noOpinionCount / a.totalResponses).slice(0, 5).map((q) => (
-              <BarRow key={q.questionId} tone="bg-gold" label={`Pergunta ${QUESTION_NUMBER[q.questionId]} — ${q.text}`} count={q.noOpinionCount} share={(q.noOpinionCount / q.totalResponses) * 100} />
-            ))}
-            {r.questions.every((q) => q.totalResponses === 0) ? <li className="text-sm text-ink-3">Sem dados.</li> : null}
-          </ul>
-        </div>
-        {[...r.questions].sort((a, b) => QUESTION_NUMBER[a.questionId] - QUESTION_NUMBER[b.questionId]).map((q) => (
-          <details key={q.questionId} className="card p-4">
-            <summary className="text-sm font-medium" title={`código interno ${q.questionId}`}>Pergunta {QUESTION_NUMBER[q.questionId]} — {q.text} <span className="text-ink-3">({q.totalResponses} respostas · {q.noOpinionCount} “não sei”)</span></summary>
-            {q.example ? <p className="mt-2 text-xs leading-relaxed text-ink-2">{q.example}</p> : null}
-            <ul className="mt-3 space-y-2">
-              {q.options.map((o) => (
-                <BarRow key={o.optionId} label={o.label} count={o.count} share={q.totalResponses ? o.shareOfResponses : null} tone={o.label === "Não sei" ? "bg-ink-3" : "bg-accent"} />
-              ))}
-            </ul>
-          </details>
-        ))}
-      </section>
-
-      <section id="prioridades" aria-labelledby="prio-h">
-        <h2 id="prio-h" className="text-xl font-bold">Prioridades mais escolhidas</h2>
-        <ol className="mt-3 card p-4 text-sm list-decimal pl-6 space-y-1">
-          {[...r.priorities].sort((a, b) => b.shareHighPriority - a.shareHighPriority).slice(0, 5).map((p) => <li key={p.topicId}>{p.topicName} — {p.totalResponses ? formatShare(p.shareHighPriority) : "—"} marcaram muito importante ou prioridade máxima</li>)}
-        </ol>
-      </section>
-
-      <section id="perfil" aria-labelledby="perfil-h">
-        <h2 id="perfil-h" className="text-xl font-bold">Perfil mais próximo</h2>
-        <p className="mt-1 text-sm text-ink-2 max-w-3xl">Para cada questionário enviado, a mesma conta aberta do relatório: por tema, quem ficou mais perto (iguais = 1, parecidas = 0,5, silêncio conta como diferente); depois, quem ficou mais perto em mais temas. Descreve concordância com documentos publicados, não intenção de voto. Calculado com as posições publicadas agora; se uma posição mudar, o número muda.</p>
-        {pp.withComparison > 0 ? (
-          <>
-            <table className="mt-3 w-full max-w-2xl text-sm card"><thead><tr className="bg-paper text-left"><th className="p-2">Resultado do perfil</th><th className="p-2">Questionários</th><th className="p-2">Proporção</th><th className="p-2">Concordância média</th></tr></thead>
-              <tbody>
-                {pp.byCandidate.map((b) => (
-                  <tr key={b.candidateId} className="border-t border-line">
-                    <td className="p-2">Mais perto de {candidateName[b.candidateId] ?? b.candidateId}</td>
-                    <td className="p-2 tabular-nums">{b.count}</td>
-                    <td className="p-2 tabular-nums font-medium">{b.share === null ? "—" : `${b.share.toLocaleString("pt-BR")}%`}</td>
-                    <td className="p-2 tabular-nums">{b.meanAgreement === null ? "—" : `${b.meanAgreement.toLocaleString("pt-BR")}%`}</td>
-                  </tr>
-                ))}
-                <tr className="border-t border-line"><td className="p-2">Empate em temas</td><td className="p-2 tabular-nums">{pp.ties}</td><td className="p-2 tabular-nums">{`${(Math.round((pp.ties / pp.withComparison) * 1000) / 10).toLocaleString("pt-BR")}%`}</td><td className="p-2">—</td></tr>
-                <tr className="border-t border-line text-ink-3"><td className="p-2">Sem comparação possível</td><td className="p-2 tabular-nums">{pp.noComparison}</td><td className="p-2" colSpan={2}>fora da proporção</td></tr>
-              </tbody>
-            </table>
-            <div className="mt-3 max-w-2xl">
-              <div className="flex h-4 w-full overflow-hidden rounded-full bg-line" role="img" aria-label={pp.byCandidate.map((b) => `${candidateName[b.candidateId] ?? b.candidateId}: ${b.count}`).join("; ")}>
-                {pp.byCandidate.map((b, i) => b.count > 0 ? <span key={b.candidateId} className={`flex items-center justify-center text-[10px] font-semibold text-white ${i === 0 ? "bg-accent" : "bg-mint"}`} style={{ width: `${(b.count / pp.withComparison) * 100}%` }}>{Math.round((b.count / pp.withComparison) * 100)}%</span> : null)}
-                {pp.ties > 0 ? <span className="flex items-center justify-center text-[10px] font-semibold text-ink-2 bg-paper" style={{ width: `${(pp.ties / pp.withComparison) * 100}%` }}>{Math.round((pp.ties / pp.withComparison) * 100)}%</span> : null}
+        {/* perfil ideológico */}
+        <section aria-label="Perfil ideológico" className="grid gap-4 lg:grid-cols-3">
+          <Panel title="Perfil ideológico das pessoas" subtitle={`${BRL(ideo.total)} questionários com posição na régua`} className="lg:col-span-2">
+            {ideo.total ? (
+              <div className="grid items-center gap-5 sm:grid-cols-[180px_1fr]">
+                <Donut size={180} parts={ideo.byIdeology.filter((x) => x.count).map((x) => ({ value: x.count, color: ideologyColor(x.label) }))} center={BRL(ideo.total)} centerNote="perfis" />
+                <ul className="space-y-2">
+                  {ideo.byIdeology.map((x) => <Bar key={x.label} label={x.label} count={x.count} share={x.share} color={ideologyColor(x.label)} />)}
+                </ul>
               </div>
-              <p className="mt-1 text-xs text-ink-3">Base: {pp.withComparison} de {pp.total} questionários enviados. Concordância média = média, entre os questionários, de (iguais + 0,5 × parecidas) ÷ perguntas respondidas.</p>
-            </div>
-          </>
-        ) : <p className="mt-3 text-sm text-ink-3">Sem dados: nenhum questionário com tema comparável.</p>}
-      </section>
+            ) : <Empty />}
+          </Panel>
+          <Panel title="Mais perto de quem na régua" subtitle="Distância no desenho da régua do espectro">
+            {ideo.total ? (
+              <div className="flex flex-col items-center gap-4">
+                <Donut size={150} parts={ideo.closerOnRuler.map((c) => ({ value: c.count, color: candColor(c.candidateId) }))} center={PCT(lulaRuler?.share ?? null)} centerNote={first("lula")} />
+                <ul className="w-full space-y-2">{ideo.closerOnRuler.map((c) => <Bar key={c.candidateId} label={name(c.candidateId)} count={c.count} share={c.share} color={candColor(c.candidateId)} />)}</ul>
+              </div>
+            ) : <Empty />}
+          </Panel>
+          <Panel title="Onde as pessoas caem na régua" subtitle="Quantos perfis em cada faixa" className="lg:col-span-3">
+            {ideo.total ? (
+              <div>
+                <div className="flex h-40 items-end gap-2" role="img" aria-label={ideo.byBand.map((b) => `${b.label}: ${b.count}`).join("; ")}>
+                  {ideo.byBand.map((b) => {
+                    const max = Math.max(...ideo.byBand.map((x) => x.count), 1);
+                    return (
+                      <div key={b.label} className="flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-1">
+                        <span className="text-xs font-semibold tabular-nums text-ink-2">{b.count}</span>
+                        <div className="w-full rounded-t-md" style={{ height: `${(b.count / max) * 100}%`, minHeight: 3, background: b.color }} />
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="mt-2 grid grid-cols-8 gap-2 text-center text-[11px] leading-tight text-ink-3">{ideo.byBand.map((b) => <span key={b.label}>{b.label}</span>)}</div>
+              </div>
+            ) : <Empty />}
+          </Panel>
+        </section>
 
-      <section id="tempo" aria-labelledby="tempo-h">
-        <h2 id="tempo-h" className="text-xl font-bold">Evolução temporal</h2>
-        {r.timeline.length ? (
-          <div className="mt-3 card p-4">
-            <div className="flex h-40 items-end gap-1" role="img" aria-label={r.timeline.map((t) => `${t.date}: ${t.count}`).join("; ")}>
-              {r.timeline.map((t) => {
-                const max = Math.max(...r.timeline.map((x) => x.count), 1);
-                return (
-                  <div key={t.date} className="flex min-w-0 flex-1 flex-col items-center justify-end gap-1" title={`${t.date}: ${t.count}`}>
-                    <span className="text-[10px] tabular-nums text-ink-2">{t.count}</span>
-                    <div className="w-full rounded-t bg-mint" style={{ height: `${(t.count / max) * 100}%`, minHeight: 2 }} />
+        {/* candidatos por tema, tempo */}
+        <section className="grid gap-4 lg:grid-cols-3">
+          <Panel title="Mais perto nos temas" subtitle="Quem ficou mais perto em mais temas, por questionário">
+            {pp.withComparison > 0 ? (
+              <div className="flex flex-col items-center gap-4">
+                <Donut size={150} parts={[...pp.byCandidate.map((b) => ({ value: b.count, color: candColor(b.candidateId) })), { value: pp.ties, color: "#d6d3cc" }]} center={BRL(pp.withComparison)} centerNote="comparáveis" />
+                <ul className="w-full space-y-2">
+                  {pp.byCandidate.map((b) => <Bar key={b.candidateId} label={name(b.candidateId)} count={b.count} share={b.share} color={candColor(b.candidateId)} />)}
+                  <Bar label="Empate" count={pp.ties} share={Math.round((pp.ties / pp.withComparison) * 1000) / 10} color="#d6d3cc" />
+                </ul>
+              </div>
+            ) : <Empty />}
+          </Panel>
+          <Panel title="Questionários por dia" subtitle={r.timeline.length ? `${r.timeline[0].date} a ${r.timeline[r.timeline.length - 1].date}` : "sem dados"} className="lg:col-span-2">
+            {r.timeline.length ? (
+              <div className="flex h-48 items-end gap-1" role="img" aria-label={r.timeline.map((t) => `${t.date}: ${t.count}`).join("; ")}>
+                {r.timeline.map((t) => (
+                  <div key={t.date} className="group flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-1" title={`${t.date}: ${t.count}`}>
+                    <span className="text-[10px] tabular-nums text-ink-3 opacity-0 group-hover:opacity-100">{t.count}</span>
+                    <div className="w-full rounded-t-md bg-gradient-to-t from-purple to-[#2563eb]" style={{ height: `${(t.count / maxDay) * 100}%`, minHeight: 3 }} />
                   </div>
-                );
-              })}
-            </div>
-            <div className="mt-1 flex justify-between text-[10px] text-ink-3"><span>{r.timeline[0].date}</span><span>{r.timeline[r.timeline.length - 1].date}</span></div>
+                ))}
+              </div>
+            ) : <Empty />}
+          </Panel>
+        </section>
+
+        {/* prioridades, não sei */}
+        <section className="grid gap-4 lg:grid-cols-2">
+          <Panel title="Temas mais importantes" subtitle="% que marcou muito importante ou prioridade máxima">
+            <ul className="space-y-2">{prioTop.map((p) => <Bar key={p.topicId} label={p.topicName} count={p.totalResponses} share={p.totalResponses ? Math.round(p.shareHighPriority * 10) / 10 : null} color="#6d3fc4" countLabel="respostas" />)}</ul>
+          </Panel>
+          <Panel title="Perguntas com mais “não sei”" subtitle="Pode indicar pergunta confusa ou tema pouco conhecido">
+            {noOpinionTop.length ? <ul className="space-y-2">{noOpinionTop.map((q) => <Bar key={q.questionId} label={`${QUESTION_NUMBER[q.questionId]}. ${q.text}`} count={q.noOpinionCount} share={Math.round((q.noOpinionCount / q.totalResponses) * 1000) / 10} color="#d4a017" />)}</ul> : <Empty />}
+          </Panel>
+        </section>
+
+        {/* avaliação, demografia */}
+        <section className="grid gap-4 lg:grid-cols-4">
+          <Panel title="Notas da pesquisa" subtitle={`${BRL(r.feedback.total)} avaliações`}>
+            <ul className="space-y-2">{r.feedback.byRating.map((n, i) => <Bar key={i} label={`${"★".repeat(i + 1)}`} count={n} share={r.feedback.total ? Math.round((n / r.feedback.total) * 1000) / 10 : null} color="#ec4899" />).reverse()}</ul>
+          </Panel>
+          <Panel title="Ajudou na decisão?" subtitle="Entre quem avaliou">
+            {r.feedback.total ? (
+              <div className="flex flex-col items-center gap-3">
+                <Donut size={130} parts={[{ value: r.feedback.helpedYes, color: "#2f9a5d" }, { value: r.feedback.helpedNo, color: "#d4a017" }, { value: r.feedback.helpedUnanswered, color: "#d6d3cc" }]} center={PCT(r.feedback.shareHelpedYes)} centerNote="sim" />
+                <p className="text-xs text-ink-2">sim {r.feedback.helpedYes} · não {r.feedback.helpedNo} · não disse {r.feedback.helpedUnanswered}</p>
+              </div>
+            ) : <Empty />}
+          </Panel>
+          {([["Faixa etária", r.demographics.ageRange, ageLabel], ["Região", r.demographics.region, regionLabel]] as const).map(([title, dist, labels]) => {
+            const entries = Object.entries(dist as Record<string, number | null>);
+            const total = entries.reduce((n, [, v]) => n + (v ?? 0), 0);
+            return (
+              <Panel key={title} title={title} subtitle={`grupos com menos de ${r.minAggregateGroupSize} ficam ocultos`}>
+                {entries.length ? <ul className="space-y-2">{entries.map(([k, v]) => v === null ? <li key={k} className="text-xs text-ink-3">{(labels as Record<string, string>)[k] ?? k}: {INSUFFICIENT_DATA_MESSAGE}</li> : <Bar key={k} label={(labels as Record<string, string>)[k] ?? k} count={v} share={total ? Math.round((v / total) * 1000) / 10 : null} color="#2563eb" />)}</ul> : <Empty />}
+              </Panel>
+            );
+          })}
+        </section>
+
+        {/* perguntas */}
+        <Panel title="Respostas por pergunta" subtitle="Quantas pessoas escolheram cada alternativa">
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {[...r.questions].sort((a, b) => QUESTION_NUMBER[a.questionId] - QUESTION_NUMBER[b.questionId]).map((q) => (
+              <div key={q.questionId} className="rounded-xl border border-line bg-paper/50 p-3">
+                <p className="text-xs font-semibold leading-snug text-ink" title={`código interno ${q.questionId}`}><span className="mr-1 rounded bg-purple px-1.5 py-0.5 text-[10px] font-bold text-white">{QUESTION_NUMBER[q.questionId]}</span>{q.text}</p>
+                <p className="mt-1 text-[11px] text-ink-3">{BRL(q.totalResponses)} respostas · {q.noOpinionCount} “não sei”</p>
+                <ul className="mt-2 space-y-1.5">
+                  {q.options.map((o) => <Bar key={o.optionId} label={o.label} count={o.count} share={q.totalResponses ? o.shareOfResponses : null} color={o.label === "Não sei" ? "#9ca3af" : "#6d3fc4"} compact />)}
+                </ul>
+              </div>
+            ))}
           </div>
-        ) : null}
-        <table className="mt-3 w-full max-w-md text-sm card"><thead><tr className="bg-paper text-left"><th className="p-2">Dia</th><th className="p-2">Questionários</th></tr></thead>
-          <tbody>{r.timeline.length === 0 ? <tr><td className="p-2 text-ink-3" colSpan={2}>Sem dados.</td></tr> : r.timeline.map((t) => <tr key={t.date} className="border-t border-line"><td className="p-2">{t.date}</td><td className="p-2 tabular-nums">{t.count}</td></tr>)}</tbody>
-        </table>
-      </section>
+        </Panel>
 
-      <section id="demografia" aria-labelledby="demo-h" className="grid gap-4 md:grid-cols-2">
-        <h2 id="demo-h" className="text-xl font-bold md:col-span-2">Demografia opcional</h2>
-        <p className="text-sm text-ink-2 md:col-span-2">Grupos com menos de {r.minAggregateGroupSize} respostas aparecem como “{INSUFFICIENT_DATA_MESSAGE}”. Não há cruzamentos entre recortes.</p>
-        {[["Faixa etária", r.demographics.ageRange, ageLabel], ["Região", r.demographics.region, regionLabel]].map(([title, dist, labels]) => (
-          <div key={title as string} className="card p-4 text-sm">
-            <h3 className="font-semibold">{title as string}</h3>
-            <ul className="mt-2 space-y-1">
-              {Object.keys(dist as Record<string, number | null>).length === 0 ? <li className="text-ink-3">Sem dados.</li> : Object.entries(dist as Record<string, number | null>).map(([k, v]) => <li key={k} className="flex justify-between gap-3"><span>{(labels as Record<string, string>)[k] ?? k}</span><span className="tabular-nums">{v === null ? INSUFFICIENT_DATA_MESSAGE : v}</span></li>)}
-            </ul>
-          </div>
-        ))}
-      </section>
-
-      <section id="avaliacao" aria-labelledby="aval-h">
-        <h2 id="aval-h" className="text-xl font-bold">Avaliação da pesquisa</h2>
-        <div className="mt-3 grid gap-3 sm:grid-cols-3">
-          <div className="card p-4"><p className="text-xs text-ink-3">Avaliações recebidas</p><p className="text-3xl font-bold">{r.feedback.total}</p></div>
-          <div className="card p-4"><p className="text-xs text-ink-3">Nota média (1–5)</p><p className="text-3xl font-bold">{r.feedback.averageRating ?? "—"}</p><p className="text-xs text-ink-2">Por nota: {r.feedback.byRating.map((n, i) => `${i + 1}: ${n}`).join(" · ")}</p></div>
-          <div className="card p-4"><p className="text-xs text-ink-3">Disseram que ajudou na decisão</p><p className="text-3xl font-bold">{r.feedback.shareHelpedYes === null ? "—" : `${r.feedback.shareHelpedYes}%`}</p><p className="text-xs text-ink-2">das avaliações que responderam · sim {r.feedback.helpedYes} · não {r.feedback.helpedNo} · não disseram {r.feedback.helpedUnanswered}</p></div>
-        </div>
-      </section>
-
-      <section aria-label="Gráficos da avaliação" className="grid gap-4 md:grid-cols-2">
-        <div className="card p-4">
-          <h3 className="text-sm font-semibold">Notas da pesquisa</h3>
-          <ul className="mt-3 space-y-2">
-            {r.feedback.byRating.map((n, i) => (
-              <BarRow key={i} tone="bg-purple" label={`Nota ${i + 1}`} count={n} share={r.feedback.total ? (n / r.feedback.total) * 100 : null} />
-            )).reverse()}
-          </ul>
-        </div>
-        <div className="card p-4">
-          <h3 className="text-sm font-semibold">A pesquisa ajudou na decisão?</h3>
-          <ul className="mt-3 space-y-2">
-            <BarRow tone="bg-mint" label="Sim" count={r.feedback.helpedYes} share={r.feedback.total ? (r.feedback.helpedYes / r.feedback.total) * 100 : null} />
-            <BarRow tone="bg-gold" label="Não" count={r.feedback.helpedNo} share={r.feedback.total ? (r.feedback.helpedNo / r.feedback.total) * 100 : null} />
-            <BarRow tone="bg-ink-3" label="Preferiu não dizer" count={r.feedback.helpedUnanswered} share={r.feedback.total ? (r.feedback.helpedUnanswered / r.feedback.total) * 100 : null} />
-          </ul>
-        </div>
-      </section>
-
-      <section id="exportacao" aria-labelledby="exp-h" className="print:hidden">
-        <h2 id="exp-h" className="text-xl font-bold">Exportação</h2>
-        <p className="text-sm text-ink-2 mt-1">Apenas agregações. Nenhuma exportação contém registros individuais.</p>
-        <div className="mt-3 flex flex-wrap gap-3 text-sm">
-          <a className="rounded-lg border border-line px-4 py-2 min-h-11 inline-flex items-center" href="/api/admin/research">JSON agregado</a>
-          <a className="rounded-lg border border-line px-4 py-2 min-h-11 inline-flex items-center" href="/api/admin/research?format=csv">CSV por pergunta e alternativa</a>
-          <PrintButton label="PDF do painel" fileTitle="Dados da pesquisa" />
-        </div>
-      </section>
+        <p className="text-center text-xs text-ink-3">{r.disclaimer}</p>
+      </div>
     </div>
   );
 }
 
-/** Barra horizontal simples: rótulo, contagem e porcentagem. */
-function BarRow({ label, count, share, tone = "bg-accent" }: { label: string; count: number; share: number | null; tone?: string }) {
+function Kpi({ label, value, note, color, small = false }: { label: string; value: string; note: string; color: string; small?: boolean }) {
+  return (
+    <div className="relative overflow-hidden rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5">
+      <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5" style={{ background: color }} />
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-3">{label}</p>
+      <p className={`mt-1 font-bold tabular-nums text-ink ${small ? "text-lg leading-tight" : "text-3xl"}`}>{value}</p>
+      <p className="mt-0.5 text-xs text-ink-2">{note}</p>
+    </div>
+  );
+}
+
+function Panel({ title, subtitle, children, className = "" }: { title: string; subtitle?: string; children: ReactNode; className?: string }) {
+  return (
+    <section className={`rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5 md:p-5 ${className}`}>
+      <h2 className="text-sm font-bold text-ink">{title}</h2>
+      {subtitle ? <p className="text-xs text-ink-3">{subtitle}</p> : null}
+      <div className="mt-4">{children}</div>
+    </section>
+  );
+}
+
+function Empty() {
+  return <p className="py-6 text-center text-sm text-ink-3">Sem dados ainda.</p>;
+}
+
+/** Rosca em CSS (conic-gradient): cada parte na sua cor, número no meio. */
+function Donut({ parts, size, center, centerNote }: { parts: { value: number; color: string }[]; size: number; center: string; centerNote: string }) {
+  const total = parts.reduce((n, p) => n + p.value, 0) || 1;
+  const ends = parts.map((_, i) => parts.slice(0, i + 1).reduce((n, p) => n + p.value, 0));
+  const stops = parts.map((p, i) => `${p.color} ${((ends[i] - p.value) / total) * 360}deg ${(ends[i] / total) * 360}deg`).join(", ");
+  return (
+    <div className="relative shrink-0 rounded-full" style={{ width: size, height: size, background: `conic-gradient(${stops || "#e3e1db 0deg 360deg"})` }} role="img" aria-label={`${center} ${centerNote}`}>
+      <div className="absolute inset-[18%] flex flex-col items-center justify-center rounded-full bg-surface text-center shadow-inner">
+        <span className="text-xl font-bold tabular-nums leading-none text-ink">{center}</span>
+        <span className="mt-1 text-[11px] text-ink-3">{centerNote}</span>
+      </div>
+    </div>
+  );
+}
+
+/** Barra horizontal: rótulo, contagem e porcentagem. */
+function Bar({ label, count, share, color, compact = false, countLabel }: { label: string; count: number; share: number | null; color: string; compact?: boolean; countLabel?: string }) {
   const pct = share ?? 0;
   return (
-    <li className="space-y-0.5">
-      <div className="flex items-baseline justify-between gap-3 text-sm">
-        <span className="min-w-0">{label}</span>
-        <span className="shrink-0 tabular-nums text-ink-2">{count} · {share === null ? "—" : `${pct.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%`}</span>
+    <li className="space-y-0.5 list-none">
+      <div className={`flex items-baseline justify-between gap-3 ${compact ? "text-xs" : "text-sm"}`}>
+        <span className="min-w-0 truncate" title={label}>{label}</span>
+        <span className="shrink-0 tabular-nums text-ink-2">{count}{countLabel ? ` ${countLabel}` : ""} · {PCT(share)}</span>
       </div>
-      <div className="h-2.5 w-full overflow-hidden rounded-full bg-line" aria-hidden="true">
-        <div className={`h-full rounded-full ${tone}`} style={{ width: `${Math.min(100, Math.max(0, pct))}%` }} />
+      <div className={`${compact ? "h-1.5" : "h-2.5"} w-full overflow-hidden rounded-full bg-line`} aria-hidden="true">
+        <div className="h-full rounded-full" style={{ width: `${Math.min(100, Math.max(0, pct))}%`, background: color }} />
       </div>
     </li>
-  );
-}
-
-function StatCard({ label, value, note, tone = "border-t-accent" }: { label: string; value: string; note?: string; tone?: string }) {
-  return (
-    <div className={`card border-t-4 p-4 ${tone}`}>
-      <p className="text-xs text-ink-3">{label}</p>
-      <p className="text-3xl font-bold tabular-nums">{value}</p>
-      {note ? <p className="text-xs text-ink-2">{note}</p> : null}
-    </div>
   );
 }
