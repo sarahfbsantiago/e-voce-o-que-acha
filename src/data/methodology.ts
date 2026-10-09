@@ -128,6 +128,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Os cards do espectro ganham capítulos com o contexto histórico de cada corrente (a crise da época, como surgiu, como conquistou apoio e como terminou). No relatório, os textos sobre o que o relatório mostra e sobre a ordem dos candidatos e o consentimento passam para o rodapé (revisão humana).",
       "Revisão humana: saem do relatório os quadrados 'Visão Lula' e 'Visão Flávio' (os textos continuam em 'Entender por quê' de cada área). O cartão de cada candidato vira um botão que abre o currículo completo.",
       "Revisão humana: no desenho da régua, as faixas de extrema esquerda e extrema direita ficam ainda mais largas e as de centro-esquerda e centro-direita, mais estreitas; os botões ficam espaçados por igual. A régua volta a se animar toda vez que aparece na tela.",
+      "Revisão humana: o quadro 'Sua ideologia' passa a ter a cor da faixa da régua onde a ideologia fica (ex.: progressismo em azul, comunismo em rosa). Sai o botão 'Comparar experiência' da seção dos candidatos.",
       "O site passa a se chamar 'E Você, O Que Acha?', no endereço e-voce-o-que-acha.up.railway.app. Nada muda nas perguntas, nas notas ou na conta.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],

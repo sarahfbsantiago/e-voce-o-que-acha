@@ -110,26 +110,6 @@ export function CandidatesSection({ ordered, profiles, summaries }: Props) {
       </div>
 
       <div className="flex flex-wrap items-center gap-3 print:hidden">
-        <Modal trigger="Comparar experiência" title="Comparação de experiência">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm border-collapse">
-              <thead>
-                <tr className="bg-paper text-left">
-                  <th scope="col" className="p-2 border-b border-line">Informação</th>
-                  {ordered.map((c) => <th key={c.id} scope="col" className="p-2 border-b border-line">{c.name}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                {EXPERIENCE_ROWS.map((row) => (
-                  <tr key={row.label} className="align-top">
-                    <th scope="row" className="p-2 border-b border-line text-left font-medium">{row.label}</th>
-                    {ordered.map((c) => <td key={c.id} className="p-2 border-b border-line">{row.byCandidate[c.id] ?? "—"}</td>)}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Modal>
         <Link href="/fontes" className="inline-flex items-center gap-1 text-sm font-semibold text-purple underline underline-offset-4 hover:text-purple-strong">Veja as fontes →</Link>
       </div>
     </section>
