@@ -19,13 +19,13 @@ export interface SpectrumSection { id: string; title: string; blocks: SpectrumBl
 export const SPECTRUM_TERMS: { label: string; at: number; chip: number; side: "above" | "below"; section: string; between?: boolean }[] = [
   { label: "Comunismo", at: 0.02, chip: 0.55, side: "above", section: "comunismo" },
   { label: "Socialismo", at: 1.5, chip: 1.45, side: "below", section: "socialismo" },
-  { label: "Social-democracia", at: 2.5, chip: 2.2, side: "above", section: "centro-esquerda" },
+  { label: "Social-democracia", at: 2.5, chip: 2.0, side: "above", section: "centro-esquerda" },
   { label: "Progressismo", at: 3.15, chip: 3.0, side: "below", section: "progressismo", between: true },
-  { label: "Centro político", at: 3.5, chip: 3.6, side: "above", section: "centro" },
+  { label: "Centro político", at: 3.5, chip: 3.3, side: "above", section: "centro" },
   { label: "Liberalismo social", at: 4.15, chip: 4.3, side: "below", section: "centro-direita" },
-  { label: "Libertarianismo", at: 4.5, chip: 4.9, side: "above", section: "centro-direita" },
+  { label: "Libertarianismo", at: 4.5, chip: 4.55, side: "above", section: "centro-direita" },
   { label: "Liberalismo econômico", at: 5.5, chip: 5.6, side: "below", section: "direita" },
-  { label: "Conservadorismo", at: 6.1, chip: 6.2, side: "above", section: "direita" },
+  { label: "Conservadorismo", at: 6.1, chip: 6.05, side: "above", section: "direita" },
   { label: "Nacionalismo radical", at: 6.85, chip: 6.9, side: "below", section: "direita-radical" },
   { label: "Fascismo", at: 7.98, chip: 7.45, side: "above", section: "fascismo" },
 ];

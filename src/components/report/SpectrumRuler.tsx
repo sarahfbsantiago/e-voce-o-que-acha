@@ -7,7 +7,15 @@ import { SPECTRUM_BANDS, CANDIDATE_SPECTRUM, personSpectrum, bandAt } from "@/da
 import { SPECTRUM_COMPARISON, SPECTRUM_INTRO, SPECTRUM_SECTIONS, SPECTRUM_TERMS, type SpectrumBlock } from "@/data/spectrum-terms";
 
 const N = SPECTRUM_BANDS.length;
-const pct = (at: number) => (at / N) * 100;
+/** Largura de cada faixa no desenho: os extremos ficam mais largos, para parecerem mais distantes do centro (só visual). */
+const WIDTHS = SPECTRUM_BANDS.map((_, i) => (i === 0 || i === N - 1 ? 1.8 : 1));
+const TOTAL = WIDTHS.reduce((n, w) => n + w, 0);
+/** Ponto da régua (0 a 8, em faixas) → posição horizontal em %, respeitando a largura de cada faixa. */
+const pct = (at: number) => {
+  const i = Math.min(N - 1, Math.max(0, Math.floor(at)));
+  const before = WIDTHS.slice(0, i).reduce((n, w) => n + w, 0);
+  return ((before + (at - i) * WIDTHS[i]) / TOTAL) * 100;
+};
 /** Rótulo centrado na seta, mas encostado na borda quando a seta está perto das pontas. */
 /** No celular: o que fica "entre" duas faixas vai para a linha da divisa mais próxima; o resto, para o meio da faixa. */
 const slotOf = (at: number, between = false) => {
@@ -88,7 +96,7 @@ export function SpectrumBlocks({ blocks }: { blocks: SpectrumBlock[] }) {
  * Régua do espectro político: termos com setas (cada um abre a explicação), candidatos por cima e
  * a pessoa por baixo, na posição que as respostas dela apontam (independente dos candidatos).
  * No fim, de qual candidato ela ficou mais próxima nos temas.
- * No celular, a régua fica em pé.
+ * No celular e no tablet, a régua fica em pé.
  */
 export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { questionId: string; optionIds: string[] }[] }) {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -144,7 +152,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
       <p className="mt-0.5 text-xs text-ink-3 print:hidden">Toque em uma ideologia para ler sobre ela. <button type="button" onClick={() => setOpenId("intro")} className="font-medium text-purple underline underline-offset-4">Entenda o espectro político →</button></p>
 
       {/* computador: régua deitada */}
-      <div className="mt-4 hidden px-1 md:block" role="img" aria-label={`${candidates.map((t) => `${t.c.name}: ${t.spot.label}`).join("; ")}; você: ${person.ideology}`}>
+      <div className="mt-4 hidden px-1 lg:block" role="img" aria-label={`${candidates.map((t) => `${t.c.name}: ${t.spot.label}`).join("; ")}; você: ${person.ideology}`}>
         {/* acima: botões espaçados, setas (retas ou inclinadas) até o ponto exato; candidatos logo acima da régua */}
         <div className="relative h-40">
           <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 160" preserveAspectRatio="none">
@@ -169,7 +177,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         </div>
 
         <div className={`${anim("spectrum-grow")} flex h-2.5 w-full overflow-hidden rounded-full`}>
-          {SPECTRUM_BANDS.map((b) => <span key={b.label} className="h-full flex-1" style={{ background: b.color }} />)}
+          {SPECTRUM_BANDS.map((b, i) => <span key={b.label} className="h-full" style={{ background: b.color, flexGrow: WIDTHS[i], flexBasis: 0 }} />)}
         </div>
 
         {/* abaixo: nomes das faixas, você e os botões de baixo, com setas até o ponto exato */}
@@ -185,7 +193,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
               <div className="absolute top-[96px]" style={{ left: `${pct(t.chip)}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
             </span>
           ))}
-          <div className="relative mt-1.5 grid grid-cols-8 gap-0.5">
+          <div className="relative mt-1.5 grid gap-0.5" style={{ gridTemplateColumns: WIDTHS.map((w) => `${w}fr`).join(" ") }}>
             {SPECTRUM_BANDS.map((b) => <span key={b.label} className="text-center text-[11px] leading-tight text-ink-3"><span className="rounded bg-surface/85 px-0.5">{b.label}</span></span>)}
           </div>
           <div className="absolute inset-x-0 top-9 z-10 h-12">
@@ -201,7 +209,7 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
       </div>
 
       {/* celular: régua em pé */}
-      <ol className="mt-4 md:hidden">
+      <ol className="mt-4 lg:hidden">
         {slots.map(({ at, band }) => {
           const terms = SPECTRUM_TERMS.filter((t) => slotOf(t.at, t.between) === at);
           const cands = candidates.filter((t) => slotOf(t.spot.at, t.spot.label.startsWith("Progressista")) === at);

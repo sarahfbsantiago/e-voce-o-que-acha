@@ -92,16 +92,28 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
         </div>
         <h1 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Seu perfil</h1>
         {ideology ? (
-          <div className="mt-3 max-w-2xl rounded-2xl border border-purple/25 bg-gradient-to-br from-purple-soft to-surface p-4 shadow-sm">
+          <div className="mt-3 max-w-4xl rounded-2xl border border-purple/25 bg-gradient-to-br from-purple-soft to-surface p-4 shadow-sm">
             <p className="text-base font-semibold text-purple-strong">Sua ideologia: {ideology.ideology}</p>
-            {IDEOLOGY_PROFILES[ideology.ideology] ? (
-              <>
-                <p className="mt-2 text-sm leading-relaxed text-ink-2">{IDEOLOGY_PROFILES[ideology.ideology].text}</p>
-                <p className="mt-3 flex flex-wrap gap-1.5">
-                  {IDEOLOGY_PROFILES[ideology.ideology].keywords.map((k) => <span key={k} className="rounded-full bg-surface px-2.5 py-0.5 text-xs font-semibold text-purple-strong ring-1 ring-purple/25">{k}</span>)}
-                </p>
-              </>
-            ) : null}
+            {IDEOLOGY_PROFILES[ideology.ideology] ? (() => {
+              const pr = IDEOLOGY_PROFILES[ideology.ideology];
+              return (
+                <>
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-ink">{pr.summary}</p>
+                  <dl className="mt-3 grid gap-2.5 text-sm leading-relaxed sm:grid-cols-3">
+                    {[["Na economia", pr.economy], ["Na sociedade", pr.society], ["O papel do Estado", pr.state]].map(([k, v]) => (
+                      <div key={k} className="rounded-xl bg-surface/80 p-3 ring-1 ring-purple/15">
+                        <dt className="text-[11px] font-bold uppercase tracking-wide text-purple">{k}</dt>
+                        <dd className="mt-1 text-ink-2">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <p className="mt-3 text-sm text-ink-2"><span className="font-semibold text-ink">O futuro que você quer:</span> {pr.future}</p>
+                  <p className="mt-3 flex flex-wrap gap-1.5">
+                    {pr.keywords.map((k) => <span key={k} className="rounded-full bg-surface px-2.5 py-0.5 text-xs font-semibold text-purple-strong ring-1 ring-purple/25">{k}</span>)}
+                  </p>
+                </>
+              );
+            })() : null}
           </div>
         ) : null}
         <p className="hidden print:block text-xs text-ink-3 mt-1">Gerado em {new Date().toLocaleDateString("pt-BR")} · E Você, O Que Acha? · nada aqui é nota ou ranking</p>

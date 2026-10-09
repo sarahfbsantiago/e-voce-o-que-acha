@@ -124,6 +124,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Os cards de cada corrente do espectro ganham 'Na história': personagens com foto (Wikimedia Commons, domínio público ou Creative Commons, com crédito), um resumo histórico e uma linha do tempo. Sai do espectro a seção 'O que precisa ser corrigido no nosso espectro?' (revisão humana).",
       "Revisão humana: os botões das correntes na régua do espectro passam a alternar acima e abaixo da régua, distribuídos de forma mais equilibrada; as setas continuam apontando para o mesmo ponto de cada corrente.",
       "Abaixo de 'Sua ideologia', o relatório passa a mostrar uma descrição curta, em segunda pessoa, de como pensa e que futuro quer quem tem aquela ideologia, com três palavras-chave (pedido da responsável).",
+      "Revisão humana: na régua do espectro, as faixas de extrema esquerda e extrema direita ficam mais largas, para mostrar que estão mais distantes do centro (só no desenho; a conta não muda). A descrição da ideologia da pessoa fica mais detalhada, com o que ela defende na economia, na sociedade e para o papel do Estado, com base nos textos do espectro.",
       "O site passa a se chamar 'E Você, O Que Acha?', no endereço e-voce-o-que-acha.up.railway.app. Nada muda nas perguntas, nas notas ou na conta.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],
