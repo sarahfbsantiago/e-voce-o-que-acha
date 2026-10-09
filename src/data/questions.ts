@@ -52,7 +52,7 @@ const SIM_NAO = (meio: string): Opt[] => [["Sim", 2], [meio, 1], ["Não", -2]];
 
 export const QUESTIONS: Question[] = [
   // ---- Sessão 1. Economia e impostos --------------------------------------
-  q("q01", "t01", 1, "Quem ganha muito dinheiro deveria pagar uma porcentagem maior de imposto (milionários e bilionários)?", CONCORDA),
+  q("q01", "t01", 1, "Quem ganha muito dinheiro deveria pagar uma porcentagem maior de imposto?", CONCORDA),
   q("q03", "t01", 3, "Quando o governo precisa economizar dinheiro, o que deveria proteger primeiro?", [
     ["Saúde, educação e programas sociais", null],
     ["As contas públicas e a dívida", null],

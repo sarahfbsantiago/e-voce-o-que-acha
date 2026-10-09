@@ -73,7 +73,7 @@ Como ler as tabelas:
 
 _Impostos, contas públicas e apoio a empresas consideradas importantes._
 
-**1. Quem ganha muito dinheiro deveria pagar uma porcentagem maior de imposto (milionários e bilionários)?**
+**1. Quem ganha muito dinheiro deveria pagar uma porcentagem maior de imposto?**
 
 - Posição documentada de Lula: apoia (+2)
 - Posição documentada de Flávio Bolsonaro: opõe-se em parte (−1)
@@ -220,7 +220,7 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Criar empregos | — | 1 | 0,5 |
 | Aumentar salários | — | 1 | 0 |
 | Investir em educação | — | 1 | 0 |
-| Reduzir a inflação | — | 0,5 | 0 |
+| Reduzir a inflação | — | 1 | 0 |
 | Usar todas essas medidas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -243,10 +243,10 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Concordo | +2 | 1 | 0,5 |
+| Concordo | +2 | 1 | 0 |
 | Concordo em parte | +1 | 0,5 | 0 |
 | Discordo em parte | -1 | 0 | 0 |
-| Discordo | -2 | 0 | 0 |
+| Discordo | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 **12. O que ajuda mais a reduzir a violência?**
@@ -256,8 +256,8 @@ _Papel federal em crimes interestaduais, recursos da Polícia Federal, prevenç�
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Mais polícia e punição | — | 0,5 | 1 |
-| Mais prevenção, educação e oportunidades | — | 0,5 | 0 |
+| Mais polícia e punição | — | 1 | 1 |
+| Mais prevenção, educação e oportunidades | — | 1 | 0 |
 | As duas coisas juntas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -284,7 +284,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Mais repressão policial | — | 0 | 1 |
+| Mais repressão policial | — | 0,5 | 1 |
 | Mais tratamento de saúde | — | 1 | 0 |
 | Mais prevenção e educação | — | 1 | 0 |
 | Uma combinação dessas medidas | — | 0,5 | 0 |
@@ -301,8 +301,8 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 |---|---|---|---|
 | Deveriam ser proibidas | — | 1 | 0 |
 | Deveriam existir com regras muito rígidas | — | 0 | 0 |
-| Deveriam existir com regras semelhantes às de outros negócios | — | 0 | 1 |
-| Deveriam ter poucas restrições | — | 0 | 0,5 |
+| Deveriam existir com regras semelhantes às de outros negócios | — | 0 | 0 |
+| Deveriam ter poucas restrições | — | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
 ### Seção 4. Ambiente e tecnologia
@@ -357,8 +357,8 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Solar e eólica | — | 1 | 0 |
-| Petróleo e gás | — | 0,5 | 1 |
-| Energia nuclear | — | 0,5 | 0 |
+| Petróleo e gás | — | 1 | 1 |
+| Energia nuclear | — | 1 | 0 |
 | Todas de forma equilibrada | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
@@ -450,7 +450,7 @@ _Direitos civis, religião e Estado, decisões do STF, independência dos órgã
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Investigar independentemente do partido | — | 1 | 0 |
-| Investigar, mas com regras mais rígidas para evitar abusos | — | 0,5 | 0,5 |
+| Investigar, mas com regras mais rígidas para evitar abusos | — | 0,5 | 0 |
 | Somente investigar quando houver provas fortes desde o início | — | 0 | 1 |
 | Não sei | fora da conta | fora | fora |
 
