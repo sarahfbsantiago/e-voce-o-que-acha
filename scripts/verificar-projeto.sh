@@ -24,7 +24,7 @@ dups="$(find . -path ./node_modules -prune -o -path ./.git -prune -o -path ./.ne
 if [ -n "$dups" ]; then echo "$dups" | sed 's/^/  /'; else echo "  nenhuma"; fi
 
 echo "== Railway (últimos deploys)"
-railway deployment list --service voce-decide 2>/dev/null | sed -n 2,3p | sed 's/^ */  /' || echo "  não foi possível consultar"
+railway deployment list --service site-questionario 2>/dev/null | sed -n 2,3p | sed 's/^ */  /' || echo "  não foi possível consultar"
 
 echo "== Site no ar ($URL)"
 for p in / /questionario /relatorio /fontes /metodologia /admin/login; do
