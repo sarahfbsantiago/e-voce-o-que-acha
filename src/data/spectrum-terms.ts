@@ -26,7 +26,7 @@ export const SPECTRUM_TERMS: { label: string; at: number; chip: number; side: "a
   { label: "Libertarianismo", at: 4.5, chip: 58.3, side: "above", section: "centro-direita" },
   { label: "Liberalismo econômico", at: 5.5, chip: 65, side: "below", section: "direita" },
   { label: "Conservadorismo", at: 6.1, chip: 75, side: "above", section: "direita" },
-  { label: "Nacionalismo radical", at: 6.85, chip: 80, side: "below", section: "direita-radical" },
+  { label: "Nacionalismo radical", at: 6.98, chip: 80, side: "below", section: "direita-radical" },
   { label: "Fascismo", at: 7.98, chip: 91.7, side: "above", section: "fascismo" },
 ];
 
