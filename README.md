@@ -140,8 +140,8 @@ _Apoio à indústria, produção nacional, obras e preferência a produtos brasi
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
-| Sim, mas sem aumentar muito os gastos | +1 | 0,5 | 0,5 |
-| Não | -2 | 0 | 0 |
+| Sim, mas sem aumentar muito os gastos | +1 | 0,5 | 0 |
+| Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
 ### Seção 2. Social: saúde, educação e renda
@@ -217,10 +217,10 @@ _Transferência de renda, condicionalidades, financiamento e prioridades contra 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Dar auxílio financeiro | — | 1 | 0 |
-| Criar empregos | — | 1 | 0,5 |
+| Criar empregos | — | 1 | 0 |
 | Aumentar salários | — | 1 | 0 |
 | Investir em educação | — | 1 | 0 |
-| Reduzir a inflação | — | 1 | 0 |
+| Reduzir a inflação | — | 1 | 0,5 |
 | Usar todas essas medidas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
