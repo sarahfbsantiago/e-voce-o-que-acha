@@ -25,7 +25,7 @@ export function bandCenter(label: SpectrumBandLabel): number {
 
 /** Onde cada candidato fica na régua, com a descrição definida pela responsável e o nome curto da ideologia. */
 export const CANDIDATE_SPECTRUM: Record<string, { at: number; label: string; ideology: string }> = {
-  lula: { at: 3.3, label: "Progressista, entre centro-esquerda e centro", ideology: "Progressismo" },
+  lula: { at: 3.15, label: "Progressista, entre centro-esquerda e centro", ideology: "Progressismo" },
   "flavio-bolsonaro": { at: 7.5, label: "Extrema direita", ideology: "Extrema direita" },
 };
 

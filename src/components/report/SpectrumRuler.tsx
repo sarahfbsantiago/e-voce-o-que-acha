@@ -7,21 +7,16 @@ import { SPECTRUM_COMPARISON, SPECTRUM_CORRECTIONS, SPECTRUM_INTRO, SPECTRUM_SEC
 const N = SPECTRUM_BANDS.length;
 const pct = (at: number) => (at / N) * 100;
 /** Rótulo centrado na seta, mas encostado na borda quando a seta está perto das pontas. */
-/** No celular: perto de uma divisa (até 0,35) vai para a linha "entre X e Y"; senão, para o meio da faixa. */
-const slotOf = (at: number) => {
+/** No celular: o que fica "entre" duas faixas vai para a linha da divisa mais próxima; o resto, para o meio da faixa. */
+const slotOf = (at: number, between = false) => {
   const r = Math.round(at);
-  return r > 0 && r < N && Math.abs(at - r) <= 0.35 ? r : Math.min(N - 1, Math.max(0, Math.floor(at))) + 0.5;
+  if (between && r > 0 && r < N) return r;
+  return Math.min(N - 1, Math.max(0, Math.floor(at))) + 0.5;
 };
 const anchor = (n: number) => (n < 10 ? "translateX(-12px)" : n > 90 ? "translateX(calc(-100% + 12px))" : "translateX(-50%)");
 
 type Totals = { c: { id: string; name: string }; themes: number }[];
 
-/** Termos agrupados pela posição (ex.: dois termos no meio da centro-esquerda). */
-function groupTerms(side: "above" | "below") {
-  const groups = new Map<number, typeof SPECTRUM_TERMS>();
-  for (const t of SPECTRUM_TERMS.filter((x) => x.side === side)) groups.set(t.at, [...(groups.get(t.at) ?? []), t]);
-  return [...groups.entries()];
-}
 
 export function SpectrumBlocks({ blocks }: { blocks: SpectrumBlock[] }) {
   return (
@@ -106,61 +101,67 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
 
       {/* computador: régua deitada */}
       <div className="mt-4 hidden px-1 md:block" role="img" aria-label={`${candidates.map((t) => `${t.c.name}: ${t.spot.label}`).join("; ")}; você: ${person.ideology}`}>
-        <div className="relative h-28">
-          {groupTerms("above").map(([at, ts]) => (
-            <div key={at} className="absolute bottom-0" style={{ left: `${pct(at)}%` }}>
-              <div className="absolute bottom-6 flex flex-col items-center gap-1.5" style={{ transform: anchor(pct(at)) }}>
-                {ts.map((t) => termButton(t.label, t.section, t.at))}
-              </div>
-              <span aria-hidden="true" className="absolute bottom-1.5 h-4 w-px -translate-x-1/2 bg-ink-3" />
-              <span aria-hidden="true" className="absolute bottom-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-t-[6px] border-x-transparent border-t-ink-3" />
-            </div>
+        {/* acima: botões espaçados, setas (retas ou inclinadas) até o ponto exato; candidatos logo acima da régua */}
+        <div className="relative h-40">
+          <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 160" preserveAspectRatio="none">
+            {SPECTRUM_TERMS.filter((t) => t.side === "above").map((t) => (
+              <line key={t.label} x1={pct(t.chip)} y1={98} x2={pct(t.at)} y2={153} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.25} vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
+            ))}
+          </svg>
+          {SPECTRUM_TERMS.filter((t) => t.side === "above").map((t) => (
+            <span key={t.label}>
+              <div className="absolute bottom-[62px]" style={{ left: `${pct(t.chip)}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
+              <span aria-hidden="true" className="absolute bottom-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-t-[7px] border-x-transparent border-t-ink-3" style={{ left: `${pct(t.at)}%` }} />
+            </span>
           ))}
-        </div>
-        <div className="relative mt-1 h-9">
           {candidates.map((t) => (
-            <div key={t.c.id} className="absolute bottom-0" style={{ left: `${pct(t.spot.at)}%`, transform: "translateX(-50%)" }}>
+            <div key={t.c.id} className="absolute bottom-0 z-10" style={{ left: `${pct(t.spot.at)}%`, transform: "translateX(-50%)" }}>
               <div className={`${anim("spectrum-drop")} flex flex-col items-center`} style={delay(1 + t.spot.at * 0.05)}>
-              <span className={`whitespace-nowrap rounded-md px-1.5 py-0.5 text-[11px] font-semibold text-white ${t.tone}`}>{t.c.name.split(" ")[0]}</span>
-              <span aria-hidden="true" className={`h-0 w-0 border-x-[5px] border-t-[6px] border-x-transparent ${t.border}`} />
+                <span className={`whitespace-nowrap rounded-md px-1.5 py-0.5 text-[11px] font-semibold text-white shadow-sm ${t.tone}`}>{t.c.name.split(" ")[0]}</span>
+                <span aria-hidden="true" className={`h-0 w-0 border-x-[5px] border-t-[6px] border-x-transparent ${t.border}`} />
               </div>
             </div>
           ))}
         </div>
+
         <div className={`${anim("spectrum-grow")} flex h-2.5 w-full overflow-hidden rounded-full`}>
           {SPECTRUM_BANDS.map((b) => <span key={b.label} className="h-full flex-1" style={{ background: b.color }} />)}
         </div>
-        <div className="mt-1.5 grid grid-cols-8 gap-0.5">
-          {SPECTRUM_BANDS.map((b) => <span key={b.label} className="text-center text-[11px] leading-tight text-ink-3">{b.label}</span>)}
-        </div>
-        <div className="relative mt-1 h-12">
-          <div className={`spectrum-slide absolute top-0 ${shown ? "" : "opacity-0"}`} style={{ left: `${shown ? pct(person.at) : 0}%` }}>
-            <div className="spectrum-nudge">
-              <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[6px] border-b-[8px] border-x-transparent border-b-purple" />
-              <span aria-hidden="true" className="absolute top-2 h-3 w-0.5 -translate-x-1/2 bg-purple" />
-            </div>
-            <span className="spectrum-pulse absolute top-5 whitespace-nowrap rounded-md bg-purple px-2 py-0.5 text-xs font-bold text-white shadow-sm" style={{ transform: anchor(pct(person.at)) }}>{youLabel}</span>
-          </div>
-        </div>
-        <div className="relative h-24">
-          {groupTerms("below").map(([at, ts], i) => (
-            <div key={at} className="absolute top-0" style={{ left: `${pct(at)}%` }}>
-              <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-b-[6px] border-x-transparent border-b-ink-3" />
-              <span aria-hidden="true" className={`absolute top-1.5 w-px -translate-x-1/2 bg-ink-3 ${i % 2 ? "h-11" : "h-4"}`} />
-              <div className={`absolute flex flex-col items-center gap-1.5 ${i % 2 ? "top-12" : "top-5"}`} style={{ transform: anchor(pct(at)) }}>
-                {ts.map((t) => termButton(t.label, t.section, t.at))}
-              </div>
-            </div>
+
+        {/* abaixo: nomes das faixas, você e os botões de baixo, com setas até o ponto exato */}
+        <div className="relative h-44">
+          <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 176" preserveAspectRatio="none">
+            {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t, i) => (
+              <line key={t.label} x1={pct(t.chip)} y1={i % 2 ? 128 : 96} x2={pct(t.at)} y2={8} className={`${anim("spectrum-pop")} stroke-ink-3`} strokeWidth={1.25} vectorEffect="non-scaling-stroke" style={delay(0.4 + t.at * 0.08)} />
+            ))}
+          </svg>
+          {SPECTRUM_TERMS.filter((t) => t.side === "below").map((t, i) => (
+            <span key={t.label}>
+              <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[4px] border-b-[7px] border-x-transparent border-b-ink-3" style={{ left: `${pct(t.at)}%` }} />
+              <div className={`absolute ${i % 2 ? "top-[128px]" : "top-[96px]"}`} style={{ left: `${pct(t.chip)}%`, transform: "translateX(-50%)" }}>{termButton(t.label, t.section, t.at)}</div>
+            </span>
           ))}
+          <div className="relative mt-1.5 grid grid-cols-8 gap-0.5">
+            {SPECTRUM_BANDS.map((b) => <span key={b.label} className="text-center text-[11px] leading-tight text-ink-3"><span className="rounded bg-surface/85 px-0.5">{b.label}</span></span>)}
+          </div>
+          <div className="absolute inset-x-0 top-9 z-10 h-12">
+            <div className={`spectrum-slide absolute top-0 ${shown ? "" : "opacity-0"}`} style={{ left: `${shown ? pct(person.at) : 0}%` }}>
+              <div className="spectrum-nudge">
+                <span aria-hidden="true" className="absolute top-0 h-0 w-0 -translate-x-1/2 border-x-[6px] border-b-[8px] border-x-transparent border-b-purple" />
+                <span aria-hidden="true" className="absolute top-2 h-3 w-0.5 -translate-x-1/2 bg-purple" />
+              </div>
+              <span className="spectrum-pulse absolute top-5 whitespace-nowrap rounded-md bg-purple px-2 py-0.5 text-xs font-bold text-white shadow-sm" style={{ transform: anchor(pct(person.at)) }}>{youLabel}</span>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* celular: régua em pé */}
       <ol className="mt-4 md:hidden">
         {slots.map(({ at, band }) => {
-          const terms = SPECTRUM_TERMS.filter((t) => slotOf(t.at) === at);
-          const cands = candidates.filter((t) => slotOf(t.spot.at) === at);
-          const you = slotOf(person.at) === at;
+          const terms = SPECTRUM_TERMS.filter((t) => slotOf(t.at, t.between) === at);
+          const cands = candidates.filter((t) => slotOf(t.spot.at, t.spot.label.startsWith("Progressista")) === at);
+          const you = slotOf(person.at, person.ideology === "Progressismo") === at;
           if (band === null && !terms.length && !cands.length && !you) return null;
           return (
             <li key={at} className={`${anim("spectrum-pop")} flex gap-3`} style={delay(at * 0.07)}>
