@@ -1,87 +1,96 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { PageTitle } from "@/components/ui";
 import { isAdminSession } from "@/lib/admin-auth";
 import { QUESTIONS } from "@/data/questions";
 import { TOPICS } from "@/data/topics";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { QUESTION_NUMBER } from "@/lib/question-order";
 import { spectrumPositionOf } from "@/data/spectrum-positions";
-import { IDEOLOGY_RANGES, SPECTRUM_BANDS } from "@/data/political-spectrum";
-import { logoutAction } from "../login/actions";
-import { AdminNav } from "@/components/AdminNav";
-import { PrintButton } from "@/components/PrintButton";
+import { SPECTRUM_BANDS } from "@/data/political-spectrum";
+import { AdminHero, AdminShell, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
 export const metadata: Metadata = { title: "Espectro político", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
 const bandIndex = (label: string) => SPECTRUM_BANDS.findIndex((b) => b.label === label);
 
+/** Para qual faixa da régua cada alternativa leva a pessoa (independe dos candidatos). */
 export default async function AdminSpectrumPage() {
   if (!(await isAdminSession())) redirect("/admin/login");
   let reviewed = 0, cells = 0;
+  const perBand = SPECTRUM_BANDS.map(() => 0);
 
   const sections = AREA_GROUPS.map((g, gi) => {
     const topics = TOPICS.filter((t) => g.topicIds.includes(t.id)).sort((a, b) => a.order - b.order);
-    const questions = topics.flatMap((t) => QUESTIONS.filter((q) => q.topicId === t.id).sort((a, b) => a.order - b.order).map((q) => ({ q, t })));
-    return { g, gi, questions };
+    const rows = topics.flatMap((t) => QUESTIONS.filter((q) => q.topicId === t.id).sort((a, b) => a.order - b.order).map((q) => ({
+      q, t,
+      options: q.options.filter((o) => !o.isNoOpinion).map((o) => {
+        const v = spectrumPositionOf(q.id, o.id);
+        if (v) { cells++; perBand[bandIndex(v.band)]++; if (v.reason !== "Proposta") reviewed++; }
+        return { o, v };
+      }),
+    })));
+    return { g, gi, rows };
   });
-
-  const body = sections.map(({ g, gi, questions }) => (
-    <section key={g.id} className="space-y-3">
-      <h2 className="flex items-center gap-2 border-l-4 pl-3 text-xl font-bold" style={{ borderColor: g.color }}>
-        <span aria-hidden="true" className="h-3 w-3 rounded-full" style={{ background: g.color }} />Seção {gi + 1}: {g.label}
-      </h2>
-      {questions.map(({ q, t }) => (
-        <div key={q.id} className="card p-4">
-          <p className="font-semibold"><span className="mr-1 text-xs text-ink-3" title={`código interno ${q.id}`}>Pergunta {QUESTION_NUMBER[q.id]}</span>{q.text}</p>
-          <p className="text-xs text-ink-3">{t.name}</p>
-          <table className="mt-3 w-full text-sm">
-            <thead><tr className="text-left text-xs text-ink-3"><th className="p-2">Alternativa que a pessoa marca</th><th className="p-2">Faixa da régua</th></tr></thead>
-            <tbody>
-              {q.options.filter((o) => !o.isNoOpinion).map((o) => {
-                const v = spectrumPositionOf(q.id, o.id);
-                if (v) { cells++; if (v.reason !== "Proposta") reviewed++; }
-                return (
-                  <tr key={o.id} className="border-t border-line align-top">
-                    <th scope="row" className="p-2 text-left font-medium">{o.label}</th>
-                    {v ? (
-                      <td className={`p-2 ${v.reason !== "Proposta" ? "outline-2 -outline-offset-2 outline-purple" : ""}`} title={v.reason}>
-                        <span className="inline-flex items-center gap-2 text-xs font-semibold">
-                          <span aria-hidden="true" className="flex h-2 w-32 overflow-hidden rounded-full">
-                            {SPECTRUM_BANDS.map((b, i) => <span key={b.label} className="h-full flex-1" style={{ background: i === bandIndex(v.band) ? b.color : "var(--color-line)" }} />)}
-                          </span>
-                          <span className="rounded-md px-1.5 py-0.5" style={{ background: `${SPECTRUM_BANDS[bandIndex(v.band)].color}26` }}>{v.band}</span>
-                        </span>
-                      </td>
-                    ) : <td className="p-2 italic text-ink-3">sem faixa (não entra na régua)</td>}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      ))}
-    </section>
-  ));
+  const maxBand = Math.max(...perBand, 1);
 
   return (
-    <div className="container-page py-12 space-y-8">
-      <AdminNav current="/admin/espectro" />
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <PageTitle eyebrow="Admin" tone="gold" lead="Para qual faixa da régua cada alternativa leva a pessoa do espectro político do relatório. Não depende dos candidatos. Mudou aqui, mudou na régua.">
-          Espectro político
-        </PageTitle>
-        <div className="flex flex-wrap items-center gap-2 print:hidden"><PrintButton label="Exportar PDF" fileTitle="Espectro político" /><form action={logoutAction}><button className="rounded-lg border border-line px-3 py-2 text-sm min-h-11">Sair</button></form></div>
-      </div>
-      <div className="card p-4 text-sm space-y-2">
-        <p>Cada alternativa aponta para uma faixa da régua. &quot;Não sei&quot; nunca entra.</p>
-        <p>Posição da pessoa = média do meio das faixas das alternativas que ela marcou (Extrema esquerda 0,5 · Esquerda 1,5 · Centro-esquerda 2,5 · Centro 3,5 · Centro-direita 4,5 · Direita 5,5 · Direita radical 6,5 · Extrema direita 7,5).</p>
-        <p>Ideologia mostrada: {IDEOLOGY_RANGES.map((r, i) => `${r.label} ${i === 0 ? `até ${String(r.upTo).replace(".", ",")}` : r.upTo === Infinity ? `acima de ${String(IDEOLOGY_RANGES[i - 1].upTo).replace(".", ",")}` : `até ${String(r.upTo).replace(".", ",")}`}`).join(" · ")}.</p>
-        <p>O resultado por tema (Lula, Flávio ou equivalente) continua vindo da tabela Notas por alternativa.</p>
-        <p className="font-semibold">{reviewed === 0 ? `Todas as ${cells} faixas são a proposta inicial, aguardando sua revisão.` : `${reviewed} das ${cells} faixas já foram revisadas por você (borda roxa); as demais são proposta.`}</p>
-      </div>
-      {body}
-    </div>
+    <AdminShell current="/admin/espectro">
+      <AdminHero kicker="Régua do relatório" title="Espectro político" pdfTitle="Espectro político"
+        subtitle="Para qual faixa da régua cada alternativa leva a pessoa. A posição dela é a média do meio das faixas que marcou; não depende dos candidatos. Mudou aqui, mudou na régua." />
+
+      <section className="grid gap-3 sm:grid-cols-3">
+        <Kpi label="Alternativas com faixa" value={String(cells)} note={`em ${QUESTIONS.length} perguntas`} color="#6d3fc4" />
+        <Kpi label="Revisadas por você" value={String(reviewed)} note="contorno roxo na tabela" color="#ec4899" />
+        <Kpi label="Ainda proposta" value={String(cells - reviewed)} note="aguardando sua revisão" color="#d4a017" />
+      </section>
+
+      <Panel title="Para onde as alternativas apontam" subtitle="Quantas alternativas em cada faixa da régua">
+        <div className="flex h-36 items-end gap-2" role="img" aria-label={SPECTRUM_BANDS.map((b, i) => `${b.label}: ${perBand[i]}`).join("; ")}>
+          {SPECTRUM_BANDS.map((b, i) => (
+            <div key={b.label} className="flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-1">
+              <span className="text-xs font-semibold tabular-nums text-ink-2">{perBand[i]}</span>
+              <div className="w-full rounded-t-md" style={{ height: `${(perBand[i] / maxBand) * 100}%`, minHeight: 3, background: b.color }} />
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 grid grid-cols-8 gap-2 text-center text-[11px] leading-tight text-ink-3">{SPECTRUM_BANDS.map((b) => <span key={b.label}>{b.label}</span>)}</div>
+      </Panel>
+
+      {sections.map(({ g, gi, rows }) => (
+        <div key={g.id} className="space-y-3">
+          <SectionTitle n={gi + 1} label={g.label} color={g.color} note={`${rows.length} perguntas`} />
+          <div className="grid gap-4 xl:grid-cols-2">
+            {rows.map(({ q, t, options }) => (
+              <article key={q.id} className="overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5">
+                <div aria-hidden="true" className="h-1" style={{ background: g.color }} />
+                <div className="p-4">
+                  <p className="text-sm font-semibold leading-snug text-ink"><QNum n={QUESTION_NUMBER[q.id]} title={`código interno ${q.id}`} />{q.text}</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-wide text-ink-3">{t.name}</p>
+                  <ul className="mt-3 divide-y divide-line/70">
+                    {options.map(({ o, v }) => {
+                      const bi = v ? bandIndex(v.band) : -1;
+                      return (
+                        <li key={o.id} className="flex flex-wrap items-center gap-x-3 gap-y-1.5 py-2">
+                          <span className="min-w-0 flex-1 text-[13px] font-medium leading-snug text-ink-2">{o.label}</span>
+                          {v ? (
+                            <span className="flex items-center gap-2" title={v.reason}>
+                              <span aria-hidden="true" className="flex h-2 w-28 overflow-hidden rounded-full">
+                                {SPECTRUM_BANDS.map((b, i) => <span key={b.label} className="h-full flex-1" style={{ background: i === bi ? b.color : "var(--color-line)" }} />)}
+                              </span>
+                              <span className={`w-32 rounded-full px-2.5 py-0.5 text-center text-xs font-bold text-ink ${v.reason !== "Proposta" ? "ring-2 ring-purple ring-offset-1" : ""}`} style={{ background: `${SPECTRUM_BANDS[bi].color}33` }}>{v.band}</span>
+                            </span>
+                          ) : <span className="text-xs italic text-ink-3">sem faixa (não entra na régua)</span>}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </AdminShell>
   );
 }
