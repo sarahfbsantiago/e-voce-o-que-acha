@@ -50,7 +50,7 @@ describe("notas revisadas por alternativa (mesma tabela do admin)", () => {
     expect(comparison.compareAnswerToPosition(q05, { questionId: "q05", optionIds: ["q05-o2"] }, p)).toBe("DIFFERENT");
   });
   it("funcionam mesmo sem posição publicada", () => {
-    expect(comparison.compareAnswerToPosition(q53, { questionId: "q53", optionIds: ["q53-o1"] }, null, "flavio-bolsonaro")).toBe("PARTIALLY_SIMILAR");
+    expect(comparison.compareAnswerToPosition(q53, { questionId: "q53", optionIds: ["q53-o3"] }, null, "flavio-bolsonaro")).toBe("PARTIALLY_SIMILAR");
     expect(comparison.compareAnswerToPosition(q53, { questionId: "q53", optionIds: ["q53-o2"] }, null, "flavio-bolsonaro")).toBe("DIFFERENT");
   });
   it("\"Não sei\" continua fora da conta", () => {

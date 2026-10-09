@@ -287,7 +287,7 @@ _Acesso a armas, regime de CACs, política de drogas e apostas online._
 | Mais repressão policial | — | 0,5 | 1 |
 | Mais tratamento de saúde | — | 1 | 0 |
 | Mais prevenção e educação | — | 1 | 0 |
-| Uma combinação dessas medidas | — | 0,5 | 0 |
+| Uma combinação dessas medidas | — | 1 | 0 |
 | Não sei | fora da conta | fora | fora |
 
 **15. O que deveria acontecer com bets e apostas online?**
@@ -345,7 +345,7 @@ _Proteção de áreas sensíveis, desmatamento, metas climáticas e fontes de en
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
 | Sim | +2 | 1 | 0 |
-| Sim, mas sem prejudicar demais a economia | +1 | 0,5 | 0,5 |
+| Sim, mas sem prejudicar demais a economia | +1 | 0,5 | 0 |
 | Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
 
@@ -425,7 +425,7 @@ _Direitos civis, religião e Estado, decisões do STF, independência dos órgã
 
 | Alternativa | Escala | Peso Lula | Peso Flávio Bolsonaro |
 |---|---|---|---|
-| Sim | +2 | 1 | 0,5 |
+| Sim | +2 | 1 | 0 |
 | Sim, porém definir novas regras junto com a população | +1 | 1 | 0 |
 | Não | -2 | 0 | 0,5 |
 | Não sei | fora da conta | fora | fora |
