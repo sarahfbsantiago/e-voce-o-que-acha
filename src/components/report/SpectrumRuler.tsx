@@ -1,21 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { SPECTRUM_HISTORY, type SectionHistory } from "@/data/spectrum-history";
-import { SPECTRUM_BANDS, CANDIDATE_SPECTRUM, RULER_WIDTHS, bandAt, closestCandidateOnRuler, personSpectrum, rulerPct } from "@/data/political-spectrum";
+import { SPECTRUM_BANDS, CANDIDATE_SPECTRUM, RULER_WIDTHS, closestCandidateOnRuler, personSpectrum, rulerPct } from "@/data/political-spectrum";
 import { SPECTRUM_COMPARISON, SPECTRUM_INTRO, SPECTRUM_SECTIONS, SPECTRUM_TERMS, type SpectrumBlock } from "@/data/spectrum-terms";
 
-const N = SPECTRUM_BANDS.length;
 const pct = rulerPct;
 const WIDTHS = RULER_WIDTHS;
 /** Rótulo centrado na seta, mas encostado na borda quando a seta está perto das pontas. */
-/** No celular: o que fica "entre" duas faixas vai para a linha da divisa mais próxima; o resto, para o meio da faixa. */
-const slotOf = (at: number, between = false) => {
-  const r = Math.round(at);
-  if (between && r > 0 && r < N) return r;
-  return Math.min(N - 1, Math.max(0, Math.floor(at))) + 0.5;
-};
 const anchor = (n: number) => (n < 10 ? "translateX(-12px)" : n > 90 ? "translateX(calc(-100% + 12px))" : "translateX(-50%)");
 
 type Totals = { c: { id: string; name: string }; themes: number }[];
@@ -141,12 +134,6 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
     </span>
   );
 
-  // celular: linhas de cima para baixo; meio de faixa = n,5 e divisas = inteiros
-  const slots: { at: number; band: number | null }[] = [];
-  for (let i = 0; i < N; i++) {
-    if (i > 0) slots.push({ at: i, band: null });
-    slots.push({ at: i + 0.5, band: i });
-  }
 
   return (
     <div ref={rootRef} className="mt-6 print-keep" aria-labelledby="espectro">
@@ -217,35 +204,43 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
         </div>
       </div>
 
-      {/* celular: régua em pé */}
-      <ol className="mt-4 lg:hidden print:hidden">
-        {slots.map(({ at, band }) => {
-          const terms = SPECTRUM_TERMS.filter((t) => slotOf(t.at, t.between) === at);
-          const cands = candidates.filter((t) => slotOf(t.spot.at, t.spot.label.startsWith("Progressista")) === at);
-          const you = slotOf(person.at, person.ideology === "Progressismo") === at;
-          if (band === null && !terms.length && !cands.length && !you) return null;
-          return (
-            <li key={at} className={`${anim("spectrum-pop")} flex gap-3`} style={delay(at * 0.07)}>
-              <span aria-hidden="true" className={`w-2.5 shrink-0 ${band === 0 ? "rounded-t-full" : ""} ${band === N - 1 ? "rounded-b-full" : ""}`} style={{ background: band !== null ? SPECTRUM_BANDS[band].color : `linear-gradient(to bottom, ${SPECTRUM_BANDS[at - 1].color}, ${SPECTRUM_BANDS[at].color})` }} />
-              <div className={`min-w-0 flex-1 ${band === null ? "py-1.5" : "py-2"}`}>
-                <p className={band === null ? "text-[11px] italic text-ink-3" : "text-xs font-semibold text-ink"}>{bandAt(at)}</p>
-                {terms.length || cands.length || you ? (
-                  <div className="relative mt-1 flex flex-wrap items-center gap-1.5">
-                    {/* setinha pontilhada da régua até os itens desta faixa */}
-                    <span aria-hidden="true" className="absolute -left-3 top-3 flex -translate-y-1/2 items-center">
-                      <span className="h-0 w-0 border-y-[4px] border-r-[6px] border-y-transparent border-r-ink-3" />
-                      <span className="w-2 border-t-[1.5px] border-dashed border-ink-3" />
-                    </span>
-                    {terms.map((t) => termButton(t.label, t.section, t.at, true))}
-                    {cands.map((t) => <span key={t.c.id} className={`rounded-md px-1.5 py-0.5 text-[11px] font-semibold text-white ${t.tone}`}>◀ {t.c.name.split(" ")[0]}</span>)}
-                    {you ? <span className="spectrum-pulse rounded-md bg-purple px-2 py-0.5 text-[11px] font-bold text-white">◀ {youLabel}</span> : null}
-                  </div>
-                ) : null}
-              </div>
-            </li>
-          );
-        })}
-      </ol>
+      {/* celular: régua em pé, com cada item numa linha própria e uma seta até o ponto exato */}
+      {(() => {
+        type Item = { key: string; at: number; node: ReactNode };
+        const items: Item[] = [
+          ...SPECTRUM_TERMS.map((t) => ({ key: t.label, at: t.at, node: termButton(t.label, t.section, t.at, true) })),
+          ...candidates.map((t) => ({ key: t.c.id, at: t.spot.at + 0.001, node: <span className={`rounded-md px-2 py-0.5 text-[11px] font-bold text-white ${t.tone}`}>{t.c.name.split(" ")[0]}</span> })),
+          { key: "voce", at: person.at + 0.002, node: <span className="spectrum-pulse rounded-md bg-purple px-2 py-0.5 text-[11px] font-bold text-white">{youLabel}</span> },
+        ].sort((x, y) => x.at - y.at);
+        const ROW = 44;
+        const H = items.length * ROW;
+        const BAR_X = 112;
+        const yOf = (at: number) => (pct(at) / 100) * H;
+        return (
+          <div className="relative mt-4 lg:hidden print:hidden" style={{ height: H }}>
+            {/* nomes das faixas, à esquerda */}
+            {SPECTRUM_BANDS.map((b, i) => (
+              <span key={b.label} className="absolute right-[calc(100%-104px)] -translate-y-1/2 text-right text-[11px] font-semibold leading-tight text-ink-2" style={{ top: yOf(i + 0.5) }}>{b.label}</span>
+            ))}
+            {/* a régua */}
+            <div className={`${anim("spectrum-grow")} absolute top-0 flex w-3 flex-col overflow-hidden rounded-full`} style={{ left: BAR_X, height: H, transformOrigin: "top" }}>
+              {SPECTRUM_BANDS.map((b, i) => <span key={b.label} style={{ background: b.color, flexGrow: WIDTHS[i], flexBasis: 0 }} />)}
+            </div>
+            {/* setas pontilhadas: de cada item até o ponto exato da régua */}
+            <svg aria-hidden="true" className="absolute inset-0 h-full w-full overflow-visible">
+              {items.map((it, i) => (
+                <line key={it.key} x1={BAR_X + 34} y1={(i + 0.5) * ROW} x2={BAR_X + 20} y2={yOf(it.at)} className="stroke-ink-3" strokeWidth={1.5} strokeDasharray="3 3" strokeLinecap="round" />
+              ))}
+            </svg>
+            {items.map((it) => (
+              <span key={`p-${it.key}`} aria-hidden="true" className="absolute h-0 w-0 -translate-y-1/2 border-y-[4px] border-r-[6px] border-y-transparent border-r-ink-3" style={{ left: BAR_X + 14, top: yOf(it.at) }} />
+            ))}
+            {items.map((it, i) => (
+              <div key={`c-${it.key}`} className={`${anim("spectrum-pop")} absolute -translate-y-1/2`} style={{ left: BAR_X + 38, top: (i + 0.5) * ROW, ...delay(0.2 + i * 0.05) }}>{it.node}</div>
+            ))}
+          </div>
+        );
+      })()}
 
       <ul className="mt-3 space-y-0.5 text-[11px] text-ink-2">
         {candidates.map((t) => <li key={t.c.id}><span className="font-semibold text-ink">{t.c.name}:</span> {t.spot.label}</li>)}
