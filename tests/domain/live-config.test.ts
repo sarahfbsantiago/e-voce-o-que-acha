@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { BASELINE_CONFIG, applyConfig, applyScope, buildOptions, diffConfig, nextQuestionId, scopeChanged, validateConfig } from "@/lib/live-config";
+import { BASELINE_CONFIG, applyConfig, applyScope, buildOptions, diffConfig, nextQuestionId, rebaseDraft, scopeChanged, validateConfig, type LiveConfig } from "@/lib/live-config";
 import { computeImpact } from "@/lib/config-impact";
 import { QUESTIONS, QUESTION_BY_ID } from "@/data/questions";
 import { QUESTION_NUMBER } from "@/lib/question-order";
@@ -126,5 +126,49 @@ describe("envio de notas e faixas juntas", () => {
     expect(out.optionScores[other]).toEqual(base.optionScores[other]);
     expect(scopeChanged(base, draft, { kind: "calc", questionId: "q01" })).toBe(true);
     expect(scopeChanged(base, out, { kind: "calc", questionId: "q03" })).toBe(false);
+  });
+});
+
+describe("rascunho por cima da versão no ar", () => {
+  const withText = (cfg: LiveConfig, qid: string, text: string): LiveConfig => {
+    const c = clone(cfg);
+    c.questions.find((q) => q.id === qid)!.text = text;
+    return c;
+  };
+  const textOf = (cfg: LiveConfig, qid: string) => cfg.questions.find((q) => q.id === qid)!.text;
+
+  it("enviar o rascunho depois de aprovar um item não desfaz o item (caso da pergunta 16)", () => {
+    const [qa, qb] = [QUESTIONS[0].id, QUESTIONS[1].id];
+    const v8 = clone(BASELINE_CONFIG);
+    // rascunho com duas mudanças; o item A é enviado sozinho e sai do rascunho
+    const draft = withText(withText(v8, qa, "A novo"), qb, "B novo");
+    const rest = applyScope(draft, v8, { kind: "question", id: qa });
+    const v9 = applyScope(v8, draft, { kind: "question", id: qa });
+    const working = rebaseDraft(v8, rest, v9);
+    expect(textOf(working, qa)).toBe("A novo");
+    expect(textOf(working, qb)).toBe("B novo");
+    expect(diffConfig(v9, working).length).toBe(1);
+  });
+
+  it("mantém mudanças do rascunho e do ar em partes diferentes, inclusive notas, régua e textos", () => {
+    const base = clone(BASELINE_CONFIG);
+    const k = Object.keys(base.optionScores)[0];
+    const draft = clone(base); draft.optionScores[k] = [0.5, "rascunho"]; draft.rightSideFrom = base.rightSideFrom + 0.1;
+    const live = withText(base, QUESTIONS[2].id, "no ar");
+    const out = rebaseDraft(base, draft, live);
+    expect(out.optionScores[k]).toEqual([0.5, "rascunho"]);
+    expect(out.rightSideFrom).toBe(base.rightSideFrom + 0.1);
+    expect(textOf(out, QUESTIONS[2].id)).toBe("no ar");
+    expect(validateConfig(out)).toEqual([]);
+  });
+
+  it("pergunta nova no rascunho continua; sem mudanças no ar, o rascunho fica igual", () => {
+    const base = clone(BASELINE_CONFIG);
+    const draft = clone(base); draft.questions.push({ ...clone(QUESTIONS[0]), id: "q99", text: "nova" });
+    expect(rebaseDraft(base, draft, base).questions.at(-1)!.id).toBe("q99");
+    const live = withText(base, QUESTIONS[0].id, "no ar");
+    const out = rebaseDraft(base, draft, live);
+    expect(out.questions.at(-1)!.id).toBe("q99");
+    expect(textOf(out, QUESTIONS[0].id)).toBe("no ar");
   });
 });

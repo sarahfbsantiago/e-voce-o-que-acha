@@ -392,3 +392,41 @@ export function describeScope(scope: Scope, numbers: Record<string, number> = {}
     case "evidence": return `Evidência ${scope.id}`;
   }
 }
+
+const isRecord = (v: unknown): v is Record<string, unknown> => !!v && typeof v === "object" && !Array.isArray(v);
+const keyedById = (v: unknown): v is { id: string }[] => Array.isArray(v) && v.length > 0 && v.every((x) => isRecord(x) && typeof x.id === "string");
+
+/** Junção em três vias: fica o que mudou em `mine` desde `base`; o resto vem de `theirs`. */
+function merge3(base: unknown, mine: unknown, theirs: unknown): unknown {
+  if (sameJson(mine, base)) return clone(theirs);
+  if (sameJson(theirs, base)) return clone(mine);
+  if (isRecord(base) && isRecord(mine) && isRecord(theirs)) {
+    const out: Record<string, unknown> = {};
+    for (const k of new Set([...Object.keys(theirs), ...Object.keys(mine)])) {
+      const v = merge3(base[k], mine[k], theirs[k]);
+      if (v !== undefined) out[k] = v;
+    }
+    return out;
+  }
+  if (keyedById(mine) && (keyedById(theirs) || Array.isArray(theirs)) && (base === undefined || Array.isArray(base))) {
+    const by = (arr: unknown) => new Map((Array.isArray(arr) ? arr : []).map((x) => [(x as { id: string }).id, x]));
+    const b = by(base), m = by(mine), t = by(theirs);
+    const out: unknown[] = [];
+    for (const [id, tv] of t) {
+      if (b.has(id) && !m.has(id)) continue; // removido no rascunho
+      out.push(m.has(id) ? merge3(b.get(id), m.get(id), tv) : clone(tv));
+    }
+    for (const [id, mv] of m) if (!t.has(id) && !b.has(id)) out.push(clone(mv)); // novo no rascunho
+    return out;
+  }
+  return clone(mine);
+}
+
+/**
+ * Traz o rascunho para cima da versão no ar: só as mudanças feitas no rascunho (em relação à versão em que ele
+ * começou) ficam; o que foi publicado depois (por pedidos de item) não é desfeito.
+ */
+export function rebaseDraft(base: LiveConfig, draft: LiveConfig, live: LiveConfig): LiveConfig {
+  const norm = (c: LiveConfig): LiveConfig => ({ ...c, content: contentOf(c) });
+  return merge3(norm(base), norm(draft), norm(live)) as LiveConfig;
+}

@@ -1,7 +1,7 @@
 import type { Prisma } from "@prisma/client";
 import { dataSourceMode } from "@/lib/env";
 import { getPrisma } from "@/lib/prisma";
-import { BASELINE_CONFIG, applyConfig, type ChangeItem, type LiveConfig } from "@/lib/live-config";
+import { BASELINE_CONFIG, applyConfig, rebaseDraft, type ChangeItem, type LiveConfig } from "@/lib/live-config";
 import type { Impact } from "@/lib/config-impact";
 
 /**
@@ -41,7 +41,14 @@ export async function ensureLiveConfig(): Promise<PublishedConfig> {
 export async function getDraft(): Promise<{ cfg: LiveConfig; baseVersion: number; updatedAt: Date } | null> {
   if (dataSourceMode() !== "prisma") return null;
   const d = await getPrisma().configDraft.findUnique({ where: { id: "main" } });
-  return d ? { cfg: asConfig(d.snapshot), baseVersion: d.baseVersion, updatedAt: d.updatedAt } : null;
+  if (!d) return null;
+  // Se algo foi publicado depois que o rascunho começou, o rascunho vem por cima da versão no ar
+  // (senão "Enviar tudo" desfaria o que já foi aprovado).
+  const live = await getPublishedConfig(true);
+  if (d.baseVersion === live.version) return { cfg: asConfig(d.snapshot), baseVersion: d.baseVersion, updatedAt: d.updatedAt };
+  const base = await getVersion(d.baseVersion);
+  const cfg = base ? rebaseDraft(base.cfg, asConfig(d.snapshot), live.cfg) : asConfig(d.snapshot);
+  return { cfg, baseVersion: live.version, updatedAt: d.updatedAt };
 }
 
 /** Rascunho atual ou, se não houver, uma cópia da versão publicada. */
@@ -175,7 +182,12 @@ export async function reopenAsDraft(id: number): Promise<void> {
   const r = await getRequest(id);
   if (!r) return;
   const pub = await getPublishedConfig(true);
-  await saveDraft(r.cfg, pub.version);
+  // o pedido foi feito sobre uma versão antiga: traz só as mudanças dele para cima do que está no ar
+  // e junta com o rascunho atual, se houver
+  const base = await getVersion(r.row.baseVersion);
+  const cfg = base ? rebaseDraft(base.cfg, r.cfg, pub.cfg) : r.cfg;
+  const draft = await getDraft();
+  await saveDraft(draft ? rebaseDraft(pub.cfg, cfg, draft.cfg) : cfg, pub.version);
 }
 
 /** Dados curtos da versão no ar (para o cabeçalho do admin). */
