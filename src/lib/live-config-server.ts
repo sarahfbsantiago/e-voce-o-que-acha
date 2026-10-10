@@ -114,6 +114,12 @@ export async function getVersion(id: number): Promise<{ row: VersionRow; cfg: Li
   return { row: { ...r, changes: r.changes as unknown as ChangeItem[], impact: r.impact as unknown as Impact }, cfg: asConfig(r.snapshot) };
 }
 
+/** A versão publicada logo antes de `id` (para mostrar o antes × depois de uma publicação). */
+export async function getPreviousVersion(id: number): Promise<{ row: VersionRow; cfg: LiveConfig } | null> {
+  const r = await getPrisma().configVersion.findFirst({ where: { id: { lt: id } }, orderBy: { id: "desc" }, select: { id: true } });
+  return r ? getVersion(r.id) : null;
+}
+
 /**
  * Entradas públicas do histórico da metodologia geradas pelas publicações do admin:
  * "Revisão humana" com o que mudou e o motivo. Sem nome de quem publicou e sem nada que leve ao admin.

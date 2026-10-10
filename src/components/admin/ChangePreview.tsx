@@ -1,7 +1,8 @@
-import { contentOf, sameJson, type LiveConfig } from "@/lib/live-config";
+import { bandKey, contentOf, sameJson, scoreKey, type LiveConfig } from "@/lib/live-config";
 import { getPrisma } from "@/lib/prisma";
 import { dataSourceMode } from "@/lib/env";
 import { evidenceSummaryWith, type PositionOverride } from "@/data/position-overrides";
+import { numbersFor } from "@/lib/publish-plan";
 
 type Pair = { title: string; group: string; before: unknown; after: unknown };
 
@@ -29,10 +30,48 @@ function flatten(v: unknown, path: string[] = [], out: [string, string][] = []):
 }
 const nice = (k: string, v: string) => (k.endsWith("Direção") ? DIR[v] ?? v : k.endsWith("Status") ? STATUS[v] ?? v : v);
 
-/** Pares antes × depois de tudo que é texto, posição ou fonte. */
-async function contentPairs(a: LiveConfig, b: LiveConfig): Promise<Pair[]> {
-  const A = contentOf(a), B = contentOf(b);
+const score = (n: number | undefined) => (n === undefined ? "—" : n === 0.5 ? "0,5" : String(n));
+const at = (n: number | null | undefined) => (n === null || n === undefined ? "fim" : String(n).replace(".", ","));
+
+/** Pares antes × depois da conta: perguntas, notas, faixas e régua. */
+function configPairs(a: LiveConfig, b: LiveConfig): Pair[] {
   const out: Pair[] = [];
+  const num = numbersFor(a, b);
+  const qa = new Map(a.questions.map((q) => [q.id, q])), qb = new Map(b.questions.map((q) => [q.id, q]));
+  for (const id of new Set([...qa.keys(), ...qb.keys()])) {
+    const title = `Pergunta ${num[id] ?? id}`;
+    const ref = qb.get(id) ?? qa.get(id)!;
+    const label = (oid: string) => ref.options.find((o) => o.id === oid)?.label ?? oid;
+    const q = (cfg: LiveConfig, m: Map<string, (typeof ref)>) => {
+      const x = m.get(id);
+      if (!x) return null;
+      return { Pergunta: x.text, Exemplo: x.example ?? "", Alternativas: x.options.map((o) => o.label), Situação: cfg.archived.includes(id) ? "Arquivada" : "No questionário" };
+    };
+    const [qA, qB] = [q(a, qa), q(b, qb)];
+    if (!sameJson(qA, qB)) out.push({ group: "Perguntas", title, before: qA, after: qB });
+    const notes = (cfg: LiveConfig) => Object.fromEntries(ref.options.filter((o) => !o.isNoOpinion).map((o) => [o.label,
+      `Lula ${score(cfg.optionScores[scoreKey(id, "lula", o.id)]?.[0])} · Flávio ${score(cfg.optionScores[scoreKey(id, "flavio-bolsonaro", o.id)]?.[0])}`]));
+    const [nA, nB] = [notes(a), notes(b)];
+    if (!sameJson(nA, nB)) out.push({ group: "Notas", title: `${title}: ${ref.text}`, before: nA, after: nB });
+    const bands = (cfg: LiveConfig) => Object.fromEntries(ref.options.filter((o) => !o.isNoOpinion).map((o) => [label(o.id), cfg.spectrumPositions[bandKey(id, o.id)]?.[0] ?? "—"]));
+    const [bA, bB] = [bands(a), bands(b)];
+    if (!sameJson(bA, bB)) out.push({ group: "Faixas na régua", title: `${title}: ${ref.text}`, before: bA, after: bB });
+  }
+  const ruler = (cfg: LiveConfig) => ({
+    ...Object.fromEntries(Object.entries(cfg.terms).map(([k, v]) => [`Seta de ${k}`, at(v)])),
+    ...Object.fromEntries(Object.entries(cfg.candidates).map(([k, v]) => [k === "lula" ? "Lula" : "Flávio", at(v)])),
+    ...Object.fromEntries(Object.entries(cfg.ideologyBounds).map(([k, v]) => [`Fim do trecho de ${k}`, at(v)])),
+    "Linha divisória": at(cfg.rightSideFrom),
+  });
+  const [rA, rB] = [ruler(a), ruler(b)];
+  if (!sameJson(rA, rB)) out.push({ group: "Régua", title: "Posições na régua", before: rA, after: rB });
+  return out;
+}
+
+/** Pares antes × depois de tudo: conta (perguntas, notas, faixas, régua), textos, posições e fontes. */
+export async function contentPairs(a: LiveConfig, b: LiveConfig): Promise<Pair[]> {
+  const A = contentOf(a), B = contentOf(b);
+  const out: Pair[] = configPairs(a, b);
   const PAGES: Record<string, string> = { home: "Página inicial", startCta: "Chamada Começar", footer: "Rodapé", comoFunciona: "Como funciona", metodologia: "Metodologia", report: "Relatório" };
   for (const k of Object.keys(B.pages)) { const x = (A.pages as unknown as Record<string, unknown>)[k], y = (B.pages as unknown as Record<string, unknown>)[k]; if (!sameJson(x, y)) out.push({ group: "Textos do site", title: PAGES[k] ?? k, before: x, after: y }); }
   for (const k of new Set([...Object.keys(A.profiles), ...Object.keys(B.profiles)])) if (!sameJson(A.profiles[k], B.profiles[k])) out.push({ group: "Perfis ideológicos", title: k, before: A.profiles[k], after: B.profiles[k] });
@@ -69,10 +108,10 @@ async function contentPairs(a: LiveConfig, b: LiveConfig): Promise<Pair[]> {
   return out;
 }
 
-/** Prévia do que muda em textos, posições e fontes: antes × depois, só os campos alterados. */
-export async function ChangePreview({ live, target }: { live: LiveConfig; target: LiveConfig }) {
+/** Antes × depois de qualquer mudança, só os campos alterados. `beforeLabel`/`afterLabel` nomeiam as duas colunas. */
+export async function ChangePreview({ live, target, beforeLabel = "No ar", afterLabel = "Com o pedido" }: { live: LiveConfig; target: LiveConfig; beforeLabel?: string; afterLabel?: string }) {
   const pairs = await contentPairs(live, target);
-  if (!pairs.length) return null;
+  if (!pairs.length) return <p className="text-sm text-ink-3">Nenhuma diferença.</p>;
   return (
     <div className="space-y-3">
       {pairs.map((p, i) => {
@@ -85,8 +124,8 @@ export async function ChangePreview({ live, target }: { live: LiveConfig; target
               {keys.slice(0, 40).map((k) => (
                 <div key={k} className="grid gap-2 p-3 md:grid-cols-[180px_1fr_1fr]">
                   <p className="text-xs font-bold text-ink-3">{k || "Valor"}</p>
-                  <div className="rounded-lg bg-[#fde8e8] p-2 text-sm text-[#7f1d1d]"><p className="text-[10px] font-bold uppercase tracking-wide opacity-70">No ar</p>{before.has(k) ? <p className="line-through decoration-[#dc2626]/60">{nice(k, before.get(k)!)}</p> : <p className="italic opacity-70">(não existe)</p>}</div>
-                  <div className="rounded-lg bg-mint-soft p-2 text-sm text-[#14532d]"><p className="text-[10px] font-bold uppercase tracking-wide opacity-70">Com o pedido</p>{after.has(k) ? <p className="font-medium">{nice(k, after.get(k)!)}</p> : <p className="italic opacity-70">(removido)</p>}</div>
+                  <div className="rounded-lg bg-[#fde8e8] p-2 text-sm text-[#7f1d1d]"><p className="text-[10px] font-bold uppercase tracking-wide opacity-70">{beforeLabel}</p>{before.has(k) ? <p className="whitespace-pre-line line-through decoration-[#dc2626]/60">{nice(k, before.get(k)!)}</p> : <p className="italic opacity-70">(não existe)</p>}</div>
+                  <div className="rounded-lg bg-mint-soft p-2 text-sm text-[#14532d]"><p className="text-[10px] font-bold uppercase tracking-wide opacity-70">{afterLabel}</p>{after.has(k) ? <p className="whitespace-pre-line font-medium">{nice(k, after.get(k)!)}</p> : <p className="italic opacity-70">(removido)</p>}</div>
                 </div>
               ))}
               {keys.length > 40 ? <p className="p-3 text-xs text-ink-3">+{keys.length - 40} campos</p> : null}

@@ -7,9 +7,10 @@ import { MiniRuler } from "@/components/admin/MiniRuler";
 import { ChangePreview } from "@/components/admin/ChangePreview";
 
 const CALC = ["Notas por alternativa", "Espectro político", "Régua", "Perguntas"];
-import { buildPublishPlan } from "@/lib/publish-plan";
-import { getPublishedConfig, getRequest } from "@/lib/live-config-server";
-import { CANDIDATE_SHORT, applyScope, describeScope, type Scope } from "@/lib/live-config";
+import { buildPublishPlan, numbersFor } from "@/lib/publish-plan";
+import type { Impact } from "@/lib/config-impact";
+import { getPreviousVersion, getPublishedConfig, getRequest, getVersion } from "@/lib/live-config-server";
+import { CANDIDATE_SHORT, applyScope, describeScope, diffConfig, type LiveConfig, type Scope } from "@/lib/live-config";
 import { rejectAction, reopenAction } from "../actions";
 import { SECTION_COLOR } from "../page";
 import { CommentThread } from "@/components/admin/CommentThread";
@@ -36,9 +37,25 @@ export default async function Page({ params, searchParams }: { params: Promise<{
   if (!req) notFound();
   const pub = await getPublishedConfig(true);
   const scope = req.row.scope as Scope | null;
-  const plan = await buildPublishPlan(scope ? applyScope(pub.cfg, req.cfg, scope) : req.cfg, req.row.rollbackOf);
-  const im = plan.impact;
   const isOpen = req.row.status === "aberto";
+  const plan = await buildPublishPlan(scope ? applyScope(pub.cfg, req.cfg, scope) : req.cfg, req.row.rollbackOf);
+  // pedido fechado: antes × depois de quando foi decidido (aprovado: versão anterior × versão publicada; senão, a base do pedido)
+  let before: LiveConfig = pub.cfg, after: LiveConfig = plan.target, labels = { before: "No ar", after: "Com o pedido" };
+  if (!isOpen) {
+    const published = req.row.publishedVersion ? await getVersion(req.row.publishedVersion) : null;
+    const prev = published ? await getPreviousVersion(published.row.id) : await getVersion(req.row.baseVersion);
+    if (prev) {
+      before = prev.cfg;
+      after = published ? published.cfg : scope ? applyScope(prev.cfg, req.cfg, scope) : req.cfg;
+      labels = published ? { before: `Antes (v${prev.row.id})`, after: `Publicado (v${published.row.id})` } : { before: `Antes (v${prev.row.id})`, after: "Pedido" };
+    }
+    plan.changes = diffConfig(before, after, numbersFor(before, after));
+    plan.sections = [...new Set(plan.changes.map((c) => c.section))];
+    plan.errors = [];
+    plan.examples = [];
+    plan.impact = published && "summary" in published.row.impact ? (published.row.impact as Impact) : null;
+  }
+  const im = plan.impact;
   const comments = await getPrisma().adminComment.findMany({ where: { target: "pedido", targetId: id }, orderBy: { id: "asc" } });
   const stale = isOpen && !scope && req.row.baseVersion !== pub.version;
 
@@ -61,7 +78,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
       {plan.errors.length ? <Panel title="Corrija antes de aprovar" accent="#dc2626"><ul className="list-disc space-y-1 pl-5 text-sm text-[#9b1c1c]">{plan.errors.map((e) => <li key={e}>{e}</li>)}</ul></Panel> : null}
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <Panel title="O que muda" subtitle="Em relação ao que está no ar">
+        <Panel title={isOpen ? "O que muda" : "O que mudou"} subtitle={isOpen ? "Em relação ao que está no ar" : `${labels.before} → ${labels.after}`}>
           <ul className="max-h-96 space-y-1.5 overflow-y-auto text-sm">
             {plan.changes.map((c, i) => (
               <li key={i} className="flex gap-2 rounded-lg bg-paper/60 px-3 py-2 ring-1 ring-line">
@@ -88,13 +105,13 @@ export default async function Page({ params, searchParams }: { params: Promise<{
         </Panel>
       </div>
 
-      <Panel title="Prévia do que foi editado" subtitle="No ar × com o pedido, só o que mudou">
+      <Panel title={isOpen ? "Prévia do que foi editado" : "Antes × depois"} subtitle={`${labels.before} × ${labels.after}, só o que mudou`}>
         <div className="space-y-4">
-          <ChangePreview live={pub.cfg} target={plan.target} />
+          <ChangePreview live={before} target={after} beforeLabel={labels.before} afterLabel={labels.after} />
           {plan.sections.some((x) => CALC.includes(x)) ? (
             <>
-              <MiniRuler cfg={pub.cfg} label={`Régua no ar (v${pub.version})`} />
-              <MiniRuler cfg={plan.target} label="Régua com o pedido" highlight />
+              <MiniRuler cfg={before} label={`Régua: ${labels.before}`} />
+              <MiniRuler cfg={after} label={`Régua: ${labels.after}`} highlight />
               {plan.examples.length ? <div className="grid gap-2 md:grid-cols-2">{plan.examples.map((e, i) => <div key={i} className="rounded-lg bg-paper/60 p-3 text-xs ring-1 ring-line"><p className="font-bold text-ink-3">Exemplo {i + 1}</p><p className="mt-1">Ideologia: {e.before} → <b>{e.after}</b></p><p>Mais perto na régua: {e.rulerBefore} → <b>{e.rulerAfter}</b></p></div>)}</div> : null}
             </>
           ) : null}

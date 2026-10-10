@@ -4,7 +4,8 @@ import { notFound, redirect } from "next/navigation";
 import { isAdminSession } from "@/lib/admin-auth";
 import { AdminHero, AdminShell, Panel } from "@/components/admin/AdminUI";
 import { MiniRuler } from "@/components/admin/MiniRuler";
-import { getPublishedConfig, getVersion, listVersions } from "@/lib/live-config-server";
+import { getPreviousVersion, getPublishedConfig, getVersion, listVersions } from "@/lib/live-config-server";
+import { ChangePreview } from "@/components/admin/ChangePreview";
 import { diffConfig } from "@/lib/live-config";
 
 export const metadata: Metadata = { title: "Versão", robots: { index: false, follow: false } };
@@ -22,6 +23,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
   const versions = await listVersions();
   const diff = other ? diffConfig(v.cfg, other.cfg) : [];
   const imp = "summary" in v.row.impact ? v.row.impact.summary : [];
+  const prev = await getPreviousVersion(id);
 
   return (
     <AdminShell current="/admin/historico">
@@ -34,13 +36,18 @@ export default async function Page({ params, searchParams }: { params: Promise<{
           {imp.length ? <ul className="space-y-1 text-sm">{imp.map((s) => <li key={s} className="rounded bg-[#fff4e5] px-2 py-1 text-[#7a4a00]">{s}</li>)}</ul> : <p className="text-sm text-ink-3">—</p>}
         </Panel>
       </div>
+      {prev ? (
+        <Panel title="Antes × depois desta versão" subtitle={`v${prev.row.id} × v${id}, só o que mudou`}>
+          <ChangePreview live={prev.cfg} target={v.cfg} beforeLabel={`Antes (v${prev.row.id})`} afterLabel={`Depois (v${id})`} />
+        </Panel>
+      ) : null}
       <Panel title="Comparar com outra versão" subtitle="Escolha a versão para comparar"
         right={<div className="flex flex-wrap gap-1">{versions.filter((x) => x.id !== id).slice(0, 12).map((x) => <Link key={x.id} href={`/admin/historico/${id}?com=${x.id}`} className={`rounded-full px-2.5 py-0.5 text-xs font-bold ring-1 ${x.id === otherId ? "bg-purple text-white ring-purple" : "bg-surface text-ink-2 ring-line"}`}>v{x.id}{x.id === pub.version ? " (no ar)" : ""}</Link>)}</div>}>
         {other ? (
           <div className="space-y-4">
             <div className="grid gap-3 lg:grid-cols-2"><MiniRuler cfg={v.cfg} label={`v${id}`} /><MiniRuler cfg={other.cfg} label={`v${otherId}`} highlight /></div>
             <p className="text-xs font-bold uppercase tracking-wide text-ink-3">De v{id} para v{otherId}: {diff.length} diferenças</p>
-            <ul className="max-h-96 space-y-1 overflow-y-auto text-sm text-ink-2">{diff.map((c, i) => <li key={i} className="rounded bg-paper/60 px-2 py-1"><b className="text-ink">{c.section}:</b> {c.text}</li>)}</ul>
+            <ChangePreview live={v.cfg} target={other.cfg} beforeLabel={`v${id}`} afterLabel={`v${otherId}`} />
           </div>
         ) : <p className="text-sm text-ink-3">Esta é a versão no ar.</p>}
       </Panel>
