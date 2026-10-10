@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SiteOnly } from "@/components/SiteOnly";
 import { StartCta } from "@/components/StartCta";
 import { BrazilScene } from "@/components/brand/BrazilScene";
 import { PageGlow } from "@/components/fx/PageGlow";
@@ -40,15 +41,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Pular para o conteúdo
         </a>
-        <PageGlow />
-        <BrazilScene anchorId="mapa-anchor" size={220} spacing={3} dust={240} />
+        <SiteOnly><PageGlow /></SiteOnly>
+        <SiteOnly><BrazilScene anchorId="mapa-anchor" size={220} spacing={3} dust={240} /></SiteOnly>
         <RevealOnScroll />
-        <SiteHeader />
+        <SiteOnly><SiteHeader /></SiteOnly>
         <main id="conteudo" className="relative z-10 flex-1">
           {children}
         </main>
-        <StartCta />
-        <SiteFooter />
+        <SiteOnly><StartCta /></SiteOnly>
+        <SiteOnly><SiteFooter /></SiteOnly>
       </body>
     </html>
   );

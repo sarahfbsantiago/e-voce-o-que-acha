@@ -23,7 +23,7 @@ export function AdminNav({ current }: { current: string }) {
           </Link>
         );
       })}
-      <Link href="/" className="ml-auto inline-flex min-h-9 items-center rounded-xl px-3 py-1.5 text-ink-2 hover:bg-paper">Ver o site ↗</Link>
+      <a href="/" target="_blank" rel="noopener" className="ml-auto inline-flex min-h-9 items-center rounded-xl px-3 py-1.5 text-ink-2 hover:bg-paper">Ver o site ↗</a>
     </nav>
   );
 }

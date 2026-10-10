@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { adminToken, adminTotpSecret } from "@/lib/env";
 import { loginAction } from "./actions";
+import { AdminTopBar } from "@/components/admin/AdminUI";
 
 export const metadata: Metadata = { title: "Acesso administrativo", robots: { index: false, follow: false } };
 
@@ -9,7 +10,9 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
   const configured = adminToken() !== null;
   const totp = adminTotpSecret() !== null;
   return (
-    <div className="grid min-h-[80vh] place-items-center bg-[#f3f2ef] px-4 py-12">
+    <div className="min-h-screen bg-[#f3f2ef]">
+    <AdminTopBar />
+    <div className="grid min-h-[80vh] place-items-center px-4 py-12">
       <div className="w-full max-w-md overflow-hidden rounded-3xl bg-surface shadow-lg ring-1 ring-black/5">
         <div className="bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-6 text-white">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">Área privada</p>
@@ -36,6 +39,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }

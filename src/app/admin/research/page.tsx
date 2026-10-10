@@ -12,6 +12,7 @@ import { AGE_RANGES, REGIONS } from "@/domain/types";
 import { SPECTRUM_BANDS, ideologySpot } from "@/data/political-spectrum";
 import { logoutAction } from "../login/actions";
 import { AdminNav } from "@/components/AdminNav";
+import { AdminTopBar } from "@/components/admin/AdminUI";
 import { PrintButton } from "@/components/PrintButton";
 
 export const metadata: Metadata = { title: "Dados da pesquisa", robots: { index: false, follow: false } };
@@ -67,7 +68,8 @@ export default async function AdminResearchPage() {
 
   return (
     <div className="min-h-screen bg-[#f3f2ef]">
-      <div className="container-page space-y-5 py-8">
+      <AdminTopBar />
+      <div className="container-page space-y-5 py-6">
         <AdminNav current="/admin/research" />
 
         {/* cabeçalho */}
