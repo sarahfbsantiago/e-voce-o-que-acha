@@ -12,9 +12,6 @@ const read = (k: string) => { try { return localStorage.getItem(k); } catch { re
 const write = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* sem armazenamento: o pop-up pode voltar */ } };
 const sent = () => read(DONE_KEY) === "sent";
 
-/** Disparado pelo botão do PDF antes de imprimir; o pop-up de avaliação abre e a impressão vem ao fechar. */
-export const PDF_EVENT = "avaliacao:antes-do-pdf";
-
 const noopSubscribe = () => () => undefined;
 
 type Helped = "yes" | "no";
@@ -60,7 +57,7 @@ function FeedbackFields({ id, rating, setRating, helped, setHelped, status, subm
 
 /**
  * Avaliação anônima da pesquisa: nota (1–5) e se ajudou na decisão (Sim/Não). Enviada só ao clicar e só com o consentimento aceito.
- * Além da caixa no fim do relatório, um pop-up aparece quando a régua do espectro surge na tela (uma vez) e ao baixar o PDF.
+ * Além da caixa no fim do relatório, um pop-up aparece uma vez quando a régua do espectro surge na tela.
  */
 export function FeedbackForm() {
   const { session } = useSession();
@@ -73,8 +70,6 @@ export function FeedbackForm() {
   const sentBefore = useSyncExternalStore(noopSubscribe, sent, () => false);
   const status: Status = sentBefore ? "sent" : sendStatus;
 
-  // depois do pop-up aberto pelo botão do PDF, a impressão continua ao fechar (enviando ou no ×)
-  const afterClose = useRef<(() => void) | null>(null);
   const open = () => { if (!dialogRef.current?.open) dialogRef.current?.showModal(); };
 
   // pop-up quando a pessoa chega na régua do espectro (a régua avisa): uma vez só, se ainda não avaliou
@@ -92,19 +87,6 @@ export function FeedbackForm() {
     };
     window.addEventListener("avaliacao:regua", onRuler);
     return () => { window.removeEventListener("avaliacao:regua", onRuler); clearTimeout(timer); };
-  }, [consented]);
-
-  // pop-up ao clicar em "Baixar em PDF", enquanto a pessoa não tiver avaliado
-  useEffect(() => {
-    const onPdf = (e: Event) => {
-      const d = (e as CustomEvent<{ print: () => void; handled: boolean }>).detail;
-      if (!consented || sent()) return;
-      d.handled = true;
-      afterClose.current = d.print;
-      open();
-    };
-    window.addEventListener(PDF_EVENT, onPdf);
-    return () => window.removeEventListener(PDF_EVENT, onPdf);
   }, [consented]);
 
   async function submit() {
@@ -136,11 +118,7 @@ export function FeedbackForm() {
         <FeedbackFields id="caixa" {...fields} />
       </section>
 
-      <dialog ref={dialogRef} className="modal" aria-labelledby="avaliacao-popup" onClose={() => {
-        const next = afterClose.current;
-        afterClose.current = null;
-        if (next) setTimeout(next, 100);
-      }} onClick={(e) => { if (e.target === dialogRef.current) dialogRef.current?.close(); }}>
+      <dialog ref={dialogRef} className="modal" aria-labelledby="avaliacao-popup" onClick={(e) => { if (e.target === dialogRef.current) dialogRef.current?.close(); }}>
         <div className="modal-panel">
           <header className="flex items-center gap-3 border-b border-line px-5 py-4">
             <h2 id="avaliacao-popup" className="min-w-0 flex-1 text-base font-bold">Avalie esta pesquisa</h2>
