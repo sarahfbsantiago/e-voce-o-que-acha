@@ -14,7 +14,7 @@ const LABELS: Record<string, string> = {
   titleHome: "Título (página inicial)", titleOther: "Título (outras páginas)", subtitle: "Subtítulo", about: "Sobre", bottom: "Linha final", lead: "Introdução",
   steps: "Passos", title: "Título", text: "Texto", sections: "Seções", blocks: "Blocos", items: "Itens", finalMessage: "Mensagem final", footerIntro: "Rodapé do relatório",
   heading: "Título do perfil", summary: "Resumo", economy: "Na economia", society: "Na sociedade", state: "O papel do Estado", futureLabel: "Rótulo do futuro", future: "O futuro", keywords: "Palavras-chave",
-  figures: "Personagens", name: "Nome", years: "Anos", caption: "Legenda", credit: "Crédito da foto", author: "Autor", license: "Licença", page: "Link da foto", slug: "Foto (arquivo)",
+  figures: "Personagens", role: "Papel (Pensador, Figura internacional ou Figura brasileira)", name: "Nome", years: "Anos", caption: "Legenda", credit: "Crédito da foto", author: "Autor", license: "Licença", page: "Link da foto", slug: "Foto (arquivo)",
   chapters: "Capítulos", timeline: "Linha do tempo", lead2: "Destaque", label: "Texto do link", href: "Link", rows: "Linhas", head: "Cabeçalho",
   shortBio: "Resumo", professionalExperience: "Currículo", date: "Data", positionsHeld: "Cargos", from: "De", to: "Até", branch: "Poder", governmentExperience: "Experiência de governo",
   keyInitiatives: "Projetos e programas", year: "Ano", kind: "Tipo", url: "Link", programHighlights: "Principais propostas", theme: "Tema", group: "Grupo", pages: "Páginas",

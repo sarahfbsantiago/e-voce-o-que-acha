@@ -16,21 +16,35 @@ type Totals = { c: { id: string; name: string }; themes: number }[];
 
 /** "Na história": personagens com foto, a história em poucas linhas e a linha do tempo, com cara de livro de história. */
 function HistoryBook({ h }: { h: SectionHistory }) {
+  // personagens com o mesmo papel (ex.: Mussolini e Hitler) dividem o cartão
+  const cards: { role?: string; figures: SectionHistory["figures"] }[] = [];
+  for (const f of h.figures) {
+    const last = cards[cards.length - 1];
+    if (f.role && last?.role === f.role) last.figures.push(f);
+    else cards.push({ role: f.role, figures: [f] });
+  }
   return (
     <section className="space-y-4 rounded-xl border border-note-line bg-note p-4 shadow-inner" aria-label="Na história">
       <p className="font-serif text-xs font-bold uppercase tracking-[0.2em] text-gold-strong">Na história</p>
-      <div className={`grid gap-4 ${h.figures.length > 1 ? "sm:grid-cols-2" : ""}`}>
-        {h.figures.map((f) => (
-          <figure key={f.slug} className="flex gap-3 rounded-lg bg-surface/70 p-2.5 shadow-sm ring-1 ring-note-line">
-            <div className="shrink-0 self-start rotate-[-1.5deg] rounded-sm bg-white p-1 pb-3 shadow-md ring-1 ring-black/5">
-              {f.slug ? <Image src={`/historia-img/${f.slug}`} unoptimized alt={`Retrato de ${f.name}`} width={96} height={124} className="h-[124px] w-24 object-cover grayscale-[35%] sepia-[25%]" /> : <span className="grid h-[124px] w-24 place-items-center bg-note text-2xl font-bold text-gold-strong">{f.name.split(" ").map((x) => x[0]).slice(0, 2).join("")}</span>}
-            </div>
-            <figcaption className="min-w-0 text-xs leading-relaxed text-ink-2">
-              <span className="block font-serif text-sm font-bold text-ink">{f.name}</span>
-              <span className="block text-[11px] text-ink-3">{f.years}</span>
-              <span className="mt-1 block">{f.caption}</span>
-            </figcaption>
-          </figure>
+      <div className={`grid gap-4 ${cards.length > 2 ? "sm:grid-cols-3" : cards.length > 1 ? "sm:grid-cols-2" : ""}`}>
+        {cards.map((c, ci) => (
+          <div key={ci} className="space-y-3 rounded-lg bg-surface/70 p-2.5 shadow-sm ring-1 ring-note-line">
+            {c.role ? <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-gold-strong">{c.role}</p> : null}
+            {c.figures.map((f) => (
+              <figure key={f.slug || f.name} className="flex gap-3 sm:flex-col">
+                {f.slug || f.caption ? (
+                  <div className="shrink-0 self-start rotate-[-1.5deg] rounded-sm bg-white p-1 pb-3 shadow-md ring-1 ring-black/5">
+                    {f.slug ? <Image src={`/historia-img/${f.slug}`} unoptimized alt={`Retrato de ${f.name}`} width={96} height={124} className="h-[124px] w-24 object-cover grayscale-[35%] sepia-[25%]" /> : <span className="grid h-[124px] w-24 place-items-center bg-note text-2xl font-bold text-gold-strong">{f.name.split(" ").map((x) => x[0]).slice(0, 2).join("")}</span>}
+                  </div>
+                ) : null}
+                <figcaption className="min-w-0 text-xs leading-relaxed text-ink-2">
+                  <span className="block font-serif text-sm font-bold text-ink">{f.name}</span>
+                  {f.years ? <span className="block text-[11px] text-ink-3">{f.years}</span> : null}
+                  {f.caption ? <span className="mt-1 block">{f.caption}</span> : null}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         ))}
       </div>
       <div className="space-y-4 font-serif text-[15px] leading-relaxed text-ink">
@@ -53,7 +67,7 @@ function HistoryBook({ h }: { h: SectionHistory }) {
         </ol>
       </div>
       <p className="text-[10px] leading-snug text-ink-3">
-        Fotos: {h.figures.map((f, i) => (
+        Fotos: {h.figures.filter((f) => f.slug && f.credit.page).map((f, i) => (
           <span key={f.slug}>{i ? " · " : ""}{f.name}, {f.credit.author}, {f.credit.license}, <a href={f.credit.page} target="_blank" rel="noreferrer" className="underline">Wikimedia Commons</a></span>
         ))}.
       </p>
