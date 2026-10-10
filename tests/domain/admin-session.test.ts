@@ -6,7 +6,7 @@ describe("sessão do admin", () => {
   beforeEach(() => { process.env.ADMIN_TOKEN = "token-de-teste-com-mais-de-16-chars"; });
   afterEach(() => { process.env.ADMIN_TOKEN = prev; });
 
-  it("o cookie não contém o token e vale por no máximo 1 hora", () => {
+  it("o cookie não contém o token e vale por no máximo 30 minutos", () => {
     const now = 1_800_000_000_000;
     const v = createSessionValue(now)!;
     expect(v).not.toContain(process.env.ADMIN_TOKEN);

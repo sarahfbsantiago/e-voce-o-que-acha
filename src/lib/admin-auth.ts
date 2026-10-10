@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import { adminToken } from "./env";
 
 export const ADMIN_COOKIE = "vd_admin";
-/** A sessão termina 1 hora depois do login, aconteça o que acontecer; depois disso o código é pedido de novo. */
-export const ADMIN_SESSION_MAX_MS = 60 * 60 * 1000;
+/** A sessão termina 30 minutos depois do login, aconteça o que acontecer; depois disso o código é pedido de novo. */
+export const ADMIN_SESSION_MAX_MS = 30 * 60 * 1000;
 
 /** Comparação em tempo constante para evitar vazamento por timing. */
 function safeEqual(a: string, b: string): boolean {
@@ -59,6 +59,14 @@ export async function isAdminSession(): Promise<boolean> {
   return isValidSessionValue(store.get(ADMIN_COOKIE)?.value);
 }
 
+
+/** Quando a sessão atual termina (ms desde 1970), para o relógio do admin. null sem sessão válida. */
+export async function adminSessionExpiresAt(): Promise<number | null> {
+  const store = await cookies();
+  const value = store.get(ADMIN_COOKIE)?.value;
+  if (!isValidSessionValue(value)) return null;
+  return Number(value!.slice(0, value!.indexOf("."))) + ADMIN_SESSION_MAX_MS;
+}
 
 /** Route Handlers: só o cookie de sessão (quem entrou com o código). */
 export function isAdminRequest(req: Request): boolean {

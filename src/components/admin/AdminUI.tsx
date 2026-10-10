@@ -3,6 +3,8 @@ import { AdminNav } from "@/components/AdminNav";
 import { PrintButton } from "@/components/PrintButton";
 import { logoutAction } from "@/app/admin/login/actions";
 import { BrazilMark } from "@/components/brand/BrazilMark";
+import { adminSessionExpiresAt } from "@/lib/admin-auth";
+import { AdminSessionClock } from "./AdminSessionClock";
 
 /**
  * Peças visuais comuns do painel administrativo (estilo dashboard): fundo cinza claro, cabeçalho em degradê,
@@ -82,13 +84,15 @@ export function QNum({ n, title }: { n: number; title?: string }) {
   return <span title={title} className="mr-2 inline-grid h-6 min-w-6 place-items-center rounded-md bg-purple px-1.5 text-[11px] font-bold text-white">{n}</span>;
 }
 
-/** Cabeçalho próprio do admin: só a logo e "Admin" (o cabeçalho do site não aparece aqui). */
-export function AdminTopBar() {
+/** Cabeçalho próprio do admin: só a logo, "Admin" e o relógio da sessão (o cabeçalho do site não aparece aqui). */
+export async function AdminTopBar() {
+  const expiresAt = await adminSessionExpiresAt();
   return (
     <div className="border-b border-black/5 bg-surface print:hidden">
       <div className="container-page flex h-14 items-center gap-2.5">
         <BrazilMark size={26} className="shrink-0" />
         <span className="text-base font-bold text-ink">Admin</span>
+        {expiresAt ? <span className="ml-auto"><AdminSessionClock expiresAt={expiresAt} /></span> : null}
       </div>
     </div>
   );
