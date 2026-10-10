@@ -94,7 +94,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
         <h1 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Seu perfil</h1>
         {ideology ? (
           <div className="mt-3 max-w-4xl rounded-2xl border-2 p-4 shadow-sm" style={{ borderColor: ideologyColor, background: `linear-gradient(135deg, ${ideologyColor}33, var(--color-surface) 70%)` }}>
-            <p className="flex items-center gap-2 text-base font-bold text-ink"><span aria-hidden="true" className="h-3.5 w-3.5 rounded-full shadow-sm" style={{ background: ideologyColor }} />Sua ideologia: {ideology.ideology}</p>
+            <p className="flex items-center gap-2 text-base font-bold text-ink"><span aria-hidden="true" className="h-3.5 w-3.5 rounded-full shadow-sm" style={{ background: ideologyColor }} />{IDEOLOGY_PROFILES[ideology.ideology]?.heading ?? `Sua ideologia: ${ideology.ideology}`}</p>
             {IDEOLOGY_PROFILES[ideology.ideology] ? (() => {
               const pr = IDEOLOGY_PROFILES[ideology.ideology];
               return (
@@ -108,8 +108,9 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
                       </div>
                     ))}
                   </dl>
-                  <p className="mt-3 text-sm text-ink-2"><span className="font-semibold text-ink">O futuro que você quer:</span> {pr.future}</p>
-                  <p className="mt-3 flex flex-wrap gap-1.5">
+                  <p className="mt-3 text-sm text-ink-2"><span className="font-semibold text-ink">{pr.futureLabel}:</span> {pr.future}</p>
+                  <p className="mt-3 flex flex-wrap items-center gap-1.5">
+                    <span className="text-xs font-semibold text-ink-2">Suas palavras-chave:</span>
                     {pr.keywords.map((k) => <span key={k} className="rounded-full border bg-surface px-2.5 py-0.5 text-xs font-semibold text-ink" style={{ borderColor: ideologyColor }}>{k}</span>)}
                   </p>
                 </>

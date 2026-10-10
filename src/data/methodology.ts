@@ -136,6 +136,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: as setas das correntes na régua terminam numa bolinha, e Flávio Bolsonaro fica um pouco mais para dentro da faixa de extrema direita.",
       "Revisão humana: na régua do espectro, nacionalismo radical passa a ficar na divisa entre direita radical e extrema direita, e Flávio Bolsonaro um pouco mais para dentro da extrema direita.",
       "Revisão humana: a frase final da régua fica discreta e formal: 'De acordo com a régua ideológica, sua ideologia está mais próxima de [nome completo do candidato]'.",
+      "Revisão humana: os perfis ideológicos do relatório passam a usar os textos da responsável. A ideologia mostrada passa a ser a corrente mais próxima na régua, separando libertarianismo, liberalismo econômico e conservadorismo; só de nacionalismo radical para a direita a ideologia fica mais próxima de Flávio Bolsonaro.",
       "O site passa a se chamar 'E Você, O Que Acha?', no endereço e-voce-o-que-acha.up.railway.app. Nada muda nas perguntas, nas notas ou na conta.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],

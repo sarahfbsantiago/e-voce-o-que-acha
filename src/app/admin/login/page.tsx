@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { adminToken, adminTotpSecret } from "@/lib/env";
 import { loginAction } from "./actions";
 import { AdminTopBar } from "@/components/admin/AdminUI";
+import { CodeInput } from "@/components/admin/CodeInput";
 
 export const metadata: Metadata = { title: "Acesso administrativo", robots: { index: false, follow: false } };
 
@@ -28,7 +29,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
               {motivo === "recarregou" ? <p className="rounded-lg bg-gold-soft px-3 py-2 text-sm text-gold-strong">Por segurança, ao atualizar ou reabrir a página o código é pedido de novo.</p> : null}
               {totp ? (
                 <label className="block text-sm font-semibold text-ink">Código do Google Authenticator
-                  <input name="code" inputMode="numeric" pattern="[0-9 ]{6,7}" maxLength={7} autoComplete="one-time-code" autoFocus required placeholder="000 000" className="mt-1.5 w-full rounded-xl border border-line bg-paper/50 px-3 py-3 text-center text-2xl font-bold tracking-[0.4em] min-h-11 focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/30" />
+                  <CodeInput />
                 </label>
               ) : (
                 <label className="block text-sm font-semibold text-ink">Token de acesso

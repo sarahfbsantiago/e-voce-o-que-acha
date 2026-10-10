@@ -30,20 +30,25 @@ export const CANDIDATE_SPECTRUM: Record<string, { at: number; label: string; ide
   "flavio-bolsonaro": { at: 7.45, label: "Extrema direita", ideology: "Extrema direita", formalName: "Flávio Nantes Bolsonaro" },
 };
 
-/** Ideologia mostrada para a pessoa, pelo trecho da régua (0 a 8) onde ela cai; acompanha as faixas. */
+/** Ideologia mostrada para a pessoa: a corrente mais próxima na régua (pontos dos termos), sem passar das faixas (centro fica no centro). */
 export const IDEOLOGY_RANGES: { upTo: number; label: string }[] = [
   { upTo: 1, label: "Comunismo" },
   { upTo: 2, label: "Socialismo" },
-  { upTo: 2.75, label: "Social-democracia" },
-  { upTo: 3.4, label: "Progressismo" },
+  { upTo: 2.825, label: "Social-democracia" },
+  { upTo: 3.325, label: "Progressismo" },
   { upTo: 4, label: "Centro político" },
-  { upTo: 5, label: "Liberalismo social" },
-  { upTo: 6, label: "Liberalismo econômico e conservadorismo" },
-  { upTo: 7, label: "Nacionalismo radical" },
+  { upTo: 4.325, label: "Liberalismo social" },
+  { upTo: 5, label: "Libertarianismo" },
+  { upTo: 5.8, label: "Liberalismo econômico" },
+  { upTo: 6.54, label: "Conservadorismo" },
+  { upTo: 7.48, label: "Nacionalismo radical" },
   { upTo: Infinity, label: "Fascismo" },
 ];
 
 /** Largura de cada faixa no desenho da régua: extremos bem mais largos, centro-esquerda e centro-direita mais estreitas. */
+/** A partir deste ponto da régua (o do nacionalismo radical), a pessoa fica mais perto do candidato da direita. */
+export const RIGHT_SIDE_FROM = 6.98;
+
 export const RULER_WIDTHS = [2.4, 1, 0.7, 1, 0.7, 1, 1, 2.4];
 const RULER_TOTAL = RULER_WIDTHS.reduce((n, w) => n + w, 0);
 /** Ponto da régua (0 a 8, em faixas) → posição no desenho, em % da largura. */
@@ -55,20 +60,21 @@ export function rulerPct(at: number): number {
 }
 
 /**
- * De qual candidato a ideologia da pessoa está mais próxima: a menor distância no desenho da régua.
- * Assim, só quem fica de nacionalismo radical para a direita fica mais perto de Flávio; os demais, de Lula.
+ * De qual candidato a ideologia da pessoa está mais próxima na régua: só quem fica de nacionalismo radical
+ * para a direita fica mais perto de Flávio; os demais, de Lula.
  */
 export function closestCandidateOnRuler(at: number, candidateIds: string[]): string | null {
-  const known = candidateIds.filter((id) => CANDIDATE_SPECTRUM[id]);
+  const known = candidateIds.filter((id) => CANDIDATE_SPECTRUM[id]).sort((x, y) => CANDIDATE_SPECTRUM[x].at - CANDIDATE_SPECTRUM[y].at);
   if (!known.length) return null;
-  const d = known.map((id) => ({ id, d: Math.abs(rulerPct(CANDIDATE_SPECTRUM[id].at) - rulerPct(at)) })).sort((a, b) => a.d - b.d);
-  return d.length > 1 && d[0].d === d[1].d ? null : d[0].id;
+  if (known.length === 1) return known[0];
+  // Regra da responsável: só de nacionalismo radical para a direita fica mais perto do candidato da direita.
+  return at >= RIGHT_SIDE_FROM ? known[known.length - 1] : known[0];
 }
 
 export interface PersonSpectrum { at: number; mean: number; ideology: string; counted: number }
 
 /** Ponto da régua de cada ideologia mostrada: o mesmo ponto para onde a seta do termo aponta. */
-const IDEOLOGY_SPOT: Record<string, string> = { "Liberalismo econômico e conservadorismo": "Liberalismo econômico" };
+const IDEOLOGY_SPOT: Record<string, string> = {};
 export function ideologySpot(ideology: string): number | null {
   return SPECTRUM_TERMS.find((t) => t.label === (IDEOLOGY_SPOT[ideology] ?? ideology))?.at ?? null;
 }

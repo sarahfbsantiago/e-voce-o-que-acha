@@ -13,7 +13,7 @@ describe("régua do espectro político (posição pelas respostas)", () => {
   });
   it("a pessoa fica na média do meio das faixas das alternativas", () => {
     expect(personSpectrum([a("q01", "o1"), a("q05", "o1")])).toMatchObject({ at: 1.5, ideology: "Socialismo" });
-    expect(personSpectrum([a("q01", "o4"), a("q05", "o3")])).toMatchObject({ at: 5.5, ideology: "Liberalismo econômico e conservadorismo" });
+    expect(personSpectrum([a("q01", "o4"), a("q05", "o3")])).toMatchObject({ at: 5.5, ideology: "Liberalismo econômico" });
   });
   it("centro é centro (não centro-direita)", () => {
     expect(personSpectrum([a("q01", "o1"), a("q05", "o3")])).toMatchObject({ at: 3.5, ideology: "Centro político" });
@@ -54,7 +54,7 @@ describe("mais próxima de (distância na régua)", () => {
   it("só de nacionalismo radical para a direita fica mais perto de Flávio", async () => {
     const { closestCandidateOnRuler, ideologySpot } = await import("@/data/political-spectrum");
     const ids = ["lula", "flavio-bolsonaro"];
-    for (const i of ["Socialismo", "Social-democracia", "Progressismo", "Centro político", "Liberalismo social", "Liberalismo econômico e conservadorismo"]) expect(closestCandidateOnRuler(ideologySpot(i)!, ids), i).toBe("lula");
+    for (const i of ["Socialismo", "Social-democracia", "Progressismo", "Centro político", "Liberalismo social", "Libertarianismo", "Liberalismo econômico", "Conservadorismo"]) expect(closestCandidateOnRuler(ideologySpot(i)!, ids), i).toBe("lula");
     for (const i of ["Nacionalismo radical", "Fascismo"]) expect(closestCandidateOnRuler(ideologySpot(i)!, ids), i).toBe("flavio-bolsonaro");
   });
 });
