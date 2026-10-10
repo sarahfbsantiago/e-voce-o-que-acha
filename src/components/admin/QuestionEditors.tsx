@@ -13,11 +13,11 @@ const SCORES = [{ v: 1, l: "1" }, { v: 0.5, l: "0,5" }, { v: 0, l: "0" }];
 
 function OptionRow({ o, set, bands, onRemove }: { o: NewOpt; set: (o: NewOpt) => void; bands: Band[]; onRemove?: () => void }) {
   return (
-    <div className="grid grid-cols-[1fr_auto_auto_auto_auto] items-center gap-2">
-      <input className={input} value={o.label} onChange={(e) => set({ ...o, label: e.target.value })} placeholder="Texto da alternativa" maxLength={200} />
+    <div className="grid grid-cols-[auto_auto_1fr_auto] items-center gap-2 rounded-lg bg-paper/50 p-2 sm:grid-cols-[1fr_auto_auto_auto_auto] sm:bg-transparent sm:p-0">
+      <input className={`${input} col-span-4 sm:col-span-1`} value={o.label} onChange={(e) => set({ ...o, label: e.target.value })} placeholder="Texto da alternativa" maxLength={200} />
       <label className="text-[11px] font-semibold text-[#562f9f]">Lula<select className={`${input} mt-0.5 w-16`} value={o.lula} onChange={(e) => set({ ...o, lula: Number(e.target.value) })}>{SCORES.map((s) => <option key={s.v} value={s.v}>{s.l}</option>)}</select></label>
       <label className="text-[11px] font-semibold text-[#237a49]">Flávio<select className={`${input} mt-0.5 w-16`} value={o.flavio} onChange={(e) => set({ ...o, flavio: Number(e.target.value) })}>{SCORES.map((s) => <option key={s.v} value={s.v}>{s.l}</option>)}</select></label>
-      <label className="text-[11px] font-semibold text-ink-2">Faixa<select className={`${input} mt-0.5 w-36`} value={o.band} onChange={(e) => set({ ...o, band: e.target.value })}>{bands.map((b) => <option key={b.label} value={b.label}>{b.label}</option>)}</select></label>
+      <label className="text-[11px] font-semibold text-ink-2">Faixa<select className={`${input} mt-0.5 w-full sm:w-36`} value={o.band} onChange={(e) => set({ ...o, band: e.target.value })}>{bands.map((b) => <option key={b.label} value={b.label}>{b.label}</option>)}</select></label>
       {onRemove ? <button type="button" onClick={onRemove} aria-label="Remover alternativa" className="mt-4 h-8 w-8 rounded-lg text-ink-3 ring-1 ring-line hover:text-[#9b1c1c]">×</button> : <span />}
     </div>
   );
