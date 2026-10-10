@@ -599,3 +599,16 @@ model HistoryImage {
   data      Bytes
   createdAt DateTime @default(now())
 }
+
+/// Comentários do admin nas sugestões e nos pedidos de publicação (nome + texto).
+model AdminComment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  /// "sugestao" ou "pedido"
+  target    String
+  targetId  Int
+  author    String
+  body      String
+
+  @@index([target, targetId])
+}

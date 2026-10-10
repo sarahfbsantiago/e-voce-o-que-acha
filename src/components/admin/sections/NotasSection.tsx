@@ -177,7 +177,7 @@ export async function NotasSection({ editable = false }: { editable?: boolean } 
           <SectionTitle n={gi + 1} label={g.label} color={g.color} note={`${rows.length} perguntas`} />
           <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 md:mx-0 md:grid md:overflow-visible md:px-0 md:pb-0 print:mx-0 print:grid print:overflow-visible print:px-0 xl:grid-cols-2">
             {rows.map(({ q, t, options }) => (
-              <article key={q.id} className="w-[86%] shrink-0 snap-start md:w-auto md:shrink print:w-auto min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
+              <article key={q.id} className="admin-lift w-[86%] shrink-0 snap-start md:w-auto md:shrink print:w-auto min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
                 <div aria-hidden="true" className="h-1" style={{ background: g.color }} />
                 <div className="p-4">
                   <p className="text-sm font-semibold leading-snug text-ink"><QNum n={QUESTION_NUMBER[q.id]} title={`código interno ${q.id}`} />{q.text}</p>
@@ -208,6 +208,12 @@ export async function NotasSection({ editable = false }: { editable?: boolean } 
                               )}
                             </td>
                           ))}
+                        </tr>
+                      ))}
+                      {q.options.filter((o) => o.isNoOpinion).map((o) => (
+                        <tr key={o.id} className="border-t border-line/70">
+                          <th scope="row" className="py-2 pr-2 text-left text-[13px] font-medium leading-snug text-ink-3">{o.label}</th>
+                          <td colSpan={CANDS.length} className="py-2 text-center text-[11px] italic text-ink-3">não entra na conta</td>
                         </tr>
                       ))}
                     </tbody>

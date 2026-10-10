@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { addOptionAction, archiveQuestionAction, createQuestionAction, restoreQuestionAction, updateQuestionAction } from "@/app/admin/config-actions";
 
-type Opt = { id: string; label: string };
+type Opt = { id: string; label: string; noOpinion?: boolean };
 type Band = { label: string; color: string };
 type NewOpt = { label: string; lula: number; flavio: number; band: string };
 
@@ -52,9 +52,14 @@ export function QuestionEditor({ id, text, example, options, archived, bands, is
           <label className="block text-xs font-semibold text-ink-2">Pergunta<textarea className={`${input} mt-1`} rows={2} value={t} onChange={(e) => setT(e.target.value)} maxLength={600} /></label>
           <label className="block text-xs font-semibold text-ink-2">Exemplo (opcional)<textarea className={`${input} mt-1`} rows={2} value={ex} onChange={(e) => setEx(e.target.value)} maxLength={1200} /></label>
           <p className="text-xs font-semibold text-ink-2">Alternativas</p>
-          {options.map((o) => <input key={o.id} className={input} value={labels[o.id]} onChange={(e) => setLabels({ ...labels, [o.id]: e.target.value })} maxLength={200} />)}
+          {options.map((o) => (
+            <div key={o.id} className="flex items-center gap-2">
+              <input className={`${input} flex-1 ${o.noOpinion ? "bg-paper" : ""}`} value={labels[o.id]} onChange={(e) => setLabels({ ...labels, [o.id]: e.target.value })} maxLength={200} aria-label={o.noOpinion ? "Alternativa sem opinião" : "Alternativa"} />
+              {o.noOpinion ? <span className="shrink-0 rounded-full bg-paper px-2 py-0.5 text-[10px] font-semibold text-ink-3 ring-1 ring-line">sempre por último · não entra na conta</span> : null}
+            </div>
+          ))}
           <p className="text-[11px] text-ink-3">Notas e faixas destas alternativas: nas páginas Notas por alternativa e Espectro político.</p>
-          <button type="button" disabled={!dirty || pending || !t.trim()} onClick={() => run(() => updateQuestionAction(id, { text: t, example: ex, labels }))} className="rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">{pending ? "Salvando…" : "Salvar no rascunho"}</button>
+          <button type="button" disabled={!dirty || pending || !t.trim()} onClick={() => run(() => updateQuestionAction(id, { text: t, example: ex, labels }))} className="admin-press rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">{pending ? "Salvando…" : "Salvar no rascunho"}</button>
         </div>
       ) : null}
 
@@ -62,7 +67,7 @@ export function QuestionEditor({ id, text, example, options, archived, bands, is
         <div className="space-y-2 rounded-xl bg-paper/70 p-3 ring-1 ring-line">
           <p className="text-xs font-semibold text-ink-2">Nova alternativa (entra antes de &quot;Não sei&quot;)</p>
           <OptionRow o={adding} set={setAdding} bands={bands} />
-          <button type="button" disabled={!adding.label.trim() || pending} onClick={() => run(async () => { await addOptionAction(id, adding); setAdding(null); })} className="rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">Adicionar no rascunho</button>
+          <button type="button" disabled={!adding.label.trim() || pending} onClick={() => run(async () => { await addOptionAction(id, adding); setAdding(null); })} className="admin-press rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">Adicionar no rascunho</button>
         </div>
       ) : null}
     </div>
@@ -94,7 +99,7 @@ export function NewQuestionForm({ topics, bands }: { topics: { id: string; name:
       <div className="flex flex-wrap gap-2">
         <button type="button" onClick={() => setOpts([...opts, blank()])} className="rounded-lg bg-surface px-3 py-1.5 text-xs font-bold text-ink-2 ring-1 ring-line">+ Alternativa</button>
         <button type="button" disabled={!ok || pending} onClick={() => start(async () => { await createQuestionAction({ topicId, text, example, options: filled }); setText(""); setExample(""); setOpts([blank(), blank(), blank()]); router.refresh(); })}
-          className="rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-4 py-1.5 text-xs font-bold text-white disabled:opacity-40">{pending ? "Salvando…" : "Criar no rascunho"}</button>
+          className="admin-press rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-4 py-1.5 text-xs font-bold text-white disabled:opacity-40">{pending ? "Salvando…" : "Criar no rascunho"}</button>
       </div>
     </div>
   );

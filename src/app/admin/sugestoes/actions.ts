@@ -28,7 +28,8 @@ export async function respondSuggestionAction(formData: FormData) {
   const status = String(formData.get("status") ?? "");
   const respondedBy = String(formData.get("respondedBy") ?? "").trim().slice(0, 60);
   const response = String(formData.get("response") ?? "").trim().slice(0, 1000);
-  if (!id || !["aceita", "recusada", "aberta"].includes(status) || respondedBy.length < 2) redirect("/admin/sugestoes?erro=2");
+  if (!id || !["aceita", "recusada", "aberta"].includes(status) || respondedBy.length < 2) redirect(`/admin/sugestoes?erro=2#s${id}`);
+  if (status === "recusada" && response.length < 3) redirect(`/admin/sugestoes?erro=recusa#s${id}`);
   await getPrisma().changeSuggestion.update({ where: { id }, data: { status, response: response || null, respondedBy, respondedAt: new Date() } });
   revalidatePath("/admin/sugestoes");
   redirect(`/admin/sugestoes#s${id}`);

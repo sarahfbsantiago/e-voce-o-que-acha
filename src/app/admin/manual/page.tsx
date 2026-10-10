@@ -5,6 +5,7 @@ import { AdminShell } from "@/components/admin/AdminUI";
 import { PrintOnLoad } from "@/components/admin/PrintOnLoad";
 import { AUTH_STEPS, TIPS } from "@/components/admin/tips";
 import { AuthIllustrations } from "@/components/admin/AuthIllustrations";
+import { Icon, type IconName } from "@/components/admin/Icon";
 
 export const metadata: Metadata = { title: "Manual do admin", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -12,8 +13,8 @@ export const dynamic = "force-dynamic";
 /** Manual completo do admin para salvar em PDF: todos os tópicos abertos (sem a chave do autenticador). */
 export default async function Page() {
   if (!(await isAdminSession())) redirect("/admin/login");
-  const all: { icon: string; title: string; color: string; points: [string, string][] }[] = [
-    { icon: "🔐", title: "Registrar no Google Authenticator", color: "#15803d", points: AUTH_STEPS },
+  const all: { icon: IconName; title: string; color: string; points: [string, string][] }[] = [
+    { icon: "shield", title: "Registrar no Google Authenticator", color: "#15803d", points: AUTH_STEPS },
     ...TIPS,
   ];
   return (
@@ -26,13 +27,13 @@ export default async function Page() {
       </header>
       <ol className="rounded-2xl bg-surface p-4 text-sm ring-1 ring-line print:break-inside-avoid">
         <p className="mb-2 text-xs font-bold uppercase tracking-wide text-ink-3">Sumário</p>
-        {all.map((t, i) => <li key={t.title} className="py-0.5">{i + 1}. {t.icon} {t.title}</li>)}
+        {all.map((t, i) => <li key={t.title} className="flex items-center gap-2 py-0.5">{i + 1}. <Icon name={t.icon} className="h-4 w-4" /> {t.title}</li>)}
       </ol>
       {all.map((t, i) => (
         <section key={t.title} className="overflow-hidden rounded-2xl bg-surface ring-1 ring-line print:break-inside-avoid print:border print:border-line">
           <div className="h-1.5" style={{ background: t.color }} />
           <div className="p-4">
-            <h2 className="flex items-center gap-2 text-lg font-bold text-ink"><span className="grid h-8 w-8 place-items-center rounded-lg text-base text-white" style={{ background: t.color }}>{t.icon}</span>{i + 1}. {t.title}</h2>
+            <h2 className="flex items-center gap-2 text-lg font-bold text-ink"><span className="grid h-8 w-8 place-items-center rounded-lg text-white" style={{ background: t.color }}><Icon name={t.icon} className="h-5 w-5" /></span>{i + 1}. {t.title}</h2>
             {i === 0 ? <div className="mt-3"><AuthIllustrations /></div> : null}
             <ol className="mt-3 space-y-2">
               {t.points.map(([a, b], j) => (

@@ -21,7 +21,7 @@ export async function AdminShell({ current, children }: { current: string; child
   return (
     <div className="min-h-screen bg-[#f3f2ef] print:bg-white">
       <AdminTopBar />
-      <div className="container-page space-y-5 py-6">
+      <div className="admin-stage container-page space-y-5 py-6">
         <AdminNav current={current} />
         {HELP[current] ? (
           <a href={`/admin#${HELP[current]}`} className="fixed bottom-4 right-4 z-40 grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-purple to-[#2563eb] text-lg font-bold text-white shadow-lg ring-4 ring-white/70 print:hidden" title="Como usar esta página" aria-label="Como usar esta página">?</a>
@@ -49,7 +49,7 @@ export async function AdminShell({ current, children }: { current: string; child
             <span className="grid h-7 w-7 place-items-center rounded-full bg-[#f97316] text-xs font-bold text-white">{pending}</span>
             <span className="text-sm font-semibold text-[#7a4a00]">{pending === 1 ? "mudança no rascunho" : "mudanças no rascunho"} · ainda não está no site</span>
             <Link href="/admin/publicar" className="ml-auto rounded-xl bg-surface px-3 py-2 text-xs font-bold text-ink-2 ring-1 ring-line">Revisar ou excluir rascunho</Link>
-            <Link href="/admin/publicar" className="rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-bold text-white shadow-sm">Enviar tudo para aprovação</Link>
+            <Link href="/admin/publicar" className="admin-press rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-bold text-white shadow-sm">Enviar tudo para aprovação</Link>
           </div>
         </div>
       ) : null}
@@ -59,7 +59,7 @@ export async function AdminShell({ current, children }: { current: string; child
 
 export function AdminHero({ kicker, title, subtitle, extra }: { kicker: string; title: string; subtitle: string; pdfTitle?: string; extra?: ReactNode }) {
   return (
-    <header className="flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-4 text-white shadow-md md:p-5">
+    <header className="admin-hero flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-4 text-white shadow-lg shadow-purple/20 md:p-5">
       <div className="max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">{kicker}</p>
         <h1 className="mt-1 text-xl font-bold md:text-3xl">{title}</h1>
@@ -75,7 +75,7 @@ export function AdminHero({ kicker, title, subtitle, extra }: { kicker: string; 
 
 export function Kpi({ label, value, note, color, small = false }: { label: string; value: string; note?: string; color: string; small?: boolean }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
+    <div className="admin-lift relative overflow-hidden rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
       <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5" style={{ background: color }} />
       <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-3">{label}</p>
       <p className={`mt-1 font-bold tabular-nums text-ink ${small ? "text-base leading-tight md:text-lg" : "text-2xl md:text-3xl"}`}>{value}</p>
@@ -86,7 +86,7 @@ export function Kpi({ label, value, note, color, small = false }: { label: strin
 
 export function Panel({ title, subtitle, children, className = "", accent, right }: { title: ReactNode; subtitle?: ReactNode; children: ReactNode; className?: string; accent?: string; right?: ReactNode }) {
   return (
-    <section className={`min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line ${className}`}>
+    <section className={`min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-md print:break-inside-avoid print:border print:border-line ${className}`}>
       {accent ? <div aria-hidden="true" className="h-1.5" style={{ background: accent }} /> : null}
       <div className="p-4 md:p-5">
         <div className="flex flex-wrap items-start justify-between gap-2">

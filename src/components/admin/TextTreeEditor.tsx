@@ -62,7 +62,7 @@ function FigurePhoto({ slug, name, set }: { slug: string; name: string; set: (sl
         <img src={`/historia-img/${slug}`} alt={`Foto de ${name}`} className="h-24 w-20 rounded object-cover ring-1 ring-line" />
       ) : <span className="grid h-24 w-20 place-items-center rounded bg-line text-[10px] text-ink-3">sem foto</span>}
       <div className="space-y-1.5">
-        <label className={`inline-flex cursor-pointer items-center rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white ${busy ? "opacity-50" : ""}`}>
+        <label className={`admin-press inline-flex cursor-pointer items-center rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white ${busy ? "opacity-50" : ""}`}>
           {busy ? "Enviando…" : slug ? "Trocar imagem" : "Inserir imagem"}
           <input type="file" accept="image/png,image/jpeg,image/webp" className="sr-only" disabled={busy} onChange={(e) => pick(e.target.files?.[0])} />
         </label>
@@ -125,7 +125,7 @@ export function TextTreeEditor({ path, value, published }: { path: (string | num
       <Node k={String(path[path.length - 1])} v={v} set={(nv) => { setV(nv); setSaved(false); }} />
       <div className="flex flex-wrap items-center gap-2">
         <button type="button" disabled={!dirty || pending} onClick={() => start(async () => { await setContentAction(path, v); setSaved(true); router.refresh(); })}
-          className="rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">{pending ? "Salvando…" : "Salvar no rascunho"}</button>
+          className="admin-press rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">{pending ? "Salvando…" : "Salvar no rascunho"}</button>
         <button type="button" disabled={!dirty} onClick={() => setV(value)} className="rounded-lg bg-surface px-3 py-1.5 text-xs font-semibold text-ink-2 ring-1 ring-line disabled:opacity-40">Desfazer</button>
         {differsFromLive ? <button type="button" onClick={() => setV(published)} className="rounded-lg bg-surface px-3 py-1.5 text-xs font-semibold text-ink-2 ring-1 ring-line">Voltar ao que está no ar</button> : null}
         {saved ? <span className="text-xs font-bold text-mint-strong">✓ Salvo no rascunho</span> : null}

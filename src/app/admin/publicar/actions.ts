@@ -91,6 +91,7 @@ export async function rejectAction(formData: FormData) {
   const id = Number(formData.get("request"));
   const by = txt(formData, "author", 60), note = txt(formData, "note", 600);
   if (by.length < 2) redirect(`/admin/publicar/${id}?erro=nome-recusa`);
+  if (!formData.get("cancel") && note.length < 3) redirect(`/admin/publicar/${id}?erro=motivo-recusa`);
   await closeRequest(id, formData.get("cancel") ? "cancelado" : "recusado", by, note);
   revalidatePath("/admin", "layout");
   redirect(`/admin/publicar?fechado=${id}`);

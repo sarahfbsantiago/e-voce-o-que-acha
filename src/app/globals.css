@@ -400,3 +400,28 @@ dialog.modal[open] { animation: modal-in 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
   /* Blocos longos podem continuar na página seguinte (os itens de dentro seguem inteiros). */
   .print-flow, .print-splittable > .print-flow, .print-flow > div, .print-flow > ul { break-inside: auto !important; page-break-inside: auto !important; }
 }
+
+/* ---- Admin: profundidade e movimento (estilo sistema profissional) ---- */
+@keyframes admin-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.admin-stage > * { animation: admin-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.admin-stage > *:nth-child(2) { animation-delay: 40ms; }
+.admin-stage > *:nth-child(3) { animation-delay: 80ms; }
+.admin-stage > *:nth-child(4) { animation-delay: 120ms; }
+.admin-stage > *:nth-child(5) { animation-delay: 160ms; }
+.admin-stage > *:nth-child(6) { animation-delay: 200ms; }
+.admin-stage > *:nth-child(n + 7) { animation-delay: 240ms; }
+.admin-lift { transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease; will-change: transform; }
+.admin-lift:hover { transform: translateY(-3px); box-shadow: 0 14px 28px -12px rgb(60 30 120 / 0.28), 0 4px 10px -4px rgb(0 0 0 / 0.08); }
+.admin-lift:active { transform: translateY(0) scale(0.99); }
+.admin-press { transition: transform 0.12s ease, box-shadow 0.15s ease, filter 0.15s ease; }
+.admin-press:hover { filter: brightness(1.06); box-shadow: 0 8px 18px -8px rgb(60 30 120 / 0.45); }
+.admin-press:active { transform: translateY(1px) scale(0.98); }
+.admin-hero { position: relative; overflow: hidden; }
+.admin-hero::after { content: ""; position: absolute; inset: -40% -10% auto auto; width: 320px; height: 320px; border-radius: 9999px; background: radial-gradient(circle, rgb(255 255 255 / 0.18), transparent 65%); animation: admin-glow 9s ease-in-out infinite alternate; pointer-events: none; }
+@keyframes admin-glow { from { transform: translate(0, 0); } to { transform: translate(-120px, 60px); } }
+@media (prefers-reduced-motion: reduce) {
+  .admin-stage > *, .admin-hero::after { animation: none !important; }
+  .admin-lift, .admin-press { transition: none; }
+  .admin-lift:hover { transform: none; }
+}
+@media print { .admin-stage > * { animation: none !important; opacity: 1 !important; } .admin-hero::after { display: none; } }

@@ -158,7 +158,7 @@ export function RulerEditor({ initial, published, order, ideologies, base }: { i
 
       <div className="flex flex-wrap gap-2">
         <button type="button" disabled={!dirty || saving || errors.length > 0} onClick={() => start(async () => { await setRulerAction(r); router.refresh(); })}
-          className="min-h-10 rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-bold text-white shadow-sm disabled:opacity-40">{saving ? "Salvando…" : "Salvar no rascunho"}</button>
+          className="admin-press min-h-10 rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-bold text-white shadow-sm disabled:opacity-40">{saving ? "Salvando…" : "Salvar no rascunho"}</button>
         <button type="button" disabled={!dirty} onClick={() => setR(initial)} className="min-h-10 rounded-xl bg-surface px-4 py-2 text-sm font-semibold text-ink-2 ring-1 ring-line disabled:opacity-40">Desfazer edição</button>
         <button type="button" onClick={() => setR(published)} className="min-h-10 rounded-xl bg-surface px-4 py-2 text-sm font-semibold text-ink-2 ring-1 ring-line">Voltar ao que está no ar</button>
       </div>

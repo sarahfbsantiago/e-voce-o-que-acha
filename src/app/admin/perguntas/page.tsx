@@ -47,14 +47,14 @@ export default async function Page() {
             <SectionTitle n={gi + 1} label={g.label} color={g.color} note={`${qs.length} perguntas`} />
             <div className="grid gap-4 xl:grid-cols-2">
               {qs.map(({ q, t }) => (
-                <article key={q.id} className="min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5">
+                <article key={q.id} className="admin-lift min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5">
                   <div aria-hidden="true" className="h-1" style={{ background: g.color }} />
                   <div className="p-4">
                     <p className="text-sm font-semibold leading-snug text-ink"><QNum n={nums[q.id]} title={`código interno ${q.id}`} />{q.text}{!pubIds.has(q.id) ? <span className="ml-2 rounded-full bg-[#f97316] px-2 py-0.5 text-[10px] font-bold text-white">nova</span> : null}</p>
                     <p className="mt-1 text-[11px] uppercase tracking-wide text-ink-3">{t.name}</p>
                     {q.example ? <p className="mt-2 text-xs leading-relaxed text-ink-2">{q.example}</p> : null}
                     <ul className="mt-2 flex flex-wrap gap-1.5">{q.options.map((o) => <li key={o.id} className={`rounded-full px-2.5 py-0.5 text-xs ${o.isNoOpinion ? "bg-paper text-ink-3" : "bg-purple-soft text-purple-strong"}`}>{o.label}</li>)}</ul>
-                    <QuestionEditor id={q.id} text={q.text} example={q.example ?? ""} options={q.options.filter((o) => !o.isNoOpinion).map((o) => ({ id: o.id, label: o.label }))} archived={false} bands={bands} isNew={!pubIds.has(q.id)} />
+                    <QuestionEditor id={q.id} text={q.text} example={q.example ?? ""} options={q.options.map((o) => ({ id: o.id, label: o.label, noOpinion: o.isNoOpinion }))} archived={false} bands={bands} isNew={!pubIds.has(q.id)} />
                     <SubmitItem scope={{ kind: "question", id: q.id }} changed={scopeChanged(published.cfg, cfg, { kind: "question", id: q.id })} what={pubIds.has(q.id) ? `Pergunta ${nums[q.id]}` : "Pergunta nova"} />
                   </div>
                 </article>

@@ -63,7 +63,7 @@ export async function PosicoesSection({ editable = false }: { editable?: boolean
           <div key={g.id} className="space-y-3">
             <SectionTitle n={gi + 1} label={g.label} color={g.color} note={`${qs.length} perguntas`} />
             {qs.map(({ q, t }) => (
-              <article key={q.id} className="overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
+              <article key={q.id} className="admin-lift overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
                 <div aria-hidden="true" className="h-1" style={{ background: g.color }} />
                 <div className="p-4 md:p-5">
                   <p className="text-sm font-semibold leading-snug text-ink"><QNum n={QUESTION_NUMBER[q.id]} title={`código interno ${q.id}`} />{q.text}</p>

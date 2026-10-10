@@ -56,7 +56,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
               {draft.errors.length ? <p className="rounded-lg bg-[#fde8e8] p-2 text-xs font-semibold text-[#9b1c1c]">Atenção: {draft.errors.length} problema(s) impedem aprovar ({draft.errors[0]}). Dá para enviar, mas só será aprovado depois de corrigir.</p> : null}
               <label className="block text-xs font-semibold text-ink-2">Seu nome *<input name="author" required minLength={2} maxLength={60} className={input} /></label>
               <label className="block text-xs font-semibold text-ink-2">Descrição das mudanças *<textarea name="note" required minLength={3} maxLength={600} rows={3} className={input} placeholder="Ex.: ajuste das notas de segurança conforme revisão" /></label>
-              <button className="min-h-10 w-full rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-bold text-white shadow-sm">Enviar para publicação</button>
+              <button className="admin-press min-h-10 w-full rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-bold text-white shadow-sm">Enviar para publicação</button>
             </form>
           </div>
         ) : <p className="text-sm text-ink-3">Nada no rascunho. Mude algo em Notas, Espectro, Perguntas, Posições, Textos ou Fontes.</p>}

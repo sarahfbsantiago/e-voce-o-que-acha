@@ -12,6 +12,8 @@ import { getPublishedConfig, getRequest } from "@/lib/live-config-server";
 import { CANDIDATE_SHORT, applyScope, describeScope, type Scope } from "@/lib/live-config";
 import { rejectAction, reopenAction } from "../actions";
 import { SECTION_COLOR } from "../page";
+import { CommentThread } from "@/components/admin/CommentThread";
+import { getPrisma } from "@/lib/prisma";
 
 export const metadata: Metadata = { title: "Revisar pedido", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -20,7 +22,7 @@ const ERRORS: Record<string, string> = {
   bloqueado: "Muitas tentativas erradas de código. Espere 10 minutos.", fechado: "Este pedido já foi fechado.",
   desatualizado: "A versão no ar mudou depois deste pedido. Recuse, leve ao rascunho e reenvie.", "sem-mudancas": "Este pedido não muda nada em relação ao que está no ar.",
   invalido: "Há problemas que impedem publicar (veja em vermelho).", nome: "Digite seu nome.", motivo: "Escreva o motivo.", ciente: "Marque \"Estou ciente\".",
-  frase: "A frase digitada não confere.", codigo: "Código do Google Authenticator inválido ou já usado.", "nome-recusa": "Digite seu nome para recusar.",
+  frase: "A frase digitada não confere.", codigo: "Código do Google Authenticator inválido ou já usado.", "nome-recusa": "Digite seu nome para recusar.", "motivo-recusa": "Para recusar, escreva o motivo da recusa.", comentario: "Para comentar, escreva seu nome e o comentário.",
 };
 const pct = (n: number | null) => (n === null ? "—" : `${String(n).replace(".", ",")}%`);
 const input = "mt-1 w-full rounded-lg border border-line bg-surface px-2.5 py-2 text-sm";
@@ -37,6 +39,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
   const plan = await buildPublishPlan(scope ? applyScope(pub.cfg, req.cfg, scope) : req.cfg, req.row.rollbackOf);
   const im = plan.impact;
   const isOpen = req.row.status === "aberto";
+  const comments = await getPrisma().adminComment.findMany({ where: { target: "pedido", targetId: id }, orderBy: { id: "asc" } });
   const stale = isOpen && !scope && req.row.baseVersion !== pub.version;
 
   return (
@@ -46,7 +49,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
       {sp.enviado ? <p className="rounded-2xl bg-mint-soft p-4 text-sm font-semibold text-mint-strong">Enviado para aprovação. Agora é só alguém revisar e aprovar aqui.</p> : null}
       {sp.erro ? <p className="rounded-2xl bg-[#fde8e8] p-4 text-sm font-semibold text-[#9b1c1c]">{ERRORS[sp.erro] ?? "Não foi possível."}</p> : null}
       {stale ? <p className="rounded-2xl bg-[#fde8e8] p-4 text-sm font-semibold text-[#9b1c1c]">Desatualizado: a versão no ar mudou (v{req.row.baseVersion} → v{pub.version}). Recuse, leve ao rascunho e reenvie.</p> : null}
-      {!isOpen ? <p className="rounded-2xl bg-paper p-4 text-sm text-ink-2 ring-1 ring-line">Fechado: <b>{req.row.status}</b>{req.row.reviewedBy ? ` por ${req.row.reviewedBy}` : ""}{req.row.publishedVersion ? ` → publicado como v${req.row.publishedVersion}` : ""}{req.row.reviewNote ? `. “${req.row.reviewNote}”` : ""}</p> : null}
+      {!isOpen ? <p className={`rounded-2xl p-4 text-sm ring-1 ${req.row.status === "recusado" ? "bg-[#fde8e8] text-[#7f1d1d] ring-[#f5b5b5]" : "bg-paper text-ink-2 ring-line"}`}>Fechado: <b>{req.row.status}</b>{req.row.reviewedBy ? ` por ${req.row.reviewedBy}` : ""}{req.row.publishedVersion ? ` → publicado como v${req.row.publishedVersion}` : ""}{req.row.reviewNote ? <>{req.row.status === "recusado" ? ". Motivo da recusa: " : ". "}<b>“{req.row.reviewNote}”</b></> : null}</p> : null}
 
       <section className="grid grid-cols-2 gap-3 xl:grid-cols-4">
         <Kpi label="Mudanças" value={String(plan.changes.length)} note={plan.sections.join(" · ")} color="#6d3fc4" small />
@@ -109,7 +112,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
             <form action={rejectAction} className="space-y-3">
               <input type="hidden" name="request" value={id} />
               <label className="block text-xs font-semibold text-ink-2">Seu nome *<input name="author" required minLength={2} maxLength={60} className={input} /></label>
-              <label className="block text-xs font-semibold text-ink-2">Comentário<textarea name="note" rows={3} maxLength={600} className={input} /></label>
+              <label className="block text-xs font-semibold text-ink-2">Motivo da recusa * <span className="font-normal text-ink-3">(não precisa para cancelar)</span><textarea name="note" rows={3} maxLength={600} className={input} placeholder="Ex.: a nota do Flávio no SUS precisa de fonte" /></label>
               <div className="flex flex-wrap gap-2">
                 <button className="rounded-lg bg-[#9b1c1c] px-3 py-2 text-sm font-bold text-white">Recusar</button>
                 <button name="cancel" value="1" className="rounded-lg bg-surface px-3 py-2 text-sm font-semibold text-ink-2 ring-1 ring-line">Cancelar meu pedido</button>
@@ -120,6 +123,9 @@ export default async function Page({ params, searchParams }: { params: Promise<{
       ) : req.row.status !== "aprovado" ? (
         <form action={reopenAction}><input type="hidden" name="request" value={id} /><button className="rounded-lg bg-surface px-3 py-2 text-sm font-semibold text-ink-2 ring-1 ring-line">Levar estas mudanças de volta ao rascunho</button></form>
       ) : null}
+      <Panel title="Comentários" subtitle="Converse sobre o pedido antes de aceitar ou recusar. Nome e comentário são obrigatórios.">
+        <CommentThread target="pedido" targetId={id} comments={comments} />
+      </Panel>
       <Link href="/admin/publicar" className="text-sm font-semibold text-purple underline">← Publicar</Link>
     </AdminShell>
   );

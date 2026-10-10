@@ -18,7 +18,7 @@ export function AddSource() {
       <input className={`${input} md:col-span-2`} placeholder="Link (https://…)" value={d.url} onChange={(e) => setD({ ...d, url: e.target.value })} />
       <textarea className={`${input} md:col-span-2`} rows={2} placeholder="Para que serve" value={d.purpose} onChange={(e) => setD({ ...d, purpose: e.target.value })} />
       <div className="flex gap-2 md:col-span-2">
-        <button type="button" disabled={!ok || pending} onClick={() => start(async () => { await addSourceAction(d); setD({ name: "", institution: "", url: "", purpose: "" }); router.refresh(); })} className="rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">Adicionar no rascunho</button>
+        <button type="button" disabled={!ok || pending} onClick={() => start(async () => { await addSourceAction(d); setD({ name: "", institution: "", url: "", purpose: "" }); router.refresh(); })} className="admin-press rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">Adicionar no rascunho</button>
         {d.url ? <a href={d.url} target="_blank" rel="noopener noreferrer" className="self-center text-xs font-semibold text-purple underline">testar link ↗</a> : null}
       </div>
     </div>

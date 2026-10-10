@@ -52,7 +52,7 @@ export async function updateQuestionAction(questionId: string, data: { text: str
     q.text = data.text.trim().slice(0, 600);
     const ex = data.example.trim().slice(0, 1200);
     if (ex) q.example = ex; else delete q.example;
-    for (const o of q.options) if (!o.isNoOpinion && data.labels[o.id] !== undefined) o.label = data.labels[o.id].trim().slice(0, 200) || o.label;
+    for (const o of q.options) if (data.labels[o.id] !== undefined) o.label = data.labels[o.id].trim().slice(0, 200) || o.label;
   });
 }
 

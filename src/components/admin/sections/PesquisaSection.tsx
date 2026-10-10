@@ -67,7 +67,7 @@ export async function PesquisaSection() {
     <>
 
         {/* cabeçalho */}
-        <header className="flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-4 text-white shadow-md md:p-5">
+        <header className="admin-hero flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-4 text-white shadow-lg shadow-purple/20 md:p-5">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">Painel da pesquisa</p>
             <h1 className="mt-1 text-2xl font-bold md:text-3xl">Dados da pesquisa</h1>
@@ -222,7 +222,7 @@ export async function PesquisaSection() {
 
 function Kpi({ label, value, note, color, small = false }: { label: string; value: string; note: string; color: string; small?: boolean }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
+    <div className="admin-lift relative overflow-hidden rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
       <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5" style={{ background: color }} />
       <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-3">{label}</p>
       <p className={`mt-1 font-bold tabular-nums text-ink ${small ? "text-lg leading-tight" : "text-3xl"}`}>{value}</p>
