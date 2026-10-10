@@ -182,7 +182,6 @@ export const SPECTRUM_SECTIONS: SpectrumSection[] = [
     { t: "p", text: "A Alemanha nazista também apresentou características fascistas, com o agravante central do racismo biológico e da política genocida do regime." },
     { t: "p", text: "Segundo o Museu Memorial do Holocausto dos Estados Unidos, o fascismo se caracteriza por ultranacionalismo, autoritarismo, militarismo e rejeição à democracia pluralista." },
     { t: "link", label: "Holocaust Encyclopedia", href: "https://encyclopedia.ushmm.org/" },
-    { t: "p", lead: "Diferença fundamental:", text: "ser conservador ou nacionalista não torna alguém fascista. O fascismo envolve um conjunto específico de características políticas, institucionais e ideológicas." },
   ] },
 ];
 
