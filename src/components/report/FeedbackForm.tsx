@@ -5,9 +5,8 @@ import { Button } from "@/components/ui";
 import { CURRENT_METHODOLOGY_VERSION } from "@/data/methodology";
 import { useSession } from "@/store/session";
 
-/** Lembra no navegador se a pessoa já avaliou e se o pop-up da régua já apareceu (ele aparece uma vez só). */
+/** Lembra no navegador se a pessoa já avaliou (aí o pop-up não aparece mais). */
 const DONE_KEY = "voce-decide:avaliacao:v1";
-const RULER_KEY = "voce-decide:avaliacao-regua:v1";
 const read = (k: string) => { try { return localStorage.getItem(k); } catch { return null; } };
 const write = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* sem armazenamento: o pop-up pode voltar */ } };
 const sent = () => read(DONE_KEY) === "sent";
@@ -57,7 +56,7 @@ function FeedbackFields({ id, rating, setRating, helped, setHelped, status, subm
 
 /**
  * Avaliação anônima da pesquisa: nota (1–5) e se ajudou na decisão (Sim/Não). Enviada só ao clicar e só com o consentimento aceito.
- * Além da caixa no fim do relatório, um pop-up aparece uma vez quando a régua do espectro surge na tela.
+ * Além da caixa no fim do relatório, um pop-up aparece toda vez que a régua do espectro surge na tela, até a pessoa avaliar.
  */
 export function FeedbackForm() {
   const { session } = useSession();
@@ -72,17 +71,16 @@ export function FeedbackForm() {
 
   const open = () => { if (!dialogRef.current?.open) dialogRef.current?.showModal(); };
 
-  // pop-up quando a pessoa chega na régua do espectro (a régua avisa): uma vez só, se ainda não avaliou
+  // pop-up toda vez que a régua do espectro volta a aparecer na tela (a régua avisa), enquanto a pessoa não avaliar
   useEffect(() => {
     if (!consented) return;
     let timer: ReturnType<typeof setTimeout> | undefined;
     const onRuler = () => {
-      if (sent() || read(RULER_KEY) || timer) return;
+      if (sent() || timer || dialogRef.current?.open) return;
       // um instante para a pessoa ver a régua antes do pop-up
       timer = setTimeout(() => {
-        if (sent() || read(RULER_KEY)) return;
-        write(RULER_KEY, "1");
-        open();
+        timer = undefined;
+        if (!sent()) open();
       }, 2500);
     };
     window.addEventListener("avaliacao:regua", onRuler);
