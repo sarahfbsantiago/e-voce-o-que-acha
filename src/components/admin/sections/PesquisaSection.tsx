@@ -102,7 +102,7 @@ export async function PesquisaSection() {
               </div>
             ) : <Empty />}
           </Panel>
-          <Panel title="Mais perto de quem na régua" subtitle="De comunismo a conservadorismo: Lula · de nacionalismo radical em diante: Flávio">
+          <Panel title="Análise geral: mais perto na régua ideológica" subtitle="De comunismo a conservadorismo: Lula · de nacionalismo radical em diante: Flávio">
             {ideo.total ? (
               <div className="flex flex-col items-center gap-4">
                 <Donut size={150} parts={ideo.closerOnRuler.map((c) => ({ value: c.count, color: candColor(c.candidateId) }))} center={PCT(lulaRuler?.share ?? null)} centerNote={first("lula")} />
@@ -132,7 +132,7 @@ export async function PesquisaSection() {
 
         {/* candidatos por tema, tempo */}
         <section className="grid gap-4 lg:grid-cols-3">
-          <Panel title="Mais perto nos temas" subtitle="Quem ficou mais perto em mais temas, por questionário">
+          <Panel title="Análises específicas: mais perto nos temas" subtitle="Quem ficou mais perto em mais temas (notas por alternativa), por questionário">
             {pp.withComparison > 0 ? (
               <div className="flex flex-col items-center gap-4">
                 <Donut size={150} parts={[...pp.byCandidate.map((b) => ({ value: b.count, color: candColor(b.candidateId) })), { value: pp.ties, color: "#d6d3cc" }]} center={BRL(pp.withComparison)} centerNote="comparáveis" />

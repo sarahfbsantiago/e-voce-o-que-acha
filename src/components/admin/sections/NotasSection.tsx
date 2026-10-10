@@ -50,8 +50,8 @@ export async function NotasSection() {
 
   return (
     <>
-      <AdminHero kicker="Calculadora" title="Notas por alternativa" pdfTitle="Notas por alternativa"
-        subtitle="Quanto cada candidato ganha quando a pessoa marca cada alternativa. É a tabela usada na conta do relatório: mudou aqui, mudou na calculadora." />
+      <AdminHero kicker="Análise específica · tema a tema" title="Notas por alternativa" pdfTitle="Notas por alternativa"
+        subtitle="Define só o bloco 'Qual candidato está mais próximo do seu perfil' do relatório: em cada tema, Lula, Flávio ou equivalente. É uma análise diferente da régua ideológica (Espectro político, a análise geral)." />
 
       <section className="grid grid-cols-2 gap-3 xl:grid-cols-5">
         <Kpi label="Perguntas" value={String(QUESTIONS.length)} note="5 por seção" color="#6d3fc4" />
@@ -67,10 +67,10 @@ export async function NotasSection() {
         <span className={`rounded-full px-2.5 py-0.5 font-bold ${PILL["0,5"]}`}>0,5 em parte</span>
         <span className={`rounded-full px-2.5 py-0.5 font-bold ${PILL["0"]}`}>0 não defende</span>
         <span className="rounded-full px-2.5 py-0.5 font-bold ring-2 ring-purple">contorno roxo = revisada por você</span>
-        <span className="ml-auto text-ink-3">Por tema: soma das notas ÷ perguntas respondidas. &quot;Não sei&quot; não entra.</span>
+        <span className="ml-auto text-ink-3">Por tema: soma das notas ÷ perguntas respondidas (&quot;Não sei&quot; não entra). Ex.: 2 perguntas com notas 1 e 0,5 → (1 + 0,5) ÷ 2 = <b className="text-ink">0,75</b>.</span>
       </div>
 
-      <Panel title="Como a conta é feita" subtitle="Média por resposta, tema a tema">
+      <Panel title="Como a conta é feita: análise específica, tema a tema" subtitle="Média por resposta. Só esta conta define, em cada tema, de qual candidato a pessoa fica mais perto (cartões das áreas no relatório).">
         <div className="grid gap-4 text-sm leading-relaxed text-ink-2 md:grid-cols-2">
           <ol className="list-decimal space-y-1.5 pl-5">
             <li>Para cada pergunta respondida, cada candidato ganha a nota da alternativa que a pessoa marcou: <b className="text-ink">1</b>, <b className="text-ink">0,5</b> ou <b className="text-ink">0</b>. &quot;Não sei&quot; não entra.</li>

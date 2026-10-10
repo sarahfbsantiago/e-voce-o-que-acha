@@ -33,8 +33,8 @@ export async function EspectroSection() {
 
   return (
     <>
-      <AdminHero kicker="Régua do relatório" title="Espectro político" pdfTitle="Espectro político"
-        subtitle="Para qual faixa da régua cada alternativa leva a pessoa. A posição dela é a média do meio das faixas que marcou; não depende dos candidatos. Mudou aqui, mudou na régua." />
+      <AdminHero kicker="Análise geral · régua ideológica" title="Espectro político" pdfTitle="Espectro político"
+        subtitle="Define a ideologia da pessoa na régua e de qual candidato ela fica mais perto ideologicamente: de comunismo a conservadorismo, Lula; de nacionalismo radical em diante, Flávio. É uma análise diferente da tema a tema (Notas por alternativa, as análises específicas)." />
 
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <Kpi label="Alternativas com faixa" value={String(cells)} note={`em ${QUESTIONS.length} perguntas`} color="#6d3fc4" />
@@ -54,7 +54,7 @@ export async function EspectroSection() {
         <div className="mt-2 grid grid-cols-8 gap-2 text-center text-[11px] leading-tight text-ink-3">{SPECTRUM_BANDS.map((b) => <span key={b.label}>{b.label}</span>)}</div>
       </Panel>
 
-      <Panel title="Como a conta é feita" subtitle="Posição da pessoa na régua, ideologia e de qual candidato ela fica mais perto">
+      <Panel title="Como a conta é feita: análise geral, na régua ideológica" subtitle="Posição da pessoa na régua, ideologia e de qual candidato ela fica mais perto ideologicamente. Não usa as notas por tema.">
         <div className="grid gap-4 text-sm leading-relaxed text-ink-2 lg:grid-cols-3">
           <div className="space-y-2">
             <p className="text-xs font-bold uppercase tracking-wide text-ink-3">1. Valor de cada resposta</p>
