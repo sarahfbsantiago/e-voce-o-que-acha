@@ -28,7 +28,7 @@ function HistoryBook({ h }: { h: SectionHistory }) {
       <p className="font-serif text-xs font-bold uppercase tracking-[0.2em] text-gold-strong">Na história</p>
       <div className={`grid gap-4 ${cards.length > 2 ? "sm:grid-cols-3" : cards.length > 1 ? "sm:grid-cols-2" : ""}`}>
         {cards.map((c, ci) => (
-          <div key={ci} className="space-y-3 rounded-lg bg-surface/70 p-2.5 shadow-sm ring-1 ring-note-line">
+          <div key={ci} className={`space-y-3 rounded-lg bg-surface/70 p-2.5 shadow-sm ring-1 ring-note-line ${c.figures.every((f) => !f.slug && !f.caption) ? "self-start" : ""}`}>
             {c.role ? <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-gold-strong">{c.role}</p> : null}
             {c.figures.map((f) => (
               <figure key={f.slug || f.name} className="flex gap-3 sm:flex-col">
