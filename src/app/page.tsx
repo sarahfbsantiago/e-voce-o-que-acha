@@ -52,10 +52,18 @@ export default function HomePage() {
           </div>
 
           <div className="animate-fade-up [animation-delay:500ms] card mx-auto mt-8 max-w-2xl border-t-4 border-t-accent px-5 py-6 shadow-sm md:px-10 md:py-9">
-            <p className="text-lg sm:text-xl text-ink-2">
-              Compare suas prioridades com propostas e registros públicos dos candidatos.
-            </p>
-            <div className="mt-5 space-y-3 border-t border-line pt-5 text-base sm:text-lg text-ink-2 leading-relaxed">
+            <p className="text-xl font-bold text-ink sm:text-2xl">Descubra sua ideologia política e compare suas ideias com as propostas dos candidatos.</p>
+            <ul className="mt-5 grid gap-3 text-left sm:grid-cols-2">
+              <li className="flex gap-3 rounded-xl bg-paper/70 p-3 ring-1 ring-line">
+                <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-purple to-[#2563eb] text-sm font-bold text-white">1</span>
+                <span className="text-sm leading-relaxed text-ink-2 sm:text-base"><b className="text-ink">Sua ideologia:</b> veja onde suas respostas te colocam na régua política, do comunismo ao fascismo, e o que essa corrente defende.</span>
+              </li>
+              <li className="flex gap-3 rounded-xl bg-paper/70 p-3 ring-1 ring-line">
+                <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-purple to-[#2563eb] text-sm font-bold text-white">2</span>
+                <span className="text-sm leading-relaxed text-ink-2 sm:text-base"><b className="text-ink">Os candidatos:</b> compare, tema a tema, suas prioridades com propostas e registros públicos de cada um.</span>
+              </li>
+            </ul>
+            <div className="mt-5 border-t border-line pt-5 text-base sm:text-lg text-ink-2 leading-relaxed">
               <p className="font-semibold text-ink">Este site não diz em quem você deve votar.</p>
             </div>
           </div>

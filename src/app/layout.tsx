@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s · E Você, O Que Acha?",
   },
   description:
-    "Compare suas prioridades com propostas e registros públicos dos candidatos. Este site não diz em quem você deve votar.",
+    "Descubra sua ideologia política e compare suas prioridades com propostas e registros públicos dos candidatos. Este site não diz em quem você deve votar.",
   applicationName: "E Você, O Que Acha?",
   openGraph: {
     type: "website",
