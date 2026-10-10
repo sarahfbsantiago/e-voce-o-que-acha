@@ -1,5 +1,6 @@
 import { getStatsRepository, StatsUnavailableError } from "@/lib/repository";
 import { SubmissionSchema } from "@/lib/validation";
+import { ensureLiveConfig } from "@/lib/live-config-server";
 import { badRequest, json } from "@/lib/api";
 
 /**
@@ -8,6 +9,7 @@ import { badRequest, json } from "@/lib/api";
  * - Nenhum IP ou user agent é lido ou armazenado aqui.
  */
 export async function POST(req: Request) {
+  await ensureLiveConfig();
   let body: unknown;
   try {
     body = await req.json();

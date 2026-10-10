@@ -3,10 +3,12 @@ import { aggregateProfileProximity } from "@/domain/profile-proximity";
 import { QUESTIONS } from "@/data/questions";
 import { isAdminRequest } from "@/lib/admin-auth";
 import { buildResearchReport, researchReportToCsv } from "@/lib/research-report";
+import { ensureLiveConfig } from "@/lib/live-config-server";
 import { json } from "@/lib/api";
 
 /** Dados agregados da pesquisa (privado). ?format=csv exporta CSV. */
 export async function GET(req: Request) {
+  await ensureLiveConfig();
   if (!isAdminRequest(req)) return json({ error: "Não autorizado." }, { status: 401 });
   const stats = await getStatsRepository();
   if (!stats.enabled) return json({ error: "Estatísticas indisponíveis: banco de dados não configurado." }, { status: 503 });

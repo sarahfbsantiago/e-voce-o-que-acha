@@ -1,7 +1,9 @@
 import { getContentRepository } from "@/lib/repository";
+import { ensureLiveConfig } from "@/lib/live-config-server";
 import { json, notFound } from "@/lib/api";
 
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {
+  await ensureLiveConfig();
   const { id } = await ctx.params;
   const repo = await getContentRepository();
   const question = await repo.getQuestion(id);

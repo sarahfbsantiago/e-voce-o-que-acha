@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { BRAZIL_H, BRAZIL_STATES, BRAZIL_W } from "@/components/brand/brazilShape";
 import { REGION_COLORS } from "@/components/brand/brazilColors";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 export const alt = "Admin · E Você, O Que Acha?. Área restrita do painel.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

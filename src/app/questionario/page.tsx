@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { PageTitle } from "@/components/ui";
 import { ConsentForm } from "@/components/ConsentForm";
 import { QUESTIONS } from "@/data/questions";
+import { ensureLiveConfig } from "@/lib/live-config-server";
 import { TOPICS } from "@/data/topics";
 
 export const metadata: Metadata = { title: "Antes de começar" };
 
-export default function QuestionarioIntroPage() {
+export default async function QuestionarioIntroPage() {
+  await ensureLiveConfig();
   return (
     <div className="container-page py-7 md:py-16 max-w-3xl">
       <PageTitle eyebrow="Questionário" lead={`${QUESTIONS.length} perguntas em ${TOPICS.length} temas. Você pode parar e voltar depois: as respostas ficam no seu navegador.`}>

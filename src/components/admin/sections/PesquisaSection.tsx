@@ -9,6 +9,7 @@ import { buildResearchReport } from "@/lib/research-report";
 import { INSUFFICIENT_DATA_MESSAGE } from "@/domain/aggregates";
 import { AGE_RANGES, REGIONS } from "@/domain/types";
 import { SPECTRUM_BANDS, ideologySpot } from "@/data/political-spectrum";
+import { ensureLiveConfig } from "@/lib/live-config-server";
 import { logoutAction } from "@/app/admin/login/actions";
 
 
@@ -28,6 +29,7 @@ const ideologyColor = (label: string) => {
  * Só agregações; nenhum registro individual. Visível apenas no admin.
  */
 export async function PesquisaSection() {
+  await ensureLiveConfig();
   if (!(await isAdminSession())) redirect("/admin/login");
   const stats = await getStatsRepository();
 
@@ -82,7 +84,7 @@ export async function PesquisaSection() {
         {/* números principais */}
         <section aria-label="Números principais" className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-7">
           <Kpi label="Questionários" value={BRL(r.overview.totalSubmissions)} note="recebidos" color="#6d3fc4" />
-          <Kpi label="Conclusão" value={PCT(r.overview.completionRate)} note={`${BRL(r.overview.completedAllQuestions)} com as 25 perguntas`} color="#2563eb" />
+          <Kpi label="Conclusão" value={PCT(r.overview.completionRate)} note={`${BRL(r.overview.completedAllQuestions)} com as ${QUESTIONS.length} perguntas`} color="#2563eb" />
           <Kpi label="Ideologia mais comum" value={topIdeology && topIdeology.count ? topIdeology.label : "—"} note={topIdeology && topIdeology.count ? `${PCT(topIdeology.share)} dos perfis` : "sem dados"} color={topIdeology ? ideologyColor(topIdeology.label) : "#9ca3af"} small />
           <Kpi label="Perto de Lula na régua" value={PCT(lulaRuler?.share ?? null)} note={`${BRL(lulaRuler?.count ?? 0)} perfis`} color={CAND_COLORS[0]} />
           <Kpi label="Responderam a avaliação" value={BRL(base)} note={`${PCT(evalShare)} dos questionários`} color="#2563eb" />

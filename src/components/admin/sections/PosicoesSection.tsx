@@ -10,6 +10,7 @@ import { sourceHref } from "@/components/SourceBits";
 import { EVIDENCE_CLASSIFICATION_LABELS } from "@/domain/types";
 import { AdminHero, Kpi, QNum, SectionTitle } from "@/components/admin/AdminUI";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
+import { ensureLiveConfig } from "@/lib/live-config-server";
 import { publishAllDraftsAction, publishPositionAction, rejectPositionAction, unpublishPositionAction } from "@/app/admin/posicoes/actions";
 
 
@@ -24,6 +25,7 @@ const STATUS_TONE: Record<string, string> = {
 };
 
 export async function PosicoesSection() {
+  await ensureLiveConfig();
   if (!(await isAdminSession())) redirect("/admin/login");
   const prisma = getPrisma();
   const positions = await prisma.candidatePosition.findMany({ include: { evidences: { include: { evidence: true } } } });

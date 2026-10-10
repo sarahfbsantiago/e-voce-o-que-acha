@@ -4,14 +4,10 @@ import { CountUp } from "@/components/fx/CountUp";
 import { ButtonLink } from "@/components/ui";
 import { StartButton } from "@/components/StartButton";
 import { QUESTIONS } from "@/data/questions";
-import { TOPICS } from "@/data/topics";
+import { ensureLiveConfig } from "@/lib/live-config-server";
+import { questionnaireCounts } from "@/lib/live-config";
 import { CORE_PRINCIPLE } from "@/domain/neutrality";
 
-const STATS = [
-  { value: String(QUESTIONS.length), label: `perguntas sobre políticas públicas e valores, em ${TOPICS.length} temas`, tone: "text-accent", bar: "from-accent to-purple-soft" },
-  { value: "0", label: "recomendações de voto ou ranking de candidatos", tone: "text-purple-strong", bar: "from-purple to-purple-soft" },
-  { value: "100%", label: "das afirmações sobre candidatos com fonte original consultável", tone: "text-mint-strong", bar: "from-mint to-mint-soft" },
-];
 
 const IconInfo = () => (
   <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 text-purple" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -24,7 +20,13 @@ const IconLink = () => (
   </svg>
 );
 
-export default function HomePage() {
+export default async function HomePage() {
+  await ensureLiveConfig();
+  const STATS = [
+    { value: String(QUESTIONS.length), label: `perguntas sobre políticas públicas e valores, em ${questionnaireCounts().topics} temas`, tone: "text-accent", bar: "from-accent to-purple-soft" },
+    { value: "0", label: "recomendações de voto ou ranking de candidatos", tone: "text-purple-strong", bar: "from-purple to-purple-soft" },
+    { value: "100%", label: "das afirmações sobre candidatos com fonte original consultável", tone: "text-mint-strong", bar: "from-mint to-mint-soft" },
+  ];
   return (
     <div className="relative">
 

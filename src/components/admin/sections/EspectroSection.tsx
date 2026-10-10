@@ -5,7 +5,8 @@ import { TOPICS } from "@/data/topics";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { QUESTION_NUMBER } from "@/lib/question-order";
 import { spectrumPositionOf } from "@/data/spectrum-positions";
-import { CANDIDATE_SPECTRUM, IDEOLOGY_RANGES, RIGHT_SIDE_FROM, RULER_WIDTHS, SPECTRUM_BANDS, ideologySpot, rulerPct } from "@/data/political-spectrum";
+import { CANDIDATE_SPECTRUM, IDEOLOGY_RANGES, RULER_RULES, RULER_WIDTHS, SPECTRUM_BANDS, ideologySpot, rulerPct } from "@/data/political-spectrum";
+import { ensureLiveConfig } from "@/lib/live-config-server";
 import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
 
@@ -13,6 +14,7 @@ const bandIndex = (label: string) => SPECTRUM_BANDS.findIndex((b) => b.label ===
 
 /** Para qual faixa da régua cada alternativa leva a pessoa (independe dos candidatos). */
 export async function EspectroSection() {
+  await ensureLiveConfig();
   if (!(await isAdminSession())) redirect("/admin/login");
   let reviewed = 0, cells = 0;
   const perBand = SPECTRUM_BANDS.map(() => 0);
@@ -57,12 +59,12 @@ export async function EspectroSection() {
       <Panel title="Como a conta é feita: análise geral, na régua ideológica" subtitle="Não usa as notas por tema.">
         {(() => {
           const ex = [{ band: 1, v: "1,5" }, { band: 3, v: "3,5" }, { band: 5, v: "5,5" }];
-          const split = rulerPct(RIGHT_SIDE_FROM);
+          const split = rulerPct(RULER_RULES.rightSideFrom);
           const segs = IDEOLOGY_RANGES.map((r, i) => {
             const from = i === 0 ? 0 : IDEOLOGY_RANGES[i - 1].upTo;
             const to = Math.min(r.upTo, SPECTRUM_BANDS.length);
             const spot = ideologySpot(r.label) ?? from;
-            return { n: i + 1, label: r.label, left: rulerPct(from), width: rulerPct(to) - rulerPct(from), color: SPECTRUM_BANDS[Math.min(SPECTRUM_BANDS.length - 1, Math.floor(spot))].color, lula: spot < RIGHT_SIDE_FROM };
+            return { n: i + 1, label: r.label, left: rulerPct(from), width: rulerPct(to) - rulerPct(from), color: SPECTRUM_BANDS[Math.min(SPECTRUM_BANDS.length - 1, Math.floor(spot))].color, lula: spot < RULER_RULES.rightSideFrom };
           });
           return (
             <div className="space-y-6">

@@ -18,3 +18,11 @@ export const ORDERED_QUESTIONS: Question[] = ORDERED_TOPICS.flatMap((t) =>
 );
 
 export const QUESTION_NUMBER: Record<string, number> = Object.fromEntries(ORDERED_QUESTIONS.map((q, i) => [q.id, i + 1]));
+
+/** Refaz a ordem e a numeração no lugar (usado quando a configuração viva muda as perguntas). */
+export function recomputeQuestionOrder(): void {
+  const next = ORDERED_TOPICS.flatMap((t) => QUESTIONS.filter((q) => q.topicId === t.id).sort((a, b) => a.order - b.order));
+  ORDERED_QUESTIONS.splice(0, ORDERED_QUESTIONS.length, ...next);
+  for (const k of Object.keys(QUESTION_NUMBER)) delete QUESTION_NUMBER[k];
+  next.forEach((q, i) => { QUESTION_NUMBER[q.id] = i + 1; });
+}

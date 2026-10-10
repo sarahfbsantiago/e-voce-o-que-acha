@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { getContentRepository } from "@/lib/repository";
+import { ensureLiveConfig } from "@/lib/live-config-server";
 import { ReportView } from "@/components/report/ReportView";
 
 export const metadata: Metadata = { title: "Seu perfil" };
 export const dynamic = "force-dynamic";
 
 export default async function RelatorioPage() {
+  await ensureLiveConfig();
   const repo = await getContentRepository();
   const [candidates, positions, evidence, summaries, sources, profiles] = await Promise.all([
     repo.getCandidates(),

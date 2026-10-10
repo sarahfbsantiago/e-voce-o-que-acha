@@ -1,14 +1,18 @@
 import { ImageResponse } from "next/og";
 import { BRAZIL_H, BRAZIL_STATES, BRAZIL_W } from "@/components/brand/brazilShape";
 import { REGION_COLORS } from "@/components/brand/brazilColors";
+import { ensureLiveConfig } from "@/lib/live-config-server";
+import { QUESTIONS } from "@/data/questions";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 export const alt = "E Você, O Que Acha?. Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /** Imagem de compartilhamento (WhatsApp, Instagram, X, LinkedIn): mapa do Brasil por região e o nome do site. */
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  await ensureLiveConfig();
   const mapH = 440;
   const mapW = (mapH * BRAZIL_W) / BRAZIL_H;
   return new ImageResponse(
@@ -21,7 +25,7 @@ export default function OpenGraphImage() {
           </div>
           <div style={{ display: "flex", fontSize: 80, fontWeight: 700, lineHeight: 1.05, marginTop: 28, letterSpacing: -2 }}>E Você, O Que Acha?</div>
           <div style={{ display: "flex", fontSize: 30, lineHeight: 1.35, marginTop: 28, color: "#4a4a46" }}>Somente dados. Fontes oficiais disponíveis para consulta. Use com moderação.</div>
-          <div style={{ display: "flex", fontSize: 22, lineHeight: 1.4, marginTop: 36, color: "#7a7a74" }}>25 perguntas · sem nome de candidato · fontes no final</div>
+          <div style={{ display: "flex", fontSize: 22, lineHeight: 1.4, marginTop: 36, color: "#7a7a74" }}>{QUESTIONS.length} perguntas · sem nome de candidato · fontes no final</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flex: 1 }}>
           <svg width={mapW} height={mapH} viewBox={`0 0 ${BRAZIL_W} ${BRAZIL_H}`}>

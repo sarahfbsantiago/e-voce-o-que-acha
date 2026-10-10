@@ -45,9 +45,10 @@ export const IDEOLOGY_RANGES: { upTo: number; label: string }[] = [
   { upTo: Infinity, label: "Fascismo" },
 ];
 
+/** Regras móveis da régua (editáveis no admin): a partir de `rightSideFrom` a pessoa fica mais perto do candidato da direita. */
+export const RULER_RULES = { rightSideFrom: 6.98 };
+
 /** Largura de cada faixa no desenho da régua: extremos bem mais largos, centro-esquerda e centro-direita mais estreitas. */
-/** A partir deste ponto da régua (o do nacionalismo radical), a pessoa fica mais perto do candidato da direita. */
-export const RIGHT_SIDE_FROM = 6.98;
 
 export const RULER_WIDTHS = [2.4, 1, 0.7, 1, 0.7, 1, 1, 2.4];
 const RULER_TOTAL = RULER_WIDTHS.reduce((n, w) => n + w, 0);
@@ -68,7 +69,7 @@ export function closestCandidateOnRuler(at: number, candidateIds: string[]): str
   if (!known.length) return null;
   if (known.length === 1) return known[0];
   // Regra da responsável: só de nacionalismo radical para a direita fica mais perto do candidato da direita.
-  return at >= RIGHT_SIDE_FROM ? known[known.length - 1] : known[0];
+  return at >= RULER_RULES.rightSideFrom ? known[known.length - 1] : known[0];
 }
 
 export interface PersonSpectrum { at: number; mean: number; ideology: string; counted: number }

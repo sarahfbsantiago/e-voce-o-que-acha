@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { PageTitle } from "@/components/ui";
 import { StartButton } from "@/components/StartButton";
+import { ensureLiveConfig } from "@/lib/live-config-server";
+import { questionnaireCounts } from "@/lib/live-config";
 
 export const metadata: Metadata = { title: "Como funciona" };
 
-const STEPS: [string, string][] = [
-  ["Você responde", "25 perguntas em linguagem simples sobre políticas públicas e valores políticos, divididas em 5 seções com 12 temas. Cada seção começa perguntando o quanto aqueles temas importam para você. Toda pergunta tem a opção “Não sei”. Os nomes dos candidatos ficam ocultos durante as perguntas, e nenhuma cor partidária é usada."],
+const steps = (n: number, topics: number): [string, string][] => [
+  ["Você responde", `${n} perguntas em linguagem simples sobre políticas públicas e valores políticos, divididas em 5 seções com ${topics} temas. Cada seção começa perguntando o quanto aqueles temas importam para você. Toda pergunta tem a opção “Não sei”. Os nomes dos candidatos ficam ocultos durante as perguntas, e nenhuma cor partidária é usada.`],
   ["Você declara prioridades", "Ao final de cada sessão, você informa quanto aquele tema importa para você. Essa informação serve exclusivamente para ordenar o seu relatório."],
   ["Nós organizamos as evidências", "Para cada pergunta, comparamos sua resposta com a posição documentada de cada candidato: igual, parecida ou diferente. Se o candidato não se posicionou nas fontes oficiais, a pergunta conta como diferente para ele, e o site diz isso. Depois, você conhece melhor os candidatos: trajetória, cargos, o que fizeram e o que prometem, com link para cada documento."],
   ["Você consulta o histórico", "Atuação legislativa e políticas executadas são apresentadas conforme o cargo que o candidato ocupou. Um parlamentar não é penalizado por não ter competências executivas."],
@@ -17,7 +19,10 @@ const STEPS: [string, string][] = [
 
 const TONES = ["bg-accent", "bg-purple", "bg-mint", "bg-gold"];
 
-export default function ComoFuncionaPage() {
+export default async function ComoFuncionaPage() {
+  await ensureLiveConfig();
+  const c = questionnaireCounts();
+  const STEPS = steps(c.questions, c.topics);
   return (
     <div className="container-page py-7 md:py-16 max-w-3xl">
       <PageTitle eyebrow="Passo a passo" lead="Oito passos, sem recomendação de voto e com a conta aberta.">Como funciona</PageTitle>

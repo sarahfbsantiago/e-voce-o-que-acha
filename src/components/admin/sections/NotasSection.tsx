@@ -6,6 +6,7 @@ import { TOPICS } from "@/data/topics";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { currentOptionScore, proposedOptionScore } from "@/lib/option-scores";
 import { QUESTION_NUMBER } from "@/lib/question-order";
+import { ensureLiveConfig } from "@/lib/live-config-server";
 import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
 
@@ -20,6 +21,7 @@ const PILL: Record<string, string> = {
 
 /** Notas por alternativa: a mesma tabela usada na conta do relatório. */
 export async function NotasSection() {
+  await ensureLiveConfig();
   if (!(await isAdminSession())) redirect("/admin/login");
   const positions = await (await getContentRepository()).getPublishedPositions();
 
@@ -54,7 +56,7 @@ export async function NotasSection() {
         subtitle="Define só o bloco 'Qual candidato está mais próximo do seu perfil' do relatório: em cada tema, Lula, Flávio ou equivalente. É uma análise diferente da régua ideológica (Espectro político, a análise geral)." />
 
       <section className="grid grid-cols-2 gap-3 xl:grid-cols-5">
-        <Kpi label="Perguntas" value={String(QUESTIONS.length)} note="5 por seção" color="#6d3fc4" />
+        <Kpi label="Perguntas" value={String(QUESTIONS.length)} note="no questionário" color="#6d3fc4" />
         <Kpi label="Notas na tabela" value={String(cells)} note="alternativas × candidatos" color="#2563eb" />
         <Kpi label="Revisadas por você" value={String(changed)} note="diferentes da regra padrão" color="#ec4899" />
         <Kpi label="Nota 1" value={String(tally["1"])} note="o candidato defende" color="#2f9a5d" />

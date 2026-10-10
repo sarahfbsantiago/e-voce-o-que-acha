@@ -534,3 +534,24 @@ model CandidateProfile {
 
   candidate Candidate @relation(fields: [candidateId], references: [id])
 }
+
+/// Versões publicadas da configuração viva (perguntas, notas, faixas e régua). Imutáveis: só se cria, nunca se edita ou apaga.
+model ConfigVersion {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  author     String
+  reason     String
+  sections   String[]
+  changes    Json
+  impact     Json
+  snapshot   Json
+  rollbackOf Int?
+}
+
+/// Rascunho único de alterações do admin (ainda não publicado).
+model ConfigDraft {
+  id          String   @id
+  snapshot    Json
+  baseVersion Int
+  updatedAt   DateTime @updatedAt
+}
