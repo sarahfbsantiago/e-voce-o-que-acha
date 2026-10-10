@@ -22,8 +22,8 @@ export const dynamic = "force-dynamic";
 const ERRORS: Record<string, string> = {
   bloqueado: "Muitas tentativas erradas de código. Espere 10 minutos.", fechado: "Este pedido já foi fechado.",
   desatualizado: "A versão no ar mudou depois deste pedido. Recuse, leve ao rascunho e reenvie.", "sem-mudancas": "Este pedido não muda nada em relação ao que está no ar.",
-  invalido: "Há problemas que impedem publicar (veja em vermelho).", nome: "Digite seu nome.", motivo: "Escreva o motivo.", ciente: "Marque \"Estou ciente\".",
-  frase: "A frase digitada não confere.", codigo: "Código do Google Authenticator inválido ou já usado.", "nome-recusa": "Digite seu nome para recusar.", "motivo-recusa": "Para recusar, escreva o motivo da recusa.", comentario: "Para comentar, escreva seu nome e o comentário.",
+  invalido: "Há problemas que impedem publicar (veja em vermelho).", nome: "Digite seu nome.", motivo: "Escreva o motivo.",
+  codigo: "Código do Google Authenticator inválido ou já usado.", "nome-recusa": "Digite seu nome para recusar.", "motivo-recusa": "Para recusar, escreva o motivo da recusa.", comentario: "Para comentar, escreva seu nome e o comentário.",
 };
 const pct = (n: number | null) => (n === null ? "—" : `${String(n).replace(".", ",")}%`);
 const input = "mt-1 w-full rounded-lg border border-line bg-surface px-2.5 py-2 text-sm";

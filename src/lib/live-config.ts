@@ -311,7 +311,9 @@ export type Scope =
   | { kind: "ruler" }
   | { kind: "content"; path: (string | number)[] }
   | { kind: "position"; key: string }
-  | { kind: "evidence"; id: string };
+  | { kind: "evidence"; id: string }
+  /** várias mudanças juntas (aba Rascunho: publicar ou enviar as selecionadas) */
+  | { kind: "many"; items: Scope[] };
 
 const pick = <T,>(rec: Record<string, T>, prefix: string) => Object.fromEntries(Object.entries(rec).filter(([k]) => k.startsWith(prefix)));
 const getPath = (root: unknown, path: (string | number)[]) => path.reduce<unknown>((n, k) => (n == null ? n : (n as Record<string | number, unknown>)[k]), root);
@@ -328,6 +330,7 @@ export function extractScope(cfg: LiveConfig, scope: Scope): unknown {
     case "content": return getPath(c, scope.path) ?? null;
     case "position": return c.positions?.[scope.key] ?? null;
     case "evidence": return c.evidence?.[scope.id] ?? null;
+    case "many": return scope.items.map((x) => extractScope(cfg, x));
   }
 }
 
@@ -335,6 +338,7 @@ export const scopeChanged = (a: LiveConfig, b: LiveConfig, scope: Scope) => !sam
 
 /** Cópia de `base` com a parte `scope` trazida de `src`. */
 export function applyScope(base: LiveConfig, src: LiveConfig, scope: Scope): LiveConfig {
+  if (scope.kind === "many") return scope.items.reduce((acc, x) => applyScope(acc, src, x), base);
   const out: LiveConfig = clone(base);
   const replacePrefix = <T,>(rec: Record<string, T>, from: Record<string, T>, prefix: string) => {
     for (const k of Object.keys(rec)) if (k.startsWith(prefix)) delete rec[k];
@@ -390,7 +394,50 @@ export function describeScope(scope: Scope, numbers: Record<string, number> = {}
     case "content": return `Texto: ${scope.path.join(" › ")}`;
     case "position": return `Posição ${scope.key.replace("|", " · ")}`;
     case "evidence": return `Evidência ${scope.id}`;
+    case "many": return scope.items.map((x) => describeScope(x, numbers)).join(", ");
   }
+}
+
+/** Identificador estável de um item (para marcar e desmarcar na aba Rascunho). */
+export const scopeId = (scope: Scope) => stableStringify(scope);
+
+const CONTENT_KEYED = ["pages", "profiles", "history"] as const;
+const CONTENT_LISTS = ["spectrumIntro", "spectrumSections", "candidateViews", "candidateProfiles", "sources"] as const;
+
+/**
+ * Cada mudança do rascunho em relação ao ar, como itens separados: pergunta, notas e faixas de uma pergunta, régua,
+ * cada texto, cada fonte, cada posição e cada evidência. Aplicar todos os itens sobre o ar dá o rascunho.
+ */
+export function draftItems(live: LiveConfig, draft: LiveConfig): Scope[] {
+  const out: Scope[] = [];
+  const ids = [...new Set([...draft.questions.map((q) => q.id), ...live.questions.map((q) => q.id)])];
+  for (const id of ids) {
+    const q = (c: LiveConfig) => ({ q: c.questions.find((x) => x.id === id) ?? null, a: c.archived.includes(id) });
+    if (!sameJson(q(live), q(draft))) out.push({ kind: "question", id });
+    else {
+      // só o valor conta (nota e faixa); o motivo guardado junto não é mudança visível
+      const calc = (c: LiveConfig) => [pick(c.optionScores, `${id}|`), pick(c.spectrumPositions, `${id}|`)].map((r) => Object.fromEntries(Object.entries(r).map(([k, v]) => [k, v[0]])));
+      if (!sameJson(calc(live), calc(draft))) out.push({ kind: "calc", questionId: id });
+    }
+  }
+  if (scopeChanged(live, draft, { kind: "ruler" })) out.push({ kind: "ruler" });
+  const A = contentOf(live) as unknown as Record<string, unknown>, B = contentOf(draft) as unknown as Record<string, unknown>;
+  for (const top of CONTENT_KEYED) {
+    const a = (A[top] ?? {}) as Record<string, unknown>, b = (B[top] ?? {}) as Record<string, unknown>;
+    for (const k of new Set([...Object.keys(a), ...Object.keys(b)])) if (!sameJson(a[k], b[k])) out.push({ kind: "content", path: [top, k] });
+  }
+  for (const top of CONTENT_LISTS) {
+    const a = (A[top] ?? []) as unknown[], b = (B[top] ?? []) as unknown[];
+    if (sameJson(a, b)) continue;
+    if (a.length !== b.length) { out.push({ kind: "content", path: [top] }); continue; }
+    b.forEach((x, i) => { if (!sameJson(a[i], x)) out.push({ kind: "content", path: [top, i] }); });
+  }
+  if (!sameJson(A.spectrumComparison, B.spectrumComparison)) out.push({ kind: "content", path: ["spectrumComparison"] });
+  const pa = (A.positions ?? {}) as Record<string, unknown>, pb = (B.positions ?? {}) as Record<string, unknown>;
+  for (const key of new Set([...Object.keys(pa), ...Object.keys(pb)])) if (!sameJson(pa[key], pb[key])) out.push({ kind: "position", key });
+  const ea = (A.evidence ?? {}) as Record<string, unknown>, eb = (B.evidence ?? {}) as Record<string, unknown>;
+  for (const id of new Set([...Object.keys(ea), ...Object.keys(eb)])) if (!sameJson(ea[id], eb[id])) out.push({ kind: "evidence", id });
+  return out;
 }
 
 const isRecord = (v: unknown): v is Record<string, unknown> => !!v && typeof v === "object" && !Array.isArray(v);

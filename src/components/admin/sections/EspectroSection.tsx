@@ -5,7 +5,7 @@ import { spectrumPositionOf } from "@/data/spectrum-positions";
 import { CANDIDATE_SPECTRUM, IDEOLOGY_RANGES, RULER_RULES, RULER_WIDTHS, SPECTRUM_BANDS, ideologySpot, rulerPct } from "@/data/political-spectrum";
 import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
 import { scopeChanged } from "@/lib/live-config";
-import { SubmitItem } from "@/components/admin/SubmitItem";
+import { DraftTag } from "@/components/admin/DraftTag";
 import { RulerEditor } from "@/components/admin/RulerEditor";
 import { SPECTRUM_TERMS } from "@/data/spectrum-terms";
 import { AdminHero, Kpi, Panel } from "@/components/admin/AdminUI";
@@ -57,7 +57,7 @@ export async function EspectroSection({ editable = false }: { editable?: boolean
             initial={{ terms: working.terms, candidates: working.candidates, ideologyBounds: working.ideologyBounds, rightSideFrom: working.rightSideFrom }}
             published={{ terms: Object.fromEntries(SPECTRUM_TERMS.map((t) => [t.label, t.at])), candidates: Object.fromEntries(Object.entries(CANDIDATE_SPECTRUM).map(([id, c]) => [id, c.at])), ideologyBounds: Object.fromEntries(IDEOLOGY_RANGES.map((x) => [x.label, Number.isFinite(x.upTo) ? x.upTo : null])), rightSideFrom: RULER_RULES.rightSideFrom }}
             order={SPECTRUM_TERMS.map((t) => t.label)} ideologies={IDEOLOGY_RANGES.map((x) => x.label)} base={working} />
-          {wc ? <SubmitItem scope={{ kind: "ruler" }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "ruler" })} what="Régua" /> : null}
+          {wc ? <DraftTag scope={{ kind: "ruler" }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "ruler" })} what="Régua" /> : null}
         </Panel>
       ) : null}
 

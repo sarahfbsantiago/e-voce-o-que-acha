@@ -21,7 +21,7 @@ export default async function Page() {
       <AdminHero kicker="Comece aqui" title="Como usar o admin" subtitle="Toque num tema para ver o passo a passo." extra={<a href="/admin/manual" className="inline-flex min-h-10 items-center rounded-lg bg-white/15 px-3 py-2 text-sm font-semibold ring-1 ring-white/30 hover:bg-white/25">Exportar PDF</a>} />
 
       <ol className="flex flex-wrap items-center gap-2 rounded-2xl bg-gradient-to-r from-purple-soft to-[#dbeafe] p-4 text-xs font-bold text-ink ring-1 ring-purple/20 sm:text-sm">
-        {([["pencil", "Editar"], ["save", "Salvar no rascunho"], ["send", "Enviar para aprovação"], ["eye", "Revisar e prévia"], ["key", "Código"], ["rocket", "No ar"], ["history", "Histórico"]] as [IconName, string][]).map(([ic, t], i, a) => (
+        {([["pencil", "Editar"], ["eye", "Revisar no Rascunho"], ["key", "Motivo e código"], ["rocket", "No ar"], ["history", "Histórico"]] as [IconName, string][]).map(([ic, t], i, a) => (
           <li key={t} className="flex items-center gap-2"><span className="admin-lift inline-flex items-center gap-1.5 rounded-xl bg-surface px-3 py-2 shadow-sm ring-1 ring-line"><Icon name={ic} className="h-4 w-4 text-purple" />{t}</span>{i < a.length - 1 ? <span className="text-purple">→</span> : null}</li>
         ))}
       </ol>

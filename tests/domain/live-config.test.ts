@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { BASELINE_CONFIG, applyConfig, applyScope, buildOptions, diffConfig, nextQuestionId, rebaseDraft, scopeChanged, validateConfig, type LiveConfig } from "@/lib/live-config";
+import { BASELINE_CONFIG, applyConfig, applyScope, buildOptions, diffConfig, draftItems, nextQuestionId, rebaseDraft, scopeChanged, validateConfig, type LiveConfig } from "@/lib/live-config";
 import { computeImpact } from "@/lib/config-impact";
 import { QUESTIONS, QUESTION_BY_ID } from "@/data/questions";
 import { QUESTION_NUMBER } from "@/lib/question-order";
@@ -170,5 +170,38 @@ describe("rascunho por cima da versão no ar", () => {
     const out = rebaseDraft(base, draft, live);
     expect(out.questions.at(-1)!.id).toBe("q99");
     expect(textOf(out, QUESTIONS[0].id)).toBe("no ar");
+  });
+});
+
+describe("aba Rascunho: itens do rascunho", () => {
+  it("separa cada mudança em um item e, aplicando todos, chega ao rascunho", () => {
+    const live = clone(BASELINE_CONFIG);
+    const draft = clone(live);
+    draft.questions[0].text = "texto novo";
+    const k = Object.keys(draft.optionScores).find((x) => x.startsWith(`${QUESTIONS[1].id}|`))!;
+    draft.optionScores[k] = [draft.optionScores[k][0] === 1 ? 0 : 1, "rascunho"];
+    draft.rightSideFrom = live.rightSideFrom + 0.1;
+    const pages = draft.content!.pages as unknown as Record<string, Record<string, unknown>>;
+    pages.metodologia = { ...pages.metodologia, title: "Metodologia nova" };
+    const items = draftItems(live, draft);
+    expect(items).toEqual([
+      { kind: "question", id: QUESTIONS[0].id },
+      { kind: "calc", questionId: QUESTIONS[1].id },
+      { kind: "ruler" },
+      { kind: "content", path: ["pages", "metodologia"] },
+    ]);
+    expect(diffConfig(applyScope(live, draft, { kind: "many", items }), draft)).toEqual([]);
+  });
+
+  it("publicar só alguns itens deixa os outros de fora", () => {
+    const live = clone(BASELINE_CONFIG);
+    const draft = clone(live);
+    draft.questions[0].text = "A";
+    draft.questions[2].text = "C";
+    const [a, c] = draftItems(live, draft);
+    const target = applyScope(live, draft, { kind: "many", items: [a] });
+    expect(target.questions[0].text).toBe("A");
+    expect(target.questions[2].text).toBe(live.questions[2].text);
+    expect(draftItems(target, draft)).toEqual([c]);
   });
 });

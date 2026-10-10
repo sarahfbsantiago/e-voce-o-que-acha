@@ -112,7 +112,7 @@ export async function discardDraftAction() {
   if (!(await isAdminSession())) redirect("/admin/login");
   await discardDraft();
   revalidatePath("/admin", "layout");
-  redirect("/admin/publicar?descartado=1");
+  redirect("/admin/rascunho?descartado=1");
 }
 
 /** Troca um trecho dos textos do site (caminho dentro de content) no rascunho. */

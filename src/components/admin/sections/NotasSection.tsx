@@ -10,7 +10,7 @@ import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
 import { bandKey, scopeChanged, scoreKey } from "@/lib/live-config";
 import { spectrumPositionOf } from "@/data/spectrum-positions";
 import { SPECTRUM_BANDS } from "@/data/political-spectrum";
-import { SubmitItem } from "@/components/admin/SubmitItem";
+import { DraftTag } from "@/components/admin/DraftTag";
 import { BandSelect, ScoreSelect } from "@/components/admin/CellEditors";
 import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
@@ -231,7 +231,7 @@ export async function NotasSection({ editable = false }: { editable?: boolean } 
                       ))}
                     </tbody>
                   </table>
-                  {wc ? <SubmitItem scope={{ kind: "calc", questionId: q.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "calc", questionId: q.id })} what={`Notas e faixas da pergunta ${QUESTION_NUMBER[q.id]}`} /> : null}
+                  {wc ? <DraftTag scope={{ kind: "calc", questionId: q.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "calc", questionId: q.id })} what={`Notas e faixas da pergunta ${QUESTION_NUMBER[q.id]}`} /> : null}
                 </div>
               </article>
             ))}

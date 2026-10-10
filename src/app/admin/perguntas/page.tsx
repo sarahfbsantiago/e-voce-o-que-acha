@@ -8,7 +8,7 @@ import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { TOPICS } from "@/data/topics";
 import { SPECTRUM_BANDS } from "@/data/political-spectrum";
 import { questionNumbers, scopeChanged } from "@/lib/live-config";
-import { SubmitItem } from "@/components/admin/SubmitItem";
+import { DraftTag } from "@/components/admin/DraftTag";
 
 export const metadata: Metadata = { title: "Perguntas", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -55,7 +55,7 @@ export default async function Page() {
                     {q.example ? <p className="mt-2 text-xs leading-relaxed text-ink-2">{q.example}</p> : null}
                     <ul className="mt-2 flex flex-wrap gap-1.5">{q.options.map((o) => <li key={o.id} className={`rounded-full px-2.5 py-0.5 text-xs ${o.isNoOpinion ? "bg-paper text-ink-3" : "bg-purple-soft text-purple-strong"}`}>{o.label}</li>)}</ul>
                     <QuestionEditor id={q.id} text={q.text} example={q.example ?? ""} options={q.options.map((o) => ({ id: o.id, label: o.label, noOpinion: o.isNoOpinion }))} archived={false} bands={bands} isNew={!pubIds.has(q.id)} />
-                    <SubmitItem scope={{ kind: "question", id: q.id }} changed={scopeChanged(published.cfg, cfg, { kind: "question", id: q.id })} what={pubIds.has(q.id) ? `Pergunta ${nums[q.id]}` : "Pergunta nova"} />
+                    <DraftTag scope={{ kind: "question", id: q.id }} changed={scopeChanged(published.cfg, cfg, { kind: "question", id: q.id })} what={pubIds.has(q.id) ? `Pergunta ${nums[q.id]}` : "Pergunta nova"} />
                   </div>
                 </article>
               ))}
@@ -70,7 +70,7 @@ export default async function Page() {
             <li key={q.id} className="rounded-xl bg-paper/60 p-3 ring-1 ring-line">
               <p className="text-sm text-ink-2">{q.text}</p>
               <QuestionEditor id={q.id} text={q.text} example={q.example ?? ""} options={[]} archived bands={bands} isNew={false} />
-              <SubmitItem scope={{ kind: "question", id: q.id }} changed={scopeChanged(published.cfg, cfg, { kind: "question", id: q.id })} what="Pergunta arquivada" />
+              <DraftTag scope={{ kind: "question", id: q.id }} changed={scopeChanged(published.cfg, cfg, { kind: "question", id: q.id })} what="Pergunta arquivada" />
             </li>
           ))}</ul>
         </Panel>

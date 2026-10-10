@@ -7,7 +7,7 @@ import { TextTreeEditor } from "@/components/admin/TextTreeEditor";
 import { getWorkingConfig } from "@/lib/live-config-server";
 import { contentOf, sameJson } from "@/lib/live-config";
 import { SPECTRUM_TERMS } from "@/data/spectrum-terms";
-import { SubmitItem } from "@/components/admin/SubmitItem";
+import { DraftTag } from "@/components/admin/DraftTag";
 
 export const metadata: Metadata = { title: "Textos do site", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -38,7 +38,7 @@ export default async function Page() {
   const ed = (path: (string | number)[], a: unknown, b: unknown) => (
     <>
       <TextTreeEditor path={path} value={j(a)} published={j(b)} />
-      <SubmitItem scope={{ kind: "content", path }} changed={diff(a, b)} what="Este texto" />
+      <DraftTag scope={{ kind: "content", path }} changed={diff(a, b)} what="Este texto" />
     </>
   );
 

@@ -11,29 +11,14 @@ import { ChangePreview } from "@/components/admin/ChangePreview";
 const CALC = ["Notas por alternativa", "Espectro político", "Régua", "Perguntas"];
 import { buildPublishPlan } from "@/lib/publish-plan";
 import { getPublishedConfig, getRequest } from "@/lib/live-config-server";
-import { activeQuestions, applyScope, contentOf, type LiveConfig, type Scope } from "@/lib/live-config";
+import { applyScope, contentOf, type Scope } from "@/lib/live-config";
 import { getContentRepository, getStatsRepository } from "@/lib/repository";
-import type { SessionState } from "@/store/session";
-import type { UserAnswer } from "@/domain/types";
+import { previewSamples as samples } from "@/components/admin/preview-samples";
 
 export const metadata: Metadata = { title: "Prévia e confirmação", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
-const session = (answers: UserAnswer[]): SessionState => ({ version: 1, consent: "declined", consentUpdatedAt: null, answers, priorities: [], candidateOrder: ["lula", "flavio-bolsonaro"], demographics: { ageRange: null, region: null }, completedAt: new Date().toISOString(), submittedAt: null });
-
-/** Questionários de exemplo: três perfis montados (esquerda, centro, direita) e os últimos reais. */
-function samples(cfg: LiveConfig, real: { answers: UserAnswer[] }[]) {
-  const qs = activeQuestions(cfg);
-  const pickBy = (fn: (opts: { id: string }[]) => { id: string }) => qs.map((q) => ({ questionId: q.id, optionIds: [fn(q.options.filter((o) => !o.isNoOpinion)).id] }));
-  return [
-    { label: "Exemplo: respostas mais à esquerda", session: session(pickBy((o) => o[0])) },
-    { label: "Exemplo: respostas ao centro", session: session(pickBy((o) => o[Math.floor((o.length - 1) / 2)])) },
-    { label: "Exemplo: respostas mais à direita", session: session(pickBy((o) => o[o.length - 1])) },
-    ...real.slice(-3).reverse().map((r, i) => ({ label: `Questionário real recente ${i + 1}`, session: session(r.answers) })),
-  ];
-}
-
-/** Aceitar: prévia de como o site vai ficar e confirmação (nome, motivo, ciente, frase e código). */
+/** Aceitar: prévia de como o site vai ficar e confirmação (nome, motivo e código). */
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   if (!(await isAdminSession())) redirect("/admin/login");
   const id = Number((await params).id);
@@ -67,9 +52,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           </div>
         )}
       </Panel>
-      <Panel title="2. Confirmar e publicar" subtitle="Nome, motivo, Estou ciente, frase e código" accent="#2f9a5d">
+      <Panel title="2. Confirmar e publicar" subtitle="Nome, motivo e código" accent="#2f9a5d">
         {plan.errors.length || stale ? <p className="text-sm font-semibold text-[#9b1c1c]">Não dá para publicar: {stale ? "pedido desatualizado" : plan.errors[0]}</p> : (
-          <PublishForm phrase={plan.phrase} requestId={id} rollback={req.row.rollbackOf} needsCode={adminTotpSecret() !== null} danger={(plan.impact?.ideologyChanged ?? 0) > 0} defaultReason={req.row.note} />
+          <PublishForm requestId={id} rollback={req.row.rollbackOf} needsCode={adminTotpSecret() !== null} defaultReason={req.row.note} />
         )}
       </Panel>
       <Link href={`/admin/publicar/${id}`} className="text-sm font-semibold text-purple underline">← Voltar ao pedido</Link>

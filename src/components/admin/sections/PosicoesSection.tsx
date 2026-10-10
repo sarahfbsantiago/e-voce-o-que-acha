@@ -14,7 +14,7 @@ import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
 import { contentOf, scopeChanged } from "@/lib/live-config";
 import { evidenceSummaryWith } from "@/data/position-overrides";
 import { EvidenceEditor, PositionEditor } from "@/components/admin/PositionEditors";
-import { SubmitItem } from "@/components/admin/SubmitItem";
+import { DraftTag } from "@/components/admin/DraftTag";
 
 
 const DIRECTION_LABEL: Record<string, string> = {
@@ -103,7 +103,7 @@ export async function PosicoesSection({ editable = false }: { editable?: boolean
                                       {editable ? (
                                         <>
                                           <EvidenceEditor id={e.id} value={{ title: e.title, summary: e.summary.replace(/ Documento: \S+$/, ""), originalExcerpt: e.originalExcerpt, link: e.summary.match(/Documento: (\S+)/)?.[1] ?? "" }} />
-                                          <SubmitItem scope={{ kind: "evidence", id: e.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "evidence", id: e.id })} what="Evidência" />
+                                          <DraftTag scope={{ kind: "evidence", id: e.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "evidence", id: e.id })} what="Evidência" />
                                         </>
                                       ) : null}
                                     </li>
@@ -115,7 +115,7 @@ export async function PosicoesSection({ editable = false }: { editable?: boolean
                           {editable ? (
                             <>
                               <PositionEditor posKey={`${q.id}|${c.id}`} value={{ summary: p.summary, direction: p.direction, closestOptionId: p.closestOptionId, reviewStatus: p.reviewStatus }} options={q.options.filter((o) => !o.isNoOpinion).map((o) => ({ id: o.id, label: o.label }))} />
-                              <SubmitItem scope={{ kind: "position", key: `${q.id}|${c.id}` }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "position", key: `${q.id}|${c.id}` })} what={`Posição de ${c.name}`} />
+                              <DraftTag scope={{ kind: "position", key: `${q.id}|${c.id}` }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "position", key: `${q.id}|${c.id}` })} what={`Posição de ${c.name}`} />
                             </>
                           ) : null}
                         </div>

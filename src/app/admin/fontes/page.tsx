@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { isAdminSession } from "@/lib/admin-auth";
 import { AdminHero, AdminShell, Kpi, Panel } from "@/components/admin/AdminUI";
 import { TextTreeEditor } from "@/components/admin/TextTreeEditor";
-import { SubmitItem } from "@/components/admin/SubmitItem";
+import { DraftTag } from "@/components/admin/DraftTag";
 import { AddSource, RemoveSource } from "@/components/admin/SourceTools";
 import { getWorkingConfig } from "@/lib/live-config-server";
 import { contentOf, sameJson } from "@/lib/live-config";
@@ -33,7 +33,7 @@ export default async function Page() {
       </section>
       <Panel title="Adicionar fonte" accent="#0891b2">
         <AddSource />
-        <SubmitItem scope={{ kind: "content", path: ["sources"] }} changed={listChanged} what="Lista de fontes (inclusões e remoções)" />
+        <DraftTag scope={{ kind: "content", path: ["sources"] }} changed={listChanged} what="Lista de fontes (inclusões e remoções)" />
       </Panel>
       <div className="space-y-2">
         {byInst.map(({ s, i }) => {
@@ -49,7 +49,7 @@ export default async function Page() {
               </summary>
               <div className="space-y-3 border-t border-line p-4">
                 <TextTreeEditor path={["sources", i]} value={JSON.parse(JSON.stringify(s)) as Json} published={JSON.parse(JSON.stringify(old ?? s)) as Json} />
-                {old ? <SubmitItem scope={{ kind: "content", path: ["sources", i] }} changed={changed && !listChanged} what="Esta fonte" /> : null}
+                {old ? <DraftTag scope={{ kind: "content", path: ["sources", i] }} changed={changed && !listChanged} what="Esta fonte" /> : null}
                 <RemoveSource id={s.id} />
               </div>
             </details>

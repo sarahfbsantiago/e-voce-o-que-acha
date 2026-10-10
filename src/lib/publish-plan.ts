@@ -8,9 +8,6 @@ import { closestCandidateOnRuler, personSpectrum } from "@/data/political-spectr
 /** Quantos envios recentes entram na conta de impacto. */
 export const IMPACT_SAMPLE = 10000;
 
-/** Nome curto de cada seção, usado na frase de confirmação. */
-const SHORT: Record<string, string> = { "Notas por alternativa": "notas", "Espectro político": "espectro", "Régua": "régua", "Perguntas": "perguntas", "Textos do site": "textos", "Revisão de posições": "posições", "Fontes e links": "fontes" };
-
 export interface PublishPlan {
   mode: "draft" | "request";
   rollbackOf: number | null;
@@ -20,7 +17,6 @@ export interface PublishPlan {
   sections: string[];
   errors: string[];
   impact: Impact | null;
-  phrase: string;
   examples: { before: string; after: string; rulerBefore: string; rulerAfter: string }[];
 }
 
@@ -31,7 +27,7 @@ export async function buildDraftPlan(): Promise<PublishPlan> {
   return buildPlanFor(w.hasDraft ? w.cfg : published.cfg, published, null, "draft", false);
 }
 
-/** Prepara a publicação: o que muda, se pode publicar, o impacto nos questionários reais e a frase a digitar. */
+/** Prepara a publicação: o que muda, se pode publicar e o impacto nos questionários reais. */
 export async function buildPublishPlan(target: LiveConfig, rollbackId: number | null): Promise<PublishPlan> {
   const published = await getPublishedConfig(true);
   return buildPlanFor(target, published, rollbackId, "request", true);
@@ -64,6 +60,5 @@ async function buildPlanFor(target: LiveConfig, published: PublishedConfig, roll
     const after = withConfig(target, published.cfg, () => sample.map((s) => { const p = personSpectrum(s.answers); return { i: p?.ideology ?? "—", r: p ? name(closestCandidateOnRuler(p.at, ids)) : "—" }; }));
     for (let k = 0; k < sample.length && examples.length < 4; k++) if (before[k].i !== after[k].i || before[k].r !== after[k].r) examples.push({ before: before[k].i, after: after[k].i, rulerBefore: before[k].r, rulerAfter: after[k].r });
   }
-  const phrase = rollbackId ? `voltar para v${rollbackId}` : sections.length ? `atualizar ${sections.map((s) => SHORT[s] ?? s.toLowerCase()).join(" e ")}` : "";
-  return { mode, rollbackOf: rollbackId, published, target, changes, sections, errors, impact, phrase, examples };
+  return { mode, rollbackOf: rollbackId, published, target, changes, sections, errors, impact, examples };
 }

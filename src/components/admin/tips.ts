@@ -13,7 +13,7 @@ export const TIPS: Tip[] = [
     ["Perguntas", "O questionário."],
     ["Textos do site e Fontes", "Tudo de texto e de links do site e do relatório."],
     ["Sugestões", "Ideias de mudança, sem mexer no site."],
-    ["Publicar e Histórico", "Aprovar mudanças, ver versões e voltar atrás."],
+    ["Rascunho e Histórico", "Revisar e publicar mudanças, ver versões e voltar atrás."],
   ] },
   { id: "onde", icon: "pin", title: "Onde aparece no site", short: "o que muda o quê", color: "#2563eb", points: [
     ["Régua e “sua ideologia”", "vêm das faixas (Notas e espectro) e da Régua do espectro."],
@@ -26,25 +26,25 @@ export const TIPS: Tip[] = [
     ["Abra", "Notas e espectro."],
     ["Clique", "na nota do candidato e escolha 1, 0,5 ou 0."],
     ["Bolinha laranja", "= mudou e ainda não foi ao ar."],
-    ["Logo abaixo", "clique em Enviar para aprovação."],
+    ["Depois", "Rascunho → Publicar."],
   ] },
   { id: "faixas", icon: "palette", title: "Mudar uma faixa", short: "para onde a resposta leva", color: "#0891b2", points: [
     ["Abra", "Notas e espectro, coluna Régua."],
     ["Escolha", "a faixa de cada alternativa (Esquerda … Direita)."],
     ["A pessoa fica", "na média das faixas que marcou."],
-    ["Logo abaixo", "Enviar para aprovação."],
+    ["Depois", "Rascunho → Publicar."],
   ] },
   { id: "regua", icon: "ruler", title: "Mover a régua", short: "correntes, Lula, Flávio, divisa", color: "#ec4899", points: [
     ["Arraste", "as correntes, Lula, Flávio, a linha divisória e as barrinhas pretas dos trechos."],
     ["Teclado", "setas ajustam 0,01; com Shift, 0,1."],
     ["Regras", "correntes não se cruzam; a divisa fica entre Lula e Flávio."],
-    ["Depois", "Salvar no rascunho → Enviar para aprovação."],
+    ["Depois", "Salvar no rascunho → Rascunho → Publicar."],
   ] },
   { id: "perguntas", icon: "list", title: "Perguntas", short: "criar, editar, arquivar", color: "#d4a017", points: [
     ["Criar", "texto, tema e, em cada alternativa, nota do Lula, nota do Flávio e faixa."],
     ["Editar", "texto, exemplo e alternativas; + Alternativa."],
     ["Arquivar", "sai do questionário; respostas antigas ficam guardadas."],
-    ["Cada pergunta", "tem o seu Enviar para aprovação."],
+    ["Etiqueta “alterado”", "a pergunta mudou e ainda não está no site."],
   ] },
   { id: "textos", icon: "text", title: "Textos e fontes", short: "perfis, correntes, currículos, links", color: "#7c3aed", points: [
     ["Abra", "Textos do site ou Fontes e links."],
@@ -52,14 +52,12 @@ export const TIPS: Tip[] = [
     ["Dica", "**texto** = negrito; {perguntas} e {temas} = contagens."],
     ["Fontes", "teste o link antes de enviar."],
   ] },
-  { id: "publicar", icon: "upload", title: "Aprovar e publicar", short: "como um pull request", color: "#dc2626", points: [
-    ["1. Salvar no rascunho", "depois de editar, clique em Salvar no rascunho (notas e faixas salvam sozinhas)."],
-    ["2. Enviar para aprovação", "logo abaixo do item: seu nome + o que mudou."],
-    ["Mudou de ideia antes de enviar?", "Desfazer este ajuste (volta ao que está no ar) ou Excluir rascunho, em Publicar."],
-    ["Depois de enviado", "só dá para cancelar no painel de aprovação (Publicar → pedido → Cancelar meu pedido)."],
-    ["3. Revisar", "em Publicar, abra o pedido: o que muda e o impacto."],
-    ["4. Aceitar", "veja a prévia de como o site vai ficar."],
-    ["5. Confirmar", "nome, motivo, Estou ciente, frase e código do Google Authenticator. O site muda na hora."],
+  { id: "publicar", icon: "upload", title: "Revisar e publicar", short: "editar, revisar, publicar", color: "#dc2626", points: [
+    ["1. Editar", "mude e salve; o item ganha a etiqueta “alterado” (notas e faixas salvam sozinhas)."],
+    ["2. Revisar", "abra Rascunho (menu ou barra laranja): cada mudança com antes × depois, já marcada."],
+    ["Não quer agora?", "desmarque (fica no rascunho) ou clique em desfazer (volta ao que está no ar)."],
+    ["3. Publicar", "motivo + código do Google Authenticator. O site muda na hora e vira uma versão no Histórico."],
+    ["Outra pessoa aprova?", "“enviar para outra pessoa aprovar” vira um pedido na aba Pedidos."],
   ] },
   { id: "impacto", icon: "chart", title: "Ler o impacto", short: "quem muda de resultado", color: "#f97316", points: [
     ["Calculado", "com os questionários reais já enviados."],
@@ -70,7 +68,7 @@ export const TIPS: Tip[] = [
   { id: "historico", icon: "history", title: "Histórico e voltar", short: "versões e rollback", color: "#0f766e", points: [
     ["Cada publicação", "vira uma versão: quem, quando, motivo, impacto."],
     ["Comparar", "duas versões e ver as réguas."],
-    ["Voltar", "para uma versão vira um pedido, aprovado com frase e código."],
+    ["Voltar", "para uma versão vira um pedido, aprovado com motivo e código."],
     ["Nada", "é apagado."],
   ] },
   { id: "sugestoes", icon: "pencil", title: "Sugestões", short: "propor sem mudar", color: "#6d3fc4", points: [
@@ -84,10 +82,10 @@ export const TIPS: Tip[] = [
     ["Aprovar", "pede o código de novo; 5 erros bloqueiam por 10 minutos."],
   ] },
   { id: "faq", icon: "help", title: "Dúvidas", short: "mudei e não apareceu…", color: "#2563eb", points: [
-    ["Mudei e não apareceu", "ainda está no rascunho ou aguardando aprovação."],
+    ["Mudei e não apareceu", "ainda está no Rascunho: abra e publique."],
     ["Publiquei errado", "Histórico → Voltar para esta versão."],
     ["Quem já respondeu", "passa a ver o resultado com a versão nova."],
-    ["Descartar tudo", "Publicar → Descartar o rascunho."],
+    ["Descartar tudo", "Rascunho → Descartar todo o rascunho."],
   ] },
 ];
 
