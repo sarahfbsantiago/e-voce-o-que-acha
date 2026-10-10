@@ -28,6 +28,7 @@ export default async function Page() {
   return (
     <AdminShell current="/admin/perguntas">
       <AdminHero kicker="Questionário" title="Perguntas" pdfTitle="Perguntas"
+        extra={<a href="/admin/perguntas/pdf" className="inline-flex min-h-10 items-center rounded-lg bg-white/15 px-3 py-2 text-sm font-semibold ring-1 ring-white/30 hover:bg-white/25">Exportar PDF</a>}
         subtitle="Edite textos, acrescente alternativas, arquive ou crie perguntas. Tudo fica no rascunho; ao publicar, a numeração e as contagens do site (perguntas e temas) se ajustam sozinhas." />
       <section className="grid grid-cols-2 gap-3 xl:grid-cols-4">
         <Kpi label="No questionário" value={String(active.length)} note="perguntas ativas no rascunho" color="#6d3fc4" />

@@ -23,7 +23,7 @@ export default async function Page() {
       <header className="rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-5 text-white">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">E Você, O Que Acha?</p>
         <h1 className="mt-1 text-2xl font-bold">Manual do admin</h1>
-        <p className="mt-1 text-sm text-white/85">Como editar, enviar para aprovação, aprovar, publicar e voltar versões. Gerado em {new Date().toLocaleDateString("pt-BR")}.</p>
+        <p className="mt-1 text-sm text-white/85">Como editar, revisar no Rascunho, publicar e voltar versões. Gerado em {new Date().toLocaleDateString("pt-BR")}.</p>
       </header>
       <ol className="rounded-2xl bg-surface p-4 text-sm ring-1 ring-line print:break-inside-avoid">
         <p className="mb-2 text-xs font-bold uppercase tracking-wide text-ink-3">Sumário</p>
