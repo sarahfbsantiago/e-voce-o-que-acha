@@ -245,8 +245,8 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
       <ul className="mt-3 space-y-0.5 text-[11px] text-ink-2">
         {candidates.map((t) => <li key={t.c.id}><span className="font-semibold text-ink">{t.c.name}:</span> {t.spot.label}</li>)}
       </ul>
-      <p style={delay(1.8)} className={`${anim("spectrum-pop")} mt-3 rounded-lg border border-purple/30 bg-purple-soft px-3 py-2 text-sm text-ink`}>
-        {closest ? <>Sua ideologia está mais próxima de: <span className="font-bold text-purple-strong">{closest.c.name}</span></> : <>Sua ideologia ficou equivalente entre os dois candidatos.</>}
+      <p style={delay(1.8)} className={`${anim("spectrum-pop")} mt-3 text-xs text-ink-3`}>
+        {closest ? `De acordo com a régua ideológica, sua ideologia está mais próxima de ${closest.spot.formalName}.` : "De acordo com a régua ideológica, sua ideologia ficou equivalente entre os dois candidatos."}
       </p>
 
       <dialog ref={dialogRef} className="modal" aria-labelledby="espectro-detalhe" onClose={() => { setOpenId(null); setOpenTerm(null); }} onClick={(e) => { if (e.target === dialogRef.current) setOpenId(null); }}>
