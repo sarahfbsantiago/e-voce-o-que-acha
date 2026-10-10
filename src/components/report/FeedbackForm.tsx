@@ -5,10 +5,12 @@ import { Button } from "@/components/ui";
 import { CURRENT_METHODOLOGY_VERSION } from "@/data/methodology";
 import { useSession } from "@/store/session";
 
-/** Lembra no navegador se a pessoa já avaliou ou fechou o pop-up (para ele aparecer uma vez só). */
+/** Lembra no navegador se a pessoa já avaliou e se o pop-up da régua já apareceu (ele aparece uma vez só). */
 const DONE_KEY = "voce-decide:avaliacao:v1";
-const readDone = () => { try { return localStorage.getItem(DONE_KEY); } catch { return null; } };
-const writeDone = (v: "sent" | "dismissed") => { try { localStorage.setItem(DONE_KEY, v); } catch { /* sem armazenamento: o pop-up pode voltar */ } };
+const RULER_KEY = "voce-decide:avaliacao-regua:v1";
+const read = (k: string) => { try { return localStorage.getItem(k); } catch { return null; } };
+const write = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* sem armazenamento: o pop-up pode voltar */ } };
+const sent = () => read(DONE_KEY) === "sent";
 
 /** Disparado pelo botão do PDF antes de imprimir; o pop-up de avaliação abre e a impressão vem ao fechar. */
 export const PDF_EVENT = "avaliacao:antes-do-pdf";
@@ -68,33 +70,35 @@ export function FeedbackForm() {
   const [sendStatus, setStatus] = useState<Status>("idle");
   const dialogRef = useRef<HTMLDialogElement>(null);
   // já avaliou antes (neste navegador): a caixa aparece como enviada
-  const sentBefore = useSyncExternalStore(noopSubscribe, () => readDone() === "sent", () => false);
+  const sentBefore = useSyncExternalStore(noopSubscribe, sent, () => false);
   const status: Status = sentBefore ? "sent" : sendStatus;
 
   // depois do pop-up aberto pelo botão do PDF, a impressão continua ao fechar (enviando ou no ×)
   const afterClose = useRef<(() => void) | null>(null);
   const open = () => { if (!dialogRef.current?.open) dialogRef.current?.showModal(); };
 
-  // pop-up quando a régua do espectro aparece na tela: uma vez só (não volta se já avaliou ou fechou)
+  // pop-up quando a pessoa chega na régua do espectro (a régua avisa): uma vez só, se ainda não avaliou
   useEffect(() => {
-    const ruler = document.getElementById("espectro");
-    if (!consented || readDone() || !ruler) return;
+    if (!consented) return;
     let timer: ReturnType<typeof setTimeout> | undefined;
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      io.disconnect();
+    const onRuler = () => {
+      if (sent() || read(RULER_KEY) || timer) return;
       // um instante para a pessoa ver a régua antes do pop-up
-      timer = setTimeout(() => { if (!readDone()) open(); }, 2500);
-    }, { threshold: 0.6 });
-    io.observe(ruler);
-    return () => { io.disconnect(); clearTimeout(timer); };
+      timer = setTimeout(() => {
+        if (sent() || read(RULER_KEY)) return;
+        write(RULER_KEY, "1");
+        open();
+      }, 2500);
+    };
+    window.addEventListener("avaliacao:regua", onRuler);
+    return () => { window.removeEventListener("avaliacao:regua", onRuler); clearTimeout(timer); };
   }, [consented]);
 
   // pop-up ao clicar em "Baixar em PDF", enquanto a pessoa não tiver avaliado
   useEffect(() => {
     const onPdf = (e: Event) => {
       const d = (e as CustomEvent<{ print: () => void; handled: boolean }>).detail;
-      if (!consented || readDone() === "sent") return;
+      if (!consented || sent()) return;
       d.handled = true;
       afterClose.current = d.print;
       open();
@@ -115,7 +119,7 @@ export function FeedbackForm() {
       const next: Status = res.status === 503 ? "unavailable" : res.ok ? "sent" : "error";
       setStatus(next);
       if (next === "sent") {
-        writeDone("sent");
+        write(DONE_KEY, "sent");
         setTimeout(() => dialogRef.current?.close(), 1200);
       }
     } catch {
@@ -133,7 +137,6 @@ export function FeedbackForm() {
       </section>
 
       <dialog ref={dialogRef} className="modal" aria-labelledby="avaliacao-popup" onClose={() => {
-        if (readDone() !== "sent") writeDone("dismissed");
         const next = afterClose.current;
         afterClose.current = null;
         if (next) setTimeout(next, 100);

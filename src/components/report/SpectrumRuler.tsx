@@ -112,7 +112,11 @@ export function SpectrumRuler({ totals, answers }: { totals: Totals; answers: { 
     const el = rootRef.current;
     if (!el || typeof IntersectionObserver === "undefined") { setShown(true); return; }
     // anima de novo toda vez que a régua volta a aparecer na tela
-    const io = new IntersectionObserver(([e]) => setShown(e.isIntersecting), { threshold: 0.2 });
+    const io = new IntersectionObserver(([e]) => {
+      setShown(e.isIntersecting);
+      // avisa o pop-up de avaliação que a pessoa chegou na régua
+      if (e.isIntersecting) window.dispatchEvent(new Event("avaliacao:regua"));
+    }, { threshold: 0.2 });
     io.observe(el);
     // no PDF (impressão), a régua aparece completa, sem depender da rolagem
     const onPrint = () => setShown(true);
