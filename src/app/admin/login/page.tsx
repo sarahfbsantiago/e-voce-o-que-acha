@@ -36,7 +36,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
                   <input name="token" type="password" autoComplete="off" required className="mt-1.5 w-full rounded-xl border border-line bg-paper/50 px-3 py-2.5 min-h-11 focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/30" />
                 </label>
               )}
-              {erro ? <p className="rounded-lg bg-[#fde8e8] px-3 py-2 text-sm text-[#9b1c1c]" role="alert">{erro === "bloqueado" ? "Muitas tentativas erradas. Espere 10 minutos." : totp ? "Código inválido ou já usado. Confira o código atual no aplicativo." : "Token inválido."}</p> : null}
+              {erro ? <p className="rounded-lg bg-[#fde8e8] px-3 py-2 text-sm text-[#9b1c1c]" role="alert">{erro === "bloqueado" ? "Muitas tentativas erradas. Espere 10 minutos." : totp ? "Código inválido ou já usado. Digite o código atual do aplicativo." : "Token inválido."}</p> : null}
               <button type="submit" className="w-full min-h-11 rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-95">Entrar</button>
             </form>
           )}
