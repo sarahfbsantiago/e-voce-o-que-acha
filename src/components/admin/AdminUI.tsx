@@ -23,10 +23,10 @@ export function AdminShell({ current, children }: { current: string; children: R
 
 export function AdminHero({ kicker, title, subtitle, pdfTitle, extra }: { kicker: string; title: string; subtitle: string; pdfTitle: string; extra?: ReactNode }) {
   return (
-    <header className="flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-5 text-white shadow-md">
+    <header className="flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-4 text-white shadow-md md:p-5">
       <div className="max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">{kicker}</p>
-        <h1 className="mt-1 text-2xl font-bold md:text-3xl">{title}</h1>
+        <h1 className="mt-1 text-xl font-bold md:text-3xl">{title}</h1>
         <p className="mt-1 text-sm leading-relaxed text-white/85">{subtitle}</p>
       </div>
       <div className="flex flex-wrap items-center gap-2 print:hidden">
@@ -43,7 +43,7 @@ export function Kpi({ label, value, note, color, small = false }: { label: strin
     <div className="relative overflow-hidden rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
       <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5" style={{ background: color }} />
       <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-3">{label}</p>
-      <p className={`mt-1 font-bold tabular-nums text-ink ${small ? "text-lg leading-tight" : "text-3xl"}`}>{value}</p>
+      <p className={`mt-1 font-bold tabular-nums text-ink ${small ? "text-base leading-tight md:text-lg" : "text-2xl md:text-3xl"}`}>{value}</p>
       {note ? <p className="mt-0.5 text-xs text-ink-2">{note}</p> : null}
     </div>
   );
@@ -51,7 +51,7 @@ export function Kpi({ label, value, note, color, small = false }: { label: strin
 
 export function Panel({ title, subtitle, children, className = "", accent, right }: { title: ReactNode; subtitle?: ReactNode; children: ReactNode; className?: string; accent?: string; right?: ReactNode }) {
   return (
-    <section className={`overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line ${className}`}>
+    <section className={`min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line ${className}`}>
       {accent ? <div aria-hidden="true" className="h-1.5" style={{ background: accent }} /> : null}
       <div className="p-4 md:p-5">
         <div className="flex flex-wrap items-start justify-between gap-2">

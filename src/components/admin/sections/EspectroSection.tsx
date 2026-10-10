@@ -5,7 +5,7 @@ import { TOPICS } from "@/data/topics";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { QUESTION_NUMBER } from "@/lib/question-order";
 import { spectrumPositionOf } from "@/data/spectrum-positions";
-import { SPECTRUM_BANDS } from "@/data/political-spectrum";
+import { IDEOLOGY_RANGES, RIGHT_SIDE_FROM, SPECTRUM_BANDS, ideologySpot } from "@/data/political-spectrum";
 import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
 
@@ -36,7 +36,7 @@ export async function EspectroSection() {
       <AdminHero kicker="Régua do relatório" title="Espectro político" pdfTitle="Espectro político"
         subtitle="Para qual faixa da régua cada alternativa leva a pessoa. A posição dela é a média do meio das faixas que marcou; não depende dos candidatos. Mudou aqui, mudou na régua." />
 
-      <section className="grid gap-3 sm:grid-cols-3">
+      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <Kpi label="Alternativas com faixa" value={String(cells)} note={`em ${QUESTIONS.length} perguntas`} color="#6d3fc4" />
         <Kpi label="Revisadas por você" value={String(reviewed)} note="contorno roxo na tabela" color="#ec4899" />
         <Kpi label="Ainda proposta" value={String(cells - reviewed)} note="aguardando sua revisão" color="#d4a017" />
@@ -54,12 +54,61 @@ export async function EspectroSection() {
         <div className="mt-2 grid grid-cols-8 gap-2 text-center text-[11px] leading-tight text-ink-3">{SPECTRUM_BANDS.map((b) => <span key={b.label}>{b.label}</span>)}</div>
       </Panel>
 
+      <Panel title="Como a conta é feita" subtitle="Posição da pessoa na régua, ideologia e de qual candidato ela fica mais perto">
+        <div className="grid gap-4 text-sm leading-relaxed text-ink-2 lg:grid-cols-3">
+          <div className="space-y-2">
+            <p className="text-xs font-bold uppercase tracking-wide text-ink-3">1. Valor de cada resposta</p>
+            <p>Cada alternativa aponta para uma faixa. A resposta vale o meio dessa faixa (&quot;Não sei&quot; não entra):</p>
+            <ul className="grid grid-cols-2 gap-1 text-xs">
+              {SPECTRUM_BANDS.map((b, i) => (
+                <li key={b.label} className="flex items-center gap-1.5"><span aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: b.color }} /><span className="min-w-0 flex-1">{b.label}</span><b className="tabular-nums text-ink">{String(i + 0.5).replace(".", ",")}</b></li>
+              ))}
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <p className="text-xs font-bold uppercase tracking-wide text-ink-3">2. Média por resposta</p>
+            <p><b className="text-ink">Posição</b> = soma dos valores das respostas ÷ número de respostas.</p>
+            <div className="rounded-xl bg-paper/70 p-3 ring-1 ring-line">
+              <p className="text-xs font-bold uppercase tracking-wide text-ink-3">Exemplo</p>
+              <p className="mt-1">3 respostas: uma em Esquerda, uma em Centro e uma em Direita.</p>
+              <p className="mt-2 font-mono text-[13px] text-ink">(1,5 + 3,5 + 5,5) ÷ 3 = 3,5</p>
+              <p className="mt-1">3,5 → Centro político.</p>
+            </div>
+            <p className="text-xs">A ideologia é a corrente cujo trecho contém a posição:</p>
+            <ul className="space-y-0.5 text-xs">
+              {IDEOLOGY_RANGES.map((r, i) => (
+                <li key={r.label} className="flex justify-between gap-2"><span>{r.label}</span><span className="tabular-nums text-ink-3">{i === 0 ? "até " : r.upTo === Infinity ? "acima de " : `${String(IDEOLOGY_RANGES[i - 1].upTo).replace(".", ",")} a `}{(r.upTo === Infinity ? IDEOLOGY_RANGES[i - 1].upTo : r.upTo).toString().replace(".", ",")}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <p className="text-xs font-bold uppercase tracking-wide text-ink-3">3. Mais perto de qual candidato</p>
+            {(() => {
+              const left = IDEOLOGY_RANGES.filter((r) => (ideologySpot(r.label) ?? 0) < RIGHT_SIDE_FROM).map((r) => r.label);
+              const right = IDEOLOGY_RANGES.filter((r) => (ideologySpot(r.label) ?? 0) >= RIGHT_SIDE_FROM).map((r) => r.label);
+              return (
+                <>
+                  <div className="rounded-xl p-3 ring-1 ring-[#6d3fc4]/30" style={{ background: "#6d3fc414" }}>
+                    <p>De <b className="text-ink">{left[0]}</b> a <b className="text-ink">{left[left.length - 1]}</b>:</p>
+                    <p className="mt-1 font-bold text-[#562f9f]">mais próxima da ideologia de Luiz Inácio Lula da Silva</p>
+                  </div>
+                  <div className="rounded-xl p-3 ring-1 ring-[#2f9a5d]/30" style={{ background: "#2f9a5d14" }}>
+                    <p>De <b className="text-ink">{right[0]}</b> em diante ({right.join(", ")}):</p>
+                    <p className="mt-1 font-bold text-[#237a49]">mais próxima da ideologia de Flávio Nantes Bolsonaro</p>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      </Panel>
+
       {sections.map(({ g, gi, rows }) => (
         <div key={g.id} className="space-y-3">
           <SectionTitle n={gi + 1} label={g.label} color={g.color} note={`${rows.length} perguntas`} />
-          <div className="grid gap-4 xl:grid-cols-2">
+          <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 md:mx-0 md:grid md:overflow-visible md:px-0 md:pb-0 print:mx-0 print:grid print:overflow-visible print:px-0 xl:grid-cols-2">
             {rows.map(({ q, t, options }) => (
-              <article key={q.id} className="overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
+              <article key={q.id} className="w-[86%] shrink-0 snap-start md:w-auto md:shrink print:w-auto min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
                 <div aria-hidden="true" className="h-1" style={{ background: g.color }} />
                 <div className="p-4">
                   <p className="text-sm font-semibold leading-snug text-ink"><QNum n={QUESTION_NUMBER[q.id]} title={`código interno ${q.id}`} />{q.text}</p>

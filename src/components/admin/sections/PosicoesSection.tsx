@@ -38,7 +38,7 @@ export async function PosicoesSection() {
       <AdminHero kicker="Curadoria" title="Revisão de posições" pdfTitle="Revisão de posições"
         subtitle="A posição documentada de cada candidato em cada pergunta, com as evidências. Só o que está publicado entra no relatório." />
 
-      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+      <section className="grid grid-cols-2 gap-3 xl:grid-cols-5">
         <Kpi label="Posições" value={String(live.length)} note={`nas ${QUESTIONS.length} perguntas atuais`} color="#6d3fc4" />
         <Kpi label="Publicadas" value={String(counts.PUBLISHED ?? 0)} note="entram no relatório" color="#2f9a5d" />
         <Kpi label="Rascunhos" value={String((counts.DRAFT ?? 0) + (counts.PENDING_REVIEW ?? 0))} note="aguardando revisão" color="#d4a017" />
@@ -65,7 +65,7 @@ export async function PosicoesSection() {
                 <div className="p-4 md:p-5">
                   <p className="text-sm font-semibold leading-snug text-ink"><QNum n={QUESTION_NUMBER[q.id]} title={`código interno ${q.id}`} />{q.text}</p>
                   <p className="mt-1 text-[11px] uppercase tracking-wide text-ink-3">{t.name}</p>
-                  <div className="mt-4 grid gap-4 md:grid-cols-2">
+                  <div className="mt-4 grid min-w-0 gap-4 md:grid-cols-2">
                     {CANDIDATES.map((c) => {
                       const p = byKey.get(`${q.id}|${c.id}`);
                       if (!p) return (

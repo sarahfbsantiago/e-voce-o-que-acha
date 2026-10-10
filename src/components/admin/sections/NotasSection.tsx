@@ -6,7 +6,7 @@ import { TOPICS } from "@/data/topics";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { currentOptionScore, proposedOptionScore } from "@/lib/option-scores";
 import { QUESTION_NUMBER } from "@/lib/question-order";
-import { AdminHero, Kpi, QNum, SectionTitle } from "@/components/admin/AdminUI";
+import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
 
 const CANDS = [{ id: "lula", name: "Lula", color: "#6d3fc4" }, { id: "flavio-bolsonaro", name: "Flávio", color: "#2f9a5d" }];
@@ -53,7 +53,7 @@ export async function NotasSection() {
       <AdminHero kicker="Calculadora" title="Notas por alternativa" pdfTitle="Notas por alternativa"
         subtitle="Quanto cada candidato ganha quando a pessoa marca cada alternativa. É a tabela usada na conta do relatório: mudou aqui, mudou na calculadora." />
 
-      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+      <section className="grid grid-cols-2 gap-3 xl:grid-cols-5">
         <Kpi label="Perguntas" value={String(QUESTIONS.length)} note="5 por seção" color="#6d3fc4" />
         <Kpi label="Notas na tabela" value={String(cells)} note="alternativas × candidatos" color="#2563eb" />
         <Kpi label="Revisadas por você" value={String(changed)} note="diferentes da regra padrão" color="#ec4899" />
@@ -70,12 +70,28 @@ export async function NotasSection() {
         <span className="ml-auto text-ink-3">Por tema: soma das notas ÷ perguntas respondidas. &quot;Não sei&quot; não entra.</span>
       </div>
 
+      <Panel title="Como a conta é feita" subtitle="Média por resposta, tema a tema">
+        <div className="grid gap-4 text-sm leading-relaxed text-ink-2 md:grid-cols-2">
+          <ol className="list-decimal space-y-1.5 pl-5">
+            <li>Para cada pergunta respondida, cada candidato ganha a nota da alternativa que a pessoa marcou: <b className="text-ink">1</b>, <b className="text-ink">0,5</b> ou <b className="text-ink">0</b>. &quot;Não sei&quot; não entra.</li>
+            <li><b className="text-ink">Média do tema</b> = soma das notas do candidato ÷ número de perguntas respondidas no tema.</li>
+            <li>Fica mais perto no tema quem tiver a média maior; médias iguais = equivalente.</li>
+          </ol>
+          <div className="rounded-xl bg-paper/70 p-3 ring-1 ring-line">
+            <p className="text-xs font-bold uppercase tracking-wide text-ink-3">Exemplo</p>
+            <p className="mt-1">Tema com 2 perguntas respondidas. Na 1ª, a alternativa marcada vale 1 para A e 0 para B; na 2ª, vale 1 para A e 0,5 para B.</p>
+            <p className="mt-2 font-mono text-[13px] text-ink">A: (1 + 1) ÷ 2 = 1<br />B: (0 + 0,5) ÷ 2 = 0,25</p>
+            <p className="mt-1">No tema, a pessoa fica mais perto de A.</p>
+          </div>
+        </div>
+      </Panel>
+
       {sections.map(({ g, gi, rows }) => (
         <div key={g.id} className="space-y-3">
           <SectionTitle n={gi + 1} label={g.label} color={g.color} note={`${rows.length} perguntas`} />
-          <div className="grid gap-4 xl:grid-cols-2">
+          <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 md:mx-0 md:grid md:overflow-visible md:px-0 md:pb-0 print:mx-0 print:grid print:overflow-visible print:px-0 xl:grid-cols-2">
             {rows.map(({ q, t, options }) => (
-              <article key={q.id} className="overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
+              <article key={q.id} className="w-[86%] shrink-0 snap-start md:w-auto md:shrink print:w-auto min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
                 <div aria-hidden="true" className="h-1" style={{ background: g.color }} />
                 <div className="p-4">
                   <p className="text-sm font-semibold leading-snug text-ink"><QNum n={QUESTION_NUMBER[q.id]} title={`código interno ${q.id}`} />{q.text}</p>

@@ -65,7 +65,7 @@ export async function PesquisaSection() {
     <>
 
         {/* cabeçalho */}
-        <header className="flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-5 text-white shadow-md">
+        <header className="flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-4 text-white shadow-md md:p-5">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">Painel da pesquisa</p>
             <h1 className="mt-1 text-2xl font-bold md:text-3xl">Dados da pesquisa</h1>
@@ -80,7 +80,7 @@ export async function PesquisaSection() {
         </header>
 
         {/* números principais */}
-        <section aria-label="Números principais" className="grid gap-3 sm:grid-cols-3 xl:grid-cols-7">
+        <section aria-label="Números principais" className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-7">
           <Kpi label="Questionários" value={BRL(r.overview.totalSubmissions)} note="recebidos" color="#6d3fc4" />
           <Kpi label="Conclusão" value={PCT(r.overview.completionRate)} note={`${BRL(r.overview.completedAllQuestions)} com as 25 perguntas`} color="#2563eb" />
           <Kpi label="Ideologia mais comum" value={topIdeology && topIdeology.count ? topIdeology.label : "—"} note={topIdeology && topIdeology.count ? `${PCT(topIdeology.share)} dos perfis` : "sem dados"} color={topIdeology ? ideologyColor(topIdeology.label) : "#9ca3af"} small />
@@ -102,7 +102,7 @@ export async function PesquisaSection() {
               </div>
             ) : <Empty />}
           </Panel>
-          <Panel title="Mais perto de quem na régua" subtitle="Distância no desenho da régua do espectro">
+          <Panel title="Mais perto de quem na régua" subtitle="De comunismo a conservadorismo: Lula · de nacionalismo radical em diante: Flávio">
             {ideo.total ? (
               <div className="flex flex-col items-center gap-4">
                 <Donut size={150} parts={ideo.closerOnRuler.map((c) => ({ value: c.count, color: candColor(c.candidateId) }))} center={PCT(lulaRuler?.share ?? null)} centerNote={first("lula")} />
@@ -200,9 +200,9 @@ export async function PesquisaSection() {
 
         {/* perguntas */}
         <Panel split title="Respostas por pergunta" subtitle="Quantas pessoas escolheram cada alternativa">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 md:mx-0 md:grid md:overflow-visible md:px-0 md:pb-0 print:mx-0 print:grid print:overflow-visible print:px-0 md:grid-cols-2 xl:grid-cols-3">
             {[...r.questions].sort((a, b) => QUESTION_NUMBER[a.questionId] - QUESTION_NUMBER[b.questionId]).map((q) => (
-              <div key={q.questionId} className="rounded-xl border border-line bg-paper/50 p-3 print:break-inside-avoid">
+              <div key={q.questionId} className="w-[86%] shrink-0 snap-start md:w-auto md:shrink print:w-auto min-w-0 rounded-xl border border-line bg-paper/50 p-3 print:break-inside-avoid">
                 <p className="text-xs font-semibold leading-snug text-ink" title={`código interno ${q.questionId}`}><span className="mr-1 rounded bg-purple px-1.5 py-0.5 text-[10px] font-bold text-white">{QUESTION_NUMBER[q.questionId]}</span>{q.text}</p>
                 <p className="mt-1 text-[11px] text-ink-3">{BRL(q.totalResponses)} respostas · {q.noOpinionCount} “não sei”</p>
                 <ul className="mt-2 space-y-1.5">
@@ -231,7 +231,7 @@ function Kpi({ label, value, note, color, small = false }: { label: string; valu
 
 function Panel({ title, subtitle, children, className = "", split = false }: { title: string; subtitle?: string; children: ReactNode; className?: string; split?: boolean }) {
   return (
-    <section className={`rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5 md:p-5 print:border print:border-line ${split ? "" : "print:break-inside-avoid"} ${className}`}>
+    <section className={`min-w-0 rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5 md:p-5 print:border print:border-line ${split ? "" : "print:break-inside-avoid"} ${className}`}>
       <h2 className="text-sm font-bold text-ink">{title}</h2>
       {subtitle ? <p className="text-xs text-ink-3">{subtitle}</p> : null}
       <div className="mt-4">{children}</div>
