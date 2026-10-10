@@ -21,14 +21,3 @@ export const TOPICS: Topic[] = [
 ];
 
 export const TOPIC_BY_ID: Record<string, Topic> = Object.fromEntries(TOPICS.map((t) => [t.id, t]));
-
-/**
- * Temas das fichas de propostas. Um por sessão do questionário, mais um
- * resumo geral do programa ("Conheça os programas completos").
- */
-export const PROGRAM_SUMMARY_THEMES = [
-  ...TOPICS.map((t) => ({ key: t.id, label: t.name })),
-  { key: "programa-geral", label: "Resumo geral do programa" },
-] as const;
-
-export const PROGRAM_GENERAL_KEY = "programa-geral";

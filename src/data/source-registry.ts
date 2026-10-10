@@ -819,12 +819,3 @@ export const SOURCE_REGISTRY: SourceRegistryEntry[] = [
 export const SOURCE_BY_ID: Record<string, SourceRegistryEntry> = Object.fromEntries(
   SOURCE_REGISTRY.map((s) => [s.id, s]),
 );
-
-/** Ordem de busca obrigatória ao localizar evidências. */
-export const SOURCE_SEARCH_ORDER = [
-  "Documento original",
-  "Base pública responsável pelo documento",
-  "Fonte primária do candidato",
-  "Organismo técnico",
-  "Fonte jornalística profissional",
-] as const;

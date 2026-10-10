@@ -25,5 +25,3 @@ export const CANDIDATES: Candidate[] = [
     historySourceIds: ["tse-planos-2026", "senado-perfil-flavio-bolsonaro", "senado-dados-abertos", "camara-dados-abertos"],
   },
 ];
-
-export const CANDIDATE_BY_ID: Record<string, Candidate> = Object.fromEntries(CANDIDATES.map((c) => [c.id, c]));

@@ -51,12 +51,3 @@ export function buildPriorityMap(
     };
   });
 }
-
-export function describeTendency(v: number | null): string {
-  if (v === null) return "Sem escala de concordância neste tema";
-  if (v >= 1.5) return "Suas respostas tendem a concordar fortemente com os enunciados";
-  if (v >= 0.5) return "Suas respostas tendem a concordar com os enunciados";
-  if (v > -0.5) return "Suas respostas se dividem ou ficam próximas do neutro";
-  if (v > -1.5) return "Suas respostas tendem a discordar dos enunciados";
-  return "Suas respostas tendem a discordar fortemente dos enunciados";
-}

@@ -280,15 +280,6 @@ export interface Indicator {
 /** Etiqueta do resumo de programa em relação às regras atuais. */
 export type ProgramActionLabel = "MANTER" | "AMPLIAR" | "CRIAR" | "MUDAR" | "REDUZIR" | "SEM_PROPOSTA_CLARA";
 
-export const PROGRAM_ACTION_LABELS: Record<ProgramActionLabel, string> = {
-  MANTER: "Manter",
-  AMPLIAR: "Ampliar",
-  CRIAR: "Criar",
-  MUDAR: "Mudar",
-  REDUZIR: "Reduzir",
-  SEM_PROPOSTA_CLARA: "Não há proposta clara",
-};
-
 export interface ProgramSummary {
   id: string;
   candidateId: string;
@@ -408,13 +399,6 @@ export const REGIONS: { value: Region; label: string }[] = [
 /** Indicador visual por questão. Nunca consolidado em ranking. */
 export type ComparisonIndicator = "SIMILAR" | "PARTIALLY_SIMILAR" | "DIFFERENT" | "INSUFFICIENT_EVIDENCE";
 
-export const COMPARISON_LABELS: Record<ComparisonIndicator, string> = {
-  SIMILAR: "Igual a você: sua resposta e a posição documentada do candidato coincidem (distância 0).",
-  PARTIALLY_SIMILAR: "Parecido com você: um passo de distância na escala (distância 1).",
-  DIFFERENT: "Diferente de você: dois passos ou mais de distância.",
-  INSUFFICIENT_EVIDENCE: "Não se posicionou nas fontes oficiais: conta como diferente para o candidato, sem atribuir a ele nenhuma posição.",
-};
-
 export const NO_EVIDENCE_MESSAGE =
   "Não encontramos posição suficientemente documentada deste candidato sobre esta questão.";
 
@@ -487,15 +471,3 @@ export interface ExperienceRow {
   label: string;
   byCandidate: Record<string, string>;
 }
-
-export const EXPERIENCE_DISCLAIMER =
-  "Quantidade de anos de experiência não significa automaticamente maior ou menor capacidade para governar. Esta informação é apresentada apenas para contextualizar a trajetória pública de cada candidato.";
-
-/** Critérios objetivos para escolher os pontos centrais de um programa. */
-export const QUICK_POINTS_CRITERIA = [
-  "propostas destacadas repetidamente no documento",
-  "propostas apresentadas como prioridade pela própria candidatura",
-  "mudanças importantes em relação às regras atuais",
-  "políticas que atingem grande parcela da população",
-  "grandes alterações institucionais propostas",
-];

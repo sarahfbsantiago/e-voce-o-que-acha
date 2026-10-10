@@ -47,12 +47,3 @@ export function PageTitle({ children, lead, eyebrow, tone = "purple" }: { childr
     </div>
   );
 }
-
-export function Notice({ children, tone = "note" }: { children: ReactNode; tone?: "note" | "neutral" | "purple" | "accent" }) {
-  const cls = { note: "bg-note border-note-line", neutral: "bg-surface border-line", purple: "bg-purple-soft border-purple/30", accent: "bg-accent-soft border-accent/30" }[tone];
-  return <div className={`rounded-xl border px-4 py-3 text-sm ${cls}`}>{children}</div>;
-}
-
-export function Tag({ children }: { children: ReactNode }) {
-  return <span className="inline-flex items-center rounded-md border border-line bg-paper px-2 py-0.5 text-xs font-medium text-ink-2">{children}</span>;
-}

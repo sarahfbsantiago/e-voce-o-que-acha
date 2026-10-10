@@ -24,7 +24,7 @@ O site não recomenda voto, não monta ranking e não usa algoritmo secreto.
 - **Fatos antes de promessas.** A explicação de cada pergunta cita primeiro o que foi feito (lei, decreto, projeto) e depois o que foi prometido.
 - **Mudança de posição.** Vale a evidência mais recente, e o relatório mostra a linha do tempo.
 - **Cargo considerado.** Um parlamentar é avaliado pelo que um parlamentar faz; nunca é penalizado por não ter poderes de presidente.
-- **Revisão humana.** Nenhuma posição aparece no site sem ser publicada no painel de administração (`/admin/posicoes`), com registro de auditoria.
+- **Revisão humana.** Nenhuma posição aparece no site sem ser publicada no painel de administração, com aprovação e registro de histórico.
 - **Versões públicas.** Metodologia na versão 1.3.0, com histórico completo em `/metodologia` e em `src/data/methodology.ts`.
 - **Privacidade.** Para participar, a pessoa concorda com o uso anônimo dos dados em nível de pesquisa (aceite no modelo da LGPD): respostas, resultado do relatório, nota da pesquisa e se ela ajudou na decisão. Faixa etária e região são opcionais. Nada de nome, email, documento ou IP.
 
@@ -54,7 +54,7 @@ Abaixo estão todas as perguntas, na ordem em que aparecem, com as alternativas 
 <details>
 <summary><strong>Ver as 25 perguntas e alternativas</strong></summary>
 
-<!-- perguntas:inicio (gerado por npm run docs:questions; não edite à mão) -->
+<!-- perguntas:inicio (estado inicial do questionário; em produção, perguntas e notas são editadas pelo painel administrativo) -->
 
 Escala de importância, perguntada ao fim de cada tema: Não importa (0) · Importa pouco (1) · Importa (2) · Importa muito (3) · É uma das coisas mais importantes para mim (4). Ela só ordena o relatório e nunca altera pesos.
 
@@ -787,7 +787,7 @@ npm run db:migrate             # aplica prisma/migrations
 npm run db:seed                # candidatos, temas, perguntas, fontes, protocolos, metodologia
 ```
 
-O seed **não** insere posições de candidatos, evidências nem resumos de programa. Eles entram com `npm run db:import-drafts` como `DRAFT` e só aparecem no site depois de publicados em `/admin/posicoes` (ver *Rascunhos para revisão*).
+O seed **não** insere posições de candidatos, evidências nem resumos de programa. Eles entram com `npm run db:import-drafts` como `DRAFT` e só aparecem no site depois de publicados no painel privado (ver *Rascunhos para revisão*).
 
 #### Variáveis de ambiente
 
@@ -795,7 +795,8 @@ O seed **não** insere posições de candidatos, evidências nem resumos de prog
 |----------|-------------|-----------|
 | `DATABASE_URL` | não | Conexão PostgreSQL. Sem ela, modo estático. |
 | `DATA_SOURCE` | não | Força `static` ou `prisma`. |
-| `ADMIN_TOKEN` | não | Token (≥16 caracteres) dos painéis `/admin/research` (agregados) e `/admin/posicoes` (publicação de posições). Sem ele os painéis ficam desativados. |
+| `ADMIN_TOKEN` | não | Segredo (≥16 caracteres) que assina a sessão do painel privado. Sem ele o painel fica desativado. |
+| `ADMIN_TOTP_SECRET` | não | Chave do aplicativo autenticador (código de 6 dígitos) para entrar no painel. Sem ela, o login local usa o `ADMIN_TOKEN`. |
 | `NEXT_PUBLIC_SITE_URL` | não | URL pública (ex.: `https://e-voce-o-que-acha.up.railway.app`) usada nas tags de compartilhamento. |
 
 #### Rascunhos para revisão (levantamentos)
@@ -808,8 +809,8 @@ npm run db:import-drafts   # importa prisma/drafts/*.json e docs/levantamentos/*
 evidências, classificadas a partir dos programas de 2026 registrados no TSE e de leis, decretos,
 medidas provisórias e projetos em fontes oficiais. `docs/levantamentos/` guarda a conferência de
 fontes e trajetória, os resumos dos programas por tema e a lista de projetos de Flávio Bolsonaro
-no Senado. Tudo entra no banco como `DRAFT` e **não aparece no site** até ser publicado em
-`/admin/posicoes` (publicar, rejeitar, despublicar ou publicar tudo, sempre com `AuditLog`).
+no Senado. Tudo entra no banco como `DRAFT` e **não aparece no site** até ser publicado pelo
+painel privado (Revisão de posições), com envio para aprovação e histórico.
 Com `IMPORT_UPDATE_PUBLISHED=1`, a reimportação atualiza posições já publicadas mantendo o status;
 itens já revisados nunca são sobrescritos.
 
@@ -835,14 +836,14 @@ src/
     questionario/          # intro + consentimento → perguntas → prioridades
     relatorio/             # "Seu mapa de prioridades" (sem pontuação)
     metodologia/ fontes/ como-funciona/
-    admin/                 # login por token + painel agregado privado
+    admin/                 # painel privado: dados da pesquisa, edição com aprovação, histórico
   components/              # UI acessível, cards simétricos, legendas por forma+texto
   data/                    # CONTEÚDO CANÔNICO: temas, perguntas, notas de contexto,
                            # argumentos, SOURCE_REGISTRY, protocolos, metodologia
   domain/                  # regras: ordenação, indicador por questão, publicação,
                            # agregação, neutralidade, ordem aleatória de candidatos
-  ingestion/               # SourceAdapter + adapters (Câmara, Senado, TSE) → DRAFT
-  lib/                     # repositório (static|prisma), validação Zod, auth admin
+  lib/                     # repositório (static|prisma), configuração publicada em versões,
+                           # contagens da pesquisa, validação Zod, auth admin
   store/                   # sessão no navegador (localStorage)
 tests/                     # domain/ e api/
 ```
@@ -869,7 +870,7 @@ Página inicial → Como funciona / Metodologia → Aceite obrigatório no model
 | `POST /api/survey/feedback` | Avaliação anônima da pesquisa |
 | `GET /api/admin/research[?format=csv]` | Agregados privados (token) |
 
-O painel `/admin/posicoes` (Server Actions, token) publica, rejeita, despublica e publica em lote, com `AuditLog`. O modelo prevê `DRAFT → PENDING_REVIEW → APPROVED → PUBLISHED | REJECTED`; só `PUBLISHED` aparece ao público. Hoje a revisão é posição a posição, com o candidato visível; a revisão cega por evidência (`EvidenceReview`) está no modelo e ainda não tem tela.
+Perguntas, notas por alternativa, faixas da régua, textos, fontes e ajustes de posições ficam em versões no banco (`ConfigVersion`, imutável). No painel privado, cada mudança vai para um rascunho, é enviada para aprovação e só entra no ar depois de revisada e confirmada; toda versão fica no histórico e pode ser restaurada. O modelo de posições prevê `DRAFT → PENDING_REVIEW → APPROVED → PUBLISHED | REJECTED`; só `PUBLISHED` aparece ao público. A revisão cega por evidência (`EvidenceReview`) está no modelo e ainda não tem tela.
 
 ### Processo de inclusão de fontes e evidências
 
@@ -877,11 +878,11 @@ O painel `/admin/posicoes` (Server Actions, token) publica, rejeita, despublica 
 2. Localizar na ordem: documento original → base pública → fonte primária do candidato → organismo técnico → imprensa profissional.
 3. Registrar a fonte em `Source` (URL, instituição, tipo, datas, verificação do link, hash/arquivo quando possível).
 4. Criar `Evidence` como `DRAFT` com trecho original, classificação, força e critério.
-5. Revisão humana em `/admin/posicoes` (posição a posição; a revisão cega por evidência, `EvidenceReview`, está no modelo e ainda não tem tela).
+5. Revisão humana no painel privado, com envio para aprovação (a revisão cega por evidência, `EvidenceReview`, está no modelo e ainda não tem tela).
 6. Publicar (`PUBLISHED`) só depois da revisão. Cada mudança gera `AuditLog`.
 7. `CandidatePosition` só pode ser publicada com ≥1 evidência aprovada e não apenas de nível D (`src/domain/publication.ts`).
 8. Mudança de posição → cronologia, sem palavras como "mentira" ou "contradição".
-9. Ingestão automática (`src/ingestion`) e classificação por LLM **nunca** publicam: produzem `DRAFT` com prompt, modelo, versão, resposta e confiança registrados.
+9. Classificação por LLM **nunca** publica: produz `DRAFT` com prompt, modelo, versão, resposta e confiança registrados.
 
 ### Regras de neutralidade verificadas em código
 
@@ -894,20 +895,18 @@ A aplicação não lê IP nem user agent. Se a infraestrutura de hospedagem (pro
 ### Estado atual e TODOs
 
 - [x] Programas de 2026 obtidos pelos Dados Abertos do TSE (`proposta_governo_2026_BR.zip`); o portal do TSE segue bloqueando acesso automatizado, mas o CDN oficial de dados abertos responde.
-- [x] Posições com evidências publicadas e notas por alternativa revisadas para as 25 perguntas com evidências importadas e publicadas; painel `/admin/posicoes` com auditoria.
-- [x] Deploy no Railway (ver `DEPLOY.md`): Postgres, migrações no start, seed e importação via SSH.
-- [ ] **TODO(ingestão)** Implementar `SenadoAdapter` e `TseAdapter`; concluir `CamaraAdapter` (autores, tramitações, votos) e persistência de `RawDocument`.
+- [x] Posições com evidências publicadas e notas por alternativa revisadas para as 25 perguntas; painel privado com edição, aprovação e histórico.
+- [x] Deploy no Railway (ver `DEPLOY.md`): Postgres, migrações no start, deploy automático a cada push.
 - [ ] **TODO(revisão)** Tela de revisão cega por evidência (`EvidenceReview`) e endpoints POST de evidência.
 - [ ] **TODO(conteúdo)** Três perguntas de Lula seguem sem posição documentada (drogas, barrar obras por impacto ambiental, religião na política); declarações sem link oficial (TV, entrevistas) não entram.
 - [ ] Verificação manual pendente: endereços dos documentos no portal do TSE (bloqueia acesso automatizado; links apontam para a página oficial das Eleições 2026), Biblioteca da Presidência, OCDE, atuação de Flávio Bolsonaro na ALERJ (2003–2019) e candidatura de Lula ao Governo de SP em 1982.
 
 ### Deploy
 
-Produção no Railway (serviço `voce-decide` + Postgres). Passo a passo, variáveis e comandos de seed/importação em `DEPLOY.md`.
+Produção no Railway (serviço `site-questionario` + Postgres). Passo a passo e variáveis em `DEPLOY.md`.
 
 ### Como contribuir
 
 - Toda alteração de pergunta, critério ou classificação exige nova entrada em `METHODOLOGY_VERSIONS` (nunca apague versões anteriores).
 - Nenhum fato político entra no banco sem `Source` consultável. O conhecimento do modelo de linguagem não é fonte.
 - Rode `npm test` antes de abrir PR: os testes de neutralidade e publicação são obrigatórios.
-- Projeto anterior (quiz estático) preservado em `legacy-static/` apenas como referência histórica.

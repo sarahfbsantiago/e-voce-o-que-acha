@@ -66,11 +66,6 @@ export function buildResearchReport(submissions: SubmissionLike[], feedback: Fee
   return reportFromTally(addToTally(emptyTally(), submissions, [], null), aggregateFeedback(feedback), profileProximity);
 }
 
-/** Quantos questionários caíram em cada ideologia e de qual candidato ficaram mais perto na régua. */
-export function aggregateIdeology(submissions: SubmissionLike[]) {
-  return ideologyFromTally(addToTally(emptyTally(), submissions, [], null));
-}
-
 function suppressed(counts: Record<string, number>): Record<string, number | null> {
   return Object.fromEntries(Object.entries(counts).map(([k, n]) => [k, suppressSmallGroup(n, n)]));
 }

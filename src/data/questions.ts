@@ -166,7 +166,3 @@ export const QUESTIONS: Question[] = [
 ];
 
 export const QUESTION_BY_ID: Record<string, Question> = Object.fromEntries(QUESTIONS.map((q) => [q.id, q]));
-
-export function questionsByTopic(topicId: string): Question[] {
-  return QUESTIONS.filter((q) => q.topicId === topicId).sort((a, b) => a.order - b.order);
-}

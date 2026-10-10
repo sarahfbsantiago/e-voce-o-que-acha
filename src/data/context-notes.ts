@@ -115,7 +115,3 @@ export const CONTEXT_NOTES: ContextNote[] = [
     sourceIds: [],
   },
 ];
-
-export const CONTEXT_NOTE_BY_ID: Record<string, ContextNote> = Object.fromEntries(
-  CONTEXT_NOTES.map((n) => [n.id, n]),
-);

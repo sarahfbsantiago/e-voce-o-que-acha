@@ -39,6 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# chaves do admin e backups: só no computador, nunca no GitHub
+/docs/privado/
 .railway-admin-token.txt
-remocao-perguntas-*.json
 .railway-admin-totp.txt
+remocao-perguntas-*.json

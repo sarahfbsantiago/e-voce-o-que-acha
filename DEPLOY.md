@@ -1,38 +1,30 @@
 # Deploy no Railway
 
-Site Next.js + PostgreSQL no mesmo projeto do Railway.
+Site Next.js + PostgreSQL no mesmo projeto do Railway (serviço `site-questionario` + `Postgres`).
 
-## 1. Repositório
-O projeto está versionado em Git. Suba para o GitHub (repositório privado) e conecte ao Railway.
-
-## 2. Projeto no Railway
-1. New Project → Deploy from GitHub repo → escolha este repositório.
+## 1. Projeto no Railway
+1. New Project → Deploy from GitHub repo → escolha o repositório de deploy.
 2. No mesmo projeto: + New → Database → PostgreSQL.
 3. No serviço do site → Variables:
-   - `DATABASE_URL` = `${{Postgres.DATABASE_URL}}` (referência ao banco do projeto)
-   - `ADMIN_TOKEN` = um segredo longo, só seu (login em /admin)
+   - `DATABASE_URL` = `${{Postgres.DATABASE_URL}}` (rede interna do projeto)
+   - `ADMIN_TOKEN` = segredo longo que assina a sessão do painel
+   - `ADMIN_TOTP_SECRET` = chave do aplicativo autenticador (login com código de 6 dígitos)
    - `NODE_ENV` = `production`
-4. O arquivo `railway.json` já define build (`npm run build`) e start (`prisma migrate deploy` + `npm start`).
+4. `railway.json` define o build e o start (`prisma migrate deploy` + `npm start`): as migrações rodam sozinhas a cada deploy.
 
-## 3. Conteúdo inicial (uma vez, do seu computador, apontando para o banco de produção)
+## 2. Conteúdo inicial (uma vez)
+Pelo shell do serviço (`railway ssh`) ou do seu computador apontando para o banco de produção:
 ```bash
-export DATABASE_URL="<URL pública do Postgres do Railway>"
-npm run db:migrate            # cria as tabelas
 npm run db:seed               # perguntas, temas, perfis, fontes, metodologia
 npm run db:import-drafts      # resumos de programa, projetos e posições (rascunho)
 ```
-Depois, publique as posições e os resumos em `/admin/posicoes` ("Publicar todos os rascunhos").
-Alternativa: rode os mesmos comandos pelo shell do serviço no Railway.
+Depois, publique as posições pelo painel privado (Revisão de posições).
 
-## 4. Atualizações
-- Conteúdo em arquivo (perguntas, perfis, fontes): editar em `src/data`, rodar `npm run db:seed` contra produção.
-- Posições dos candidatos: `prisma/drafts/positions.draft.json`, depois `IMPORT_UPDATE_PUBLISHED=1 npm run db:import-drafts`.
-- Código: `git push` guarda o histórico. O serviço registra este repositório como origem, mas o deploy de produção é feito pela CLI, a partir dos arquivos locais:
-  `railway up --service voce-decide --detach` e depois `railway deployment list` até SUCCESS.
-  Não use `railway redeploy` para publicar código novo: ele reconstrói o commit antigo.
-- Depois do deploy, se `src/data` mudou: `ssh voce-decide-prod 'cd /app && npx tsx prisma/seed.ts'`.
+## 3. Atualizações
+- **Código:** `git push origin main`. O Railway está ligado ao repositório e faz o deploy sozinho; acompanhe com `railway deployment list --service site-questionario` até SUCCESS.
+- **Perguntas, notas, faixas, régua, textos, fontes e posições:** pelo painel privado (rascunho → aprovação → publicação, com histórico). Os arquivos em `src/data` são só o estado inicial; mudá-los não altera o site em produção.
+- **Metodologia e conteúdo-base em `src/data`:** depois do deploy, rode o seed no servidor: `npx tsx prisma/seed.ts`.
 
-## 5. Checagens antes de publicar
-- `npm test`, `npx tsc --noEmit`, `npx eslint src`
-- Abrir `/relatorio` depois de responder o questionário no site publicado.
-- Conferir `/admin/research` com o token.
+## 4. Checagens antes de publicar
+- `npx tsc --noEmit`, `npm run lint`, `npm test`, `npm run build`
+- Responder o questionário no site publicado e abrir `/relatorio`.

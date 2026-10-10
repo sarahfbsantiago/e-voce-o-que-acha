@@ -2,7 +2,6 @@ import type {
   CandidatePosition,
   Evidence,
   Indicator,
-  ProgramSummary,
   ReviewStatus,
   SourceRegistryEntry,
 } from "@/domain/types";
@@ -68,16 +67,6 @@ export function validateIndicator(indicator: Indicator): ValidationResult {
   if (!indicator.unit?.trim()) reasons.push("Unidade obrigatória.");
   if (!indicator.releasedAt) reasons.push("Data de divulgação obrigatória.");
   if (!indicator.sourceId) reasons.push("Fonte obrigatória.");
-  return { ok: reasons.length === 0, reasons };
-}
-
-/** Resumo de programa exige fonte aprovada e linguagem factual. */
-export function canPublishProgramSummary(summary: ProgramSummary, source: SourceRegistryEntry | undefined): ValidationResult {
-  const reasons: string[] = [];
-  if (!source) reasons.push("Fonte obrigatória.");
-  if (!isApproved(summary.reviewStatus)) reasons.push("Resumo precisa estar APPROVED.");
-  const forbidden = findForbiddenPhrases(summary.summary + " " + summary.title);
-  if (forbidden.length > 0) reasons.push(`Resumo contém linguagem proibida: ${forbidden.join(", ")}.`);
   return { ok: reasons.length === 0, reasons };
 }
 

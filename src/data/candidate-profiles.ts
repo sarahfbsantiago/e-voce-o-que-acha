@@ -335,6 +335,3 @@ export const PROGRAM_2026_THEMES = [
   { key: "relacoes-internacionais", label: "Relações internacionais" },
   { key: "direitos-e-instituicoes", label: "Direitos e instituições" },
 ] as const;
-
-/** Chave de ProgramSummary para os pontos centrais ("em poucos minutos"). */
-export const QUICK_POINTS_KEY = "pontos-centrais";

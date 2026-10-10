@@ -127,7 +127,3 @@ export const RESEARCH_PROTOCOLS: ResearchProtocol[] = QUESTIONS.map((q) => ({
   exclusionCriteria: COMMON_EXCLUSION_CRITERIA,
   definedAt: "2026-10-06",
 }));
-
-export const RESEARCH_PROTOCOL_BY_QUESTION: Record<string, ResearchProtocol> = Object.fromEntries(
-  RESEARCH_PROTOCOLS.map((p) => [p.questionId, p]),
-);
