@@ -76,7 +76,7 @@ export async function PesquisaSection() {
           <div className="flex flex-wrap items-center gap-2 print:hidden">
             <a className="rounded-lg bg-white/15 px-3 py-2 text-sm font-medium ring-1 ring-white/30 hover:bg-white/25" href="/api/admin/research?format=csv">CSV</a>
             <a className="rounded-lg bg-white/15 px-3 py-2 text-sm font-medium ring-1 ring-white/30 hover:bg-white/25" href="/api/admin/research">JSON</a>
-            <a href="/admin/completo" className="inline-flex min-h-10 items-center rounded-lg bg-white/15 px-3 py-2 text-sm font-semibold ring-1 ring-white/30 hover:bg-white/25">PDF completo</a>
+            <a href="/admin/completo" className="inline-flex min-h-10 items-center rounded-lg bg-white/15 px-3 py-2 text-sm font-semibold ring-1 ring-white/30 hover:bg-white/25">Exportar PDF</a>
             <form action={logoutAction}><button className="min-h-10 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-purple-strong">Sair</button></form>
           </div>
         </header>

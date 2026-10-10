@@ -57,7 +57,7 @@ export async function AdminShell({ current, children }: { current: string; child
   );
 }
 
-export function AdminHero({ kicker, title, subtitle, pdfTitle, extra }: { kicker: string; title: string; subtitle: string; pdfTitle: string; extra?: ReactNode }) {
+export function AdminHero({ kicker, title, subtitle, extra }: { kicker: string; title: string; subtitle: string; pdfTitle?: string; extra?: ReactNode }) {
   return (
     <header className="flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#3b1f7a] via-purple to-[#2563eb] p-4 text-white shadow-md md:p-5">
       <div className="max-w-3xl">
@@ -67,7 +67,6 @@ export function AdminHero({ kicker, title, subtitle, pdfTitle, extra }: { kicker
       </div>
       <div className="flex flex-wrap items-center gap-2 print:hidden">
         {extra}
-        <a href="/admin/completo" title={`PDF com todas as seções (inclui ${pdfTitle})`} className="inline-flex min-h-10 items-center rounded-lg bg-white/15 px-3 py-2 text-sm font-semibold ring-1 ring-white/30 hover:bg-white/25">PDF completo</a>
         <form action={logoutAction}><button className="min-h-10 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-purple-strong">Sair</button></form>
       </div>
     </header>

@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { isAdminSession } from "@/lib/admin-auth";
 import { AdminHero, AdminShell } from "@/components/admin/AdminUI";
 import { Modal } from "@/components/Modal";
+import { SecretField } from "@/components/admin/SecretField";
+import { adminTotpSecret } from "@/lib/env";
 
 export const metadata: Metadata = { title: "Como usar o admin", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -111,6 +113,37 @@ export default async function Page() {
       </ol>
 
       <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
+        <li id="autenticador" className="scroll-mt-6">
+          <Modal plainTrigger title="🔐 Registrar no Google Authenticator" className="group h-full w-full rounded-2xl bg-surface p-4 text-left shadow-sm ring-1 ring-black/5 transition-transform hover:-translate-y-0.5 hover:shadow-md"
+            trigger={
+              <span className="flex h-full flex-col gap-2">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#15803d] text-xl text-white shadow-sm">🔐</span>
+                <span className="text-sm font-bold text-ink">Registrar no Google Authenticator</span>
+                <span className="text-xs text-ink-3">a chave para cadastrar o código</span>
+                <span className="mt-auto text-xs font-bold text-[#15803d]">Ver como →</span>
+              </span>
+            }>
+            <div className="space-y-3">
+              <ul className="space-y-2.5">
+                {[
+                  ["Instale", "o Google Authenticator no celular (App Store ou Google Play)."],
+                  ["Toque em +", "e escolha “Inserir chave de configuração”."],
+                  ["Nome da conta", "E Você, O Que Acha? (admin)."],
+                  ["Chave", "copie a chave abaixo (toque no olhinho para ver) e cole no aplicativo."],
+                  ["Tipo de chave", "“Baseada no tempo”. Salve."],
+                  ["Pronto", "o código de 6 números muda a cada 30 segundos; use-o para entrar e para aprovar."],
+                ].map(([a, b], i) => (
+                  <li key={i} className="flex gap-3 rounded-xl bg-[#15803d12] p-3">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#15803d] text-[11px] font-bold text-white">{i + 1}</span>
+                    <span className="text-sm leading-relaxed text-ink-2"><b className="text-[#15803d]">{a}</b> {b}</span>
+                  </li>
+                ))}
+              </ul>
+              {adminTotpSecret() ? <SecretField value={adminTotpSecret()!.replace(/[^A-Za-z2-7]/g, "").toUpperCase()} /> : <p className="rounded-xl bg-paper p-3 text-sm text-ink-3">O autenticador não está ativado neste ambiente.</p>}
+              <p className="rounded-xl bg-[#fde8e8] p-3 text-xs text-[#7f1d1d]">Não envie esta chave por mensagem nem e-mail: com ela, qualquer pessoa gera os códigos de acesso. Perdeu o celular? Peça uma chave nova.</p>
+            </div>
+          </Modal>
+        </li>
         {TIPS.map((t) => (
           <li key={t.id} id={t.id} className="scroll-mt-6">
             <Modal plainTrigger title={`${t.icon} ${t.title}`} className="group h-full w-full rounded-2xl bg-surface p-4 text-left shadow-sm ring-1 ring-black/5 transition-transform hover:-translate-y-0.5 hover:shadow-md"
