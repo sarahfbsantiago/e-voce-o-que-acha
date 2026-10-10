@@ -70,20 +70,97 @@ export async function NotasSection() {
         <span className="ml-auto text-ink-3">Por tema: soma das notas ÷ perguntas respondidas (&quot;Não sei&quot; não entra). Ex.: 2 perguntas com notas 1 e 0,5 → (1 + 0,5) ÷ 2 = <b className="text-ink">0,75</b>.</span>
       </div>
 
-      <Panel title="Como a conta é feita: análise específica, tema a tema" subtitle="Média por resposta. Só esta conta define, em cada tema, de qual candidato a pessoa fica mais perto (cartões das áreas no relatório).">
-        <div className="grid gap-4 text-sm leading-relaxed text-ink-2 md:grid-cols-2">
-          <ol className="list-decimal space-y-1.5 pl-5">
-            <li>Para cada pergunta respondida, cada candidato ganha a nota da alternativa que a pessoa marcou: <b className="text-ink">1</b>, <b className="text-ink">0,5</b> ou <b className="text-ink">0</b>. &quot;Não sei&quot; não entra.</li>
-            <li><b className="text-ink">Média do tema</b> = soma das notas do candidato ÷ número de perguntas respondidas no tema.</li>
-            <li>Fica mais perto no tema quem tiver a média maior; médias iguais = equivalente.</li>
-          </ol>
-          <div className="rounded-xl bg-paper/70 p-3 ring-1 ring-line">
-            <p className="text-xs font-bold uppercase tracking-wide text-ink-3">Exemplo</p>
-            <p className="mt-1">Tema com 2 perguntas respondidas. Na 1ª, a alternativa marcada vale 1 para A e 0 para B; na 2ª, vale 1 para A e 0,5 para B.</p>
-            <p className="mt-2 font-mono text-[13px] text-ink">A: (1 + 1) ÷ 2 = 1<br />B: (0 + 0,5) ÷ 2 = 0,25</p>
-            <p className="mt-1">No tema, a pessoa fica mais perto de A.</p>
-          </div>
-        </div>
+      <Panel title="Como a conta é feita: análise específica, tema a tema" subtitle="Só esta conta define o bloco 'Qual candidato está mais próximo do seu perfil' do relatório. Não mexe na régua ideológica.">
+        {(() => {
+          // exemplo com as notas reais da tabela: tema Economia e impostos, 2 perguntas
+          const q1 = QUESTIONS.find((q) => q.id === "q01")!;
+          const q2 = QUESTIONS.find((q) => q.id === "q03")!;
+          const picks = [{ q: q1, o: q1.options[0] }, { q: q2, o: q2.options[1] }];
+          const val = (qid: string, cid: string, oid: string) => proposedOptionScore(qid, cid, oid)?.score ?? 0;
+          const rows = picks.map(({ q, o }) => ({ q, o, s: CANDS.map((c) => val(q.id, c.id, o.id)) }));
+          const avg = CANDS.map((_, i) => rows.reduce((n, r) => n + r.s[i], 0) / rows.length);
+          const top = avg[0] === avg[1] ? null : avg[0] > avg[1] ? 0 : 1;
+          const f = (n: number) => String(Math.round(n * 100) / 100).replace(".", ",");
+          return (
+            <div className="space-y-6">
+              <ol className="grid gap-3 md:grid-cols-3">
+                {[
+                  ["1", "Cada resposta dá a cada candidato a nota da alternativa marcada (1, 0,5 ou 0)"],
+                  ["2", "Média do tema = soma das notas ÷ perguntas respondidas no tema"],
+                  ["3", "Quem tem a média maior fica com o tema; empate = equivalente"],
+                ].map(([n, t]) => (
+                  <li key={n} className="flex items-center gap-3 rounded-xl bg-paper/70 p-3 ring-1 ring-line">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-purple to-[#2563eb] text-base font-bold text-white">{n}</span>
+                    <span className="text-sm font-semibold leading-snug text-ink">{t}</span>
+                  </li>
+                ))}
+              </ol>
+
+              <div className="grid gap-4 lg:grid-cols-[1.2fr_1fr]">
+                {/* exemplo */}
+                <div className="rounded-xl bg-paper/70 p-4 ring-1 ring-line">
+                  <p className="text-xs font-bold uppercase tracking-wide text-ink-3">Exemplo · tema Economia e impostos, 2 respostas</p>
+                  <ul className="mt-3 space-y-2">
+                    {rows.map((r, i) => (
+                      <li key={r.q.id} className="rounded-lg bg-surface p-3 ring-1 ring-line">
+                        <p className="text-xs text-ink-2"><QNum n={QUESTION_NUMBER[r.q.id]} />{r.q.text}</p>
+                        <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
+                          <span className="rounded-full bg-ink px-2.5 py-0.5 font-semibold text-white">marcou: {r.o.label}</span>
+                          <span className="text-ink-3">→</span>
+                          {CANDS.map((c, ci) => (
+                            <span key={c.id} className="inline-flex items-center gap-1"><span className="font-semibold" style={{ color: c.color }}>{c.name}</span><span className={`inline-grid h-6 min-w-9 place-items-center rounded-full px-2 font-bold ${PILL[fmt(r.s[ci])]}`}>{fmt(r.s[ci])}</span></span>
+                          ))}
+                          <span className="ml-auto text-[10px] font-bold text-ink-3">resposta {i + 1}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-3 space-y-2">
+                    {CANDS.map((c, ci) => (
+                      <div key={c.id} className="flex items-center gap-2 text-sm">
+                        <span className="w-14 font-bold" style={{ color: c.color }}>{c.name}</span>
+                        <span className="font-mono text-[13px] text-ink">({rows.map((r) => f(r.s[ci])).join(" + ")}) ÷ {rows.length} =</span>
+                        <span className="relative h-3 flex-1 overflow-hidden rounded-full bg-line"><span className="absolute inset-y-0 left-0 rounded-full" style={{ width: `${avg[ci] * 100}%`, background: c.color }} /></span>
+                        <b className="w-10 text-right tabular-nums text-ink">{f(avg[ci])}</b>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="mt-3 rounded-lg bg-surface px-3 py-2 text-sm font-semibold text-ink ring-1 ring-line">
+                    Resultado do tema: {top === null ? "equivalente" : <span style={{ color: CANDS[top].color }}>{CANDS[top].name}</span>} <span className="font-normal text-ink-3">(média maior)</span>
+                  </p>
+                </div>
+
+                {/* onde aparece no relatório */}
+                <div className="rounded-xl p-4 ring-2 ring-purple/40" style={{ background: "#6d3fc40a" }}>
+                  <p className="text-xs font-bold uppercase tracking-wide text-purple-strong">Onde isso aparece no relatório da pessoa</p>
+                  <div className="mt-3 rounded-xl bg-surface p-3 shadow-sm ring-1 ring-line">
+                    <p className="text-sm font-bold text-ink">Qual candidato está mais próximo do seu perfil</p>
+                    <div className="relative mt-2 grid grid-cols-2 gap-2">
+                      {CANDS.map((c, ci) => (
+                        <div key={c.id} className="rounded-lg bg-paper/70 p-2 ring-1 ring-line">
+                          <p className="text-[10px] uppercase tracking-wide text-ink-3">{c.name}</p>
+                          <p className="text-xl font-bold text-accent">{top === ci ? 1 : 0}<span className="ml-1 text-[11px] font-medium text-ink-2">de 1 tema</span></p>
+                        </div>
+                      ))}
+                      <span className="absolute -right-2 -top-3 grid h-6 w-6 place-items-center rounded-full bg-[#ec4899] text-xs font-bold text-white shadow">B</span>
+                    </div>
+                    <div className="relative mt-2 rounded-lg bg-paper/70 p-2 ring-1 ring-line">
+                      <p className="text-xs font-bold text-ink">Economia e trabalho</p>
+                      <p className="mt-1 flex items-center justify-between text-xs text-ink-2">Economia e impostos
+                        <span className="rounded-md border border-accent/30 bg-accent-soft px-1.5 py-0.5 text-[11px] font-medium text-accent-strong ring-2 ring-[#2563eb]">{top === null ? "equivalente" : CANDS[top].name}</span>
+                      </p>
+                      <span className="absolute -right-2 -top-3 grid h-6 w-6 place-items-center rounded-full bg-[#2563eb] text-xs font-bold text-white shadow">A</span>
+                    </div>
+                  </div>
+                  <ul className="mt-3 space-y-2 text-sm text-ink-2">
+                    <li className="flex gap-2"><span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#2563eb] text-xs font-bold text-white">A</span><span>O <b className="text-ink">selo de cada tema</b> mostra quem teve a média maior naquele tema (o resultado do exemplo).</span></li>
+                    <li className="flex gap-2"><span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#ec4899] text-xs font-bold text-white">B</span><span>Os <b className="text-ink">números no topo</b> contam em quantos temas cada candidato ficou mais perto.</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </Panel>
 
       {sections.map(({ g, gi, rows }) => (
