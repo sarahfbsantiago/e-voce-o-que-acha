@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { BASELINE_CONFIG, applyConfig, buildOptions, diffConfig, nextQuestionId, validateConfig, type LiveConfig } from "@/lib/live-config";
+import { BASELINE_CONFIG, applyConfig, buildOptions, diffConfig, nextQuestionId, validateConfig } from "@/lib/live-config";
 import { computeImpact } from "@/lib/config-impact";
 import { QUESTIONS, QUESTION_BY_ID } from "@/data/questions";
 import { QUESTION_NUMBER } from "@/lib/question-order";

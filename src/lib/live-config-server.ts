@@ -112,3 +112,18 @@ export async function getVersion(id: number): Promise<{ row: VersionRow; cfg: Li
   if (!r) return null;
   return { row: { ...r, changes: r.changes as unknown as ChangeItem[], impact: r.impact as unknown as Impact }, cfg: asConfig(r.snapshot) };
 }
+
+/**
+ * Entradas públicas do histórico da metodologia geradas pelas publicações do admin:
+ * "Revisão humana" com o que mudou e o motivo. Sem nome de quem publicou e sem nada que leve ao admin.
+ */
+export async function publicChangelogEntries(): Promise<string[]> {
+  if (dataSourceMode() !== "prisma") return [];
+  const rows = await getPrisma().configVersion.findMany({ where: { id: { gt: 1 } }, orderBy: { id: "asc" }, select: { createdAt: true, reason: true, changes: true, rollbackOf: true } });
+  return rows.map((r) => {
+    const changes = (r.changes as unknown as ChangeItem[]).map((c) => c.text);
+    const shown = changes.slice(0, 12).join("; ") + (changes.length > 12 ? `; e mais ${changes.length - 12} ajustes` : "");
+    const date = r.createdAt.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    return `Revisão humana (${date}): ${r.rollbackOf ? "volta a uma configuração anterior. " : ""}${shown}. Motivo: ${r.reason}`;
+  });
+}

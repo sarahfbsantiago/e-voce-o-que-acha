@@ -80,10 +80,11 @@ export function computeImpact(subs: Sub[], candidates: Candidate[], positions: C
   const s = impact.summary;
   if (impact.questions.before !== impact.questions.after) s.push(`Perguntas: ${impact.questions.before} → ${impact.questions.after}`);
   if (impact.topics.before !== impact.topics.after) s.push(`Temas com perguntas: ${impact.topics.before} → ${impact.topics.after}`);
-  s.push(`Ideologia muda para ${impact.ideologyChanged} de ${impact.total} questionários`);
+  if (impact.ideologyChanged) s.push(`Ideologia muda para ${impact.ideologyChanged} de ${impact.total} questionários`);
   for (const r of impact.ruler) if (r.before !== r.after) s.push(`Mais perto de ${CANDIDATE_SHORT[r.candidate] ?? r.candidate} na régua: ${pct(r.before)} → ${pct(r.after)}`);
   for (const r of impact.profile) if (r.before !== r.after) s.push(`Mais perto de ${CANDIDATE_SHORT[r.candidate] ?? r.candidate} nos temas: ${pct(r.before)} → ${pct(r.after)}`);
   for (const t of impact.themes) s.push(`Tema ${t.topic}: resultado muda para ${t.changed} questionários`);
-  if (s.length === 1 && impact.ideologyChanged === 0) s.push("Nenhuma métrica dos questionários já enviados muda");
+  if (impact.rulerChanged && !impact.ruler.some((r) => r.before !== r.after)) s.push(`Lado na régua muda para ${impact.rulerChanged} questionários`);
+  if (!s.length) s.push(`Nenhuma métrica dos ${impact.total} questionários já enviados muda`);
   return impact;
 }

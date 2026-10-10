@@ -3,18 +3,31 @@ import { AdminNav } from "@/components/AdminNav";
 import { logoutAction } from "@/app/admin/login/actions";
 import { BrazilMark } from "@/components/brand/BrazilMark";
 import { adminSessionExpiresAt } from "@/lib/admin-auth";
+import { getDraft, getPublishedConfig } from "@/lib/live-config-server";
+import { diffConfig } from "@/lib/live-config";
 import { AdminSessionClock } from "./AdminSessionClock";
 
 /**
  * Peças visuais comuns do painel administrativo (estilo dashboard): fundo cinza claro, cabeçalho em degradê,
  * números em cartões e conteúdo em painéis brancos arredondados.
  */
-export function AdminShell({ current, children }: { current: string; children: ReactNode }) {
+export async function AdminShell({ current, children }: { current: string; children: ReactNode }) {
+  const pending = await draftChangeCount();
   return (
     <div className="min-h-screen bg-[#f3f2ef] print:bg-white">
       <AdminTopBar />
       <div className="container-page space-y-5 py-6">
         <AdminNav current={current} />
+        {HELP[current] ? (
+          <a href={`/admin#${HELP[current]}`} className="fixed bottom-4 right-4 z-40 grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-purple to-[#2563eb] text-lg font-bold text-white shadow-lg ring-4 ring-white/70 print:hidden" title="Como usar esta página" aria-label="Como usar esta página">?</a>
+        ) : null}
+        {pending > 0 && current !== "/admin/publicar" ? (
+          <a href="/admin/publicar" className="flex flex-wrap items-center gap-3 rounded-2xl bg-[#fff4e5] px-4 py-3 text-sm ring-1 ring-[#f5c27a] hover:bg-[#ffecd1] print:hidden">
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-[#f97316] text-xs font-bold text-white">{pending}</span>
+            <span className="font-semibold text-[#7a4a00]">{pending === 1 ? "mudança no rascunho, ainda não publicada" : "mudanças no rascunho, ainda não publicadas"}</span>
+            <span className="ml-auto font-bold text-[#9a3412]">Revisar e publicar →</span>
+          </a>
+        ) : null}
         {children}
       </div>
     </div>
@@ -95,4 +108,17 @@ export async function AdminTopBar() {
       </div>
     </div>
   );
+}
+
+/** Âncora do tutorial para cada página (botão ? no canto). */
+const HELP: Record<string, string> = { "/admin/research": "secoes", "/admin/posicoes": "secoes", "/admin/notas": "notas", "/admin/espectro": "regua", "/admin/perguntas": "perguntas", "/admin/publicar": "publicar", "/admin/historico": "historico", "/admin/sugestoes": "sugestoes" };
+
+/** Quantas mudanças o rascunho tem em relação à versão no ar (0 sem rascunho ou sem banco). */
+async function draftChangeCount(): Promise<number> {
+  try {
+    const draft = await getDraft();
+    if (!draft) return 0;
+    const pub = await getPublishedConfig();
+    return diffConfig(pub.cfg, draft.cfg).length;
+  } catch { return 0; }
 }

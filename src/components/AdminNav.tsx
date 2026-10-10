@@ -1,11 +1,16 @@
 import Link from "next/link";
 
 const LINKS = [
+  { href: "/admin", label: "Como usar", icon: "?" },
   { href: "/admin/research", label: "Dados da pesquisa", icon: "◔" },
   { href: "/admin/posicoes", label: "Revisão de posições", icon: "✓" },
   { href: "/admin/notas", label: "Notas por alternativa", icon: "★" },
   { href: "/admin/espectro", label: "Espectro político", icon: "↔" },
-];
+  { href: "/admin/perguntas", label: "Perguntas", icon: "≡" },
+  { href: "/admin/sugestoes", label: "Sugestões", icon: "✎" },
+  { href: "/admin/publicar", label: "Publicar", icon: "⇪" },
+  { href: "/admin/historico", label: "Histórico", icon: "⟲" },
+]
 
 /** Menu do painel administrativo: liga as páginas do admin entre si e ao site E Você, O Que Acha?. */
 export function AdminNav({ current }: { current: string }) {

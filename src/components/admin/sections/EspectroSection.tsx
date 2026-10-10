@@ -6,15 +6,20 @@ import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { QUESTION_NUMBER } from "@/lib/question-order";
 import { spectrumPositionOf } from "@/data/spectrum-positions";
 import { CANDIDATE_SPECTRUM, IDEOLOGY_RANGES, RULER_RULES, RULER_WIDTHS, SPECTRUM_BANDS, ideologySpot, rulerPct } from "@/data/political-spectrum";
-import { ensureLiveConfig } from "@/lib/live-config-server";
+import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
+import { bandKey } from "@/lib/live-config";
+import { BandSelect } from "@/components/admin/CellEditors";
+import { RulerEditor } from "@/components/admin/RulerEditor";
+import { SPECTRUM_TERMS } from "@/data/spectrum-terms";
 import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
 
 const bandIndex = (label: string) => SPECTRUM_BANDS.findIndex((b) => b.label === label);
 
 /** Para qual faixa da régua cada alternativa leva a pessoa (independe dos candidatos). */
-export async function EspectroSection() {
+export async function EspectroSection({ editable = false }: { editable?: boolean } = {}) {
   await ensureLiveConfig();
+  const working = editable ? (await getWorkingConfig()).cfg : null;
   if (!(await isAdminSession())) redirect("/admin/login");
   let reviewed = 0, cells = 0;
   const perBand = SPECTRUM_BANDS.map(() => 0);
@@ -55,6 +60,15 @@ export async function EspectroSection() {
         </div>
         <div className="mt-2 grid grid-cols-8 gap-2 text-center text-[11px] leading-tight text-ink-3">{SPECTRUM_BANDS.map((b) => <span key={b.label}>{b.label}</span>)}</div>
       </Panel>
+
+      {editable && working ? (
+        <Panel title="Editar a régua" subtitle="Mova as correntes, Lula, Flávio, a linha divisória e os trechos das ideologias. Fica no rascunho até publicar." accent="#ec4899">
+          <RulerEditor
+            initial={{ terms: working.terms, candidates: working.candidates, ideologyBounds: working.ideologyBounds, rightSideFrom: working.rightSideFrom }}
+            published={{ terms: Object.fromEntries(SPECTRUM_TERMS.map((t) => [t.label, t.at])), candidates: Object.fromEntries(Object.entries(CANDIDATE_SPECTRUM).map(([id, c]) => [id, c.at])), ideologyBounds: Object.fromEntries(IDEOLOGY_RANGES.map((x) => [x.label, Number.isFinite(x.upTo) ? x.upTo : null])), rightSideFrom: RULER_RULES.rightSideFrom }}
+            order={SPECTRUM_TERMS.map((t) => t.label)} ideologies={IDEOLOGY_RANGES.map((x) => x.label)} base={working} />
+        </Panel>
+      ) : null}
 
       <Panel title="Como a conta é feita: análise geral, na régua ideológica" subtitle="Não usa as notas por tema.">
         {(() => {
@@ -180,7 +194,11 @@ export async function EspectroSection() {
                               <span aria-hidden="true" className="flex h-2 w-28 overflow-hidden rounded-full">
                                 {SPECTRUM_BANDS.map((b, i) => <span key={b.label} className="h-full flex-1" style={{ background: i === bi ? b.color : "var(--color-line)" }} />)}
                               </span>
-                              <span className={`w-32 rounded-full px-2.5 py-0.5 text-center text-xs font-bold text-ink ${v.reason !== "Proposta" ? "ring-2 ring-purple ring-offset-1" : ""}`} style={{ background: `${SPECTRUM_BANDS[bi].color}33` }}>{v.band}</span>
+                              {editable ? (
+                                <BandSelect questionId={q.id} optionId={o.id} value={working?.spectrumPositions[bandKey(q.id, o.id)]?.[0] ?? v.band} published={v.band} bands={SPECTRUM_BANDS.map((b) => ({ label: b.label, color: b.color }))} />
+                              ) : (
+                                <span className={`w-32 rounded-full px-2.5 py-0.5 text-center text-xs font-bold text-ink ${v.reason !== "Proposta" ? "ring-2 ring-purple ring-offset-1" : ""}`} style={{ background: `${SPECTRUM_BANDS[bi].color}33` }}>{v.band}</span>
+                              )}
                             </span>
                           ) : <span className="text-xs italic text-ink-3">sem faixa (não entra na régua)</span>}
                         </li>

@@ -6,7 +6,9 @@ import { TOPICS } from "@/data/topics";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { currentOptionScore, proposedOptionScore } from "@/lib/option-scores";
 import { QUESTION_NUMBER } from "@/lib/question-order";
-import { ensureLiveConfig } from "@/lib/live-config-server";
+import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
+import { scoreKey } from "@/lib/live-config";
+import { ScoreSelect } from "@/components/admin/CellEditors";
 import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
 
@@ -20,10 +22,11 @@ const PILL: Record<string, string> = {
 };
 
 /** Notas por alternativa: a mesma tabela usada na conta do relatório. */
-export async function NotasSection() {
+export async function NotasSection({ editable = false }: { editable?: boolean } = {}) {
   await ensureLiveConfig();
   if (!(await isAdminSession())) redirect("/admin/login");
   const positions = await (await getContentRepository()).getPublishedPositions();
+  const working = editable ? (await getWorkingConfig()).cfg : null;
 
   let changed = 0, cells = 0;
   const tally = { "1": 0, "0,5": 0, "0": 0 } as Record<string, number>;
@@ -38,12 +41,14 @@ export async function NotasSection() {
           const raw = currentOptionScore(q, o, positions.find((p) => p.candidateId === c.id && p.questionId === q.id));
           const prop = proposedOptionScore(q.id, c.id, o.id);
           const hasAny = q.options.some((x) => proposedOptionScore(q.id, c.id, x.id));
-          if (raw === null && !hasAny) return { value: null as string | null, reviewed: false, title: "sem posição" };
+          if (raw === null && !hasAny) return { value: null as string | null, num: 0, draftNum: 0, reviewed: false, title: "sem posição" };
           const now = raw ?? 0;
-          const value = fmt(prop ? prop.score : now);
+          const pubNum = prop ? prop.score : now;
+          const draftNum = working?.optionScores[scoreKey(q.id, c.id, o.id)]?.[0] ?? pubNum;
+          const value = fmt(pubNum);
           const reviewed = !!prop && prop.score !== now;
           cells++; tally[value]++; if (reviewed) changed++;
-          return { value, reviewed, title: reviewed ? `Regra padrão: ${raw === null ? "sem posição" : fmt(now)}. ${prop!.reason}` : "Regra padrão" };
+          return { value, num: pubNum, draftNum, reviewed, title: reviewed ? `Regra padrão: ${raw === null ? "sem posição" : fmt(now)}. ${prop!.reason}` : "Regra padrão" };
         }),
       })),
     }));
@@ -193,7 +198,11 @@ export async function NotasSection() {
                               {sc.value === null ? (
                                 <span className="text-[11px] italic text-ink-3">sem posição</span>
                               ) : (
-                                <span title={sc.title} className={`inline-grid h-7 min-w-10 place-items-center rounded-full px-2 text-xs font-bold tabular-nums ${PILL[sc.value]} ${sc.reviewed ? "ring-2 ring-purple ring-offset-1" : ""}`}>{sc.value}</span>
+                                editable ? (
+                                  <ScoreSelect questionId={q.id} candidateId={CANDS[i].id} optionId={o.id} value={sc.draftNum} published={sc.num} reviewed={sc.reviewed} />
+                                ) : (
+                                  <span title={sc.title} className={`inline-grid h-7 min-w-10 place-items-center rounded-full px-2 text-xs font-bold tabular-nums ${PILL[sc.value]} ${sc.reviewed ? "ring-2 ring-purple ring-offset-1" : ""}`}>{sc.value}</span>
+                                )
                               )}
                             </td>
                           ))}

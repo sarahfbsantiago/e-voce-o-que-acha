@@ -9,5 +9,5 @@ export const dynamic = "force-dynamic";
 
 export default async function Page() {
   if (!(await isAdminSession())) redirect("/admin/login");
-  return <AdminShell current="/admin/notas"><NotasSection /></AdminShell>;
+  return <AdminShell current="/admin/notas"><NotasSection editable /></AdminShell>;
 }

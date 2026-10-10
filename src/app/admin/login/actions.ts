@@ -41,7 +41,7 @@ export async function loginAction(formData: FormData) {
   if (!value) redirect("/admin/login?erro=1");
   const store = await cookies();
   store.set(ADMIN_COOKIE, value, sessionCookieOptions());
-  redirect("/admin/research?entrou=1");
+  redirect("/admin?entrou=1");
 }
 
 export async function logoutAction() {

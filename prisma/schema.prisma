@@ -555,3 +555,18 @@ model ConfigDraft {
   baseVersion Int
   updatedAt   DateTime @updatedAt
 }
+
+/// Sugestões de mudança registradas no admin (não mudam o site; ficam para análise).
+model ChangeSuggestion {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  author      String
+  section     String
+  questionId  String?
+  suggestion  String
+  reason      String
+  status      String    @default("aberta")
+  response    String?
+  respondedBy String?
+  respondedAt DateTime?
+}
