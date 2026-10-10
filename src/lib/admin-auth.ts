@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import { adminToken } from "./env";
 
 export const ADMIN_COOKIE = "vd_admin";
-/** Sessão expira sem atividade depois deste tempo. Ações do admin renovam; só recarregar a página não renova. */
-export const ADMIN_SESSION_IDLE_MS = 10 * 60 * 1000;
+/** A sessão termina 1 hora depois do login, aconteça o que acontecer; depois disso o código é pedido de novo. */
+export const ADMIN_SESSION_MAX_MS = 60 * 60 * 1000;
 
 /** Comparação em tempo constante para evitar vazamento por timing. */
 function safeEqual(a: string, b: string): boolean {
@@ -45,7 +45,7 @@ export function isValidSessionValue(value: string | null | undefined, now = Date
   const mac = value.slice(dot + 1);
   if (!/^\d{10,16}$/.test(issuedAt) || !safeEqual(mac, sign(issuedAt, secret))) return false;
   const age = now - Number(issuedAt);
-  return age >= 0 && age <= ADMIN_SESSION_IDLE_MS;
+  return age >= 0 && age <= ADMIN_SESSION_MAX_MS;
 }
 
 export function sessionCookieOptions() {
@@ -59,18 +59,9 @@ export async function isAdminSession(): Promise<boolean> {
   return isValidSessionValue(store.get(ADMIN_COOKIE)?.value);
 }
 
-/** Server Actions: renova a sessão a cada ação do admin (janela deslizante de inatividade). */
-export async function refreshAdminSession(): Promise<void> {
-  const value = createSessionValue();
-  if (!value) return;
-  const store = await cookies();
-  store.set(ADMIN_COOKIE, value, sessionCookieOptions());
-}
 
-/** Route Handlers: aceita o header x-admin-token (token) ou o cookie de sessão. */
+/** Route Handlers: só o cookie de sessão (quem entrou com o código). */
 export function isAdminRequest(req: Request): boolean {
-  const header = req.headers.get("x-admin-token");
-  if (isValidAdminToken(header)) return true;
   const cookie = req.headers.get("cookie") ?? "";
   const match = cookie.split(";").map((c) => c.trim()).find((c) => c.startsWith(`${ADMIN_COOKIE}=`));
   return isValidSessionValue(match ? decodeURIComponent(match.slice(ADMIN_COOKIE.length + 1)) : null);

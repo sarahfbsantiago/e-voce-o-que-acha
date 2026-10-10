@@ -2,12 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { isAdminSession, refreshAdminSession } from "@/lib/admin-auth";
+import { isAdminSession } from "@/lib/admin-auth";
 import { getPrisma } from "@/lib/prisma";
 
 async function guard() {
   if (!(await isAdminSession())) redirect("/admin/login");
-  await refreshAdminSession();
 }
 
 /** Publica uma posição e as evidências ligadas a ela, com registro de auditoria. */
