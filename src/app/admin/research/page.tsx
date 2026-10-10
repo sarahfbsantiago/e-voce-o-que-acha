@@ -60,11 +60,12 @@ export default async function AdminResearchPage() {
   const noOpinionTop = [...r.questions].filter((q) => q.totalResponses > 0).sort((a, b) => b.noOpinionCount / b.totalResponses - a.noOpinionCount / a.totalResponses).slice(0, 5);
   const prioTop = [...r.priorities].sort((a, b) => b.shareHighPriority - a.shareHighPriority);
   const maxDay = Math.max(...r.timeline.map((x) => x.count), 1);
-  // proporções da avaliação sobre o total de questionários (quem não avaliou também conta)
-  const base = Math.max(r.overview.totalSubmissions, r.feedback.total);
+  // avaliação: proporções entre quem respondeu a avaliação (não sobre o total de questionários)
+  const base = r.feedback.total;
   const ofBase = (n: number) => (base ? Math.round((n / base) * 1000) / 10 : null);
-  const helpedNoAnswer = base - r.feedback.helpedYes - r.feedback.helpedNo;
+  const helpedNoAnswer = r.feedback.helpedUnanswered;
   const notRated = base - r.feedback.byRating.reduce((n, x) => n + x, 0);
+  const evalShare = r.overview.totalSubmissions ? Math.round((base / r.overview.totalSubmissions) * 1000) / 10 : null;
 
   return (
     <div className="min-h-screen bg-[#f3f2ef]">
@@ -88,13 +89,14 @@ export default async function AdminResearchPage() {
         </header>
 
         {/* números principais */}
-        <section aria-label="Números principais" className="grid gap-3 sm:grid-cols-3 xl:grid-cols-6">
+        <section aria-label="Números principais" className="grid gap-3 sm:grid-cols-3 xl:grid-cols-7">
           <Kpi label="Questionários" value={BRL(r.overview.totalSubmissions)} note="recebidos" color="#6d3fc4" />
           <Kpi label="Conclusão" value={PCT(r.overview.completionRate)} note={`${BRL(r.overview.completedAllQuestions)} com as 25 perguntas`} color="#2563eb" />
           <Kpi label="Ideologia mais comum" value={topIdeology && topIdeology.count ? topIdeology.label : "—"} note={topIdeology && topIdeology.count ? `${PCT(topIdeology.share)} dos perfis` : "sem dados"} color={topIdeology ? ideologyColor(topIdeology.label) : "#9ca3af"} small />
           <Kpi label="Perto de Lula na régua" value={PCT(lulaRuler?.share ?? null)} note={`${BRL(lulaRuler?.count ?? 0)} perfis`} color={CAND_COLORS[0]} />
-          <Kpi label="Ajudou na decisão" value={PCT(ofBase(r.feedback.helpedYes))} note={`${r.feedback.helpedYes} de ${BRL(base)} questionários`} color="#d4a017" />
-          <Kpi label="Nota da pesquisa" value={r.feedback.averageRating === null ? "—" : String(r.feedback.averageRating).replace(".", ",")} note={`média de ${BRL(base - notRated)} avaliações · ${PCT(ofBase(base - notRated))} avaliaram`} color="#ec4899" />
+          <Kpi label="Responderam a avaliação" value={BRL(base)} note={`${PCT(evalShare)} dos questionários`} color="#2563eb" />
+          <Kpi label="Ajudou na decisão" value={PCT(ofBase(r.feedback.helpedYes))} note={`${r.feedback.helpedYes} de ${BRL(base)} que avaliaram`} color="#d4a017" />
+          <Kpi label="Nota da pesquisa" value={r.feedback.averageRating === null ? "—" : String(r.feedback.averageRating).replace(".", ",")} note={`média entre os ${BRL(base - notRated)} que deram nota`} color="#ec4899" />
         </section>
 
         {/* perfil ideológico */}
@@ -176,13 +178,13 @@ export default async function AdminResearchPage() {
 
         {/* avaliação, demografia */}
         <section className="grid gap-4 lg:grid-cols-4">
-          <Panel title="Notas da pesquisa" subtitle={`% sobre os ${BRL(base)} questionários`}>
+          <Panel title="Notas da pesquisa" subtitle={`% entre os ${BRL(base)} que responderam a avaliação`}>
             <ul className="space-y-2">
               {r.feedback.byRating.map((n, i) => <Bar key={i} label={`${"★".repeat(i + 1)}`} count={n} share={ofBase(n)} color="#ec4899" />).reverse()}
-              <Bar label="Sem avaliação" count={notRated} share={ofBase(notRated)} color="#d6d3cc" />
+              {notRated > 0 ? <Bar label="Sem nota" count={notRated} share={ofBase(notRated)} color="#d6d3cc" /> : null}
             </ul>
           </Panel>
-          <Panel title="Ajudou na decisão?" subtitle={`% sobre os ${BRL(base)} questionários`}>
+          <Panel title="Ajudou na decisão?" subtitle={`% entre os ${BRL(base)} que responderam a avaliação`}>
             {base ? (
               <div className="flex flex-col items-center gap-3">
                 <Donut size={130} parts={[{ value: r.feedback.helpedYes, color: "#2f9a5d" }, { value: r.feedback.helpedNo, color: "#d4a017" }, { value: helpedNoAnswer, color: "#d6d3cc" }]} center={PCT(ofBase(r.feedback.helpedYes))} centerNote="sim" />
