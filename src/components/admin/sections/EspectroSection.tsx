@@ -5,7 +5,7 @@ import { TOPICS } from "@/data/topics";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { QUESTION_NUMBER } from "@/lib/question-order";
 import { spectrumPositionOf } from "@/data/spectrum-positions";
-import { IDEOLOGY_RANGES, RIGHT_SIDE_FROM, SPECTRUM_BANDS, ideologySpot } from "@/data/political-spectrum";
+import { CANDIDATE_SPECTRUM, IDEOLOGY_RANGES, RIGHT_SIDE_FROM, RULER_WIDTHS, SPECTRUM_BANDS, ideologySpot, rulerPct } from "@/data/political-spectrum";
 import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
 
@@ -54,53 +54,107 @@ export async function EspectroSection() {
         <div className="mt-2 grid grid-cols-8 gap-2 text-center text-[11px] leading-tight text-ink-3">{SPECTRUM_BANDS.map((b) => <span key={b.label}>{b.label}</span>)}</div>
       </Panel>
 
-      <Panel title="Como a conta é feita: análise geral, na régua ideológica" subtitle="Posição da pessoa na régua, ideologia e de qual candidato ela fica mais perto ideologicamente. Não usa as notas por tema.">
-        <div className="grid gap-4 text-sm leading-relaxed text-ink-2 lg:grid-cols-3">
-          <div className="space-y-2">
-            <p className="text-xs font-bold uppercase tracking-wide text-ink-3">1. Valor de cada resposta</p>
-            <p>Cada alternativa aponta para uma faixa. A resposta vale o meio dessa faixa (&quot;Não sei&quot; não entra):</p>
-            <ul className="grid grid-cols-2 gap-1 text-xs">
-              {SPECTRUM_BANDS.map((b, i) => (
-                <li key={b.label} className="flex items-center gap-1.5"><span aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: b.color }} /><span className="min-w-0 flex-1">{b.label}</span><b className="tabular-nums text-ink">{String(i + 0.5).replace(".", ",")}</b></li>
-              ))}
-            </ul>
-          </div>
-          <div className="space-y-2">
-            <p className="text-xs font-bold uppercase tracking-wide text-ink-3">2. Média por resposta</p>
-            <p><b className="text-ink">Posição</b> = soma dos valores das respostas ÷ número de respostas.</p>
-            <div className="rounded-xl bg-paper/70 p-3 ring-1 ring-line">
-              <p className="text-xs font-bold uppercase tracking-wide text-ink-3">Exemplo</p>
-              <p className="mt-1">3 respostas: uma em Esquerda, uma em Centro e uma em Direita.</p>
-              <p className="mt-2 font-mono text-[13px] text-ink">(1,5 + 3,5 + 5,5) ÷ 3 = 3,5</p>
-              <p className="mt-1">3,5 → Centro político.</p>
+      <Panel title="Como a conta é feita: análise geral, na régua ideológica" subtitle="Não usa as notas por tema.">
+        {(() => {
+          const ex = [{ band: 1, v: "1,5" }, { band: 3, v: "3,5" }, { band: 5, v: "5,5" }];
+          const split = rulerPct(RIGHT_SIDE_FROM);
+          const segs = IDEOLOGY_RANGES.map((r, i) => {
+            const from = i === 0 ? 0 : IDEOLOGY_RANGES[i - 1].upTo;
+            const to = Math.min(r.upTo, SPECTRUM_BANDS.length);
+            const spot = ideologySpot(r.label) ?? from;
+            return { n: i + 1, label: r.label, left: rulerPct(from), width: rulerPct(to) - rulerPct(from), color: SPECTRUM_BANDS[Math.min(SPECTRUM_BANDS.length - 1, Math.floor(spot))].color, lula: spot < RIGHT_SIDE_FROM };
+          });
+          return (
+            <div className="space-y-6">
+              {/* passos */}
+              <ol className="grid gap-3 md:grid-cols-3">
+                {[
+                  ["1", "Cada resposta vale o meio da faixa para onde aponta"],
+                  ["2", "Posição = média dos valores das respostas"],
+                  ["3", "A posição cai numa ideologia e num lado da régua"],
+                ].map(([n, t]) => (
+                  <li key={n} className="flex items-center gap-3 rounded-xl bg-paper/70 p-3 ring-1 ring-line">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-purple to-[#2563eb] text-base font-bold text-white">{n}</span>
+                    <span className="text-sm font-semibold leading-snug text-ink">{t}</span>
+                  </li>
+                ))}
+              </ol>
+
+              {/* régua visual */}
+              <div className="overflow-x-auto pb-1">
+                <div className="min-w-[640px] px-1">
+                  {/* lados: Lula x Flávio */}
+                  <div className="relative h-9">
+                    <div className="absolute inset-y-0 left-0 flex items-center justify-center rounded-l-xl bg-[#6d3fc4]/12 text-xs font-bold text-[#562f9f] ring-1 ring-[#6d3fc4]/25" style={{ width: `${split}%` }}>◀ mais perto de Lula</div>
+                    <div className="absolute inset-y-0 right-0 flex items-center justify-center rounded-r-xl bg-[#2f9a5d]/12 text-xs font-bold text-[#237a49] ring-1 ring-[#2f9a5d]/25" style={{ width: `${100 - split}%` }}>mais perto de Flávio ▶</div>
+                  </div>
+                  {/* candidatos */}
+                  <div className="relative mt-1 h-7">
+                    {Object.entries(CANDIDATE_SPECTRUM).map(([id, c]) => (
+                      <span key={id} className={`absolute top-0 -translate-x-1/2 rounded-md px-1.5 py-0.5 text-[11px] font-bold text-white ${id === "lula" ? "bg-[#6d3fc4]" : "bg-[#2f9a5d]"}`} style={{ left: `${rulerPct(c.at)}%` }}>{id === "lula" ? "Lula" : "Flávio"}</span>
+                    ))}
+                  </div>
+                  {/* faixas com valor */}
+                  <div className="relative">
+                    <div className="flex h-8 overflow-hidden rounded-lg">
+                      {SPECTRUM_BANDS.map((b, i) => (
+                        <div key={b.label} className="flex items-center justify-center text-[11px] font-bold text-white" style={{ background: b.color, flexGrow: RULER_WIDTHS[i], flexBasis: 0 }}>{String(i + 0.5).replace(".", ",")}</div>
+                      ))}
+                    </div>
+                    <div aria-hidden="true" className="absolute -top-16 -bottom-14 w-0.5 bg-ink" style={{ left: `${split}%` }} />
+                  </div>
+                  <div className="mt-1 flex text-center text-[10px] leading-tight text-ink-3">
+                    {SPECTRUM_BANDS.map((b, i) => <span key={b.label} style={{ flexGrow: RULER_WIDTHS[i], flexBasis: 0 }}>{b.label}</span>)}
+                  </div>
+                  {/* trechos das ideologias */}
+                  <div className="relative mt-3 h-7">
+                    {segs.map((g) => (
+                      <div key={g.label} title={g.label} className="absolute inset-y-0 flex items-center justify-center border-r-2 border-surface text-[11px] font-bold text-white" style={{ left: `${g.left}%`, width: `${g.width}%`, background: g.color }}>{g.n}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* legenda das ideologias */}
+              <div className="grid gap-3 md:grid-cols-2">
+                {[true, false].map((lula) => (
+                  <div key={String(lula)} className="rounded-xl p-3 ring-1" style={{ background: lula ? "#6d3fc40f" : "#2f9a5d0f", borderColor: "transparent", boxShadow: `inset 0 0 0 1px ${lula ? "#6d3fc440" : "#2f9a5d40"}` }}>
+                    <p className={`text-xs font-bold uppercase tracking-wide ${lula ? "text-[#562f9f]" : "text-[#237a49]"}`}>{lula ? "Mais perto da ideologia de Luiz Inácio Lula da Silva" : "Mais perto da ideologia de Flávio Nantes Bolsonaro"}</p>
+                    <ul className="mt-2 flex flex-wrap gap-1.5">
+                      {segs.filter((g) => g.lula === lula).map((g) => (
+                        <li key={g.label} className="inline-flex items-center gap-1.5 rounded-full bg-surface py-0.5 pl-0.5 pr-2.5 text-xs font-semibold text-ink ring-1 ring-line">
+                          <span className="grid h-5 w-5 place-items-center rounded-full text-[10px] font-bold text-white" style={{ background: g.color }}>{g.n}</span>{g.label}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              {/* exemplo visual */}
+              <div className="rounded-xl bg-paper/70 p-4 ring-1 ring-line">
+                <p className="text-xs font-bold uppercase tracking-wide text-ink-3">Exemplo · 3 respostas</p>
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-lg font-bold text-ink">
+                  <span className="text-ink-3">(</span>
+                  {ex.map((e, i) => (
+                    <span key={e.band} className="flex items-center gap-2">
+                      {i ? <span className="text-ink-3">+</span> : null}
+                      <span className="flex flex-col items-center rounded-lg px-3 py-1 text-white" style={{ background: SPECTRUM_BANDS[e.band].color }}>
+                        <span className="tabular-nums">{e.v}</span><span className="text-[10px] font-semibold opacity-90">{SPECTRUM_BANDS[e.band].label}</span>
+                      </span>
+                    </span>
+                  ))}
+                  <span className="text-ink-3">) ÷ 3 =</span>
+                  <span className="flex flex-col items-center rounded-lg px-3 py-1 text-white" style={{ background: SPECTRUM_BANDS[3].color }}>
+                    <span className="tabular-nums">3,5</span><span className="text-[10px] font-semibold opacity-90">Centro político</span>
+                  </span>
+                  <span className="text-ink-3">→</span>
+                  <span className="rounded-lg bg-[#6d3fc4] px-3 py-1.5 text-sm text-white">mais perto de Lula</span>
+                </div>
+              </div>
             </div>
-            <p className="text-xs">A ideologia é a corrente cujo trecho contém a posição:</p>
-            <ul className="space-y-0.5 text-xs">
-              {IDEOLOGY_RANGES.map((r, i) => (
-                <li key={r.label} className="flex justify-between gap-2"><span>{r.label}</span><span className="tabular-nums text-ink-3">{i === 0 ? "até " : r.upTo === Infinity ? "acima de " : `${String(IDEOLOGY_RANGES[i - 1].upTo).replace(".", ",")} a `}{(r.upTo === Infinity ? IDEOLOGY_RANGES[i - 1].upTo : r.upTo).toString().replace(".", ",")}</span></li>
-              ))}
-            </ul>
-          </div>
-          <div className="space-y-2">
-            <p className="text-xs font-bold uppercase tracking-wide text-ink-3">3. Mais perto de qual candidato</p>
-            {(() => {
-              const left = IDEOLOGY_RANGES.filter((r) => (ideologySpot(r.label) ?? 0) < RIGHT_SIDE_FROM).map((r) => r.label);
-              const right = IDEOLOGY_RANGES.filter((r) => (ideologySpot(r.label) ?? 0) >= RIGHT_SIDE_FROM).map((r) => r.label);
-              return (
-                <>
-                  <div className="rounded-xl p-3 ring-1 ring-[#6d3fc4]/30" style={{ background: "#6d3fc414" }}>
-                    <p>De <b className="text-ink">{left[0]}</b> a <b className="text-ink">{left[left.length - 1]}</b>:</p>
-                    <p className="mt-1 font-bold text-[#562f9f]">mais próxima da ideologia de Luiz Inácio Lula da Silva</p>
-                  </div>
-                  <div className="rounded-xl p-3 ring-1 ring-[#2f9a5d]/30" style={{ background: "#2f9a5d14" }}>
-                    <p>De <b className="text-ink">{right[0]}</b> em diante ({right.join(", ")}):</p>
-                    <p className="mt-1 font-bold text-[#237a49]">mais próxima da ideologia de Flávio Nantes Bolsonaro</p>
-                  </div>
-                </>
-              );
-            })()}
-          </div>
-        </div>
+          );
+        })()}
       </Panel>
 
       {sections.map(({ g, gi, rows }) => (
