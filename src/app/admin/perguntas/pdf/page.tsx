@@ -12,6 +12,7 @@ import { bandKey, questionNumbers, scopeChanged, scoreKey, type LiveConfig } fro
 import type { Question } from "@/domain/types";
 import exemploTemas from "@/components/admin/guia/exemplo-temas.png";
 import exemploRegua from "@/components/admin/guia/exemplo-regua.png";
+import exemploRelatorioRegua from "@/components/admin/guia/exemplo-relatorio-regua.png";
 
 export const metadata: Metadata = { title: "Perguntas, pesos e régua", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -126,8 +127,11 @@ export default async function Page() {
               <li>• O tema fica <b>&quot;Lula&quot;</b>.</li>
             </ul>
           </div>
-          <p className="mt-3 text-sm font-semibold text-ink">Onde aparece: no relatório, no selo ao lado de cada tema e na contagem &quot;X de 12 temas comparáveis&quot;.</p>
-          <Image src={exemploTemas} loading="eager" unoptimized alt="Exemplo do relatório: total de temas de cada candidato e o selo de cada tema" className="mt-2 w-full max-w-md rounded-lg ring-1 ring-line" />
+          <div className="mt-3 rounded-xl p-3 ring-2 ring-purple/30">
+            <p className="text-sm font-bold text-ink">Onde isso aparece no relatório da pessoa</p>
+            <p className="mt-1 text-sm text-ink-2">No fim do questionário, o relatório mostra, tema a tema, se as respostas da pessoa ficaram mais próximas de Lula ou de Flávio (o selo ao lado de cada tema), e quantos temas cada um levou (&quot;X de 12 temas comparáveis&quot;). Os pesos desta tabela decidem cada selo.</p>
+            <Image src={exemploTemas} loading="eager" unoptimized alt="Relatório: total de temas de cada candidato e o selo de cada tema" className="mt-2 w-full max-w-md rounded-lg ring-1 ring-line" />
+          </div>
         </div>
 
         <div className={box}>
@@ -146,8 +150,16 @@ export default async function Page() {
               <li>• Antes da divisa {num(split)} → &quot;mais próxima de <b>Lula</b>&quot;</li>
             </ul>
           </div>
-          <p className="mt-3 text-sm font-semibold text-ink">Onde aparece: no relatório, na régua do espectro e em &quot;Sua ideologia&quot;. Na imagem, as correntes, Lula, Flávio, a divisa e, embaixo, os trechos de cada ideologia (1 a {IDEOLOGY_RANGES.length}).</p>
-          <Image src={exemploRegua} loading="eager" unoptimized alt="Régua do espectro: correntes, Lula, Flávio, a divisa e os trechos das ideologias" className="mt-2 w-full rounded-lg ring-1 ring-line" />
+          <div className="mt-3 rounded-xl p-3 ring-1 ring-line">
+            <p className="text-sm font-bold text-ink">Como a régua é montada (aba Régua do espectro)</p>
+            <p className="mt-1 text-sm text-ink-2">As correntes, Lula, Flávio, a divisa e, embaixo, os trechos de cada ideologia (1 a {IDEOLOGY_RANGES.length}). A média da pessoa cai num desses trechos.</p>
+            <Image src={exemploRegua} loading="eager" unoptimized alt="Régua do espectro no admin: correntes, Lula, Flávio, a divisa e os trechos das ideologias" className="mt-2 w-full rounded-lg ring-1 ring-line" />
+          </div>
+          <div className="mt-3 rounded-xl p-3 ring-2 ring-[#2563eb]/30 print:break-inside-avoid">
+            <p className="text-sm font-bold text-ink">Onde isso aparece no relatório da pessoa</p>
+            <p className="mt-1 text-sm text-ink-2">No fim do relatório, em &quot;Onde você fica no espectro ideológico político&quot;: a seta <b>Você</b> fica no ponto da ideologia da pessoa (no exemplo, &quot;Você · Progressismo&quot;), ao lado de Lula e Flávio, e a frase final diz de qual candidato a ideologia está mais próxima.</p>
+            <Image src={exemploRelatorioRegua} loading="eager" unoptimized alt="Relatório: régua do espectro com a seta Você na ideologia da pessoa" className="mt-2 w-full max-w-xl rounded-lg ring-1 ring-line" />
+          </div>
         </div>
       </section>
     </AdminShell>
