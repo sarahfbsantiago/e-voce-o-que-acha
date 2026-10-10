@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SITE_TEXTS } from "@/data/site-texts";
 import { BrazilMark } from "@/components/brand/BrazilMark";
 import { CURRENT_METHODOLOGY_VERSION, POLITICAL_DATA_UPDATED_AT } from "@/data/methodology";
 import { formatDate } from "@/lib/format";
@@ -18,10 +19,7 @@ export function SiteFooter() {
               <BrazilMark size={26} className="shrink-0" />
               E Você, O Que Acha?
             </p>
-            <p className="mt-3 leading-relaxed">
-              Este site não diz em quem você deve votar. Ele organiza evidências públicas para você
-              tirar a própria conclusão.
-            </p>
+            <p className="mt-3 leading-relaxed">{SITE_TEXTS.footer.about}</p>
           </div>
 
           <div>
@@ -57,9 +55,7 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <p className="mt-10 border-t border-line pt-6 text-center text-xs text-ink-3">
-          Projeto independente e sem fins eleitorais. Todas as afirmações sobre candidatos apontam para a fonte original.
-        </p>
+        <p className="mt-10 border-t border-line pt-6 text-center text-xs text-ink-3">{SITE_TEXTS.footer.bottom}</p>
       </div>
     </footer>
   );

@@ -1,9 +1,12 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { AdminNav } from "@/components/AdminNav";
 import { logoutAction } from "@/app/admin/login/actions";
 import { BrazilMark } from "@/components/brand/BrazilMark";
 import { adminSessionExpiresAt } from "@/lib/admin-auth";
-import { getDraft, getPublishedConfig } from "@/lib/live-config-server";
+import { getDraft, getPublishedConfig, liveVersionMeta } from "@/lib/live-config-server";
+import { getPrisma } from "@/lib/prisma";
+import { dataSourceMode } from "@/lib/env";
 import { diffConfig } from "@/lib/live-config";
 import { AdminSessionClock } from "./AdminSessionClock";
 
@@ -13,6 +16,8 @@ import { AdminSessionClock } from "./AdminSessionClock";
  */
 export async function AdminShell({ current, children }: { current: string; children: ReactNode }) {
   const pending = await draftChangeCount();
+  const meta = await liveVersionMeta().catch(() => null);
+  const openRequests = await countOpenRequests();
   return (
     <div className="min-h-screen bg-[#f3f2ef] print:bg-white">
       <AdminTopBar />
@@ -21,15 +26,32 @@ export async function AdminShell({ current, children }: { current: string; child
         {HELP[current] ? (
           <a href={`/admin#${HELP[current]}`} className="fixed bottom-4 right-4 z-40 grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-purple to-[#2563eb] text-lg font-bold text-white shadow-lg ring-4 ring-white/70 print:hidden" title="Como usar esta página" aria-label="Como usar esta página">?</a>
         ) : null}
+        {meta ? (
+          <p className="flex flex-wrap items-center gap-2 text-xs text-ink-3 print:hidden">
+            <span className="rounded-full bg-mint px-2 py-0.5 font-bold text-white">no ar: v{meta.id}</span>
+            publicada em {meta.createdAt.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })} por <b className="text-ink-2">{meta.author}</b>{meta.approvedBy ? <> · aprovada por <b className="text-ink-2">{meta.approvedBy}</b></> : null}
+            {openRequests ? <Link href="/admin/publicar" className="rounded-full bg-purple-soft px-2 py-0.5 font-bold text-purple-strong">{openRequests} aguardando aprovação →</Link> : null}
+          </p>
+        ) : null}
         {pending > 0 && current !== "/admin/publicar" ? (
-          <a href="/admin/publicar" className="flex flex-wrap items-center gap-3 rounded-2xl bg-[#fff4e5] px-4 py-3 text-sm ring-1 ring-[#f5c27a] hover:bg-[#ffecd1] print:hidden">
+          <Link href="/admin/publicar" className="flex flex-wrap items-center gap-3 rounded-2xl bg-[#fff4e5] px-4 py-3 text-sm ring-1 ring-[#f5c27a] hover:bg-[#ffecd1] print:hidden">
             <span className="grid h-7 w-7 place-items-center rounded-full bg-[#f97316] text-xs font-bold text-white">{pending}</span>
             <span className="font-semibold text-[#7a4a00]">{pending === 1 ? "mudança no rascunho, ainda não publicada" : "mudanças no rascunho, ainda não publicadas"}</span>
-            <span className="ml-auto font-bold text-[#9a3412]">Revisar e publicar →</span>
-          </a>
+            <span className="ml-auto font-bold text-[#9a3412]">Enviar para aprovação →</span>
+          </Link>
         ) : null}
         {children}
+        {pending > 0 && current !== "/admin/publicar" ? <div aria-hidden="true" className="h-16" /> : null}
       </div>
+      {pending > 0 && current !== "/admin/publicar" ? (
+        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#f5c27a] bg-[#fff4e5]/95 backdrop-blur print:hidden">
+          <div className="container-page flex flex-wrap items-center gap-3 py-2.5 pr-16">
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-[#f97316] text-xs font-bold text-white">{pending}</span>
+            <span className="text-sm font-semibold text-[#7a4a00]">{pending === 1 ? "mudança no rascunho" : "mudanças no rascunho"} · ainda não está no site</span>
+            <Link href="/admin/publicar" className="ml-auto rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-bold text-white shadow-sm">Enviar tudo para aprovação</Link>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -111,7 +133,7 @@ export async function AdminTopBar() {
 }
 
 /** Âncora do tutorial para cada página (botão ? no canto). */
-const HELP: Record<string, string> = { "/admin/research": "secoes", "/admin/posicoes": "secoes", "/admin/notas": "notas", "/admin/espectro": "regua", "/admin/perguntas": "perguntas", "/admin/publicar": "publicar", "/admin/historico": "historico", "/admin/sugestoes": "sugestoes" };
+const HELP: Record<string, string> = { "/admin/research": "secoes", "/admin/posicoes": "secoes", "/admin/notas": "notas", "/admin/espectro": "regua", "/admin/perguntas": "perguntas", "/admin/publicar": "publicar", "/admin/historico": "historico", "/admin/sugestoes": "sugestoes", "/admin/textos": "textos", "/admin/fontes": "textos" };
 
 /** Quantas mudanças o rascunho tem em relação à versão no ar (0 sem rascunho ou sem banco). */
 async function draftChangeCount(): Promise<number> {
@@ -121,4 +143,9 @@ async function draftChangeCount(): Promise<number> {
     const pub = await getPublishedConfig();
     return diffConfig(pub.cfg, draft.cfg).length;
   } catch { return 0; }
+}
+
+async function countOpenRequests(): Promise<number> {
+  if (dataSourceMode() !== "prisma") return 0;
+  try { return await getPrisma().publishRequest.count({ where: { status: "aberto" } }); } catch { return 0; }
 }

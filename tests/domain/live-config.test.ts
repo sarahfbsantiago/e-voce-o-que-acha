@@ -83,3 +83,29 @@ describe("configuração viva (admin editável)", () => {
     expect(personSpectrum([a("q01", "o1")])!.at).toBe(1.5); // voltou ao publicado
   });
 });
+
+describe("pedidos de um item só (como pull requests)", () => {
+  it("aplica só o item sobre a versão no ar, mesmo que ela tenha mudado depois", async () => {
+    const { applyScope, scopeChanged, sameJson } = await import("@/lib/live-config");
+    const draft = clone(BASELINE_CONFIG);
+    draft.optionScores["q09|flavio-bolsonaro|o3"] = [1, "t"];
+    draft.spectrumPositions["q01|o1"] = ["Direita", "t"];
+    const scope = { kind: "scores" as const, questionId: "q09" };
+    expect(scopeChanged(BASELINE_CONFIG, draft, scope)).toBe(true);
+    const live2 = clone(BASELINE_CONFIG); live2.candidates.lula = 3.3; // outra mudança publicada antes
+    const target = applyScope(live2, draft, scope);
+    expect(target.optionScores["q09|flavio-bolsonaro|o3"][0]).toBe(1);
+    expect(target.spectrumPositions["q01|o1"][0]).toBe("Esquerda"); // a outra mudança do rascunho não vai junto
+    expect(target.candidates.lula).toBe(3.3); // não desfaz o que já estava no ar
+    expect(sameJson({ a: 1, b: [2, { c: 3, d: 4 }] }, { b: [2, { d: 4, c: 3 }], a: 1 })).toBe(true);
+  });
+  it("textos: muda só o trecho enviado", async () => {
+    const { applyScope, contentOf } = await import("@/lib/live-config");
+    const draft = clone(BASELINE_CONFIG);
+    contentOf(draft).pages.home.headline = "Novo título";
+    contentOf(draft).pages.footer.about = "Outro rodapé";
+    const target = applyScope(BASELINE_CONFIG, draft, { kind: "content", path: ["pages", "home"] });
+    expect(contentOf(target).pages.home.headline).toBe("Novo título");
+    expect(contentOf(target).pages.footer.about).toBe(contentOf(BASELINE_CONFIG).pages.footer.about);
+  });
+});

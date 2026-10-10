@@ -546,6 +546,8 @@ model ConfigVersion {
   impact     Json
   snapshot   Json
   rollbackOf Int?
+  approvedBy String?
+  requestId  Int?
 }
 
 /// Rascunho único de alterações do admin (ainda não publicado).
@@ -569,4 +571,23 @@ model ChangeSuggestion {
   response    String?
   respondedBy String?
   respondedAt DateTime?
+}
+
+/// Pedido de publicação (como um pull request): alguém envia o rascunho; outra pessoa (ou a mesma) revisa e aprova ou recusa.
+model PublishRequest {
+  id               Int       @id @default(autoincrement())
+  createdAt        DateTime  @default(now())
+  author           String
+  note             String
+  baseVersion      Int
+  snapshot         Json
+  changes          Json
+  rollbackOf       Int?
+  /// Alcance do pedido: null = rascunho inteiro; senão só aquele item (aplicado sobre a versão no ar na hora de aprovar).
+  scope            Json?
+  status           String    @default("aberto")
+  reviewedBy       String?
+  reviewNote       String?
+  reviewedAt       DateTime?
+  publishedVersion Int?
 }

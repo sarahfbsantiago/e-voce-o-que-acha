@@ -3,29 +3,20 @@ import { PageTitle } from "@/components/ui";
 import { StartButton } from "@/components/StartButton";
 import { ensureLiveConfig } from "@/lib/live-config-server";
 import { questionnaireCounts } from "@/lib/live-config";
+import { SITE_TEXTS, fillCounts } from "@/data/site-texts";
 
 export const metadata: Metadata = { title: "Como funciona" };
 
-const steps = (n: number, topics: number): [string, string][] => [
-  ["Você responde", `${n} perguntas em linguagem simples sobre políticas públicas e valores políticos, divididas em 5 seções com ${topics} temas. Cada seção começa perguntando o quanto aqueles temas importam para você. Toda pergunta tem a opção “Não sei”. Os nomes dos candidatos ficam ocultos durante as perguntas, e nenhuma cor partidária é usada.`],
-  ["Você declara prioridades", "Ao final de cada sessão, você informa quanto aquele tema importa para você. Essa informação serve exclusivamente para ordenar o seu relatório."],
-  ["Nós organizamos as evidências", "Para cada pergunta, comparamos sua resposta com a posição documentada de cada candidato: igual, parecida ou diferente. Se o candidato não se posicionou nas fontes oficiais, a pergunta conta como diferente para ele, e o site diz isso. Depois, você conhece melhor os candidatos: trajetória, cargos, o que fizeram e o que prometem, com link para cada documento."],
-  ["Você consulta o histórico", "Atuação legislativa e políticas executadas são apresentadas conforme o cargo que o candidato ocupou. Um parlamentar não é penalizado por não ter competências executivas."],
-  ["Você vê a diferença", "Proposta eleitoral, declaração, atuação legislativa, política executada e indicador estatístico são sempre separados e nunca misturados."],
-  ["Você abre a fonte", "Cada afirmação sobre um candidato aponta para o documento original. No relatório, cada pergunta mostra qual documento sustenta a posição, com data e link. Na trajetória, o botão “Como sabemos disso?” mostra a fonte, a instituição, o trecho utilizado e o tipo de evidência. O catálogo de fontes abre a origem de cada uma."],
-  ["Você entende o sistema", "A metodologia é pública: perguntas, critérios de inclusão e exclusão, hierarquia de evidências, tratamento de lacunas e histórico de alterações."],
-  ["Você decide", "O site não recomenda candidato nem monta ranking. Mostra, com a conta aberta, quanto suas respostas concordam com cada um e em quantos temas cada um ficou mais perto. A decisão é sua."],
-];
 
 const TONES = ["bg-accent", "bg-purple", "bg-mint", "bg-gold"];
 
 export default async function ComoFuncionaPage() {
   await ensureLiveConfig();
   const c = questionnaireCounts();
-  const STEPS = steps(c.questions, c.topics);
+  const STEPS: [string, string][] = SITE_TEXTS.comoFunciona.steps.map((x) => [x.title, fillCounts(x.text, c)]);
   return (
     <div className="container-page py-7 md:py-16 max-w-3xl">
-      <PageTitle eyebrow="Passo a passo" lead="Oito passos, sem recomendação de voto e com a conta aberta.">Como funciona</PageTitle>
+      <PageTitle eyebrow="Passo a passo" lead={SITE_TEXTS.comoFunciona.lead}>Como funciona</PageTitle>
 
       <ol className="space-y-4">
         {STEPS.map(([title, text], i) => (

@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isAdminSession } from "@/lib/admin-auth";
 import { discardDraft, getWorkingConfig, saveDraft } from "@/lib/live-config-server";
-import { CANDIDATE_IDS, bandKey, buildOptions, nextQuestionId, scoreKey, type LiveConfig } from "@/lib/live-config";
+import { CANDIDATE_IDS, bandKey, buildOptions, contentOf, nextQuestionId, scoreKey, type LiveConfig } from "@/lib/live-config";
 import { SPECTRUM_BANDS, type SpectrumBandLabel } from "@/data/political-spectrum";
 
 /**
@@ -112,4 +112,60 @@ export async function discardDraftAction() {
   await discardDraft();
   revalidatePath("/admin", "layout");
   redirect("/admin/publicar?descartado=1");
+}
+
+/** Troca um trecho dos textos do site (caminho dentro de content) no rascunho. */
+export async function setContentAction(path: (string | number)[], value: unknown) {
+  if (!path.length || !["pages", "profiles", "spectrumIntro", "spectrumSections", "spectrumComparison", "history", "candidateViews", "candidateProfiles", "sources"].includes(String(path[0]))) return;
+  await edit((c) => {
+    c.content = JSON.parse(JSON.stringify(contentOf(c)));
+    let node: Record<string | number, unknown> = c.content as unknown as Record<string, unknown>;
+    for (const k of path.slice(0, -1)) node = node[k] as Record<string | number, unknown>;
+    node[path[path.length - 1]] = value;
+  });
+}
+
+/** Ajusta uma posição (resumo, direção, alternativa mais próxima, status) no rascunho. */
+export async function setPositionAction(key: string, o: { summary?: string; direction?: string; closestOptionId?: string | null; reviewStatus?: string }) {
+  const DIRS = ["SUPPORTS", "PARTIALLY_SUPPORTS", "NEUTRAL", "PARTIALLY_OPPOSES", "OPPOSES", "UNCLEAR"];
+  const STATUS = ["DRAFT", "PUBLISHED", "REJECTED"];
+  await edit((c) => {
+    c.content = JSON.parse(JSON.stringify(contentOf(c)));
+    const clean: Record<string, unknown> = {};
+    if (o.summary !== undefined) clean.summary = o.summary.trim().slice(0, 2000);
+    if (o.direction && DIRS.includes(o.direction)) clean.direction = o.direction;
+    if (o.closestOptionId !== undefined) clean.closestOptionId = o.closestOptionId || null;
+    if (o.reviewStatus && STATUS.includes(o.reviewStatus)) clean.reviewStatus = o.reviewStatus;
+    c.content!.positions[key] = clean;
+  });
+}
+
+/** Ajusta título, resumo, trecho e link de uma evidência no rascunho. */
+export async function setEvidenceAction(id: string, o: { title: string; summary: string; originalExcerpt: string; link: string }) {
+  await edit((c) => {
+    c.content = JSON.parse(JSON.stringify(contentOf(c)));
+    c.content!.evidence[id] = { title: o.title.trim().slice(0, 300), summary: o.summary.trim().slice(0, 2000), originalExcerpt: o.originalExcerpt.trim().slice(0, 3000), link: o.link.trim().slice(0, 600) };
+  });
+}
+
+/** Fonte nova (no rascunho). */
+export async function addSourceAction(d: { name: string; institution: string; url: string; purpose: string }) {
+  if (d.name.trim().length < 3 || !/^https?:\/\//.test(d.url.trim())) return;
+  await edit((c) => {
+    c.content = JSON.parse(JSON.stringify(contentOf(c)));
+    const list = c.content!.sources ?? [];
+    const base = d.name.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "fonte";
+    let id = base, n = 2;
+    while (list.some((x) => x.id === id)) id = `${base}-${n++}`;
+    list.push({ id, name: d.name.trim(), institution: d.institution.trim(), url: d.url.trim(), type: "other", legend: "PRIMARIA", purpose: d.purpose.trim(), verification: { status: "PENDING_MANUAL", checkedAt: new Date().toISOString().slice(0, 10) } } as never);
+    c.content!.sources = list;
+  });
+}
+
+/** Remove uma fonte (no rascunho). */
+export async function removeSourceAction(id: string) {
+  await edit((c) => {
+    c.content = JSON.parse(JSON.stringify(contentOf(c)));
+    c.content!.sources = (c.content!.sources ?? []).filter((x) => x.id !== id);
+  });
 }

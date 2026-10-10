@@ -139,6 +139,7 @@ export const METHODOLOGY_VERSIONS: MethodologyVersion[] = [
       "Revisão humana: os perfis ideológicos do relatório passam a usar os textos da responsável. A ideologia mostrada passa a ser a corrente mais próxima na régua, separando libertarianismo, liberalismo econômico e conservadorismo; só de nacionalismo radical para a direita a ideologia fica mais próxima de Flávio Bolsonaro.",
       "Revisão humana: a página inicial passa a explicar as duas partes do site: descobrir a ideologia política na régua e comparar, tema a tema, as prioridades com propostas e registros públicos dos candidatos.",
       "Notas por alternativa, faixas da régua, posições na régua e perguntas passam a ser publicadas em versões revisadas; cada publicação entra neste histórico como revisão humana, com o que mudou e o motivo. A contagem de perguntas e temas do site passa a ser automática.",
+      "Textos das páginas, perfis ideológicos, explicações e contexto histórico das correntes, currículos, fontes e o resumo das posições dos candidatos também passam a ser revisados e publicados em versões, com registro neste histórico.",
       "O site passa a se chamar 'E Você, O Que Acha?', no endereço e-voce-o-que-acha.up.railway.app. Nada muda nas perguntas, nas notas ou na conta.",
       "Todo botão 'Começar' leva ao início do questionário, e o botão aparece no cabeçalho de todas as páginas (menos durante as perguntas).",
     ],

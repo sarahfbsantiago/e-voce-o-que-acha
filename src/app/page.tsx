@@ -6,6 +6,7 @@ import { StartButton } from "@/components/StartButton";
 import { QUESTIONS } from "@/data/questions";
 import { ensureLiveConfig } from "@/lib/live-config-server";
 import { questionnaireCounts } from "@/lib/live-config";
+import { SITE_TEXTS } from "@/data/site-texts";
 import { CORE_PRINCIPLE } from "@/domain/neutrality";
 
 
@@ -54,19 +55,19 @@ export default async function HomePage() {
           </div>
 
           <div className="animate-fade-up [animation-delay:500ms] card mx-auto mt-8 max-w-2xl border-t-4 border-t-accent px-5 py-6 shadow-sm md:px-10 md:py-9">
-            <p className="text-xl font-bold text-ink sm:text-2xl">Descubra sua ideologia política e compare suas ideias com as propostas dos candidatos.</p>
+            <p className="text-xl font-bold text-ink sm:text-2xl">{SITE_TEXTS.home.headline}</p>
             <ul className="mt-5 grid gap-3 text-left sm:grid-cols-2">
               <li className="flex gap-3 rounded-xl bg-paper/70 p-3 ring-1 ring-line">
                 <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-purple to-[#2563eb] text-sm font-bold text-white">1</span>
-                <span className="text-sm leading-relaxed text-ink-2 sm:text-base"><b className="text-ink">Sua ideologia:</b> veja onde suas respostas te colocam na régua política, do comunismo ao fascismo, e o que essa corrente defende.</span>
+                <span className="text-sm leading-relaxed text-ink-2 sm:text-base"><b className="text-ink">{SITE_TEXTS.home.card1Title}</b> {SITE_TEXTS.home.card1Text}</span>
               </li>
               <li className="flex gap-3 rounded-xl bg-paper/70 p-3 ring-1 ring-line">
                 <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-purple to-[#2563eb] text-sm font-bold text-white">2</span>
-                <span className="text-sm leading-relaxed text-ink-2 sm:text-base"><b className="text-ink">Os candidatos:</b> compare, tema a tema, suas prioridades com propostas e registros públicos de cada um.</span>
+                <span className="text-sm leading-relaxed text-ink-2 sm:text-base"><b className="text-ink">{SITE_TEXTS.home.card2Title}</b> {SITE_TEXTS.home.card2Text}</span>
               </li>
             </ul>
             <div className="mt-5 border-t border-line pt-5 text-base sm:text-lg text-ink-2 leading-relaxed">
-              <p className="font-semibold text-ink">Este site não diz em quem você deve votar.</p>
+              <p className="font-semibold text-ink">{SITE_TEXTS.home.notice}</p>
             </div>
           </div>
 

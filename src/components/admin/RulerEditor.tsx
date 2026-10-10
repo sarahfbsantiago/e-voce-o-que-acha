@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useMemo, useRef, useState, useTransition } from "react";
 import { setRulerAction } from "@/app/admin/config-actions";
 import { RULER_WIDTHS, SPECTRUM_BANDS } from "@/data/political-spectrum";
-import { validateConfig, type LiveConfig } from "@/lib/live-config";
+import { validateConfig, type LiveConfig, sameJson } from "@/lib/live-config";
 
 type Ruler = Pick<LiveConfig, "terms" | "candidates" | "ideologyBounds" | "rightSideFrom">;
 type DragKey = { kind: "term" | "cand" | "bound" | "split"; id: string } | null;
@@ -35,8 +35,8 @@ export function RulerEditor({ initial, published, order, ideologies, base }: { i
   const [saving, start] = useTransition();
   const box = useRef<HTMLDivElement>(null);
   const errors = useMemo(() => validateConfig({ ...base, ...r }).filter((e) => /régua|cruzar|trecho|linha|Lula|Flávio|seta/i.test(e)), [base, r]);
-  const dirty = JSON.stringify(r) !== JSON.stringify(initial);
-  const changedFromLive = JSON.stringify(r) !== JSON.stringify(published);
+  const dirty = !sameJson(r, initial);
+  const changedFromLive = !sameJson(r, published);
 
   const move = (clientX: number) => {
     if (!drag || !box.current) return;
@@ -72,6 +72,21 @@ export function RulerEditor({ initial, published, order, ideologies, base }: { i
     role: "slider",
   });
 
+  // linhas dos nomes: cada nome vai para a primeira linha em que não encosta no anterior (largura estimada em %)
+  const rowsOf = (() => {
+    const W = 900;
+    const ends: number[] = [];
+    const out: Record<string, number> = {};
+    for (const label of [...order].sort((x, y) => r.terms[x] - r.terms[y])) {
+      const c = toPct(r.terms[label]);
+      const half = ((label.length + 5) * 6.2 / W) * 50;
+      let row = 0;
+      while (ends[row] !== undefined && ends[row] > c - half) row++;
+      ends[row] = c + half + 0.8;
+      out[label] = row;
+    }
+    return out;
+  })();
   const bounds = ideologies.map((label, i) => ({ label, from: i === 0 ? 0 : (r.ideologyBounds[ideologies[i - 1]] ?? 8), to: r.ideologyBounds[label] ?? 8 }));
   const bandColor = (at: number) => SPECTRUM_BANDS[Math.min(7, Math.max(0, Math.floor(at)))].color;
 
@@ -82,7 +97,7 @@ export function RulerEditor({ initial, published, order, ideologies, base }: { i
         {changedFromLive ? <span className="rounded-full bg-[#fff4e5] px-2.5 py-1 font-semibold text-[#7a4a00] ring-1 ring-[#f5c27a]">diferente da versão no ar</span> : null}
       </div>
       <div className="overflow-x-auto pb-2">
-        <div ref={box} className="relative mx-4 min-w-[720px] touch-none select-none" style={{ height: 340 }}
+        <div ref={box} className="relative mx-4 min-w-[720px] touch-none select-none" style={{ height: 370 }}
           onPointerMove={(e) => move(e.clientX)} onPointerUp={() => setDrag(null)} onPointerLeave={() => setDrag(null)}>
           {/* candidatos */}
           {Object.entries(r.candidates).map(([id, at]) => (
@@ -92,7 +107,7 @@ export function RulerEditor({ initial, published, order, ideologies, base }: { i
             </button>
           ))}
           {/* linha divisória */}
-          <div {...handle({ kind: "split", id: "split" })} aria-label={`Linha divisória: ${fmt(r.rightSideFrom)}`} className="absolute top-9 z-10 -translate-x-1/2 cursor-ew-resize" style={{ left: `${toPct(r.rightSideFrom)}%`, height: 240 }}>
+          <div {...handle({ kind: "split", id: "split" })} aria-label={`Linha divisória: ${fmt(r.rightSideFrom)}`} className="absolute top-9 z-10 -translate-x-1/2 cursor-ew-resize" style={{ left: `${toPct(r.rightSideFrom)}%`, height: 64 }}>
             <div className="mx-auto h-full w-1 rounded bg-ink" />
             <span className="absolute -top-1 left-2 whitespace-nowrap rounded bg-ink px-1.5 py-0.5 text-[10px] font-bold text-white">divisa {fmt(r.rightSideFrom)}</span>
           </div>
@@ -111,13 +126,13 @@ export function RulerEditor({ initial, published, order, ideologies, base }: { i
             return (
               <div key={label} {...handle({ kind: "term", id: label })} aria-label={`${label}: ${fmt(at)}`} className="absolute -translate-x-1/2 cursor-grab text-center active:cursor-grabbing" style={{ left: `${toPct(at)}%`, top: 100 }}>
                 <span className="mx-auto block h-3 w-3 rounded-full border-2 border-surface shadow" style={{ background: bandColor(at) }} />
-                <span className="mx-auto block w-px bg-ink-3" style={{ height: [12, 40, 68][i % 3] }} />
+                <span className="mx-auto block w-px bg-ink-3" style={{ height: 12 + rowsOf[label] * 28 }} />
                 <span className="block whitespace-nowrap rounded-md bg-surface px-1.5 py-0.5 text-[10px] font-bold text-ink shadow ring-1 ring-line" style={{ transform: i === 0 ? "translateX(calc(50% - 8px))" : i === order.length - 1 ? "translateX(calc(-50% + 8px))" : undefined }}>{label} <span className="font-normal text-ink-3">{fmt(at)}</span></span>
               </div>
             );
           })}
           {/* trechos das ideologias */}
-          <div className="absolute inset-x-0" style={{ top: 268 }}>
+          <div className="absolute inset-x-0" style={{ top: 298 }}>
             {bounds.map((b, i) => (
               <div key={b.label} className="absolute flex h-7 items-center justify-center border-r border-surface text-[10px] font-bold text-white" style={{ left: `${toPct(b.from)}%`, width: `${Math.max(0, toPct(b.to) - toPct(b.from))}%`, background: bandColor(r.terms[b.label] ?? b.from) }} title={b.label}>{i + 1}</div>
             ))}

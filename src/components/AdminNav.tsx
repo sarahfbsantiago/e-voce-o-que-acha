@@ -7,6 +7,8 @@ const LINKS = [
   { href: "/admin/notas", label: "Notas por alternativa", icon: "★" },
   { href: "/admin/espectro", label: "Espectro político", icon: "↔" },
   { href: "/admin/perguntas", label: "Perguntas", icon: "≡" },
+  { href: "/admin/textos", label: "Textos do site", icon: "¶" },
+  { href: "/admin/fontes", label: "Fontes e links", icon: "↗" },
   { href: "/admin/sugestoes", label: "Sugestões", icon: "✎" },
   { href: "/admin/publicar", label: "Publicar", icon: "⇪" },
   { href: "/admin/historico", label: "Histórico", icon: "⟲" },

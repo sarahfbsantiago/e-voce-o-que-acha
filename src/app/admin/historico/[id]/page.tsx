@@ -46,7 +46,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
       </Panel>
       <div className="flex flex-wrap gap-2">
         <Link href="/admin/historico" className="rounded-lg bg-surface px-3 py-2 text-sm font-semibold text-ink-2 ring-1 ring-line">← Histórico</Link>
-        {id !== pub.version ? <Link href={`/admin/publicar?rollback=${id}`} className="rounded-lg bg-[#ec4899] px-3 py-2 text-sm font-bold text-white">Voltar para esta versão</Link> : null}
+        {id !== pub.version ? <Link href={`/admin/publicar/voltar/${id}`} className="rounded-lg bg-[#ec4899] px-3 py-2 text-sm font-bold text-white">Voltar para esta versão</Link> : null}
       </div>
     </AdminShell>
   );

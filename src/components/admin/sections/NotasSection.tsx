@@ -7,7 +7,8 @@ import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { currentOptionScore, proposedOptionScore } from "@/lib/option-scores";
 import { QUESTION_NUMBER } from "@/lib/question-order";
 import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
-import { scoreKey } from "@/lib/live-config";
+import { scopeChanged, scoreKey } from "@/lib/live-config";
+import { SubmitItem } from "@/components/admin/SubmitItem";
 import { ScoreSelect } from "@/components/admin/CellEditors";
 import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
@@ -26,7 +27,8 @@ export async function NotasSection({ editable = false }: { editable?: boolean } 
   await ensureLiveConfig();
   if (!(await isAdminSession())) redirect("/admin/login");
   const positions = await (await getContentRepository()).getPublishedPositions();
-  const working = editable ? (await getWorkingConfig()).cfg : null;
+  const wc = editable ? await getWorkingConfig() : null;
+  const working = wc?.cfg ?? null;
 
   let changed = 0, cells = 0;
   const tally = { "1": 0, "0,5": 0, "0": 0 } as Record<string, number>;
@@ -210,6 +212,7 @@ export async function NotasSection({ editable = false }: { editable?: boolean } 
                       ))}
                     </tbody>
                   </table>
+                  {wc ? <SubmitItem scope={{ kind: "scores", questionId: q.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "scores", questionId: q.id })} what={`Notas da pergunta ${QUESTION_NUMBER[q.id]}`} /> : null}
                 </div>
               </article>
             ))}

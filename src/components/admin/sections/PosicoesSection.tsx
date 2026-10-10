@@ -10,8 +10,11 @@ import { sourceHref } from "@/components/SourceBits";
 import { EVIDENCE_CLASSIFICATION_LABELS } from "@/domain/types";
 import { AdminHero, Kpi, QNum, SectionTitle } from "@/components/admin/AdminUI";
 import { AREA_GROUPS } from "@/components/report/areaGroups";
-import { ensureLiveConfig } from "@/lib/live-config-server";
-import { publishAllDraftsAction, publishPositionAction, rejectPositionAction, unpublishPositionAction } from "@/app/admin/posicoes/actions";
+import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
+import { contentOf, scopeChanged } from "@/lib/live-config";
+import { evidenceSummaryWith } from "@/data/position-overrides";
+import { EvidenceEditor, PositionEditor } from "@/components/admin/PositionEditors";
+import { SubmitItem } from "@/components/admin/SubmitItem";
 
 
 const DIRECTION_LABEL: Record<string, string> = {
@@ -24,11 +27,16 @@ const STATUS_TONE: Record<string, string> = {
   PUBLISHED: "bg-mint-soft text-mint-strong border-mint/40", REJECTED: "bg-paper text-ink-3 border-line",
 };
 
-export async function PosicoesSection() {
+export async function PosicoesSection({ editable = false }: { editable?: boolean } = {}) {
   await ensureLiveConfig();
   if (!(await isAdminSession())) redirect("/admin/login");
   const prisma = getPrisma();
-  const positions = await prisma.candidatePosition.findMany({ include: { evidences: { include: { evidence: true } } } });
+  const wc = await getWorkingConfig();
+  const ovPos = contentOf(editable ? wc.cfg : wc.published.cfg).positions ?? {};
+  const ovEv = contentOf(editable ? wc.cfg : wc.published.cfg).evidence ?? {};
+  const raw = await prisma.candidatePosition.findMany({ include: { evidences: { include: { evidence: true } } } });
+  // valores com os ajustes do admin (rascunho, nesta página; versão no ar, no PDF)
+  const positions = raw.map((p) => { const o = ovPos[`${p.questionId}|${p.candidateId}`] ?? {}; return { ...p, summary: o.summary ?? p.summary, direction: (o.direction ?? p.direction) as typeof p.direction, closestOptionId: o.closestOptionId !== undefined ? o.closestOptionId : p.closestOptionId, reviewStatus: (o.reviewStatus ?? p.reviewStatus) as typeof p.reviewStatus, evidences: p.evidences.map((x) => ({ ...x, evidence: { ...x.evidence, title: ovEv[x.evidence.id]?.title ?? x.evidence.title, summary: evidenceSummaryWith(x.evidence.summary, ovEv[x.evidence.id]), originalExcerpt: ovEv[x.evidence.id]?.originalExcerpt ?? x.evidence.originalExcerpt } })) }; });
   const current = new Set(QUESTIONS.map((q) => q.id));
   const live = positions.filter((p) => current.has(p.questionId));
   const byKey = new Map(live.map((p) => [`${p.questionId}|${p.candidateId}`, p]));
@@ -38,7 +46,7 @@ export async function PosicoesSection() {
   return (
     <>
       <AdminHero kicker="Curadoria" title="Revisão de posições" pdfTitle="Revisão de posições"
-        subtitle="A posição documentada de cada candidato em cada pergunta, com as evidências. Só o que está publicado entra no relatório." />
+        subtitle="A posição documentada de cada candidato em cada pergunta, com as evidências. Edite e envie para aprovação; só o que está publicado entra no relatório." />
 
       <section className="grid grid-cols-2 gap-3 xl:grid-cols-5">
         <Kpi label="Posições" value={String(live.length)} note={`nas ${QUESTIONS.length} perguntas atuais`} color="#6d3fc4" />
@@ -48,13 +56,6 @@ export async function PosicoesSection() {
         <Kpi label="Sem posição" value={String(missing)} note="as notas por alternativa valem mesmo assim" color="#ec4899" />
       </section>
 
-      <form action={publishAllDraftsAction} className="flex flex-wrap items-center gap-3 rounded-2xl bg-surface p-4 shadow-sm ring-1 ring-black/5 print:hidden">
-        <p className="text-sm font-semibold text-ink">Publicar todos os rascunhos de uma vez</p>
-        <label className="ml-auto flex items-center gap-2 text-xs text-ink-3">Digite PUBLICAR para confirmar
-          <input name="confirm" className="field w-36" placeholder="PUBLICAR" />
-        </label>
-        <button className="min-h-10 rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-semibold text-white shadow-sm">Publicar todos</button>
-      </form>
 
       {AREA_GROUPS.map((g, gi) => {
         const qs = TOPICS.filter((t) => g.topicIds.includes(t.id)).sort((a, b) => a.order - b.order).flatMap((t) => QUESTIONS.filter((q) => q.topicId === t.id).sort((a, b) => a.order - b.order).map((q) => ({ q, t })));
@@ -99,22 +100,24 @@ export async function PosicoesSection() {
                                       <p className="mt-1 text-ink-2">{e.summary.replace(/ Documento: \S+$/, "")}</p>
                                       <p className="mt-1 italic text-ink-2"><q>{e.originalExcerpt}</q></p>
                                       <p className="mt-1 text-ink-3">{src?.institution ?? e.sourceId}{link ? <> · <a className="font-semibold text-purple underline" href={link} target="_blank" rel="noopener noreferrer">abrir documento ↗</a></> : null}</p>
+                                      {editable ? (
+                                        <>
+                                          <EvidenceEditor id={e.id} value={{ title: e.title, summary: e.summary.replace(/ Documento: \S+$/, ""), originalExcerpt: e.originalExcerpt, link: e.summary.match(/Documento: (\S+)/)?.[1] ?? "" }} />
+                                          <SubmitItem scope={{ kind: "evidence", id: e.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "evidence", id: e.id })} what="Evidência" />
+                                        </>
+                                      ) : null}
                                     </li>
                                   );
                                 })}
                               </ul>
                             </details>
                           ) : null}
-                          <div className="flex flex-wrap gap-2 print:hidden">
-                            {p.reviewStatus !== "PUBLISHED" ? (
-                              <form action={publishPositionAction}><input type="hidden" name="id" value={p.id} /><button className="min-h-9 rounded-lg bg-mint px-3 py-1.5 text-xs font-bold text-white shadow-sm">Publicar</button></form>
-                            ) : (
-                              <form action={unpublishPositionAction}><input type="hidden" name="id" value={p.id} /><button className="min-h-9 rounded-lg bg-surface px-3 py-1.5 text-xs font-bold text-ink-2 ring-1 ring-line">Despublicar</button></form>
-                            )}
-                            {p.reviewStatus !== "REJECTED" ? (
-                              <form action={rejectPositionAction}><input type="hidden" name="id" value={p.id} /><button className="min-h-9 rounded-lg bg-surface px-3 py-1.5 text-xs font-bold text-ink-3 ring-1 ring-line">Rejeitar</button></form>
-                            ) : null}
-                          </div>
+                          {editable ? (
+                            <>
+                              <PositionEditor posKey={`${q.id}|${c.id}`} value={{ summary: p.summary, direction: p.direction, closestOptionId: p.closestOptionId, reviewStatus: p.reviewStatus }} options={q.options.filter((o) => !o.isNoOpinion).map((o) => ({ id: o.id, label: o.label }))} />
+                              <SubmitItem scope={{ kind: "position", key: `${q.id}|${c.id}` }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "position", key: `${q.id}|${c.id}` })} what={`Posição de ${c.name}`} />
+                            </>
+                          ) : null}
                         </div>
                       );
                     })}

@@ -61,18 +61,19 @@ export async function discardDraft(): Promise<void> {
 }
 
 /** Publica uma nova versão (imutável) e limpa o rascunho. */
-export async function publishVersion(input: { cfg: LiveConfig; author: string; reason: string; sections: string[]; changes: ChangeItem[]; impact: Impact; rollbackOf?: number | null }): Promise<number> {
+export async function publishVersion(input: { cfg: LiveConfig; author: string; reason: string; sections: string[]; changes: ChangeItem[]; impact: Impact; rollbackOf?: number | null; approvedBy?: string | null; requestId?: number | null; keepDraft?: boolean }): Promise<number> {
   const prisma = getPrisma();
   const created = await prisma.$transaction(async (tx) => {
     const v = await tx.configVersion.create({
       data: {
-        author: input.author, reason: input.reason, sections: input.sections, rollbackOf: input.rollbackOf ?? null,
+        author: input.author, reason: input.reason, sections: input.sections, rollbackOf: input.rollbackOf ?? null, approvedBy: input.approvedBy ?? null, requestId: input.requestId ?? null,
         changes: input.changes as unknown as Prisma.InputJsonValue,
         impact: input.impact as unknown as Prisma.InputJsonValue,
         snapshot: input.cfg as unknown as Prisma.InputJsonValue,
       },
     });
-    await tx.configDraft.deleteMany({ where: { id: "main" } });
+    if (!input.keepDraft) await tx.configDraft.deleteMany({ where: { id: "main" } });
+    if (input.requestId) await tx.publishRequest.update({ where: { id: input.requestId }, data: { status: "aprovado", reviewedBy: input.approvedBy ?? null, reviewedAt: new Date(), publishedVersion: v.id } });
     return v;
   });
   cache = null;
@@ -99,11 +100,11 @@ async function syncQuestionRows(cfg: LiveConfig): Promise<void> {
   }
 }
 
-export interface VersionRow { id: number; createdAt: Date; author: string; reason: string; sections: string[]; changes: ChangeItem[]; impact: Impact | Record<string, never>; rollbackOf: number | null }
+export interface VersionRow { id: number; createdAt: Date; author: string; reason: string; sections: string[]; changes: ChangeItem[]; impact: Impact | Record<string, never>; rollbackOf: number | null; approvedBy: string | null; requestId: number | null }
 
 export async function listVersions(): Promise<VersionRow[]> {
   if (dataSourceMode() !== "prisma") return [];
-  const rows = await getPrisma().configVersion.findMany({ orderBy: { id: "desc" }, select: { id: true, createdAt: true, author: true, reason: true, sections: true, changes: true, impact: true, rollbackOf: true } });
+  const rows = await getPrisma().configVersion.findMany({ orderBy: { id: "desc" }, select: { id: true, createdAt: true, author: true, reason: true, sections: true, changes: true, impact: true, rollbackOf: true, approvedBy: true, requestId: true } });
   return rows.map((r) => ({ ...r, changes: r.changes as unknown as ChangeItem[], impact: r.impact as unknown as Impact }));
 }
 
@@ -126,4 +127,53 @@ export async function publicChangelogEntries(): Promise<string[]> {
     const date = r.createdAt.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
     return `Revisão humana (${date}): ${r.rollbackOf ? "volta a uma configuração anterior. " : ""}${shown}. Motivo: ${r.reason}`;
   });
+}
+
+// ---------------------------------------------------------------------------
+// Pedidos de publicação (como pull requests)
+// ---------------------------------------------------------------------------
+export interface RequestRow { id: number; createdAt: Date; author: string; note: string; baseVersion: number; changes: ChangeItem[]; rollbackOf: number | null; scope: Prisma.JsonValue | null; status: string; reviewedBy: string | null; reviewNote: string | null; reviewedAt: Date | null; publishedVersion: number | null }
+
+/** Envia uma configuração para aprovação. Do rascunho: o rascunho é esvaziado (as mudanças passam para o pedido). */
+export async function createRequest(input: { author: string; note: string; cfg: LiveConfig; baseVersion: number; changes: ChangeItem[]; rollbackOf?: number | null; fromDraft: boolean; scope?: unknown }): Promise<number> {
+  const prisma = getPrisma();
+  const r = await prisma.$transaction(async (tx) => {
+    const created = await tx.publishRequest.create({
+      data: { author: input.author, note: input.note, baseVersion: input.baseVersion, rollbackOf: input.rollbackOf ?? null, scope: (input.scope ?? undefined) as Prisma.InputJsonValue | undefined, snapshot: input.cfg as unknown as Prisma.InputJsonValue, changes: input.changes as unknown as Prisma.InputJsonValue },
+    });
+    if (input.fromDraft) await tx.configDraft.deleteMany({ where: { id: "main" } });
+    return created;
+  });
+  return r.id;
+}
+
+export async function listRequests(): Promise<RequestRow[]> {
+  if (dataSourceMode() !== "prisma") return [];
+  const rows = await getPrisma().publishRequest.findMany({ orderBy: { id: "desc" }, omit: { snapshot: true } });
+  return rows.map((r) => ({ ...r, changes: r.changes as unknown as ChangeItem[] }));
+}
+
+export async function getRequest(id: number): Promise<{ row: RequestRow; cfg: LiveConfig } | null> {
+  const r = await getPrisma().publishRequest.findUnique({ where: { id } });
+  if (!r) return null;
+  const { snapshot, ...rest } = r;
+  return { row: { ...rest, changes: r.changes as unknown as ChangeItem[] }, cfg: asConfig(snapshot) };
+}
+
+export async function closeRequest(id: number, status: "recusado" | "cancelado", by: string, note: string): Promise<void> {
+  await getPrisma().publishRequest.update({ where: { id }, data: { status, reviewedBy: by, reviewNote: note || null, reviewedAt: new Date() } });
+}
+
+/** Devolve as mudanças de um pedido recusado para o rascunho (para corrigir e reenviar). */
+export async function reopenAsDraft(id: number): Promise<void> {
+  const r = await getRequest(id);
+  if (!r) return;
+  const pub = await getPublishedConfig(true);
+  await saveDraft(r.cfg, pub.version);
+}
+
+/** Dados curtos da versão no ar (para o cabeçalho do admin). */
+export async function liveVersionMeta(): Promise<{ id: number; createdAt: Date; author: string; approvedBy: string | null } | null> {
+  if (dataSourceMode() !== "prisma") return null;
+  return getPrisma().configVersion.findFirst({ orderBy: { id: "desc" }, select: { id: true, createdAt: true, author: true, approvedBy: true } });
 }

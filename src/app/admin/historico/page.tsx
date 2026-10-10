@@ -8,7 +8,7 @@ import { getPublishedConfig, listVersions } from "@/lib/live-config-server";
 export const metadata: Metadata = { title: "Histórico de mudanças", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
-const SECTION_COLOR: Record<string, string> = { "Notas por alternativa": "#6d3fc4", "Espectro político": "#2563eb", "Régua": "#ec4899", "Perguntas": "#2f9a5d" };
+import { SECTION_COLOR } from "../publicar/page";
 const when = (d: Date) => d.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ publicado?: string; secao?: string; pessoa?: string }> }) {
@@ -55,7 +55,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                   <span className="rounded-lg bg-ink px-2 py-0.5 text-xs font-bold text-white">v{v.id}</span>
                   {live ? <span className="rounded-full bg-mint px-2 py-0.5 text-[11px] font-bold text-white">no ar</span> : null}
                   {v.rollbackOf ? <span className="rounded-full bg-[#ec4899] px-2 py-0.5 text-[11px] font-bold text-white">rollback para v{v.rollbackOf}</span> : null}
-                  <p className="text-sm text-ink"><b>{v.author}</b> {v.changes.length ? <>mudou <b>{v.changes.length} {v.changes.length === 1 ? "item" : "itens"}</b> em {v.sections.map((s, i) => <span key={s}>{i ? ", " : ""}<b style={{ color: SECTION_COLOR[s] }}>{s}</b></span>)}</> : "criou a versão inicial"}</p>
+                  <p className="text-sm text-ink"><b>{v.author}</b> {v.changes.length ? <>mudou <b>{v.changes.length} {v.changes.length === 1 ? "item" : "itens"}</b> em {v.sections.map((s, i) => <span key={s}>{i ? ", " : ""}<b style={{ color: SECTION_COLOR[s] }}>{s}</b></span>)}</> : "criou a versão inicial"}{v.approvedBy ? <span className="text-ink-3"> · aprovado por <b className="text-ink">{v.approvedBy}</b></span> : null}</p>
                   <span className="ml-auto text-xs text-ink-3">{when(v.createdAt)}</span>
                 </div>
                 <div className="grid gap-4 p-4 md:grid-cols-2">
@@ -76,7 +76,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                 </div>
                 <div className="flex flex-wrap gap-2 border-t border-line bg-paper/40 px-4 py-2.5">
                   <Link href={`/admin/historico/${v.id}`} className="rounded-lg bg-surface px-3 py-1.5 text-xs font-bold text-ink-2 ring-1 ring-line hover:bg-paper">Ver detalhe e comparar</Link>
-                  {!live ? <Link href={`/admin/publicar?rollback=${v.id}`} className="rounded-lg bg-[#ec4899] px-3 py-1.5 text-xs font-bold text-white shadow-sm">Voltar para esta versão</Link> : null}
+                  {!live ? <Link href={`/admin/publicar/voltar/${v.id}`} className="rounded-lg bg-[#ec4899] px-3 py-1.5 text-xs font-bold text-white shadow-sm">Voltar para esta versão</Link> : null}
                 </div>
               </article>
             </li>

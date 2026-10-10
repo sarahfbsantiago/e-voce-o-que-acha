@@ -1,3 +1,6 @@
+import { SOURCE_REGISTRY } from "@/data/source-registry";
+import { EVIDENCE_OVERRIDES, POSITION_OVERRIDES, evidenceSummaryWith } from "@/data/position-overrides";
+import { CANDIDATE_PROFILES } from "@/data/candidate-profiles";
 import type { Prisma } from "@prisma/client";
 import type {
   AgeRange,
@@ -78,28 +81,32 @@ export const prismaContentRepository: ContentRepository = {
   },
 
   async getCandidateProfiles(): Promise<CandidateProfile[]> {
-    const rows = await getPrisma().candidateProfile.findMany();
-    return rows.map((r) => r.data as unknown as CandidateProfile);
+    // Currículos editáveis no admin: vale a versão publicada (configuração viva), não a cópia do seed.
+    return JSON.parse(JSON.stringify(CANDIDATE_PROFILES)) as CandidateProfile[];
   },
 
   async getPublishedPositions(candidateId?: string): Promise<CandidatePosition[]> {
+    // Ajustes publicados pelo admin (Revisão de posições) valem por cima do banco, inclusive o status.
     const rows = await getPrisma().candidatePosition.findMany({
-      where: { reviewStatus: "PUBLISHED", ...(candidateId ? { candidateId } : {}) },
+      where: candidateId ? { candidateId } : {},
       include: { evidences: true },
     });
-    return rows.map((p) => ({
-      id: p.id,
-      candidateId: p.candidateId,
-      questionId: p.questionId,
-      direction: p.direction,
-      closestOptionId: p.closestOptionId,
-      summary: p.summary,
-      dimension: p.dimension ?? undefined,
-      evidenceIds: p.evidences.map((e) => e.evidenceId),
-      reviewStatus: p.reviewStatus,
-      timeline: (p.timeline as unknown as CandidatePosition["timeline"]) ?? undefined,
-      updatedAt: p.updatedAt.toISOString(),
-    }));
+    return rows.map((p) => {
+      const o = POSITION_OVERRIDES[`${p.questionId}|${p.candidateId}`] ?? {};
+      return {
+        id: p.id,
+        candidateId: p.candidateId,
+        questionId: p.questionId,
+        direction: (o.direction ?? p.direction) as CandidatePosition["direction"],
+        closestOptionId: o.closestOptionId !== undefined ? o.closestOptionId : p.closestOptionId,
+        summary: o.summary ?? p.summary,
+        dimension: p.dimension ?? undefined,
+        evidenceIds: p.evidences.map((e) => e.evidenceId),
+        reviewStatus: (o.reviewStatus ?? p.reviewStatus) as CandidatePosition["reviewStatus"],
+        timeline: (p.timeline as unknown as CandidatePosition["timeline"]) ?? undefined,
+        updatedAt: p.updatedAt.toISOString(),
+      };
+    }).filter((p) => p.reviewStatus === "PUBLISHED");
   },
 
   async getPublishedEvidence(filter): Promise<Evidence[]> {
@@ -116,9 +123,9 @@ export const prismaContentRepository: ContentRepository = {
       candidateId: e.candidateId,
       questionId: e.questionId,
       topicId: e.topicId,
-      title: e.title,
-      summary: e.summary,
-      originalExcerpt: e.originalExcerpt,
+      title: EVIDENCE_OVERRIDES[e.id]?.title ?? e.title,
+      summary: evidenceSummaryWith(e.summary, EVIDENCE_OVERRIDES[e.id]),
+      originalExcerpt: EVIDENCE_OVERRIDES[e.id]?.originalExcerpt ?? e.originalExcerpt,
       sourceId: e.sourceId,
       sourceType: e.sourceType,
       eventDate: iso(e.eventDate),
@@ -151,14 +158,13 @@ export const prismaContentRepository: ContentRepository = {
     }));
   },
 
+  // Fontes editáveis no admin: vale a versão publicada (configuração viva); o banco é a cópia do seed.
   async getSources(): Promise<SourceRegistryEntry[]> {
-    const rows = await getPrisma().source.findMany({ orderBy: { institution: "asc" } });
-    return rows.map(mapSource);
+    return [...SOURCE_REGISTRY].sort((a, b) => a.institution.localeCompare(b.institution, "pt-BR"));
   },
 
   async getSource(id) {
-    const s = await getPrisma().source.findUnique({ where: { id } });
-    return s ? mapSource(s) : null;
+    return SOURCE_REGISTRY.find((s) => s.id === id) ?? null;
   },
 
   async getMethodologyVersions(): Promise<MethodologyVersion[]> {
@@ -227,29 +233,7 @@ function mapQuestion(q: QuestionRow): Question {
   };
 }
 
-type SourceRow = Prisma.SourceGetPayload<Record<string, never>>;
 
-function mapSource(s: SourceRow): SourceRegistryEntry {
-  return {
-    id: s.id,
-    name: s.name,
-    institution: s.institution,
-    url: s.url,
-    documentUrl: s.documentUrl ?? undefined,
-    type: s.type,
-    legend: s.legend,
-    purpose: s.purpose,
-    usageRestrictions: s.usageRestrictions ?? undefined,
-    publishedAt: iso(s.publishedAt) ?? undefined,
-    retrievedAt: iso(s.retrievedAt) ?? undefined,
-    verification: {
-      status: s.verificationStatus,
-      checkedAt: iso(s.verificationCheckedAt) ?? undefined,
-      note: s.verificationNote ?? undefined,
-    },
-    notes: s.notes ?? undefined,
-  };
-}
 
 export const prismaStatsRepository: StatsRepository = {
   enabled: true,

@@ -9,8 +9,8 @@ import { TOPICS } from "@/data/topics";
 import { CURRENT_METHODOLOGY_VERSION } from "@/data/methodology";
 import { buildPriorityMap } from "@/domain/user-summary";
 import { orderCandidates, randomCandidateOrder } from "@/domain/candidate-order";
-import { FINAL_MESSAGE } from "@/domain/neutrality";
-import { useSession } from "@/store/session";
+import { SITE_TEXTS } from "@/data/site-texts";
+import { useSession, type SessionState } from "@/store/session";
 import { StartButton } from "@/components/StartButton";
 import { ButtonLink, Eyebrow } from "@/components/ui";
 import { RestartButton } from "@/components/RestartButton";
@@ -30,24 +30,28 @@ interface Props {
   summaries: ProgramSummary[];
   sources: SourceRegistryEntry[];
   profiles: CandidateProfile[];
+  /** Pré-visualização no admin: usa este questionário de exemplo e não envia nem salva nada. */
+  previewSession?: SessionState;
 }
 
 /**
  * Relatório final, enxuto: perfil por área (pizza), proximidade por tema, cobertura das respostas
  * trajetória de cada candidato e, ao final, as fontes. Comparações pergunta a pergunta ficam fora, por enquanto.
  */
-export function ReportView({ candidates, positions, summaries, profiles }: Props) {
-  const { session, hydrated, update } = useSession();
+export function ReportView({ candidates, positions, summaries, profiles, previewSession }: Props) {
+  const real = useSession();
+  const { session, hydrated, update } = previewSession ? { session: previewSession, hydrated: true, update: () => undefined } : real;
   const submitted = useRef(false);
 
   // Sorteia a ordem dos candidatos uma vez por sessão.
   useEffect(() => {
+    if (previewSession) return;
     if (hydrated && !session.candidateOrder) update({ candidateOrder: randomCandidateOrder(candidates.map((c) => c.id)) });
-  }, [hydrated, session.candidateOrder, candidates, update]);
+  }, [hydrated, session.candidateOrder, candidates, update, previewSession]);
 
   // Envio anônimo, somente com consentimento, uma única vez.
   useEffect(() => {
-    if (!hydrated || submitted.current) return;
+    if (previewSession || !hydrated || submitted.current) return;
     if (session.consent !== "accepted" || session.submittedAt || session.answers.length === 0) return;
     submitted.current = true;
     fetch("/api/survey/submissions", {
@@ -63,7 +67,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
     })
       .then((r) => (r.ok ? update({ submittedAt: new Date().toISOString() }) : undefined))
       .catch(() => undefined);
-  }, [hydrated, session, update]);
+  }, [hydrated, session, update, previewSession]);
 
   if (!hydrated) return <div className="container-page py-12 text-ink-3">Carregando…</div>;
 
@@ -182,7 +186,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
       <div className="print:hidden"><FeedbackForm /></div>
 
       <section className="print-keep text-center py-8 max-w-3xl mx-auto print:hidden">
-        <p className="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight leading-snug">{FINAL_MESSAGE}</p>
+        <p className="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight leading-snug">{SITE_TEXTS.report.finalMessage}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-3 print:hidden">
           <ButtonLink href="/questionario/perguntas" variant="secondary">Revisar minhas respostas</ButtonLink>
           <RestartButton label="Refazer do zero" variant="secondary" />
@@ -192,7 +196,7 @@ export function ReportView({ candidates, positions, summaries, profiles }: Props
 
       {/* rodapé do relatório */}
       <footer className="mx-auto max-w-3xl border-t border-line pt-5 text-center text-xs leading-relaxed text-ink-3 print:hidden">
-        <p>O que você disse que importa, tema a tema, e com quem suas respostas ficaram mais próximas nos temas em que há posições publicadas. Nada aqui vira nota ou ranking.</p>
+        <p>{SITE_TEXTS.report.footerIntro}</p>
         <p className="mt-1.5">
           Ordem dos candidatos sorteada nesta sessão. Consentimento: {session.consent === "accepted" ? (session.submittedAt ? "respostas enviadas anonimamente" : "envio anônimo pendente") : "respostas apenas neste navegador"}.
         </p>

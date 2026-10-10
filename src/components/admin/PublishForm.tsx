@@ -1,22 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { publishAction } from "@/app/admin/publicar/actions";
+import { approveAction } from "@/app/admin/publicar/actions";
 
 /** Confirmação da publicação: nome, motivo, "Estou ciente", frase digitada e código do Google Authenticator. */
-export function PublishForm({ phrase, rollback, needsCode, danger }: { phrase: string; rollback: number | null; needsCode: boolean; danger: boolean }) {
+export function PublishForm({ phrase, requestId, rollback, needsCode, danger, defaultReason }: { phrase: string; requestId: number; rollback: number | null; needsCode: boolean; danger: boolean; defaultReason: string }) {
   const [author, setAuthor] = useState("");
-  const [reason, setReason] = useState("");
+  const [reason, setReason] = useState(defaultReason);
   const [aware, setAware] = useState(false);
   const [typed, setTyped] = useState("");
   const [code, setCode] = useState("");
   const ok = author.trim().length >= 2 && reason.trim().length >= 3 && aware && typed.trim().toLowerCase() === phrase.toLowerCase() && (!needsCode || code.length === 6);
   const field = "mt-1.5 w-full rounded-xl border border-line bg-paper/50 px-3 py-2.5 text-sm focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/30";
   return (
-    <form action={publishAction} className="space-y-4">
-      {rollback ? <input type="hidden" name="rollback" value={rollback} /> : null}
+    <form action={approveAction} className="space-y-4">
+      <input type="hidden" name="request" value={requestId} />
       <div className="grid gap-4 md:grid-cols-2">
-        <label className="block text-sm font-semibold text-ink">Seu nome
+        <label className="block text-sm font-semibold text-ink">Seu nome (quem aprova)
           <input name="author" value={author} onChange={(e) => setAuthor(e.target.value)} maxLength={60} required className={field} placeholder="Ex.: Sarah" />
         </label>
         <label className="block text-sm font-semibold text-ink">Motivo da mudança
@@ -36,7 +36,7 @@ export function PublishForm({ phrase, rollback, needsCode, danger }: { phrase: s
         </label>
       ) : null}
       <button disabled={!ok} className="min-h-11 w-full rounded-xl bg-gradient-to-r from-[#9b1c1c] to-[#dc2626] px-4 py-2.5 text-sm font-bold text-white shadow-sm disabled:cursor-not-allowed disabled:from-line disabled:to-line disabled:text-ink-3 md:w-auto">
-        {rollback ? `Voltar para a versão v${rollback}` : "Publicar no site"}
+        {rollback ? `Aprovar e voltar para a v${rollback}` : "Aprovar e publicar no site"}
       </button>
     </form>
   );

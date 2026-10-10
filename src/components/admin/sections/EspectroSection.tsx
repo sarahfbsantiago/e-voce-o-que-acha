@@ -7,7 +7,8 @@ import { QUESTION_NUMBER } from "@/lib/question-order";
 import { spectrumPositionOf } from "@/data/spectrum-positions";
 import { CANDIDATE_SPECTRUM, IDEOLOGY_RANGES, RULER_RULES, RULER_WIDTHS, SPECTRUM_BANDS, ideologySpot, rulerPct } from "@/data/political-spectrum";
 import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
-import { bandKey } from "@/lib/live-config";
+import { bandKey, scopeChanged } from "@/lib/live-config";
+import { SubmitItem } from "@/components/admin/SubmitItem";
 import { BandSelect } from "@/components/admin/CellEditors";
 import { RulerEditor } from "@/components/admin/RulerEditor";
 import { SPECTRUM_TERMS } from "@/data/spectrum-terms";
@@ -19,7 +20,8 @@ const bandIndex = (label: string) => SPECTRUM_BANDS.findIndex((b) => b.label ===
 /** Para qual faixa da régua cada alternativa leva a pessoa (independe dos candidatos). */
 export async function EspectroSection({ editable = false }: { editable?: boolean } = {}) {
   await ensureLiveConfig();
-  const working = editable ? (await getWorkingConfig()).cfg : null;
+  const wc = editable ? await getWorkingConfig() : null;
+  const working = wc?.cfg ?? null;
   if (!(await isAdminSession())) redirect("/admin/login");
   let reviewed = 0, cells = 0;
   const perBand = SPECTRUM_BANDS.map(() => 0);
@@ -67,6 +69,7 @@ export async function EspectroSection({ editable = false }: { editable?: boolean
             initial={{ terms: working.terms, candidates: working.candidates, ideologyBounds: working.ideologyBounds, rightSideFrom: working.rightSideFrom }}
             published={{ terms: Object.fromEntries(SPECTRUM_TERMS.map((t) => [t.label, t.at])), candidates: Object.fromEntries(Object.entries(CANDIDATE_SPECTRUM).map(([id, c]) => [id, c.at])), ideologyBounds: Object.fromEntries(IDEOLOGY_RANGES.map((x) => [x.label, Number.isFinite(x.upTo) ? x.upTo : null])), rightSideFrom: RULER_RULES.rightSideFrom }}
             order={SPECTRUM_TERMS.map((t) => t.label)} ideologies={IDEOLOGY_RANGES.map((x) => x.label)} base={working} />
+          {wc ? <SubmitItem scope={{ kind: "ruler" }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "ruler" })} what="Régua" /> : null}
         </Panel>
       ) : null}
 
@@ -205,6 +208,7 @@ export async function EspectroSection({ editable = false }: { editable?: boolean
                       );
                     })}
                   </ul>
+                  {wc ? <SubmitItem scope={{ kind: "bands", questionId: q.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "bands", questionId: q.id })} what={`Faixas da pergunta ${QUESTION_NUMBER[q.id]}`} /> : null}
                 </div>
               </article>
             ))}
