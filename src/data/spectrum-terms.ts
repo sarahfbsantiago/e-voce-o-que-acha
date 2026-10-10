@@ -127,6 +127,8 @@ export const SPECTRUM_SECTIONS: SpectrumSection[] = [
       "Diminuir a presença do Estado em atividades econômicas.",
     ] },
     { t: "p", lead: "Exemplo concreto:", text: "um libertário de direita poderia argumentar que o governo não deveria cobrar tantos tributos para financiar determinados serviços, pois os indivíduos deveriam ter mais liberdade para decidir onde gastar seu dinheiro." },
+    { t: "p", lead: "Correção da nossa régua:", text: "libertarianismo não pertence exclusivamente à centro direita. Existem vertentes de esquerda e de direita, como explica a Enciclopédia de Filosofia de Stanford." },
+    { t: "link", label: "Enciclopédia de Filosofia de Stanford", href: "https://plato.stanford.edu/entries/libertarianism/" },
   ] },
   { id: "direita", title: "Direita: Liberalismo econômico e conservadorismo", blocks: [
     { t: "p", lead: "Ideia central:", text: "dar maior importância à propriedade privada e à economia de mercado, no caso liberal, ou à preservação das tradições e instituições, no caso conservador." },
@@ -180,6 +182,7 @@ export const SPECTRUM_SECTIONS: SpectrumSection[] = [
     { t: "p", text: "A Alemanha nazista também apresentou características fascistas, com o agravante central do racismo biológico e da política genocida do regime." },
     { t: "p", text: "Segundo o Museu Memorial do Holocausto dos Estados Unidos, o fascismo se caracteriza por ultranacionalismo, autoritarismo, militarismo e rejeição à democracia pluralista." },
     { t: "link", label: "Holocaust Encyclopedia", href: "https://encyclopedia.ushmm.org/" },
+    { t: "p", lead: "Diferença fundamental:", text: "ser conservador ou nacionalista não torna alguém fascista. O fascismo envolve um conjunto específico de características políticas, institucionais e ideológicas." },
   ] },
 ];
 
