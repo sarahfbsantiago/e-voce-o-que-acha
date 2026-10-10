@@ -4,6 +4,9 @@ import { notFound, redirect } from "next/navigation";
 import { isAdminSession } from "@/lib/admin-auth";
 import { AdminHero, AdminShell, Kpi, Panel } from "@/components/admin/AdminUI";
 import { MiniRuler } from "@/components/admin/MiniRuler";
+import { ChangePreview } from "@/components/admin/ChangePreview";
+
+const CALC = ["Notas por alternativa", "Espectro político", "Régua", "Perguntas"];
 import { buildPublishPlan } from "@/lib/publish-plan";
 import { getPublishedConfig, getRequest } from "@/lib/live-config-server";
 import { CANDIDATE_SHORT, applyScope, describeScope, type Scope } from "@/lib/live-config";
@@ -65,8 +68,8 @@ export default async function Page({ params, searchParams }: { params: Promise<{
             ))}
           </ul>
         </Panel>
-        <Panel title="Impacto no cálculo" subtitle={im ? `Com os ${im.total} questionários já enviados` : "Sem impacto na conta"}>
-          {im ? (
+        <Panel title="Impacto no cálculo" subtitle={!plan.sections.some((x) => CALC.includes(x)) ? "Mudança só de texto: não mexe na conta" : im ? `Com os ${im.total} questionários já enviados` : ""}>
+          {!plan.sections.some((x) => CALC.includes(x)) ? <p className="rounded-lg bg-mint-soft px-3 py-2 text-sm font-semibold text-mint-strong">Nenhuma conta muda: só o texto que aparece no site.</p> : im ? (
             <div className="space-y-3 text-sm">
               <ul className="space-y-1.5">{im.summary.map((s) => <li key={s} className="rounded-lg bg-[#fff4e5] px-3 py-2 font-semibold text-[#7a4a00] ring-1 ring-[#f5c27a]">{s}</li>)}</ul>
               <table className="w-full text-xs">
@@ -82,11 +85,16 @@ export default async function Page({ params, searchParams }: { params: Promise<{
         </Panel>
       </div>
 
-      <Panel title="Pré-visualização" subtitle="Régua antes e depois e exemplos reais que mudam">
+      <Panel title="Prévia do que foi editado" subtitle="No ar × com o pedido, só o que mudou">
         <div className="space-y-4">
-          <MiniRuler cfg={pub.cfg} label={`No ar (v${pub.version})`} />
-          <MiniRuler cfg={plan.target} label="Com este pedido" highlight />
-          {plan.examples.length ? <div className="grid gap-2 md:grid-cols-2">{plan.examples.map((e, i) => <div key={i} className="rounded-lg bg-paper/60 p-3 text-xs ring-1 ring-line"><p className="font-bold text-ink-3">Exemplo {i + 1}</p><p className="mt-1">Ideologia: {e.before} → <b>{e.after}</b></p><p>Mais perto na régua: {e.rulerBefore} → <b>{e.rulerAfter}</b></p></div>)}</div> : <p className="text-xs text-ink-3">Nenhum questionário de exemplo muda.</p>}
+          <ChangePreview live={pub.cfg} target={plan.target} />
+          {plan.sections.some((x) => CALC.includes(x)) ? (
+            <>
+              <MiniRuler cfg={pub.cfg} label={`Régua no ar (v${pub.version})`} />
+              <MiniRuler cfg={plan.target} label="Régua com o pedido" highlight />
+              {plan.examples.length ? <div className="grid gap-2 md:grid-cols-2">{plan.examples.map((e, i) => <div key={i} className="rounded-lg bg-paper/60 p-3 text-xs ring-1 ring-line"><p className="font-bold text-ink-3">Exemplo {i + 1}</p><p className="mt-1">Ideologia: {e.before} → <b>{e.after}</b></p><p>Mais perto na régua: {e.rulerBefore} → <b>{e.rulerAfter}</b></p></div>)}</div> : null}
+            </>
+          ) : null}
         </div>
       </Panel>
 

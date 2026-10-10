@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isAdminSession } from "@/lib/admin-auth";
+import { getPrisma } from "@/lib/prisma";
 import { discardDraft, getWorkingConfig, saveDraft } from "@/lib/live-config-server";
 import { CANDIDATE_IDS, bandKey, buildOptions, contentOf, nextQuestionId, scoreKey, type LiveConfig } from "@/lib/live-config";
 import { SPECTRUM_BANDS, type SpectrumBandLabel } from "@/data/political-spectrum";
@@ -136,7 +137,7 @@ export async function setPositionAction(key: string, o: { summary?: string; dire
     if (o.direction && DIRS.includes(o.direction)) clean.direction = o.direction;
     if (o.closestOptionId !== undefined) clean.closestOptionId = o.closestOptionId || null;
     if (o.reviewStatus && STATUS.includes(o.reviewStatus)) clean.reviewStatus = o.reviewStatus;
-    c.content!.positions[key] = clean;
+    c.content!.positions[key] = { ...(c.content!.positions[key] ?? {}), ...clean };
   });
 }
 
@@ -168,4 +169,16 @@ export async function removeSourceAction(id: string) {
     c.content = JSON.parse(JSON.stringify(contentOf(c)));
     c.content!.sources = (c.content!.sources ?? []).filter((x) => x.id !== id);
   });
+}
+
+/** Envia a foto de um personagem (png, jpg ou webp, até 3 MB). Fica no banco; devolve o nome a usar no campo da foto. */
+export async function uploadFigureImageAction(formData: FormData): Promise<{ slug?: string; error?: string }> {
+  if (!(await isAdminSession())) return { error: "Sessão expirada." };
+  const file = formData.get("file");
+  if (!(file instanceof File)) return { error: "Escolha um arquivo." };
+  if (!["image/png", "image/jpeg", "image/webp"].includes(file.type)) return { error: "Use PNG, JPG ou WEBP." };
+  if (file.size > 3 * 1024 * 1024) return { error: "Imagem grande demais (máx. 3 MB)." };
+  const slug = `foto-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+  await getPrisma().historyImage.create({ data: { slug, mime: file.type, data: Buffer.from(await file.arrayBuffer()) } });
+  return { slug };
 }

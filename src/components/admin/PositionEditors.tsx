@@ -28,7 +28,7 @@ export function PositionEditor({ posKey, value, options }: { posKey: string; val
       </div>
       <label className="block text-[11px] font-semibold text-ink-2">Resumo da posição<textarea className={`${input} mt-0.5`} rows={3} value={v.summary} onChange={(e) => setV({ ...v, summary: e.target.value })} /></label>
       <div className="flex flex-wrap items-center gap-2">
-        <button type="button" disabled={!dirty || pending} onClick={() => start(async () => { await setPositionAction(posKey, v); setSaved(true); router.refresh(); })} className="rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">{pending ? "Salvando…" : "Salvar no rascunho"}</button>
+        <button type="button" disabled={!dirty || pending} onClick={() => start(async () => { const changed = Object.fromEntries(Object.entries(v).filter(([k, x]) => x !== value[k as keyof typeof value])); await setPositionAction(posKey, changed); setSaved(true); router.refresh(); })} className="rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">{pending ? "Salvando…" : "Salvar no rascunho"}</button>
         <button type="button" onClick={() => { setV(value); setOpen(false); }} className="rounded-lg bg-surface px-3 py-1.5 text-xs font-semibold text-ink-2 ring-1 ring-line">Fechar</button>
         {saved ? <span className="text-xs font-bold text-mint-strong">✓ Salvo no rascunho</span> : null}
       </div>

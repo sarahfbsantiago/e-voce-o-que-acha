@@ -6,6 +6,9 @@ import { adminTotpSecret } from "@/lib/env";
 import { AdminHero, AdminShell, Panel } from "@/components/admin/AdminUI";
 import { PublishForm } from "@/components/admin/PublishForm";
 import { SitePreviewLoader } from "@/components/admin/SitePreviewLoader";
+import { ChangePreview } from "@/components/admin/ChangePreview";
+
+const CALC = ["Notas por alternativa", "Espectro político", "Régua", "Perguntas"];
 import { buildPublishPlan } from "@/lib/publish-plan";
 import { getPublishedConfig, getRequest } from "@/lib/live-config-server";
 import { activeQuestions, applyScope, contentOf, type LiveConfig, type Scope } from "@/lib/live-config";
@@ -47,20 +50,22 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const [candidates, positions, evidence, summaries, sources, real] = await Promise.all([
     repo.getCandidates(), repo.getPublishedPositions(), repo.getPublishedEvidence({}), repo.getPublishedProgramSummaries(), repo.getSources(), stats.enabled ? stats.listSubmissions() : Promise.resolve([]),
   ]);
-  const textChanges = plan.changes.filter((c) => c.section === "Textos do site" || c.section === "Fontes e links");
+  const calc = plan.sections.some((x) => CALC.includes(x));
+  // textos que aparecem dentro do relatório (perfis, mensagens, correntes, visões, currículos)
+  const reportText = plan.changes.some((c) => c.section === "Textos do site" && /Perfil|Relatório|Card|Contexto|Visão|Currículo|espectro/i.test(c.text));
 
   return (
     <AdminShell current="/admin/publicar">
       <AdminHero kicker={`Pedido #${id} · aceitar`} title="Prévia de como o site vai ficar" pdfTitle={`Prévia pedido ${id}`} subtitle={`${req.row.author}: ${req.row.note}. Confira e, se estiver tudo certo, confirme com o código para publicar.`} />
-      <Panel title="1. Prévia" subtitle="Relatório com questionários de exemplo e o questionário, já com as mudanças do pedido" accent="#6d3fc4">
-        <SitePreviewLoader cfg={target} live={pub.cfg} previewKey={`previa-${id}-${pub.version}`} liveKey={pub.key} samples={samples(target, real)}
-          data={{ candidates, positions, evidence, summaries, sources, profiles: contentOf(target).candidateProfiles }} />
-        {textChanges.length ? (
-          <div className="mt-4 rounded-xl bg-paper/60 p-3 ring-1 ring-line">
-            <p className="text-xs font-bold uppercase tracking-wide text-ink-3">Textos e fontes alterados (veja também nas páginas depois de publicar)</p>
-            <ul className="mt-1 list-disc pl-5 text-sm text-ink-2">{textChanges.map((c, i) => <li key={i}>{c.text}</li>)}</ul>
+      <Panel title="1. Prévia do que foi editado" subtitle="No ar × com o pedido, só o que mudou" accent="#6d3fc4">
+        <ChangePreview live={pub.cfg} target={target} />
+        {!calc && !reportText ? null : (
+          <div className="mt-4">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-ink-3">{calc ? "Como fica o relatório (questionários de exemplo)" : "Como o texto aparece no relatório"}</p>
+            <SitePreviewLoader cfg={target} live={pub.cfg} previewKey={`previa-${id}-${pub.version}`} liveKey={pub.key} samples={samples(target, real)}
+              data={{ candidates, positions, evidence, summaries, sources, profiles: contentOf(target).candidateProfiles }} />
           </div>
-        ) : null}
+        )}
       </Panel>
       <Panel title="2. Confirmar e publicar" subtitle="Nome, motivo, Estou ciente, frase e código" accent="#2f9a5d">
         {plan.errors.length || stale ? <p className="text-sm font-semibold text-[#9b1c1c]">Não dá para publicar: {stale ? "pedido desatualizado" : plan.errors[0]}</p> : (

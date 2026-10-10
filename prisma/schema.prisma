@@ -591,3 +591,11 @@ model PublishRequest {
   reviewedAt       DateTime?
   publishedVersion Int?
 }
+
+/// Fotos de personagens enviadas pelo admin (ficam no banco para não se perderem a cada deploy).
+model HistoryImage {
+  slug      String   @id
+  mime      String
+  data      Bytes
+  createdAt DateTime @default(now())
+}

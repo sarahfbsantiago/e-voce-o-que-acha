@@ -91,8 +91,8 @@ export default async function Page() {
         })}
       </div>
 
-      <SectionTitle n={4} label="Visão Lula e Visão Flávio" color="#2f9a5d" />
-      <div className="space-y-2">{w.candidateViews.map((v, i) => <Item key={v.candidateId} title={`Visão ${v.candidateId === "lula" ? "Lula" : "Flávio"}`} changed={diff(v, p.candidateViews[i])}>{ed(["candidateViews", i], v, p.candidateViews[i])}</Item>)}</div>
+      <SectionTitle n={4} label="“Entender por quê” do relatório (Visão Lula e Visão Flávio, tema a tema)" color="#2f9a5d" />
+      <div className="space-y-2">{w.candidateViews.map((v, i) => <Item key={v.candidateId} title={`Entender por quê · Visão ${v.candidateId === "lula" ? "Lula" : "Flávio"}`} hint="o texto de cada tema que abre ao tocar em uma área do relatório" changed={diff(v, p.candidateViews[i])}>{ed(["candidateViews", i], v, p.candidateViews[i])}</Item>)}</div>
 
       <SectionTitle n={5} label="Currículos dos candidatos" color="#1c1c1a" />
       <div className="space-y-2">{w.candidateProfiles.map((c, i) => <Item key={c.candidateId} title={c.candidateId === "lula" ? "Lula" : "Flávio Bolsonaro"} changed={diff(c, p.candidateProfiles[i])}>{ed(["candidateProfiles", i], c, p.candidateProfiles[i])}</Item>)}</div>

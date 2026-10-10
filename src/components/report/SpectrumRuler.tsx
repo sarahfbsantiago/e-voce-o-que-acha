@@ -23,7 +23,7 @@ function HistoryBook({ h }: { h: SectionHistory }) {
         {h.figures.map((f) => (
           <figure key={f.slug} className="flex gap-3 rounded-lg bg-surface/70 p-2.5 shadow-sm ring-1 ring-note-line">
             <div className="shrink-0 self-start rotate-[-1.5deg] rounded-sm bg-white p-1 pb-3 shadow-md ring-1 ring-black/5">
-              <Image src={`/historia/${f.slug}.jpg`} alt={`Retrato de ${f.name}`} width={96} height={124} className="h-[124px] w-24 object-cover grayscale-[35%] sepia-[25%]" />
+              {f.slug ? <Image src={`/historia-img/${f.slug}`} unoptimized alt={`Retrato de ${f.name}`} width={96} height={124} className="h-[124px] w-24 object-cover grayscale-[35%] sepia-[25%]" /> : <span className="grid h-[124px] w-24 place-items-center bg-note text-2xl font-bold text-gold-strong">{f.name.split(" ").map((x) => x[0]).slice(0, 2).join("")}</span>}
             </div>
             <figcaption className="min-w-0 text-xs leading-relaxed text-ink-2">
               <span className="block font-serif text-sm font-bold text-ink">{f.name}</span>

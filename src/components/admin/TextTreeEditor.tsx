@@ -4,7 +4,7 @@ import { sameJson } from "@/lib/live-config";
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { setContentAction } from "@/app/admin/config-actions";
+import { setContentAction, uploadFigureImageAction } from "@/app/admin/config-actions";
 
 type Json = string | number | boolean | null | Json[] | { [k: string]: Json };
 
@@ -21,7 +21,7 @@ const LABELS: Record<string, string> = {
   officialLinks: "Links oficiais", note: "Observação", sourceId: "Fonte (código)", sourceIds: "Fontes (códigos)", list: "Lista", t: "Tipo do bloco", id: "Identificador",
 };
 const label = (k: string | number) => (typeof k === "number" ? `#${k + 1}` : LABELS[k] ?? k);
-const HIDDEN = new Set(["candidateId", "documentedActionCategories"]);
+const HIDDEN = new Set(["candidateId", "documentedActionCategories", "topicIds", "topicId"]);
 const input = "w-full rounded-lg border border-line bg-surface px-2.5 py-1.5 text-sm focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/30";
 
 /** Esvazia textos de um item para servir de modelo ao "+ Adicionar". */
@@ -31,6 +31,47 @@ function blankLike(v: Json): Json {
   if (Array.isArray(v)) return v.length && typeof v[0] !== "object" ? [] : v.length ? [blankLike(v[0])] : [];
   if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, k === "t" ? x : blankLike(x)]));
   return v;
+}
+
+/** Foto do personagem: miniatura, trocar (envia PNG/JPG/WEBP, reduzida para no máx. 600 px) ou remover. */
+function FigurePhoto({ slug, name, set }: { slug: string; name: string; set: (slug: string) => void }) {
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const pick = async (file: File | undefined) => {
+    if (!file) return;
+    setBusy(true); setErr("");
+    try {
+      const bmp = await createImageBitmap(file);
+      const scale = Math.min(1, 600 / Math.max(bmp.width, bmp.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(bmp.width * scale); canvas.height = Math.round(bmp.height * scale);
+      canvas.getContext("2d")!.drawImage(bmp, 0, 0, canvas.width, canvas.height);
+      const type = file.type === "image/png" ? "image/png" : "image/jpeg";
+      const blob: Blob = await new Promise((ok) => canvas.toBlob((b) => ok(b!), type, 0.85));
+      const fd = new FormData();
+      fd.append("file", new File([blob], file.name, { type }));
+      const r = await uploadFigureImageAction(fd);
+      if (r.slug) set(r.slug); else setErr(r.error ?? "Não foi possível enviar.");
+    } catch { setErr("Não foi possível ler a imagem."); }
+    setBusy(false);
+  };
+  return (
+    <div className="flex flex-wrap items-center gap-3 rounded-lg bg-paper/60 p-2 ring-1 ring-line">
+      {slug ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={`/historia-img/${slug}`} alt={`Foto de ${name}`} className="h-24 w-20 rounded object-cover ring-1 ring-line" />
+      ) : <span className="grid h-24 w-20 place-items-center rounded bg-line text-[10px] text-ink-3">sem foto</span>}
+      <div className="space-y-1.5">
+        <label className={`inline-flex cursor-pointer items-center rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white ${busy ? "opacity-50" : ""}`}>
+          {busy ? "Enviando…" : slug ? "Trocar imagem" : "Inserir imagem"}
+          <input type="file" accept="image/png,image/jpeg,image/webp" className="sr-only" disabled={busy} onChange={(e) => pick(e.target.files?.[0])} />
+        </label>
+        {slug ? <button type="button" onClick={() => set("")} className="block rounded-lg bg-surface px-3 py-1 text-xs font-bold text-[#9b1c1c] ring-1 ring-[#f5b5b5]">Remover foto</button> : null}
+        <p className="text-[10px] text-ink-3">PNG, JPG ou WEBP até 3 MB. Lembre de atualizar o crédito da foto.</p>
+        {err ? <p className="text-[11px] font-semibold text-[#9b1c1c]">{err}</p> : null}
+      </div>
+    </div>
+  );
 }
 
 function Node({ k, v, set }: { k: string | number; v: Json; set: (v: Json) => void }) {
@@ -61,9 +102,11 @@ function Node({ k, v, set }: { k: string | number; v: Json; set: (v: Json) => vo
       </fieldset>
     );
   }
+  const isFigure = typeof v.slug === "string" && typeof v.name === "string";
   return (
     <div className="space-y-2">
-      {Object.entries(v).map(([ck, cv]) => <Node key={ck} k={ck} v={cv} set={(nv) => set({ ...v, [ck]: nv })} />)}
+      {isFigure ? <FigurePhoto slug={v.slug as string} name={v.name as string} set={(slug) => set({ ...v, slug })} /> : null}
+      {Object.entries(v).filter(([ck]) => !(isFigure && ck === "slug")).map(([ck, cv]) => <Node key={ck} k={ck} v={cv} set={(nv) => set({ ...v, [ck]: nv })} />)}
     </div>
   );
 }
