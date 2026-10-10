@@ -60,7 +60,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
             </form>
           </div>
         ) : <p className="text-sm text-ink-3">Nada no rascunho. Mude algo em Notas, Espectro, Perguntas, Posições, Textos ou Fontes.</p>}
-        {draft.changes.length ? <form action={discardDraftAction} className="mt-3 text-right"><button className="text-xs font-semibold text-ink-3 underline hover:text-[#9b1c1c]">Descartar o rascunho</button></form> : null}
+        {draft.changes.length ? <form action={discardDraftAction} className="mt-3 text-right"><button className="rounded-lg bg-surface px-3 py-1.5 text-xs font-bold text-[#9b1c1c] ring-1 ring-[#f5b5b5]">Excluir rascunho (tudo que ainda não foi enviado)</button></form> : null}
       </Panel>
 
       <Panel title="2. Aguardando aprovação" subtitle="Abra um pedido para revisar e aprovar ou recusar" accent="#6d3fc4">

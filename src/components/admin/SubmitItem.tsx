@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { submitItemAction } from "@/app/admin/publicar/actions";
+import { discardItemAction, submitItemAction } from "@/app/admin/publicar/actions";
 import type { Scope } from "@/lib/live-config";
 
 const NAME_KEY = "vd-admin-nome";
@@ -22,8 +22,9 @@ export function SubmitItem({ scope, changed, what }: { scope: Scope; changed: bo
     <div className="mt-2 rounded-xl bg-[#fff4e5] p-2.5 ring-1 ring-[#f5c27a] print:hidden">
       {!open ? (
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold text-[#7a4a00]">{what}: alterado no rascunho</span>
-          <button type="button" onClick={() => { try { setName(localStorage.getItem(NAME_KEY) ?? ""); } catch {} setOpen(true); }} className="ml-auto rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white shadow-sm">Enviar para aprovação</button>
+          <span className="text-xs font-semibold text-[#7a4a00]">{what}: salvo no rascunho (ainda não enviado)</span>
+          <button type="button" disabled={pending} onClick={() => { if (window.confirm("Desfazer este ajuste? Ele volta a ficar igual ao que está no site.")) start(async () => { await discardItemAction(scope); router.refresh(); }); }} className="ml-auto rounded-lg bg-surface px-3 py-1.5 text-xs font-bold text-ink-2 ring-1 ring-line hover:text-[#9b1c1c]">Desfazer este ajuste</button>
+          <button type="button" onClick={() => { try { setName(localStorage.getItem(NAME_KEY) ?? ""); } catch {} setOpen(true); }} className="rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white shadow-sm">Enviar para aprovação</button>
         </div>
       ) : (
         <div className="grid gap-2 sm:grid-cols-[160px_1fr_auto]">

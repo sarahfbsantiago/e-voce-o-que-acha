@@ -48,7 +48,8 @@ export async function AdminShell({ current, children }: { current: string; child
           <div className="container-page flex flex-wrap items-center gap-3 py-2.5 pr-16">
             <span className="grid h-7 w-7 place-items-center rounded-full bg-[#f97316] text-xs font-bold text-white">{pending}</span>
             <span className="text-sm font-semibold text-[#7a4a00]">{pending === 1 ? "mudança no rascunho" : "mudanças no rascunho"} · ainda não está no site</span>
-            <Link href="/admin/publicar" className="ml-auto rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-bold text-white shadow-sm">Enviar tudo para aprovação</Link>
+            <Link href="/admin/publicar" className="ml-auto rounded-xl bg-surface px-3 py-2 text-xs font-bold text-ink-2 ring-1 ring-line">Revisar ou excluir rascunho</Link>
+            <Link href="/admin/publicar" className="rounded-xl bg-gradient-to-r from-purple to-[#2563eb] px-4 py-2 text-sm font-bold text-white shadow-sm">Enviar tudo para aprovação</Link>
           </div>
         </div>
       ) : null}

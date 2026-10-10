@@ -125,3 +125,13 @@ export async function submitItemAction(scope: Scope, author: string, note: strin
   revalidatePath("/admin", "layout");
   return { id };
 }
+
+/** Desfaz um ajuste ainda não enviado: aquele item volta a ser igual ao que está no ar. */
+export async function discardItemAction(scope: Scope): Promise<void> {
+  if (!(await isAdminSession())) return;
+  const { cfg, published, hasDraft } = await getWorkingConfig();
+  if (!hasDraft) return;
+  const rest = applyScope(cfg, published.cfg, scope);
+  if (diffConfig(published.cfg, rest).length) await saveDraft(rest, published.version); else await discardDraft();
+  revalidatePath("/admin", "layout");
+}

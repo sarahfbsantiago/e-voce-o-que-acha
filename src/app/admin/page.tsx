@@ -59,11 +59,13 @@ const TIPS: Tip[] = [
     ["Fontes", "teste o link antes de enviar."],
   ] },
   { id: "publicar", icon: "⇪", title: "Aprovar e publicar", short: "como um pull request", color: "#dc2626", points: [
-    ["1. Enviar", "abaixo do item: seu nome + o que mudou."],
-    ["2. Revisar", "em Publicar, abra o pedido: o que muda e o impacto."],
-    ["3. Aceitar", "veja a prévia de como o site vai ficar."],
-    ["4. Confirmar", "nome, motivo, Estou ciente, frase e código do Google Authenticator."],
-    ["Pronto", "o site muda na hora."],
+    ["1. Salvar no rascunho", "depois de editar, clique em Salvar no rascunho (notas e faixas salvam sozinhas)."],
+    ["2. Enviar para aprovação", "logo abaixo do item: seu nome + o que mudou."],
+    ["Mudou de ideia antes de enviar?", "Desfazer este ajuste (volta ao que está no ar) ou Excluir rascunho, em Publicar."],
+    ["Depois de enviado", "só dá para cancelar no painel de aprovação (Publicar → pedido → Cancelar meu pedido)."],
+    ["3. Revisar", "em Publicar, abra o pedido: o que muda e o impacto."],
+    ["4. Aceitar", "veja a prévia de como o site vai ficar."],
+    ["5. Confirmar", "nome, motivo, Estou ciente, frase e código do Google Authenticator. O site muda na hora."],
   ] },
   { id: "impacto", icon: "📊", title: "Ler o impacto", short: "quem muda de resultado", color: "#f97316", points: [
     ["Calculado", "com os questionários reais já enviados."],
@@ -103,7 +105,7 @@ export default async function Page() {
       <AdminHero kicker="Comece aqui" title="Como usar o admin" pdfTitle="Como usar o admin" subtitle="Toque num tema para ver o passo a passo." />
 
       <ol className="flex flex-wrap items-center gap-2 rounded-2xl bg-gradient-to-r from-purple-soft to-[#dbeafe] p-4 text-xs font-bold text-ink ring-1 ring-purple/20 sm:text-sm">
-        {["✏️ Editar", "📨 Enviar para aprovação", "👀 Revisar e prévia", "🔑 Código", "🚀 No ar", "🗂️ Histórico"].map((t, i, a) => (
+        {["✏️ Editar", "💾 Salvar no rascunho", "📨 Enviar para aprovação", "👀 Revisar e prévia", "🔑 Código", "🚀 No ar", "🗂️ Histórico"].map((t, i, a) => (
           <li key={t} className="flex items-center gap-2"><span className="rounded-xl bg-surface px-3 py-2 shadow-sm ring-1 ring-line">{t}</span>{i < a.length - 1 ? <span className="text-purple">→</span> : null}</li>
         ))}
       </ol>
