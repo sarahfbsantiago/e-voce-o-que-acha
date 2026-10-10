@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { BASELINE_CONFIG, applyConfig, buildOptions, diffConfig, nextQuestionId, validateConfig } from "@/lib/live-config";
+import { BASELINE_CONFIG, applyConfig, applyScope, buildOptions, diffConfig, nextQuestionId, scopeChanged, validateConfig } from "@/lib/live-config";
 import { computeImpact } from "@/lib/config-impact";
 import { QUESTIONS, QUESTION_BY_ID } from "@/data/questions";
 import { QUESTION_NUMBER } from "@/lib/question-order";
@@ -107,5 +107,24 @@ describe("pedidos de um item só (como pull requests)", () => {
     const target = applyScope(BASELINE_CONFIG, draft, { kind: "content", path: ["pages", "home"] });
     expect(contentOf(target).pages.home.headline).toBe("Novo título");
     expect(contentOf(target).pages.footer.about).toBe(contentOf(BASELINE_CONFIG).pages.footer.about);
+  });
+});
+
+describe("envio de notas e faixas juntas", () => {
+  it("leva as notas e as faixas da pergunta, e nada de outra pergunta", () => {
+    const base = BASELINE_CONFIG;
+    const draft = JSON.parse(JSON.stringify(base)) as typeof base;
+    const [k1] = Object.keys(draft.optionScores).filter((k) => k.startsWith("q01|"));
+    const [b1] = Object.keys(draft.spectrumPositions).filter((k) => k.startsWith("q01|"));
+    const [other] = Object.keys(draft.optionScores).filter((k) => k.startsWith("q03|"));
+    draft.optionScores[k1] = [draft.optionScores[k1][0] === 1 ? 0 : 1, "teste"];
+    draft.spectrumPositions[b1] = [draft.spectrumPositions[b1][0] === "Direita" ? "Esquerda" : "Direita", "teste"];
+    draft.optionScores[other] = [draft.optionScores[other][0] === 1 ? 0 : 1, "teste"];
+    const out = applyScope(base, draft, { kind: "calc", questionId: "q01" });
+    expect(out.optionScores[k1]).toEqual(draft.optionScores[k1]);
+    expect(out.spectrumPositions[b1]).toEqual(draft.spectrumPositions[b1]);
+    expect(out.optionScores[other]).toEqual(base.optionScores[other]);
+    expect(scopeChanged(base, draft, { kind: "calc", questionId: "q01" })).toBe(true);
+    expect(scopeChanged(base, out, { kind: "calc", questionId: "q03" })).toBe(false);
   });
 });

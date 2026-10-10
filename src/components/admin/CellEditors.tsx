@@ -25,7 +25,7 @@ export function ScoreSelect({ questionId, candidateId, optionId, value, publishe
 }
 
 /** Faixa editável de uma alternativa na régua. */
-export function BandSelect({ questionId, optionId, value, published, bands }: { questionId: string; optionId: string; value: string; published: string; bands: { label: string; color: string }[] }) {
+export function BandSelect({ questionId, optionId, value, published, bands, width = "w-36" }: { questionId: string; optionId: string; value: string; published: string; bands: { label: string; color: string }[]; width?: string }) {
   const router = useRouter();
   const [v, setV] = useState(value);
   const [pending, start] = useTransition();
@@ -35,7 +35,7 @@ export function BandSelect({ questionId, optionId, value, published, bands }: { 
     <span className="relative inline-block">
       <select aria-label="Faixa na régua" value={v} disabled={pending}
         onChange={(e) => { const b = e.target.value; setV(b); start(async () => { await setBandAction(questionId, optionId, b); router.refresh(); }); }}
-        className={`w-36 cursor-pointer appearance-none rounded-full px-2.5 py-1 text-center text-xs font-bold text-ink outline-none ${draft ? "ring-2 ring-[#f97316] ring-offset-1" : ""} ${pending ? "opacity-60" : ""}`}
+        className={`${width} cursor-pointer appearance-none rounded-full px-2.5 py-1 text-center text-xs font-bold text-ink outline-none ${draft ? "ring-2 ring-[#f97316] ring-offset-1" : ""} ${pending ? "opacity-60" : ""}`}
         style={{ background: `${color}33` }}>
         {bands.map((b) => <option key={b.label} value={b.label}>{b.label}</option>)}
       </select>

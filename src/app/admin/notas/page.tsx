@@ -4,7 +4,7 @@ import { isAdminSession } from "@/lib/admin-auth";
 import { AdminShell } from "@/components/admin/AdminUI";
 import { NotasSection } from "@/components/admin/sections/NotasSection";
 
-export const metadata: Metadata = { title: "Notas por alternativa", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "Notas e espectro", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
 export default async function Page() {

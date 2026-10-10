@@ -17,7 +17,7 @@ const STATUS: Record<string, { label: string; cls: string }> = {
   aceita: { label: "Aceita", cls: "bg-mint-soft text-mint-strong ring-mint/40" },
   recusada: { label: "Recusada", cls: "bg-paper text-ink-3 ring-line" },
 };
-const EDITOR: Record<string, string> = { "Notas por alternativa": "/admin/notas", "Espectro político": "/admin/espectro", "Régua": "/admin/espectro", "Perguntas": "/admin/perguntas" };
+const EDITOR: Record<string, string> = { "Notas por alternativa": "/admin/notas", "Espectro político": "/admin/notas", "Régua": "/admin/espectro", "Perguntas": "/admin/perguntas" };
 const ERRO: Record<string, string> = { "1": "Preencha seu nome e a sugestão.", "2": "Digite seu nome para responder.", recusa: "Para recusar, escreva o motivo da recusa.", comentario: "Para comentar, escreva seu nome e o comentário." };
 const input = "mt-1 w-full rounded-lg border border-line bg-surface px-2.5 py-2 text-sm focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/30";
 

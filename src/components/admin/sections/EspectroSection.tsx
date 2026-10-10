@@ -1,23 +1,19 @@
 import { redirect } from "next/navigation";
 import { isAdminSession } from "@/lib/admin-auth";
 import { QUESTIONS } from "@/data/questions";
-import { TOPICS } from "@/data/topics";
-import { AREA_GROUPS } from "@/components/report/areaGroups";
-import { QUESTION_NUMBER } from "@/lib/question-order";
 import { spectrumPositionOf } from "@/data/spectrum-positions";
 import { CANDIDATE_SPECTRUM, IDEOLOGY_RANGES, RULER_RULES, RULER_WIDTHS, SPECTRUM_BANDS, ideologySpot, rulerPct } from "@/data/political-spectrum";
 import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
-import { bandKey, scopeChanged } from "@/lib/live-config";
+import { scopeChanged } from "@/lib/live-config";
 import { SubmitItem } from "@/components/admin/SubmitItem";
-import { BandSelect } from "@/components/admin/CellEditors";
 import { RulerEditor } from "@/components/admin/RulerEditor";
 import { SPECTRUM_TERMS } from "@/data/spectrum-terms";
-import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
+import { AdminHero, Kpi, Panel } from "@/components/admin/AdminUI";
 
 
 const bandIndex = (label: string) => SPECTRUM_BANDS.findIndex((b) => b.label === label);
 
-/** Para qual faixa da régua cada alternativa leva a pessoa (independe dos candidatos). */
+/** Régua do espectro político: editor da régua, resumo das faixas e como a conta é feita. */
 export async function EspectroSection({ editable = false }: { editable?: boolean } = {}) {
   await ensureLiveConfig();
   const wc = editable ? await getWorkingConfig() : null;
@@ -26,28 +22,20 @@ export async function EspectroSection({ editable = false }: { editable?: boolean
   let reviewed = 0, cells = 0;
   const perBand = SPECTRUM_BANDS.map(() => 0);
 
-  const sections = AREA_GROUPS.map((g, gi) => {
-    const topics = TOPICS.filter((t) => g.topicIds.includes(t.id)).sort((a, b) => a.order - b.order);
-    const rows = topics.flatMap((t) => QUESTIONS.filter((q) => q.topicId === t.id).sort((a, b) => a.order - b.order).map((q) => ({
-      q, t,
-      options: q.options.filter((o) => !o.isNoOpinion).map((o) => {
-        const v = spectrumPositionOf(q.id, o.id);
-        if (v) { cells++; perBand[bandIndex(v.band)]++; if (v.reason !== "Proposta") reviewed++; }
-        return { o, v };
-      }),
-    })));
-    return { g, gi, rows };
-  });
+  for (const q of QUESTIONS) for (const o of q.options.filter((x) => !x.isNoOpinion)) {
+    const v = spectrumPositionOf(q.id, o.id);
+    if (v) { cells++; perBand[bandIndex(v.band)]++; if (v.reason !== "Proposta") reviewed++; }
+  }
   const maxBand = Math.max(...perBand, 1);
 
   return (
     <>
-      <AdminHero kicker="Análise geral · régua ideológica" title="Espectro político" pdfTitle="Espectro político"
-        subtitle="Define a ideologia da pessoa na régua e de qual candidato ela fica mais perto ideologicamente: de comunismo a conservadorismo, Lula; de nacionalismo radical em diante, Flávio. É uma análise diferente da tema a tema (Notas por alternativa, as análises específicas)." />
+      <AdminHero kicker="Análise geral · régua ideológica" title="Régua do espectro político" pdfTitle="Régua do espectro político"
+        subtitle="Posição das correntes, de Lula e de Flávio, a linha divisória e os trechos das ideologias. As faixas de cada alternativa ficam em Notas e espectro." />
 
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <Kpi label="Alternativas com faixa" value={String(cells)} note={`em ${QUESTIONS.length} perguntas`} color="#6d3fc4" />
-        <Kpi label="Revisadas por você" value={String(reviewed)} note="contorno roxo na tabela" color="#ec4899" />
+        <Kpi label="Revisadas por você" value={String(reviewed)} note="em Notas e espectro" color="#ec4899" />
         <Kpi label="Ainda proposta" value={String(cells - reviewed)} note="aguardando sua revisão" color="#d4a017" />
       </section>
 
@@ -176,51 +164,6 @@ export async function EspectroSection({ editable = false }: { editable?: boolean
         })()}
       </Panel>
 
-      {sections.map(({ g, gi, rows }) => (
-        <div key={g.id} className="space-y-3">
-          <SectionTitle n={gi + 1} label={g.label} color={g.color} note={`${rows.length} perguntas`} />
-          <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 md:mx-0 md:grid md:overflow-visible md:px-0 md:pb-0 print:mx-0 print:grid print:overflow-visible print:px-0 xl:grid-cols-2">
-            {rows.map(({ q, t, options }) => (
-              <article key={q.id} className="admin-lift w-[86%] shrink-0 snap-start md:w-auto md:shrink print:w-auto min-w-0 overflow-hidden rounded-2xl bg-surface shadow-sm ring-1 ring-black/5 print:break-inside-avoid print:border print:border-line">
-                <div aria-hidden="true" className="h-1" style={{ background: g.color }} />
-                <div className="p-4">
-                  <p className="text-sm font-semibold leading-snug text-ink"><QNum n={QUESTION_NUMBER[q.id]} title={`código interno ${q.id}`} />{q.text}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-wide text-ink-3">{t.name}</p>
-                  <ul className="mt-3 divide-y divide-line/70">
-                    {options.map(({ o, v }) => {
-                      const bi = v ? bandIndex(v.band) : -1;
-                      return (
-                        <li key={o.id} className="flex flex-wrap items-center gap-x-3 gap-y-1.5 py-2">
-                          <span className="min-w-0 flex-1 text-[13px] font-medium leading-snug text-ink-2">{o.label}</span>
-                          {v ? (
-                            <span className="flex items-center gap-2" title={v.reason}>
-                              <span aria-hidden="true" className="flex h-2 w-28 overflow-hidden rounded-full">
-                                {SPECTRUM_BANDS.map((b, i) => <span key={b.label} className="h-full flex-1" style={{ background: i === bi ? b.color : "var(--color-line)" }} />)}
-                              </span>
-                              {editable ? (
-                                <BandSelect questionId={q.id} optionId={o.id} value={working?.spectrumPositions[bandKey(q.id, o.id)]?.[0] ?? v.band} published={v.band} bands={SPECTRUM_BANDS.map((b) => ({ label: b.label, color: b.color }))} />
-                              ) : (
-                                <span className={`w-32 rounded-full px-2.5 py-0.5 text-center text-xs font-bold text-ink ${v.reason !== "Proposta" ? "ring-2 ring-purple ring-offset-1" : ""}`} style={{ background: `${SPECTRUM_BANDS[bi].color}33` }}>{v.band}</span>
-                              )}
-                            </span>
-                          ) : <span className="text-xs italic text-ink-3">sem faixa (não entra na régua)</span>}
-                        </li>
-                      );
-                    })}
-                    {q.options.filter((o) => o.isNoOpinion).map((o) => (
-                      <li key={o.id} className="flex flex-wrap items-center gap-x-3 gap-y-1.5 py-2">
-                        <span className="min-w-0 flex-1 text-[13px] font-medium leading-snug text-ink-3">{o.label}</span>
-                        <span className="text-xs italic text-ink-3">não entra na régua</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {wc ? <SubmitItem scope={{ kind: "bands", questionId: q.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "bands", questionId: q.id })} what={`Faixas da pergunta ${QUESTION_NUMBER[q.id]}`} /> : null}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      ))}
     </>
   );
 }

@@ -55,10 +55,9 @@ export function QuestionEditor({ id, text, example, options, archived, bands, is
           {options.map((o) => (
             <div key={o.id} className="flex items-center gap-2">
               <input className={`${input} flex-1 ${o.noOpinion ? "bg-paper" : ""}`} value={labels[o.id]} onChange={(e) => setLabels({ ...labels, [o.id]: e.target.value })} maxLength={200} aria-label={o.noOpinion ? "Alternativa sem opinião" : "Alternativa"} />
-              {o.noOpinion ? <span className="shrink-0 rounded-full bg-paper px-2 py-0.5 text-[10px] font-semibold text-ink-3 ring-1 ring-line">sempre por último · não entra na conta</span> : null}
             </div>
           ))}
-          <p className="text-[11px] text-ink-3">Notas e faixas destas alternativas: nas páginas Notas por alternativa e Espectro político.</p>
+          <p className="text-[11px] text-ink-3">Notas e faixas destas alternativas: em Notas e espectro.</p>
           <button type="button" disabled={!dirty || pending || !t.trim()} onClick={() => run(() => updateQuestionAction(id, { text: t, example: ex, labels }))} className="admin-press rounded-lg bg-gradient-to-r from-purple to-[#2563eb] px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40">{pending ? "Salvando…" : "Salvar no rascunho"}</button>
         </div>
       ) : null}

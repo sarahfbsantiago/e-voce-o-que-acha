@@ -7,9 +7,11 @@ import { AREA_GROUPS } from "@/components/report/areaGroups";
 import { currentOptionScore, proposedOptionScore } from "@/lib/option-scores";
 import { QUESTION_NUMBER } from "@/lib/question-order";
 import { ensureLiveConfig, getWorkingConfig } from "@/lib/live-config-server";
-import { scopeChanged, scoreKey } from "@/lib/live-config";
+import { bandKey, scopeChanged, scoreKey } from "@/lib/live-config";
+import { spectrumPositionOf } from "@/data/spectrum-positions";
+import { SPECTRUM_BANDS } from "@/data/political-spectrum";
 import { SubmitItem } from "@/components/admin/SubmitItem";
-import { ScoreSelect } from "@/components/admin/CellEditors";
+import { BandSelect, ScoreSelect } from "@/components/admin/CellEditors";
 import { AdminHero, Kpi, Panel, QNum, SectionTitle } from "@/components/admin/AdminUI";
 
 
@@ -59,8 +61,8 @@ export async function NotasSection({ editable = false }: { editable?: boolean } 
 
   return (
     <>
-      <AdminHero kicker="Análise específica · tema a tema" title="Notas por alternativa" pdfTitle="Notas por alternativa"
-        subtitle="Define só o bloco 'Qual candidato está mais próximo do seu perfil' do relatório: em cada tema, Lula, Flávio ou equivalente. É uma análise diferente da régua ideológica (Espectro político, a análise geral)." />
+      <AdminHero kicker="Por alternativa" title="Notas e espectro" pdfTitle="Notas e espectro"
+        subtitle="Em cada alternativa: a nota de cada candidato (resultado tema a tema) e a faixa na régua (ideologia da pessoa)." />
 
       <section className="grid grid-cols-2 gap-3 xl:grid-cols-5">
         <Kpi label="Perguntas" value={String(QUESTIONS.length)} note="no questionário" color="#6d3fc4" />
@@ -189,6 +191,7 @@ export async function NotasSection({ editable = false }: { editable?: boolean } 
                         {CANDS.map((c) => (
                           <th key={c.id} className="w-20 pb-2 text-center font-semibold"><span className="inline-flex items-center gap-1"><span aria-hidden="true" className="h-2 w-2 rounded-full" style={{ background: c.color }} />{c.name}</span></th>
                         ))}
+                        <th className="w-28 pb-2 text-center font-semibold">Régua</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -208,17 +211,27 @@ export async function NotasSection({ editable = false }: { editable?: boolean } 
                               )}
                             </td>
                           ))}
+                          <td className="py-2 pl-1 text-center">{(() => {
+                            const v = spectrumPositionOf(q.id, o.id);
+                            if (!v) return <span className="text-[11px] italic text-ink-3">—</span>;
+                            const color = SPECTRUM_BANDS.find((b) => b.label === v.band)?.color ?? "#ccc";
+                            return editable ? (
+                              <BandSelect questionId={q.id} optionId={o.id} value={working?.spectrumPositions[bandKey(q.id, o.id)]?.[0] ?? v.band} published={v.band} bands={SPECTRUM_BANDS.map((b) => ({ label: b.label, color: b.color }))} width="w-28" />
+                            ) : (
+                              <span className="inline-block w-28 rounded-full px-2 py-0.5 text-[11px] font-bold text-ink" style={{ background: `${color}33` }}>{v.band}</span>
+                            );
+                          })()}</td>
                         </tr>
                       ))}
                       {q.options.filter((o) => o.isNoOpinion).map((o) => (
                         <tr key={o.id} className="border-t border-line/70">
                           <th scope="row" className="py-2 pr-2 text-left text-[13px] font-medium leading-snug text-ink-3">{o.label}</th>
-                          <td colSpan={CANDS.length} className="py-2 text-center text-[11px] italic text-ink-3">não entra na conta</td>
+                          <td colSpan={CANDS.length + 1} />
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                  {wc ? <SubmitItem scope={{ kind: "scores", questionId: q.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "scores", questionId: q.id })} what={`Notas da pergunta ${QUESTION_NUMBER[q.id]}`} /> : null}
+                  {wc ? <SubmitItem scope={{ kind: "calc", questionId: q.id }} changed={scopeChanged(wc.published.cfg, wc.cfg, { kind: "calc", questionId: q.id })} what={`Notas e faixas da pergunta ${QUESTION_NUMBER[q.id]}`} /> : null}
                 </div>
               </article>
             ))}

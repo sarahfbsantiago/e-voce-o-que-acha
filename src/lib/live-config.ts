@@ -306,6 +306,8 @@ export type Scope =
   | { kind: "question"; id: string }
   | { kind: "scores"; questionId: string }
   | { kind: "bands"; questionId: string }
+  /** notas e faixas de uma pergunta juntas (página Notas e espectro) */
+  | { kind: "calc"; questionId: string }
   | { kind: "ruler" }
   | { kind: "content"; path: (string | number)[] }
   | { kind: "position"; key: string }
@@ -321,6 +323,7 @@ export function extractScope(cfg: LiveConfig, scope: Scope): unknown {
     case "question": return { q: cfg.questions.find((q) => q.id === scope.id) ?? null, archived: cfg.archived.includes(scope.id), s: pick(cfg.optionScores, `${scope.id}|`), b: pick(cfg.spectrumPositions, `${scope.id}|`) };
     case "scores": return pick(cfg.optionScores, `${scope.questionId}|`);
     case "bands": return pick(cfg.spectrumPositions, `${scope.questionId}|`);
+    case "calc": return { s: pick(cfg.optionScores, `${scope.questionId}|`), b: pick(cfg.spectrumPositions, `${scope.questionId}|`) };
     case "ruler": return { t: cfg.terms, c: cfg.candidates, i: cfg.ideologyBounds, r: cfg.rightSideFrom };
     case "content": return getPath(c, scope.path) ?? null;
     case "position": return c.positions?.[scope.key] ?? null;
@@ -349,6 +352,10 @@ export function applyScope(base: LiveConfig, src: LiveConfig, scope: Scope): Liv
     }
     case "scores": replacePrefix(out.optionScores, src.optionScores, `${scope.questionId}|`); break;
     case "bands": replacePrefix(out.spectrumPositions, src.spectrumPositions, `${scope.questionId}|`); break;
+    case "calc":
+      replacePrefix(out.optionScores, src.optionScores, `${scope.questionId}|`);
+      replacePrefix(out.spectrumPositions, src.spectrumPositions, `${scope.questionId}|`);
+      break;
     case "ruler": out.terms = clone(src.terms); out.candidates = clone(src.candidates); out.ideologyBounds = clone(src.ideologyBounds); out.rightSideFrom = src.rightSideFrom; break;
     case "content": {
       out.content = clone(contentOf(out));
@@ -378,6 +385,7 @@ export function describeScope(scope: Scope, numbers: Record<string, number> = {}
     case "question": return `Pergunta ${numbers[scope.id] ?? scope.id}`;
     case "scores": return `Notas da pergunta ${numbers[scope.questionId] ?? scope.questionId}`;
     case "bands": return `Faixas da pergunta ${numbers[scope.questionId] ?? scope.questionId}`;
+    case "calc": return `Notas e faixas da pergunta ${numbers[scope.questionId] ?? scope.questionId}`;
     case "ruler": return "Régua";
     case "content": return `Texto: ${scope.path.join(" › ")}`;
     case "position": return `Posição ${scope.key.replace("|", " · ")}`;
