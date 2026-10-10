@@ -1,3 +1,4 @@
+import { aggregateFeedback } from "@/domain/aggregates";
 import { ARGUMENT_SETS } from "@/data/arguments";
 import { CANDIDATES } from "@/data/candidates";
 import { CANDIDATE_PROFILES } from "@/data/candidate-profiles";
@@ -69,7 +70,10 @@ export const disabledStatsRepository: StatsRepository = {
   async saveSubmission() {
     throw new StatsUnavailableError();
   },
-  async listSubmissions() {
+  async listSubmissionsAfter() {
+    return [];
+  },
+  async listRecentSubmissions() {
     return [];
   },
   async countSubmissions() {
@@ -78,7 +82,7 @@ export const disabledStatsRepository: StatsRepository = {
   async saveFeedback() {
     throw new StatsUnavailableError();
   },
-  async listFeedback() {
-    return [];
+  async feedbackSummary() {
+    return aggregateFeedback([]);
   },
 };

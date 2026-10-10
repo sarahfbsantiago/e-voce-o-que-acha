@@ -12,7 +12,7 @@ import type {
   SourceRegistryEntry,
   Topic,
 } from "@/domain/types";
-import type { FeedbackLike, SubmissionLike } from "@/domain/aggregates";
+import type { FeedbackAggregate, SubmissionLike } from "@/domain/aggregates";
 import type { FeedbackInput, SubmissionInput } from "@/lib/validation";
 
 /**
@@ -45,12 +45,18 @@ export class StatsUnavailableError extends Error {
   }
 }
 
+export interface SubmissionCursor { at: string; id: string }
+
 /** Estatísticas anônimas. Estrutura separada do conteúdo. */
 export interface StatsRepository {
   readonly enabled: boolean;
   saveSubmission(input: SubmissionInput): Promise<{ id: string }>;
-  listSubmissions(): Promise<SubmissionLike[]>;
+  /** Lote de envios depois do cursor (ordem: submittedAt, id). Nunca carrega a tabela inteira. */
+  listSubmissionsAfter(cursor: SubmissionCursor | null, take: number): Promise<SubmissionLike[]>;
+  /** Os envios mais recentes (amostra para impacto e prévia). */
+  listRecentSubmissions(take: number): Promise<SubmissionLike[]>;
   countSubmissions(): Promise<number>;
   saveFeedback(input: FeedbackInput): Promise<{ id: string }>;
-  listFeedback(): Promise<FeedbackLike[]>;
+  /** Avaliações somadas no próprio banco. */
+  feedbackSummary(): Promise<FeedbackAggregate>;
 }

@@ -40,7 +40,10 @@ const share = (arr: (string | null)[], v: string) => {
 };
 
 export interface Impact {
+  /** questionários usados na conta (amostra) */
   total: number;
+  /** questionários no banco; maior que total quando a conta usou amostra */
+  population?: number;
   questions: { before: number; after: number };
   topics: { before: number; after: number };
   ideologyChanged: number;

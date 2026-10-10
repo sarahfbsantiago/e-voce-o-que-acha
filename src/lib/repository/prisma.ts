@@ -20,10 +20,10 @@ import type {
   TopicPriority,
   UserAnswer,
 } from "@/domain/types";
-import type { FeedbackLike, SubmissionLike } from "@/domain/aggregates";
+import type { FeedbackAggregate, SubmissionLike } from "@/domain/aggregates";
 import { getPrisma } from "@/lib/prisma";
 import type { FeedbackInput, SubmissionInput } from "@/lib/validation";
-import type { ContentRepository, StatsRepository } from "./types";
+import type { ContentRepository, StatsRepository, SubmissionCursor } from "./types";
 
 const iso = (d: Date | null | undefined) => (d ? d.toISOString().slice(0, 10) : null);
 
@@ -235,6 +235,19 @@ function mapQuestion(q: QuestionRow): Question {
 
 
 
+type SubmissionRow = Awaited<ReturnType<ReturnType<typeof getPrisma>["surveySubmission"]["findFirstOrThrow"]>>;
+function submissionFromRow(r: SubmissionRow): SubmissionLike {
+  return {
+    id: r.id,
+    submittedAt: r.submittedAt.toISOString(),
+    methodologyVersion: r.methodologyVersion,
+    answers: r.answers as unknown as UserAnswer[],
+    topicPriorities: r.topicPriorities as unknown as TopicPriority[],
+    optionalAgeRange: r.optionalAgeRange ? AGE_FROM_DB[r.optionalAgeRange] : null,
+    optionalRegion: r.optionalRegion ? REGION_FROM_DB[r.optionalRegion] : null,
+  };
+}
+
 export const prismaStatsRepository: StatsRepository = {
   enabled: true,
 
@@ -249,30 +262,22 @@ export const prismaStatsRepository: StatsRepository = {
       },
       select: { id: true },
     });
-    // Atualiza agregados por pergunta/alternativa.
-    for (const a of input.answers) {
-      for (const optionId of a.optionIds) {
-        await getPrisma().questionAggregate.upsert({
-          where: { questionId_optionId_methodologyVersion: { questionId: a.questionId, optionId, methodologyVersion: input.methodologyVersion } },
-          create: { questionId: a.questionId, optionId, methodologyVersion: input.methodologyVersion, responseCount: 1 },
-          update: { responseCount: { increment: 1 }, calculatedAt: new Date() },
-        });
-      }
-    }
     return { id: row.id };
   },
 
-  async listSubmissions(): Promise<SubmissionLike[]> {
-    const rows = await getPrisma().surveySubmission.findMany({ orderBy: { submittedAt: "asc" } });
-    return rows.map((r) => ({
-      id: r.id,
-      submittedAt: r.submittedAt.toISOString(),
-      methodologyVersion: r.methodologyVersion,
-      answers: r.answers as unknown as UserAnswer[],
-      topicPriorities: r.topicPriorities as unknown as TopicPriority[],
-      optionalAgeRange: r.optionalAgeRange ? AGE_FROM_DB[r.optionalAgeRange] : null,
-      optionalRegion: r.optionalRegion ? REGION_FROM_DB[r.optionalRegion] : null,
-    }));
+  async listSubmissionsAfter(cursor: SubmissionCursor | null, take: number): Promise<SubmissionLike[]> {
+    const at = cursor ? new Date(cursor.at) : null;
+    const rows = await getPrisma().surveySubmission.findMany({
+      where: at ? { OR: [{ submittedAt: { gt: at } }, { submittedAt: at, id: { gt: cursor!.id } }] } : undefined,
+      orderBy: [{ submittedAt: "asc" }, { id: "asc" }],
+      take,
+    });
+    return rows.map(submissionFromRow);
+  },
+
+  async listRecentSubmissions(take: number): Promise<SubmissionLike[]> {
+    const rows = await getPrisma().surveySubmission.findMany({ orderBy: [{ submittedAt: "desc" }, { id: "desc" }], take });
+    return rows.reverse().map(submissionFromRow);
   },
 
   async countSubmissions() {
@@ -287,8 +292,21 @@ export const prismaStatsRepository: StatsRepository = {
     return { id: row.id };
   },
 
-  async listFeedback(): Promise<FeedbackLike[]> {
-    const rows = await getPrisma().surveyFeedback.findMany({ orderBy: { submittedAt: "asc" } });
-    return rows.map((r) => ({ id: r.id, submittedAt: r.submittedAt.toISOString(), methodologyVersion: r.methodologyVersion, rating: r.rating, helpedDecision: r.helpedDecision }));
+  async feedbackSummary(): Promise<FeedbackAggregate> {
+    const rows = await getPrisma().surveyFeedback.groupBy({ by: ["rating", "helpedDecision"], _count: { _all: true } });
+    const byRating = [0, 0, 0, 0, 0];
+    let total = 0, sum = 0, yes = 0, no = 0, unanswered = 0;
+    for (const r of rows) {
+      const n = r._count._all;
+      total += n;
+      if (r.rating >= 1 && r.rating <= 5) { byRating[r.rating - 1] += n; sum += r.rating * n; }
+      if (r.helpedDecision === true) yes += n; else if (r.helpedDecision === false) no += n; else unanswered += n;
+    }
+    return {
+      total,
+      averageRating: total ? Math.round((sum / total) * 100) / 100 : null,
+      byRating, helpedYes: yes, helpedNo: no, helpedUnanswered: unanswered,
+      shareHelpedYes: yes + no ? Math.round((yes / (yes + no)) * 1000) / 10 : null,
+    };
   },
 };

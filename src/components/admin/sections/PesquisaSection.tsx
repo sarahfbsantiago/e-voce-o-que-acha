@@ -2,10 +2,9 @@ import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { isAdminSession } from "@/lib/admin-auth";
 import { getContentRepository, getStatsRepository } from "@/lib/repository";
-import { aggregateProfileProximity } from "@/domain/profile-proximity";
 import { QUESTIONS } from "@/data/questions";
 import { QUESTION_NUMBER } from "@/lib/question-order";
-import { buildResearchReport } from "@/lib/research-report";
+import { getResearchReport } from "@/lib/research-cache";
 import { INSUFFICIENT_DATA_MESSAGE } from "@/domain/aggregates";
 import { AGE_RANGES, REGIONS } from "@/domain/types";
 import { SPECTRUM_BANDS, ideologySpot } from "@/data/political-spectrum";
@@ -43,9 +42,8 @@ export async function PesquisaSection() {
   }
 
   const content = await getContentRepository();
-  const [submissions, feedback, candidates, positions] = await Promise.all([stats.listSubmissions(), stats.listFeedback(), content.getCandidates(), content.getPublishedPositions()]);
-  const pp = aggregateProfileProximity(submissions, QUESTIONS, candidates, positions);
-  const r = buildResearchReport(submissions, feedback, pp);
+  const [{ report: r, status }, candidates] = await Promise.all([getResearchReport(), content.getCandidates()]);
+  const pp = r.profileProximity!;
   const name = (id: string) => candidates.find((c) => c.id === id)?.name ?? id;
   const first = (id: string) => name(id).split(" ")[0];
   const ageLabel = Object.fromEntries(AGE_RANGES.map((a) => [a.value, a.label]));
@@ -80,6 +78,12 @@ export async function PesquisaSection() {
             <form action={logoutAction}><button className="min-h-10 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-purple-strong">Sair</button></form>
           </div>
         </header>
+
+        {status.catchingUp ? (
+          <p className="rounded-2xl bg-[#fff4e5] p-4 text-sm font-semibold text-[#7a4a00] ring-1 ring-[#f5c27a] print:hidden">
+            Atualizando as contagens: {BRL(status.processed)} de {BRL(status.total)} questionários já somados. Recarregue a página em instantes.
+          </p>
+        ) : null}
 
         {/* números principais */}
         <section aria-label="Números principais" className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-7">

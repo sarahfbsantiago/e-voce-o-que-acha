@@ -71,7 +71,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
             ))}
           </ul>
         </Panel>
-        <Panel title="Impacto no cálculo" subtitle={!plan.sections.some((x) => CALC.includes(x)) ? "Mudança só de texto: não mexe na conta" : im ? `Com os ${im.total} questionários já enviados` : ""}>
+        <Panel title="Impacto no cálculo" subtitle={!plan.sections.some((x) => CALC.includes(x)) ? "Mudança só de texto: não mexe na conta" : im ? ((im.population ?? im.total) > im.total ? `Estimativa com os ${im.total.toLocaleString("pt-BR")} questionários mais recentes (de ${(im.population ?? 0).toLocaleString("pt-BR")})` : `Com os ${im.total} questionários já enviados`) : ""}>
           {!plan.sections.some((x) => CALC.includes(x)) ? <p className="rounded-lg bg-mint-soft px-3 py-2 text-sm font-semibold text-mint-strong">Nenhuma conta muda: só o texto que aparece no site.</p> : im ? (
             <div className="space-y-3 text-sm">
               <ul className="space-y-1.5">{im.summary.map((s) => <li key={s} className="rounded-lg bg-[#fff4e5] px-3 py-2 font-semibold text-[#7a4a00] ring-1 ring-[#f5c27a]">{s}</li>)}</ul>

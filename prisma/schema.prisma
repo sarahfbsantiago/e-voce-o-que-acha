@@ -501,6 +501,7 @@ model SurveySubmission {
   optionalRegion     Region?
 
   @@index([submittedAt])
+  @@index([submittedAt, id])
   @@index([methodologyVersion])
 }
 
@@ -611,4 +612,18 @@ model AdminComment {
   body      String
 
   @@index([target, targetId])
+}
+
+/// Contagens acumuladas do painel da pesquisa (só números agregados). Cada resposta nova é somada uma vez;
+/// quando a conta muda (nova versão publicada ou posições), recomeça do zero em lotes.
+model StatsSnapshot {
+  key         String   @id
+  fingerprint String
+  /// Última resposta já somada (ordem: submittedAt, id).
+  cursorAt    DateTime?
+  cursorId    String?
+  processed   Int      @default(0)
+  tally       Json
+  rev         Int      @default(0)
+  updatedAt   DateTime @updatedAt
 }

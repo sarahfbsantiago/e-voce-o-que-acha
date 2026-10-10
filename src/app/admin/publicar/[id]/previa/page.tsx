@@ -48,7 +48,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const repo = await getContentRepository();
   const stats = await getStatsRepository();
   const [candidates, positions, evidence, summaries, sources, real] = await Promise.all([
-    repo.getCandidates(), repo.getPublishedPositions(), repo.getPublishedEvidence({}), repo.getPublishedProgramSummaries(), repo.getSources(), stats.enabled ? stats.listSubmissions() : Promise.resolve([]),
+    repo.getCandidates(), repo.getPublishedPositions(), repo.getPublishedEvidence({}), repo.getPublishedProgramSummaries(), repo.getSources(), stats.enabled ? stats.listRecentSubmissions(3) : Promise.resolve([]),
   ]);
   const calc = plan.sections.some((x) => CALC.includes(x));
   // textos que aparecem dentro do relatório (perfis, mensagens, correntes, visões, currículos)

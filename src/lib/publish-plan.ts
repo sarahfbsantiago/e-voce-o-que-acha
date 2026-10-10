@@ -5,6 +5,9 @@ import { computeImpact, type Impact } from "@/lib/config-impact";
 import { QUESTION_NUMBER } from "@/lib/question-order";
 import { closestCandidateOnRuler, personSpectrum } from "@/data/political-spectrum";
 
+/** Quantos envios recentes entram na conta de impacto. */
+export const IMPACT_SAMPLE = 10000;
+
 /** Nome curto de cada seção, usado na frase de confirmação. */
 const SHORT: Record<string, string> = { "Notas por alternativa": "notas", "Espectro político": "espectro", "Régua": "régua", "Perguntas": "perguntas", "Textos do site": "textos", "Revisão de posições": "posições", "Fontes e links": "fontes" };
 
@@ -48,9 +51,12 @@ async function buildPlanFor(target: LiveConfig, published: PublishedConfig, roll
   const examples: PublishPlan["examples"] = [];
   if (changes.length && withImpact) {
     const [stats, content] = [await getStatsRepository(), await getContentRepository()];
-    const subs = stats.enabled ? await stats.listSubmissions() : [];
+    // amostra dos envios mais recentes: o impacto fica rápido e com memória fixa, com qualquer volume
+    const [subs, population] = stats.enabled ? await Promise.all([stats.listRecentSubmissions(IMPACT_SAMPLE), stats.countSubmissions()]) : [[], 0];
     const [candidates, positions] = await Promise.all([content.getCandidates(), content.getPublishedPositions()]);
     impact = computeImpact(subs, candidates, positions, published.cfg, target, published.cfg);
+    impact.population = population;
+    if (population > subs.length) impact.summary.unshift(`Estimativa com os ${subs.length.toLocaleString("pt-BR")} questionários mais recentes (de ${population.toLocaleString("pt-BR")})`);
     const ids = candidates.map((c) => c.id);
     const name = (id: string | null) => (id ? candidates.find((c) => c.id === id)?.name ?? id : "—");
     const sample = subs.slice(-200);
